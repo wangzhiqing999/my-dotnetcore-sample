@@ -7,3 +7,7 @@
 
 ### A0002_HelloWorldMvc
 最简单的 HelloWorld  asp.net core 程序.
+
+
+### A0003_EF
+使用 Visual Studio 2017， 开发 EntityFramework Code First 的例子.  (使用 SQL Server 数据库)
