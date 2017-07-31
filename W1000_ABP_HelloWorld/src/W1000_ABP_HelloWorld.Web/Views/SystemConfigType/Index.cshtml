@@ -1,0 +1,33 @@
+﻿@using W1000_ABP_HelloWorld.Web.Startup
+@model W1000_ABP_HelloWorld.Web.Models.SystemConfig.SystemConfigTypeIndexViewModel
+
+@{ 
+    ViewBag.Title = L("SystemConfigTypeList");
+    ViewBag.ActiveMenu = PageNames.SystemConfigType;
+}
+
+
+@section scripts
+{
+    
+}
+
+
+<h2>
+    @L("SystemConfigType")
+</h2>
+
+
+
+<div class="row">
+    <div>
+        <ul class="list-group" id="TaskList">
+            @foreach (var item in Model.SystemConfigTypes)
+            {
+                <li class="list-group-item">
+                    <h4 class="list-group-item-heading">@item.Id : @item.ConfigTypeName</h4>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

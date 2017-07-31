@@ -1,0 +1,13 @@
+﻿{
+  "culture": "tr",
+  "texts": {
+    "HelloWorld": "Merhaba Dünya!",
+    "ChangeLanguage": "Dil değiştir",
+    "HomePage": "Ana sayfa",
+    "About": "Hakkında",
+    "Home_Description": "W1000_ABP_HelloWorld projesine hoşgeldiniz...",
+    "About_Description": "Bu proje, ASP.NET Core ile ABP framework kullanmak için basit bir başlangıç şablonudur.",
+
+    "SystemConfigType": "System Config Type"
+  }
+}
