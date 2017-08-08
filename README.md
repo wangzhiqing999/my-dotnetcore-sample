@@ -15,3 +15,7 @@
 
 ### W1000_ABP_HelloWorld
 使用 ABP 创建的 HelloWorld 项目.
+
+
+### W1001_ABP_With_Zero
+使用 ABP 创建的项目. (引用了 module zero)
