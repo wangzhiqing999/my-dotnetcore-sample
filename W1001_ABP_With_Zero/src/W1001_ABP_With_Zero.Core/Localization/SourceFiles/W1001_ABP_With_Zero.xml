@@ -77,5 +77,24 @@
     <text name="Actions">Actions</text>
 
     <text name="CouldNotCompleteLoginOperation">Could not complete login operation. Please try again later.</text>
+
+
+
+
+    
+    <text name="Tasks">Tasks</text>
+    <text name="TaskList">Task List</text>
+    <text name="TaskState">Task State</text>
+    
+    <text name="TaskState_Open">Open</text>
+    <text name="TaskState_Completed">Completed</text>
+    <text name="AllTasks">All Tasks</text>
+
+    <text name="NewTask">New Task</text>
+    <text name="TaskTitle">Task Title</text>
+    <text name="TaskDescription">Task Description</text>
+    <text name="CreateTime">Create Time</text>
+
+
   </texts>
 </localizationDictionary>

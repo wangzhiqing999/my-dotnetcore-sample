@@ -64,6 +64,13 @@ namespace W1001_ABP_With_Zero.Web.Host.Startup
             {
                 options.SwaggerDoc("v1", new Info { Title = "W1001_ABP_With_Zero API", Version = "v1" });
                 options.DocInclusionPredicate((docName, description) => true);
+
+
+                ////将application层中的注释添加到SwaggerUI中
+                // var baseDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
+                // var commentsFileName = "Bin//W1001_ABP_With_Zero.Application.xml";
+                // var commentsFile = System.IO.Path.Combine(baseDirectory, commentsFileName);
+                // options.IncludeXmlComments(commentsFile);
             });
 
             //Configure Abp and Dependency Injection

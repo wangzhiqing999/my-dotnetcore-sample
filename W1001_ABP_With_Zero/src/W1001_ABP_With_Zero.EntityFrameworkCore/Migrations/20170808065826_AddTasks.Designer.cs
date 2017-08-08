@@ -12,9 +12,10 @@ using W1001_ABP_With_Zero.Tasks;
 namespace W1001_ABP_With_Zero.Migrations
 {
     [DbContext(typeof(W1001_ABP_With_ZeroDbContext))]
-    partial class W1001_ABP_With_ZeroDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170808065826_AddTasks")]
+    partial class AddTasks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")

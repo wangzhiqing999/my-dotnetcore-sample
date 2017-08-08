@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
@@ -12,6 +12,12 @@
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net461' ">
     <DefineConstants>FEATURE_SIGNALR</DefineConstants>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="wwwroot\view-resources\Views\Tasks\create.js" />
+    <Content Include="wwwroot\view-resources\Views\Tasks\create.min.js" />
+    <Content Include="wwwroot\view-resources\Views\Tasks\Index.js" />
+    <Content Include="wwwroot\view-resources\Views\Tasks\index.min.js" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Update="Dockerfile">

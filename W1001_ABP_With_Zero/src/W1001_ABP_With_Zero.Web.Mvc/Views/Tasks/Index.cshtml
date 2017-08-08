@@ -1,0 +1,86 @@
+﻿@using W1001_ABP_With_Zero.Web.Startup
+
+@model W1001_ABP_With_Zero.Web.Models.Tasks.IndexViewModel
+
+@{
+    ViewBag.CurrentPageName = PageNames.Tasks; //The menu item will be active for this page.
+}
+
+@section scripts
+{
+    <environment names="Development">
+        <script src="~/view-resources/Views/Tasks/Index.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/Tasks/Index.min.js" asp-append-version="true"></script>
+    </environment>
+}
+
+
+
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    @L("TaskList")
+                </h2>
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a id="RefreshButton" href="javascript:void(0);" class="waves-effect waves-block"><i class="material-icons">refresh</i>Refresh</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="body table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>@L("TaskTitle")</th>
+                            <th>@L("TaskState")</th>
+                            <th>@L("CreateTime")</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var task in Model.Tasks)
+                        {
+                            <tr>
+                                <td>@task.Title</td>
+                                <td>@task.State</td>
+                                <td>@task.CreationTime.ToString("yyyy-MM-dd HH:mm:ss") </td>
+
+                                <td class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">menu</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+
+                                        
+                                        <li>
+                                            <a href="#" data-id="@task.Id" data-state="@task.State" class="updateState waves-effect waves-block">
+                                            @(task.State == W1001_ABP_With_Zero.Tasks.TaskState.Open? "Complete" : "Open")                                            
+                                            </a>
+                                        </li>
+                                        
+
+
+                                    </ul>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <a  class="btn btn-primary btn-circle waves-effect waves-circle waves-float pull-right" asp-action="Create">
+                    <i class="material-icons">add</i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+

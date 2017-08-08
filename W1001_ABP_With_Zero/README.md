@@ -126,6 +126,54 @@ PM>Update-Database
 
 
 
+## 测试增加一个模块.
+
+### .Code 项目.
+增加一个 Tasks 的目录，用于存储 任务相关的基础类.
+
+修改 /Authorization/PermissionNames.cs
+增加 public const string Pages_Tasks = "Pages.Tasks";
 
 
+数据库中， 需要执行
+INSERT INTO [dbo].[AbpPermissions](
+	[CreationTime],[CreatorUserId],[Discriminator],
+	[IsGranted],[Name],[TenantId],[RoleId],[UserId]
+) VALUES (
+	GETDATE(),	NULL,	'RolePermissionSetting',
+	1,	'Pages.Tasks',		NULL,  1,  NULL
+)
+GO
+
+
+修改 /Authorization/ZeroAuthorizationProvider.cs
+增加 context.CreatePermission(PermissionNames.Pages_Tasks, L("Tasks"));
+
+
+
+修改 /Localization/SourceFiles/ .xml
+根据语种， 增加 <text name="Tasks">Tasks</text>
+
+
+
+
+### .EntityFrameworkCore 项目.
+DbContext 类， 增加一行
+public DbSet<Task> Tasks { get; set; }
+
+PM>Add-Migration AddTasks
+PM>Update-Database
+
+
+### .Application 项目.
+增加一个 Tasks 的目录，用于存储 任务相关的 DTO / 服务接口 / 服务实现.
+
+
+### .Web.Mvc 项目.
+增加 Tasks 控制器.
+增加 Tasks 相关视图.
+增加 Tasks 相关 js 脚本代码.
+
+PageNames 类中， 增加 Tasks 页面名称.
+ZeroNavigationProvider 类中， 增加菜单相关处理.
 

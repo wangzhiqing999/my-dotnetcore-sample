@@ -1,0 +1,38 @@
+﻿@using W1001_ABP_With_Zero.Web.Startup
+
+@{
+    ViewBag.CurrentPageName = PageNames.Tasks; //The menu item will be active for this page.
+}
+
+
+
+@section scripts
+{
+    <environment names="Development">
+        <script src="~/view-resources/Views/Tasks/Create.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/Tasks/Create.min.js" asp-append-version="true"></script>
+    </environment>
+}
+
+<h2>
+    @L("NewTask")
+</h2>
+
+<form id="TaskCreationForm">
+    
+    <div class="form-group">
+        <label for="Title">@L("TaskTitle")</label>
+        <input type="text" name="Title" class="form-control" placeholder="@L("TaskTitle")" required maxlength="@W1001_ABP_With_Zero.Tasks.Task.MaxTitleLength">
+    </div>
+
+    <div class="form-group">
+        <label for="Description">@L("TaskDescription")</label>
+        <input type="text" name="Description" class="form-control" placeholder="@L("TaskDescription")" maxlength="@W1001_ABP_With_Zero.Tasks.Task.MaxDescriptionLength">
+    </div>
+
+    <button type="submit" class="btn btn-default">@L("Save")</button>
+
+</form>
