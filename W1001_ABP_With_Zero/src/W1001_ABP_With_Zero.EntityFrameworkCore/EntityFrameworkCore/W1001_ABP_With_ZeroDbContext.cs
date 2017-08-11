@@ -15,6 +15,11 @@ namespace W1001_ABP_With_Zero.EntityFrameworkCore
         /* Define an IDbSet for each entity of the application */
         public DbSet<Task> Tasks { get; set; }
 
+
+        public DbSet<Other> Others { get; set; }
+
+
+
         public W1001_ABP_With_ZeroDbContext(DbContextOptions<W1001_ABP_With_ZeroDbContext> options)
             : base(options)
         {

@@ -52,6 +52,14 @@ namespace W1001_ABP_With_Zero.Web.Startup
                         icon: "business",
                         requiredPermissionName: PermissionNames.Pages_Tasks
                     )
+                ).AddItem(
+                    new MenuItemDefinition(
+                        PageNames.Others,
+                        L("Others"),
+                        url: "Others",
+                        icon: "business",
+                        requiredPermissionName: PermissionNames.Pages_Others
+                    )
                 )
                 .AddItem(
                     new MenuItemDefinition(

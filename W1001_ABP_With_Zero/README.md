@@ -174,6 +174,6 @@ PM>Update-Database
 增加 Tasks 相关视图.
 增加 Tasks 相关 js 脚本代码.
 
-PageNames 类中， 增加 Tasks 页面名称.
-ZeroNavigationProvider 类中， 增加菜单相关处理.
+/Startup/PageNames 类中， 增加 Tasks 页面名称.
+/Startup/ZeroNavigationProvider 类中， 增加菜单相关处理.
 

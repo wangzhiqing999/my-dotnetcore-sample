@@ -11,5 +11,6 @@
 
 
         public const string Tasks = "Tasks";
+        public const string Others = "Others";
     }
 }

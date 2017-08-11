@@ -11,5 +11,11 @@
 
         public const string Pages_Tasks = "Pages.Tasks";
 
+
+
+
+
+        public const string Pages_Others = "Pages.Others";
+
     }
 }

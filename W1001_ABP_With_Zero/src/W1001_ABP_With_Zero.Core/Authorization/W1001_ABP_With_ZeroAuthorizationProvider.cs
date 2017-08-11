@@ -14,6 +14,7 @@ namespace W1001_ABP_With_Zero.Authorization
 
 
             context.CreatePermission(PermissionNames.Pages_Tasks, L("Tasks"));
+            context.CreatePermission(PermissionNames.Pages_Others, L("Others"));
         }
 
         private static ILocalizableString L(string name)

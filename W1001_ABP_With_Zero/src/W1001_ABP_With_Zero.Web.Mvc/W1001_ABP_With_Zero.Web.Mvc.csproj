@@ -13,6 +13,15 @@
     <DefineConstants>FEATURE_SIGNALR</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="wwwroot\view-resources\Views\Others\Index.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\view-resources\Views\Others\Index.min.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\view-resources\Views\Others\_EditOtherModal.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="wwwroot\view-resources\Views\Tasks\create.js" />
     <Content Include="wwwroot\view-resources\Views\Tasks\create.min.js" />
     <Content Include="wwwroot\view-resources\Views\Tasks\Index.js" />
