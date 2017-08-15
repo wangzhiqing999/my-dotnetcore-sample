@@ -31,8 +31,15 @@ namespace W1001_ABP_With_Zero.Web.Host.Startup
 
         private readonly IConfigurationRoot _appConfiguration;
 
+
+        private readonly string webRootPath;
+
+
         public Startup(IHostingEnvironment env)
         {
+
+            webRootPath = env.WebRootPath;
+
             _appConfiguration = env.GetAppConfiguration();
         }
 
@@ -66,12 +73,24 @@ namespace W1001_ABP_With_Zero.Web.Host.Startup
                 options.DocInclusionPredicate((docName, description) => true);
 
 
-                ////将application层中的注释添加到SwaggerUI中
-                // var baseDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
-                // var commentsFileName = "Bin//W1001_ABP_With_Zero.Application.xml";
-                // var commentsFile = System.IO.Path.Combine(baseDirectory, commentsFileName);
-                // options.IncludeXmlComments(commentsFile);
+                // 注意：下面的路径， 写的是开发环境的路径.
+                // 如果实际发布的话， 应该需要修改.
+
+                //将application层中的注释添加到SwaggerUI中
+                var baseDirectory = webRootPath.Replace("wwwroot", "");                
+                var commentsFileName = "Bin\\Debug\\netcoreapp1.1\\W1001_ABP_With_Zero.Application.xml";
+                var commentsFile = System.IO.Path.Combine(baseDirectory, commentsFileName);
+
+                if(System.IO.File.Exists(commentsFile))
+                {
+                    // 如果文件不存在， 会导致服务器 500 异常.
+                    options.IncludeXmlComments(commentsFile);
+                }
+
+                
             });
+
+
 
             //Configure Abp and Dependency Injection
             return services.AddAbp<W1001_ABP_With_ZeroWebHostModule>(options =>
