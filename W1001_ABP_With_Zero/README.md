@@ -177,3 +177,47 @@ PM>Update-Database
 /Startup/PageNames 类中， 增加 Tasks 页面名称.
 /Startup/ZeroNavigationProvider 类中， 增加菜单相关处理.
 
+
+
+
+
+
+
+
+### 新增通用模块的处理.
+
+对于 Other 类，可以实现下列接口：
+
+ICreationAudited		包含 创建用户 与 创建时间.
+IModificationAudited	包含 最后修改用户 与 最后修改时间.
+IDeletionAudited		包含 数据是否被删除 与 删除用户 与 删除时间.  （软删除的处理）
+IPassivable				包含 状态
+IMayHaveTenant			包含 租户代码 （可选）
+IMustHaveTenant			包含 租户代码 （必选）
+
+
+对于 IOtherAppService 接口，继承 IAsyncCrudAppService<OtherDto, Int64, PagedResultRequestDto, CreateOtherDto, OtherDto>
+自动定义了基本的 增/删/改/查  的处理接口.
+
+
+对于 OtherAppService 类， 实现  AsyncCrudAppService<Other, OtherDto, Int64, PagedResultRequestDto, CreateOtherDto, OtherDto>, IOtherAppService
+自动包含了基本的 增/删/改/查  的处理实现.
+
+
+
+
+### 关于租户的处理 
+W1001_ABP_With_ZeroApplicationModule 类的 PreInitialize() 方法中，加一行
+Configuration.MultiTenancy.IsEnabled = true;
+
+对于实现 IMustHaveTenant 的实体。
+代码上面，不需要做任何的处理。
+查询的时候，会自动忽略 其他租户的数据。
+插入的时候，会自动填写当前租户的代码。
+
+对于实现 IMayHaveTenant 的实体。
+代码上面，需要做一些额外的处理。
+查询的时候，会自动忽略 其他租户的数据。
+插入的时候，好像需要自己手动填写当前租户的代码， 否则插入的结果， 租户代码列， 数值还是 NULL.
+
+

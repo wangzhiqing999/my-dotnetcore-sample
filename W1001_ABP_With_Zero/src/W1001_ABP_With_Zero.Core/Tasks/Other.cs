@@ -22,7 +22,7 @@ namespace W1001_ABP_With_Zero.Tasks
     [Table("AppOthers")]
     public class Other : Entity<Int64>,
         ICreationAudited, IModificationAudited, IDeletionAudited,         
-        IPassivable
+        IPassivable, IMayHaveTenant
     {
 
         /// <summary>
@@ -127,8 +127,24 @@ namespace W1001_ABP_With_Zero.Tasks
         public virtual bool IsActive { set; get; }
 
 
+
         #endregion
 
+
+
+
+
+
+        #region IMayHaveTenant 接口的实现.
+
+
+        /// <summary>
+        /// 租户的ID.
+        /// </summary>
+        public int? TenantId { set; get; }
+
+
+        #endregion
 
 
 
@@ -173,6 +189,9 @@ namespace W1001_ABP_With_Zero.Tasks
 
 
 
+
+            // 租户的ID.
+            buff.AppendFormat("TenantId = {0}; ", this.DeletionTime);
 
 
             buff.Append("]");

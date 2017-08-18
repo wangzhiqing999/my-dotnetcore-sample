@@ -14,6 +14,12 @@ namespace W1001_ABP_With_Zero
         public override void PreInitialize()
         {
             Configuration.Authorization.Providers.Add<W1001_ABP_With_ZeroAuthorizationProvider>();
+
+
+
+            // 默认多租户是被禁用的，我们需要在模块的 PreInitialize 方法中开启它
+            Configuration.MultiTenancy.IsEnabled = true;
+
         }
 
         public override void Initialize()

@@ -16,6 +16,9 @@ namespace W1001_ABP_With_Zero.Tasks
 {
     public class OtherAppService : AsyncCrudAppService<Other, OtherDto, Int64, PagedResultRequestDto, CreateOtherDto, OtherDto>, IOtherAppService
     {
+
+
+
         public OtherAppService(IRepository<Other, Int64> repository) : base(repository)
         {
         }

@@ -11,7 +11,7 @@ namespace W1001_ABP_With_Zero.Tasks
 
 
     [Table("AppTasks")]
-    public class Task : Entity, IHasCreationTime
+    public class Task : Entity, IHasCreationTime, IMustHaveTenant
     {
         public const int MaxTitleLength = 256;
         public const int MaxDescriptionLength = 64 * 1024; //64KB
@@ -58,6 +58,23 @@ namespace W1001_ABP_With_Zero.Tasks
             Title = title;
             Description = description;
         }
+
+
+
+
+
+
+
+        #region IMustHaveTenant 接口的实现.
+
+
+        /// <summary>
+        /// 租户的ID.
+        /// </summary>
+        public int TenantId { set; get; }
+
+
+        #endregion
 
 
     }
