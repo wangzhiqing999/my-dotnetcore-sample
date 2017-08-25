@@ -20,6 +20,12 @@ namespace W1001_ABP_With_Zero.EntityFrameworkCore
 
 
 
+        public DbSet<TestUserType> TestUserTypes { get; set; }
+
+
+
+
+
         public W1001_ABP_With_ZeroDbContext(DbContextOptions<W1001_ABP_With_ZeroDbContext> options)
             : base(options)
         {
