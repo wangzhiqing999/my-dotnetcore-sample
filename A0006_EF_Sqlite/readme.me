@@ -1,17 +1,15 @@
 # .Net Core Entity Framework 
 
 .Net Core, NuGet 添加下列包：
- 
-MySql.Data.EntityFrameworkCore
-MySql.Data.EntityFrameworkCore.Design
+
+Microsoft.EntityFrameworkCore.Sqlite
 Microsoft.EntityFrameworkCore.Design
 Microsoft.EntityFrameworkCore.Tools
 Microsoft.EntityFrameworkCore.Tools.DotNet
 
 
-在此状态下，是如果数据库不存在， 首次运行， 能够自动创建。
+在此状态下，是 如果数据库不存在， 首次运行， 能够自动创建。
 但是一旦数据库创建后， 代码发生变化， 将无法通过代码去更新数据库了。
-
 
 
 
@@ -23,13 +21,22 @@ Microsoft.EntityFrameworkCore.Tools.DotNet
 修改为
     <DotNetCliToolReference  Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" />
     <DotNetCliToolReference  Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
-	
-	
+
 然后在命令行中， 项目的当前目录下， 运行
-...\A0005_EF_Mysql>dotnet ef migrations add FirstMigration
+...\A0006_EF_Sqlite>dotnet ef migrations add FirstMigration
 
-结果提示：
-Method 'Clone' in type 'MySql.Data.EntityFrameworkCore.Infraestructure.Internal.MySQLOptionsExtension' from assembly 'MySql.Data.EntityFrameworkCore, Version=6.10.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d' does not have an implementation.
+结果将提示：
+Done. To undo this action, use 'ef migrations remove'
 
-导致无法完成其他的相关操作。
+然后， 在当前目录下，将生成一个 Migrations 目录， 包含相关的生成的代码文件。
+
+
+
+然后在命令行中， 项目的当前目录下， 运行
+...\A0006_EF_Sqlite>dotnet ef database update
+
+结果将提示：Applying migration '20171102111133_FirstMigration'.
+Done.
+
+然后，当前目录下， 将看到已经生成的 sqlite 数据库文件。
 
