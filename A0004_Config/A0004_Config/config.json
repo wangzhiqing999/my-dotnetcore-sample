@@ -1,0 +1,7 @@
+﻿{
+  "url": "localhost",
+  "port": {
+    "one": 1234,
+    "two": 456
+  }
+}

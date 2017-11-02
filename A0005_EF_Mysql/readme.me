@@ -1,0 +1,24 @@
+# .Net Core Entity Framework 
+
+.Net Core, 需要添加 MySql.Data.EntityFrameworkCore 这个包.
+
+
+为了使用 Code First， 还需要添加 Microsoft.EntityFrameworkCore.Tools 这个包.
+
+
+运行 
+Add-Migration MyFirstMigration  
+或者
+Update-Database
+
+都是提示
+Method 'Clone' in type 'MySql.Data.EntityFrameworkCore.Infraestructure.Internal.MySQLOptionsExtension' from assembly 'MySql.Data.EntityFrameworkCore, Version=6.10.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d' does not have an implementation.
+
+
+添加 MySql.Data.EntityFrameworkCore.Design， 意义不大。
+
+
+
+现状是 如果数据库不存在， 首次运行， 能够自动创建。
+但是，由于 Add-Migration MyFirstMigration   与   Update-Database  运行的出错。
+导致一旦数据库创建后， 代码发生变化， 将无法通过代码去更新数据库了。
