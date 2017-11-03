@@ -1,5 +1,8 @@
 # .Net Core Entity Framework 
 
+
+### 初始化设置
+
 .Net Core, NuGet 添加下列包：
 
 Microsoft.EntityFrameworkCore.Sqlite
@@ -13,6 +16,8 @@ Microsoft.EntityFrameworkCore.Tools.DotNet
 
 
 
+
+### 初始化 EF migration
 
 需要完成的后续操作： 编辑 A0006_EF_Sqlite.csproj
 将 
@@ -40,3 +45,37 @@ Done.
 
 然后，当前目录下， 将看到已经生成的 sqlite 数据库文件。
 
+
+
+
+
+### 一对多的测试代码.
+
+添加一对多的相关代码。
+主要是 DocumentTypes 与 Documents 形成一对多.
+
+然后在命令行中， 项目的当前目录下， 运行
+...\A0006_EF_Sqlite>dotnet ef migrations add AddOneToManyCode
+
+然后在命令行中， 项目的当前目录下， 运行
+...\A0006_EF_Sqlite>dotnet ef database update
+
+观察数据库是否正确生成了相关的表.
+
+
+
+
+### 多对多的测试代码.
+
+添加多对多的相关代码。
+主要是 MrRole 与 MrUser 形成多对多.  中间关联表为 MrUserRole
+实际做法，相当于两个一对多的处理。
+中间表需要额外做一个 复合主键的设置。
+
+然后在命令行中， 项目的当前目录下， 运行
+...\A0006_EF_Sqlite>dotnet ef migrations add AddManyToManyCode
+
+然后在命令行中， 项目的当前目录下， 运行
+...\A0006_EF_Sqlite>dotnet ef database update
+
+观察数据库是否正确生成了相关的表.

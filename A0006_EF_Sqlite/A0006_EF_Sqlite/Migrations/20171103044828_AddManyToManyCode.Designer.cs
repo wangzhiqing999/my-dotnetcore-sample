@@ -10,9 +10,10 @@ using System;
 namespace A0006_EF_Sqlite.Migrations
 {
     [DbContext(typeof(TestContext))]
-    partial class TestContextModelSnapshot : ModelSnapshot
+    [Migration("20171103044828_AddManyToManyCode")]
+    partial class AddManyToManyCode
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

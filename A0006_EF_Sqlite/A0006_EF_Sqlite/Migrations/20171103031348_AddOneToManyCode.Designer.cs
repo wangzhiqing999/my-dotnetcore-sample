@@ -10,9 +10,10 @@ using System;
 namespace A0006_EF_Sqlite.Migrations
 {
     [DbContext(typeof(TestContext))]
-    partial class TestContextModelSnapshot : ModelSnapshot
+    [Migration("20171103031348_AddOneToManyCode")]
+    partial class AddOneToManyCode
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,57 +60,6 @@ namespace A0006_EF_Sqlite.Migrations
                     b.ToTable("document_type");
                 });
 
-            modelBuilder.Entity("A0006_EF_Sqlite.Model.MrRole", b =>
-                {
-                    b.Property<string>("RoleCode")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("role_code")
-                        .HasMaxLength(32);
-
-                    b.Property<string>("RoleName")
-                        .IsRequired()
-                        .HasColumnName("role_name")
-                        .HasMaxLength(64);
-
-                    b.HasKey("RoleCode");
-
-                    b.ToTable("mr_role");
-                });
-
-            modelBuilder.Entity("A0006_EF_Sqlite.Model.MrUser", b =>
-                {
-                    b.Property<string>("UserCode")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("user_code")
-                        .HasMaxLength(32);
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnName("user_name")
-                        .HasMaxLength(32);
-
-                    b.HasKey("UserCode");
-
-                    b.ToTable("mr_user");
-                });
-
-            modelBuilder.Entity("A0006_EF_Sqlite.Model.MrUserRole", b =>
-                {
-                    b.Property<string>("UserCode")
-                        .HasColumnName("user_code")
-                        .HasMaxLength(32);
-
-                    b.Property<string>("RoleCode")
-                        .HasColumnName("role_code")
-                        .HasMaxLength(32);
-
-                    b.HasKey("UserCode", "RoleCode");
-
-                    b.HasIndex("RoleCode");
-
-                    b.ToTable("mr_user_role");
-                });
-
             modelBuilder.Entity("A0006_EF_Sqlite.Model.TestData", b =>
                 {
                     b.Property<long>("ID")
@@ -138,19 +88,6 @@ namespace A0006_EF_Sqlite.Migrations
                     b.HasOne("A0006_EF_Sqlite.Model.DocumentType", "DocumentType")
                         .WithMany("DocumentList")
                         .HasForeignKey("DocumentTypeCode");
-                });
-
-            modelBuilder.Entity("A0006_EF_Sqlite.Model.MrUserRole", b =>
-                {
-                    b.HasOne("A0006_EF_Sqlite.Model.MrRole", "Role")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("RoleCode")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("A0006_EF_Sqlite.Model.MrUser", "User")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("UserCode")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
