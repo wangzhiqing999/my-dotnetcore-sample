@@ -75,4 +75,21 @@ https://docs.microsoft.com/en-us/aspnet/core/publishing/iis?tabs=aspnetcore2x
 
 
 
+#### Linux 控制台下运行
+
+测试虚拟机：CentOS-7-x86_64-Minimal-1611.iso 安装.
+
+安装 .NetCore. 参考下面的页面.
+http://www.microsoft.com/net/learn/get-started/linuxcentos
+
+在 Program.cs 文件中，WebHost.CreateDefaultBuilder(args)  后面， 追加一行 .UseUrls("http://*:5000")
+重新发布一次， 然后将文件复制到 Linux 系统下。
+
+[root@localhost PublishOutput]#dotnet MyMiniTradingSystem.Web.dll
+Hosting environment: Production
+Content root path: /home/wang/PublishOutput
+Now listening on: http://[::]:5000
+Application started. Press Ctrl+C to shut down.
+
+然后浏览器中，http://虚拟机ip地址:5000/api/CommodityPrices   查看页面。
 
