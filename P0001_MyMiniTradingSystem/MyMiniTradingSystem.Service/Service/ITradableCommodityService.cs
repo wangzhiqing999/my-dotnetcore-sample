@@ -12,9 +12,8 @@ namespace MyMiniTradingSystem.Service
         /// 插入商品信息
         /// </summary>
         /// <param name="newData"></param>
-        /// <param name="resultMessage"></param>
         /// <returns></returns>
-        bool CreateTradableCommodity(TradableCommodity newData, ref string resultMessage);
+        ServiceResult CreateTradableCommodity(TradableCommodity newData);
 
 
         /// <summary>

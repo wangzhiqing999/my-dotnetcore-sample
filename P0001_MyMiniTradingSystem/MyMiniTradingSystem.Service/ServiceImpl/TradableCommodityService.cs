@@ -28,11 +28,10 @@ namespace MyMiniTradingSystem.ServiceImpl
         /// 插入商品信息
         /// </summary>
         /// <param name="newData"></param>
-        /// <param name="resultMessage"></param>
         /// <returns></returns>
-        public bool CreateTradableCommodity(TradableCommodity newData, ref string resultMessage)
+        public ServiceResult CreateTradableCommodity(TradableCommodity newData)
         {
-            bool result = false;
+            ServiceResult result;
 
             try
             {
@@ -47,23 +46,23 @@ namespace MyMiniTradingSystem.ServiceImpl
 
                     if (query.Count() > 0)
                     {
-                        resultMessage = String.Format("代码为{0}的商品已存在！", newData.CommodityCode);
+                        result = new ServiceResult(-1, String.Format("代码为{0}的商品已存在！", newData.CommodityCode));
                         return result;
                     }
 
                     context.TradableCommoditys.Add(newData);
                     context.SaveChanges();
 
-                    result = true;
+                    // 执行成功.
+                    result = ServiceResult.SuccessServiceResult;
                 }
 
             }
             catch (Exception ex)
             {
                 logger.Error(ex.Message, ex);
-                
-                result = false;
-                resultMessage = ex.Message;
+
+                result = new ServiceResult(-1, ex.Message);
             }
 
             return result;

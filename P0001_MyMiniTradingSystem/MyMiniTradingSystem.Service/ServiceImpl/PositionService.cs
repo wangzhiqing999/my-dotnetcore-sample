@@ -18,7 +18,7 @@ using MyMiniTradingSystem.Service;
 namespace MyMiniTradingSystem.ServiceImpl
 {
 
-    public class PositionService
+    public class PositionService : IPositionService
     {
         /// <summary>
         /// 日志处理类.
@@ -28,20 +28,13 @@ namespace MyMiniTradingSystem.ServiceImpl
 
 
         /// <summary>
-        /// 结果消息.
-        /// </summary>
-        public string ResultMessage { set; get; }
-
-
-
-        /// <summary>
         /// 创建仓位.
         /// </summary>
         /// <param name="newData"></param>
         /// <returns></returns>
-        public bool OpenPosition(Position newData)
+        public ServiceResult OpenPosition(Position newData)
         {
-            bool result = false;
+            ServiceResult result;
 
             try
             {
@@ -77,7 +70,8 @@ namespace MyMiniTradingSystem.ServiceImpl
                     // 保存.
                     context.SaveChanges();
 
-                    result = true;
+                    // 执行成功.
+                    result = ServiceResult.SuccessServiceResult;
                 }
 
             }
@@ -85,8 +79,7 @@ namespace MyMiniTradingSystem.ServiceImpl
             {
                 logger.Error(ex.Message, ex);
 
-                result = false;
-                ResultMessage = ex.Message;
+                result = new ServiceResult(-1, ex.Message);
             }
 
 
@@ -103,9 +96,9 @@ namespace MyMiniTradingSystem.ServiceImpl
         /// </summary>
         /// <param name="newData"></param>
         /// <returns></returns>
-        public bool ClosePosition(Position newData)
+        public ServiceResult ClosePosition(Position newData)
         {
-            bool result = false;
+            ServiceResult result;
 
             try
             {
@@ -130,7 +123,8 @@ namespace MyMiniTradingSystem.ServiceImpl
 
                         if (oldData.Quantity < newData.Quantity)
                         {
-                            ResultMessage = String.Format("仓位只有{0}，无法平仓{1}。", oldData.Quantity, newData.Quantity);
+                            result = new ServiceResult(-1,
+                                String.Format("仓位只有{0}，无法平仓{1}。", oldData.Quantity, newData.Quantity));
                             return result;
                         }
                         oldData.Quantity = oldData.Quantity - newData.Quantity;
@@ -138,7 +132,7 @@ namespace MyMiniTradingSystem.ServiceImpl
                     else
                     {
                         // 数据不存在.
-                        ResultMessage = "没有相关的仓位可供平仓。";
+                        result = new ServiceResult(-1, "没有相关的仓位可供平仓");
                         return result;
                     }
 
@@ -148,7 +142,8 @@ namespace MyMiniTradingSystem.ServiceImpl
                     // 保存.
                     context.SaveChanges();
 
-                    result = true;
+                    // 执行成功.
+                    result = ServiceResult.SuccessServiceResult;
                 }
 
             }
@@ -156,8 +151,7 @@ namespace MyMiniTradingSystem.ServiceImpl
             {
                 logger.Error(ex.Message, ex);
 
-                result = false;
-                ResultMessage = ex.Message;
+                result = new ServiceResult(-1, ex.Message);
             }
 
 

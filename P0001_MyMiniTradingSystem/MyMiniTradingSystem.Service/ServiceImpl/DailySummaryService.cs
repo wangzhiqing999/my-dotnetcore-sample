@@ -19,7 +19,7 @@ namespace MyMiniTradingSystem.ServiceImpl
 {
 
 
-    public class DailySummaryService
+    public class DailySummaryService : IDailySummaryService
     {
 
         /// <summary>
@@ -30,22 +30,14 @@ namespace MyMiniTradingSystem.ServiceImpl
 
 
         /// <summary>
-        /// 结果消息.
-        /// </summary>
-        public string ResultMessage { set; get; }
-
-
-
-
-
-        /// <summary>
-        /// 创建某用户的每日总结.
+        /// 创建某用户的每日总结
         /// </summary>
         /// <param name="userCode"></param>
+        /// <param name="date"></param>
         /// <returns></returns>
-        public bool BuildOneUserDailySummary(string userCode, DateTime date)
+        public ServiceResult BuildOneUserDailySummary(string userCode, DateTime date)
         {
-            bool result = false;
+            ServiceResult result;
 
             try
             {
@@ -67,7 +59,7 @@ namespace MyMiniTradingSystem.ServiceImpl
 
                     if (userPositionList.Count == 0)
                     {
-                        ResultMessage = "用户没有任何持仓！";
+                        result = new ServiceResult(-1, "用户没有任何持仓！");                        
                         return result;
                     }
 
@@ -84,7 +76,8 @@ namespace MyMiniTradingSystem.ServiceImpl
 
                         if (cp == null)
                         {
-                            ResultMessage = String.Format("未能检索到{0}的{1:yyyy-MM-dd}的行情数据！",userPosition.CommodityCode, date);
+                            result = new ServiceResult(-1,
+                                String.Format("未能检索到{0}的{1:yyyy-MM-dd}的行情数据！", userPosition.CommodityCode, date));
                             return result;
                         }
 
@@ -169,7 +162,8 @@ namespace MyMiniTradingSystem.ServiceImpl
                     // 保存.
                     context.SaveChanges();
 
-                    result = true;
+                    // 执行成功.
+                    result = ServiceResult.SuccessServiceResult;
                 }
 
             }
@@ -177,16 +171,11 @@ namespace MyMiniTradingSystem.ServiceImpl
             {
                 logger.Error(ex.Message, ex);
 
-                result = false;
-                ResultMessage = ex.Message;
+                // 失败.
+                result = new ServiceResult(-1, ex.Message);
             }
 
-
-
-
             return result;
-
-
         }
 
 
@@ -198,9 +187,9 @@ namespace MyMiniTradingSystem.ServiceImpl
         /// </summary>
         /// <param name="newData"></param>
         /// <returns></returns>
-        public bool InsertOrUpdateDailySummary(DailySummary newData)
+        public ServiceResult InsertOrUpdateDailySummary(DailySummary newData)
         {
-            bool result = false;
+            ServiceResult result;
 
             try
             {
@@ -242,7 +231,8 @@ namespace MyMiniTradingSystem.ServiceImpl
                     // 保存.
                     context.SaveChanges();
 
-                    result = true;
+                    // 执行成功.
+                    result = ServiceResult.SuccessServiceResult;
                 }
 
             }
@@ -250,12 +240,9 @@ namespace MyMiniTradingSystem.ServiceImpl
             {
                 logger.Error(ex.Message, ex);
 
-                result = false;
-                ResultMessage = ex.Message;
+                // 失败.
+                result = new ServiceResult(-1, ex.Message);
             }
-
-
-
 
             return result;
         }

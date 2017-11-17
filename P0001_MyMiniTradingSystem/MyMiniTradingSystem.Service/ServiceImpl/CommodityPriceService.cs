@@ -19,7 +19,7 @@ namespace MyMiniTradingSystem.ServiceImpl
 {
 
 
-    public class CommodityPriceService
+    public class CommodityPriceService : ICommodityPriceService
     {
 
         /// <summary>
@@ -29,23 +29,15 @@ namespace MyMiniTradingSystem.ServiceImpl
 
 
 
-        /// <summary>
-        /// 结果消息.
-        /// </summary>
-        public string ResultMessage { set; get; }
-
-
-
-
 
         /// <summary>
         /// 更新每日行情.
         /// </summary>
         /// <param name="newData"></param>
         /// <returns></returns>
-        public bool InsertOrUpdateCommodityPrice(CommodityPrice newData)
+        public ServiceResult InsertOrUpdateCommodityPrice(CommodityPrice newData)
         {
-            bool result = false;
+            ServiceResult result;
 
             try
             {
@@ -100,7 +92,8 @@ namespace MyMiniTradingSystem.ServiceImpl
                     // 保存.
                     context.SaveChanges();
 
-                    result = true;
+                    // 成功.
+                    result = ServiceResult.SuccessServiceResult;
                 }
 
             }
@@ -108,12 +101,9 @@ namespace MyMiniTradingSystem.ServiceImpl
             {
                 logger.Error(ex.Message, ex);
 
-                result = false;
-                ResultMessage = ex.Message;
+                // 失败.
+                result = new ServiceResult(-1, ex.Message);
             }
-
-
-
 
             return result;
         }

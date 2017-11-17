@@ -58,8 +58,10 @@ namespace MyMiniTradingSystem.ServiceImpl
         /// <returns></returns>
         private CommodityPrice GetOneCommodityPriceDay(string line)
         {
-
-            Console.WriteLine(line);
+            if(logger.IsDebugEnabled)
+            {
+                logger.Debug(line);
+            }
 
             // 数据格式：
             // var hq_str_sh601006="大秦铁路,13.41,13.69,13.07,13.69,13.05,13.06,13.07,115275247,1540387027,43400,13.06,51500,13.05,34900,13.04,187800,13.03,547600,13.02,13800,13.07,26000,13.08,19800,13.09,312424,13.10,79400,13.11,2015-04-24,11:35:42,00";
@@ -73,11 +75,15 @@ namespace MyMiniTradingSystem.ServiceImpl
 
             string[] itemArray = line.Split(',');
 
+            // 处理日期.
+            string dateStr = itemArray[itemArray.Length - 3];
+            DateTime processDate = Convert.ToDateTime(dateStr);
+
             CommodityPrice result = new CommodityPrice()
             {
                 // 日期.
-                TradingStartDate = DateTime.Today,
-                TradingFinishDate = DateTime.Today,
+                TradingStartDate = processDate,
+                TradingFinishDate = processDate,
                 // 开.
                 OpenPrice = Convert.ToDecimal(itemArray[1]),
                 // 高.

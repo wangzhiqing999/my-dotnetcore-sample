@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "MyMiniTradingSystem.Cmd": {
+      "commandName": "Project"
+    }
+  }
+}
