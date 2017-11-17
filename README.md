@@ -21,6 +21,10 @@
 使用 Visual Studio 2017， 开发 EntityFramework Code First 的例子.  (使用 Mysql 数据库)
 
 
+### A0010_TestWebApi
+使用 Visual Studio 2017， 创建一个 Web Api 项目的例子. (DotNet Core 2.0)
+
+
 
 
 
