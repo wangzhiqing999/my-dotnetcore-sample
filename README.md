@@ -25,6 +25,8 @@
 使用 Visual Studio 2017， 创建一个 Web Api 项目的例子. (DotNet Core 2.0)
 
 
+### A0020_Fundamentals
+使用 Visual Studio 2017， 创建一个 Web 项目，测试 静态文件、路由配置、URL Rewriting、Session、WebSockets 的例子. (DotNet Core 2.0)
 
 
 
