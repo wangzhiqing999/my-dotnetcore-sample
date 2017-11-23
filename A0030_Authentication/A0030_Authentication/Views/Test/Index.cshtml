@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "测试权限";
+}
+
+<h2> 测试权限 </h2>
+
+
+<ul>
+    <li>
+        <a href="/Test/Default"> 需要用户登录 </a>
+    </li>
+
+    <li>
+        <a href="/Test/EmployeeInfo"> 需要用户登录 + 需要 Employee 角色</a>
+    </li>
+
+    <li>
+        <a href="/Test/Manager"> 需要用户登录 + 需要 Admin  角色</a>
+    </li>
+
+
+
+    <li>
+        <a href="/Test/Payslip"> 需要用户登录 + 需要有员工代码</a>
+    </li>
+
+
+    <li>
+        <a href="/Test/SystemData"> 需要用户登录 + 需要有特定的员工代码</a>
+    </li>
+
+
+
+</ul>
