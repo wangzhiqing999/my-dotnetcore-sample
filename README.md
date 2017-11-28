@@ -33,6 +33,10 @@
 使用 Visual Studio 2017， 创建一个 Web 项目，测试安全相关的例子。(DotNet Core 2.0)
 
 
+### A0040_React
+使用 Visual Studio 2017， 创建一个 Web 项目，测试 React 的使用。(DotNet Core 2.0) 
+
+
 ### W1000_ABP_HelloWorld
 使用 ABP 创建的 HelloWorld 项目.
 
