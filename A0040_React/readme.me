@@ -49,3 +49,54 @@ Layout.tsx 是布局， 也就是 左菜单， 右内容。
 NavMenu.tsx 是菜单
 
 
+
+
+
+## 测试追加业务功能代码.
+
+1.依赖项， 管理 NuGet 程序包， 添加
+Microsoft.EntityFrameworkCore.SqlServer
+Microsoft.EntityFrameworkCore.Tools
+
+2.编写 EF CodeFirst 相关代码.
+Model 目录下，新增相关的数据类.
+DataAccess 目录下，新增 EF 的 Context 类.
+
+3.程序包管理器控制台上运行
+Add-Migration MyFirstMigration
+Update-Database
+插入测试数据.
+
+4.添加 操作使用 Entity Framework 的 API 控制器.
+选择 Report 类. 生成 ReportsController.cs
+
+5.修改 /Startup.cs
+添加
+// 数据库连接字符串，定义在 appsettings.json 文件中.
+string connString = Configuration.GetConnectionString("MyReportConnection");
+// 数据库配置
+services.AddDbContext<MyReportContext>(options => options.UseSqlServer(connString));
+
+6.修改 /appsettings.json
+添加
+  "ConnectionStrings": {
+    "MyReportConnection": "Data Source=localhost\\SQLEXPRESS;Initial Catalog=TestReport; Integrated Security=True;"
+  },
+
+7./ClientApp/components 目录下，创建 TypeScript JSX 文件.
+Report.tsx
+
+8.修改 /ClientApp/routes.tsx
+添加
+import { ReportList } from './components/Report';
+<Route path='/report' component={ReportList} />
+
+9.修改 /ClientApp/components/NavMenu.tsx
+添加
+<li>
+	<NavLink to={'/report'} activeClassName='active'>
+		<span className='glyphicon glyphicon-th-list'></span> Test Report
+	</NavLink>
+</li>
+
+10. 尝试运行.

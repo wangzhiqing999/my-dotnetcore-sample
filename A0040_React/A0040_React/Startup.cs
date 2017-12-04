@@ -8,6 +8,12 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+
+using Microsoft.EntityFrameworkCore;
+using A0040_React.DataAccess;
+
+
+
 namespace A0040_React
 {
     public class Startup
@@ -22,6 +28,16 @@ namespace A0040_React
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            // 数据库连接字符串，定义在 appsettings.json 文件中.
+            string connString = Configuration.GetConnectionString("MyReportConnection");
+
+            // 数据库配置
+            services.AddDbContext<MyReportContext>(options => options.UseSqlServer(connString));
+
+
+
+
             services.AddMvc();
         }
 
