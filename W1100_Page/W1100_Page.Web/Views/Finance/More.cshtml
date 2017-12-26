@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewData["Title"] = "More";
+}
+
+<h2>More</h2>
+
+<table>
+    <tbody id="testTable">
+        <tr>
+            <th width="10%">时间</th>
+            <th width="10%">&nbsp;</th>
+            <th width="10%">国家</th>
+            <th width="40%">指标名称</th>
+            <th width="10%">前值</th>
+            <th width="10%">预测值</th>
+            <th width="10%">公布值</th>
+        </tr>
+    </tbody>
+</table>
+
+
+@section Scripts
+{
+<script>
+
+    $(document).ready(function () {
+        loadData(1);
+
+
+        $("#testTable").on("click", ".more", function () {
+            var pgNo = $(this).attr("pageNo");
+            $(this).parent().parent().remove();
+            loadData(pgNo);
+        });
+    });
+
+
+    function loadData(pgNo) {
+
+        console.log("loadData Start!", pgNo);
+
+        $.post("/Finance/GetFinanceData",
+            {
+                pageNo: pgNo,
+                pageSize: 30
+            },
+            function (data, status) {
+                for (var i = 0, len = data.financeDataList.length; i < len; i ++) {
+                    var item = data.financeDataList[i];
+                    // console.debug(item);
+
+                    var oneLine = "<tr>";
+                    oneLine = oneLine + "<td>" + item.displayFinanceDate + "</td>";
+                    oneLine = oneLine + "<td><img src='/images/Country/" + item.countryClassName + ".png'></td>";
+                    oneLine = oneLine + "<td>" + item.countryName + "</td>";
+                    oneLine = oneLine + "<td>" + item.content + "</td>";
+                    oneLine = oneLine + "<td>" + item.previous + "</td>";
+                    oneLine = oneLine + "<td>" + item.predict + "</td>";
+                    oneLine = oneLine + "<td>" + item.currentValue + "</td>";
+                    oneLine = oneLine + "</tr>";
+
+                    $("#testTable").append(oneLine);
+                }
+
+                if (data.pageIndex < data.pageCount) {
+                    var moreLine = "<tr><td colspan='7'> <a href='javascript:void(0)' class='more' pageNo='" + (data.pageIndex + 1) + "'>更多</a> </td></tr>";
+                    $("#testTable").append(moreLine);
+                } else {
+                    var noMoreLine = "<tr><td colspan='7'> 没有更多数据了... </td></tr>";
+                    $("#testTable").append(noMoreLine);
+                }
+            });
+
+
+    }
+
+</script>
+}

@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewData["Title"] = "Scroll";
+}
+
+<h2>Scroll</h2>
+
+
+<table>
+    <tbody id="testTable">
+        <tr>
+            <th width="10%">时间</th>
+            <th width="10%">&nbsp;</th>
+            <th width="10%">国家</th>
+            <th width="40%">指标名称</th>
+            <th width="10%">前值</th>
+            <th width="10%">预测值</th>
+            <th width="10%">公布值</th>
+        </tr>
+    </tbody>
+</table>
+
+
+@section Scripts
+{
+<script>
+
+    // 当前页索引.
+    var myPageIndex = 0;
+    // 总页数.
+    var myPageCount = 0;
+    // 页面加载标志位.
+    var loadingFlag = false;
+
+    $(document).ready(function () {
+        loadData(1);
+
+        $(window).bind("scroll", function () {
+            // 当滚动条滚动时
+            showload();
+        });
+    });
+
+    function showload() {
+        var lazyheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
+
+        if ($(document).height() - 120 <= lazyheight) {
+
+            if (myPageIndex < myPageCount && !loadingFlag) {
+                // 翻页.
+                loadData(myPageIndex + 1);
+            }
+
+        }
+    }
+
+    function loadData(pgNo) {        
+        console.log("loadData Start!", pgNo);
+        loadingFlag = true;
+
+        $.post("/Finance/GetFinanceData",
+            {
+                pageNo: pgNo,
+                pageSize: 30
+            },
+            function (data, status) {
+                for (var i = 0, len = data.financeDataList.length; i < len; i ++) {
+                    var item = data.financeDataList[i];
+                    // console.debug(item);
+
+                    var oneLine = "<tr>";
+                    oneLine = oneLine + "<td>" + item.displayFinanceDate + "</td>";
+                    oneLine = oneLine + "<td><img src='/images/Country/" + item.countryClassName + ".png'></td>";
+                    oneLine = oneLine + "<td>" + item.countryName + "</td>";
+                    oneLine = oneLine + "<td>" + item.content + "</td>";
+                    oneLine = oneLine + "<td>" + item.previous + "</td>";
+                    oneLine = oneLine + "<td>" + item.predict + "</td>";
+                    oneLine = oneLine + "<td>" + item.currentValue + "</td>";
+                    oneLine = oneLine + "</tr>";
+
+                    $("#testTable").append(oneLine);
+                }
+
+                myPageIndex = data.pageIndex;
+                myPageCount = data.pageCount;
+
+                if (data.pageIndex >= data.pageCount) {
+                    var noMoreLine = "<tr><td colspan='7'> 没有更多数据了... </td></tr>";
+                    $("#testTable").append(noMoreLine);
+                }
+
+                loadingFlag = false;
+            });
+
+
+    }
+
+</script>
+}

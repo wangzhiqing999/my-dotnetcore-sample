@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+
+    <ul>
+        <li class="row">
+            <a asp-area="" asp-controller="Finance" asp-action="More" class="navbar-brand"> 以最末行增加一个【更多】链接的方式来翻页 </a>
+        </li>
+
+        <li class="row">
+            <a asp-area="" asp-controller="Finance" asp-action="Scroll" class="navbar-brand"> 以滚动条，滚到底自动加载的方式来翻页 </a>
+        </li>
+
+        <li class="row">
+            <a asp-area="" asp-controller="Finance" asp-action="Page" class="navbar-brand"> 标准方式来翻页 </a>
+        </li>
+    </ul>
+
+</div>

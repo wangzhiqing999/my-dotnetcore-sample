@@ -1,0 +1,177 @@
+﻿
+@{
+    ViewData["Title"] = "Page";
+}
+
+<h2>Page</h2>
+
+<style>
+    .current {
+        color: red;
+    }
+</style>
+
+<table>
+    <tbody id="testTable">
+        <tr>
+            <th width="10%">时间</th>
+            <th width="10%">&nbsp;</th>
+            <th width="10%">国家</th>
+            <th width="40%">指标名称</th>
+            <th width="10%">前值</th>
+            <th width="10%">预测值</th>
+            <th width="10%">公布值</th>
+        </tr>
+    </tbody>
+</table>
+
+
+<div id="pageBar">
+
+</div>
+
+
+
+
+@section Scripts
+{
+<script>
+
+    // 当前页索引.
+    var myPageIndex = 0;
+    // 总页数.
+    var myPageCount = 0;
+
+    $(document).ready(function () {
+        loadData(1);
+
+        $("#pageBar").on("click", ".PageInfo", function () {
+            var pgNo = $(this).attr("title");
+            loadData(pgNo);
+        });
+    });
+
+
+    function loadData(pgNo) {
+
+        console.log("loadData Start!", pgNo);
+
+        $(".financeData").each(function () {
+            $(this).remove();
+        });
+
+        $.post("/Finance/GetFinanceData",
+            {
+                pageNo: pgNo,
+                pageSize: 10
+            },
+            function (data, status) {
+                for (var i = 0, len = data.financeDataList.length; i < len; i ++) {
+                    var item = data.financeDataList[i];
+                    // console.debug(item);
+
+                    var oneLine = "<tr class='financeData'>";
+                    oneLine = oneLine + "<td>" + item.displayFinanceDate + "</td>";
+                    oneLine = oneLine + "<td><img src='/images/Country/" + item.countryClassName + ".png'></td>";
+                    oneLine = oneLine + "<td>" + item.countryName + "</td>";
+                    oneLine = oneLine + "<td>" + item.content + "</td>";
+                    oneLine = oneLine + "<td>" + item.previous + "</td>";
+                    oneLine = oneLine + "<td>" + item.predict + "</td>";
+                    oneLine = oneLine + "<td>" + item.currentValue + "</td>";
+                    oneLine = oneLine + "</tr>";
+
+                    $("#testTable").append(oneLine);
+                }
+
+
+                myPageIndex = data.pageIndex;
+                myPageCount = data.pageCount;
+                buildPage();
+
+            });
+
+
+    }
+
+
+    function buildPage() {
+        // 首页.
+        var firstPage = "<a id='firstPage' href='#' class='PageInfo first' title='1'> &lt;&lt; </a>";
+        // 末页.
+        var lastPage = "<a id='lastPage' href='#' class='PageInfo last' title='" + myPageCount + "'> &gt;&gt; </a>";
+        // 上一页.
+        var prevPage = null;
+        // 下一页.
+        var nextPage = null;
+
+
+        if (myPageIndex == 1) {
+            prevPage = "<a href='javascript: void (0)'> &lt; </a>";
+        } else {
+            prevPage = "<a href='#' class='PageInfo' title='" + (myPageIndex - 1) + "'> &lt; </a>";
+        }
+        if (myPageIndex == myPageCount) {
+            nextPage = "<a href='javascript: void (0)'> &gt; </a>"
+        } else {
+            nextPage = "<a href='#' class='PageInfo' title='" + (myPageIndex + 1) + "'> &gt; </a>";
+        }
+
+
+        var todoPage = '<a href="javascript:void(0)"> ... </a>';
+
+
+
+        $("#pageBar").html("");
+
+        $("#pageBar").append(firstPage);
+
+        $("#pageBar").append(prevPage);
+
+
+        if (myPageIndex == 1) {
+            // 第一页必显示
+            $("#pageBar").append('<a href="javascript:void(0)" class="current"> 1  </a>');
+        } else {
+            $("#pageBar").append('<a href="#" class="PageInfo" title="1"> 1  </a>');
+        }
+
+        // 开始页
+        var startPage = Math.max(2, (myPageIndex - 2));
+        // 结束页
+        var finishPage = Math.min(myPageCount - 1, startPage + 5);
+
+
+        if (startPage > 2)
+        {
+            $("#pageBar").append(todoPage);
+        }
+
+
+        for (var i = startPage; i <= finishPage; i++)
+        {
+            if (i == myPageIndex) {
+                $("#pageBar").append('<a href="javascript:void(0)" class="current"> ' + i + ' </a>');
+            } else {
+                $("#pageBar").append('<a href="#" class="PageInfo" title="' + i + '"> ' + i + ' </a>');
+            }
+        }
+
+        if (finishPage < myPageCount - 1) {
+            $("#pageBar").append(todoPage);
+        }
+
+
+        if (myPageIndex == myPageCount) {
+            // 最后一页必显示
+            $("#pageBar").append('<a href="javascript:void(0)" class="current"> ' + myPageCount + ' </a>');
+        } else {
+            $("#pageBar").append('<a href="#" class="PageInfo" title="' + myPageCount + '"> ' + myPageCount + ' </a>');
+        }
+
+        $("#pageBar").append(nextPage);
+
+        $("#pageBar").append(lastPage);
+    }
+
+</script>
+}
