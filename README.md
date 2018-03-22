@@ -45,5 +45,9 @@
 使用 ABP 创建的项目. (引用了 module zero)
 
 
+### W1010_ABP_NetCode2
+使用 ABP 创建的项目. (.NET Core 2.x 版本)
+
+
 ### W1100_Page
 Ajax 数据翻页的例子.

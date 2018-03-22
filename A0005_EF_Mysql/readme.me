@@ -1,7 +1,7 @@
-# .Net Core Entity Framework 
+# .Net Core Entity Framework
 
 .Net Core, NuGet 添加下列包：
- 
+
 MySql.Data.EntityFrameworkCore
 MySql.Data.EntityFrameworkCore.Design
 Microsoft.EntityFrameworkCore.Design
@@ -14,22 +14,64 @@ Microsoft.EntityFrameworkCore.Tools.DotNet
 
 
 
+### 基本的处理.
+
+Add-Migration MyFirstMigration
+用来生成命令，生成数据库和表的C#代码
+
+Script-Migration
+生成创建表的 SQL 语句.
+
+Update-Database
+执行生成的代码，更新数据库表结构.
 
 
-需要完成的后续操作： 编辑 A0006_EF_Sqlite.csproj
-将 
-    <PackageReference  Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" />
-    <PackageReference  Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
-修改为
-    <DotNetCliToolReference  Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" />
-    <DotNetCliToolReference  Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
-	
-	
-然后在命令行中， 项目的当前目录下， 运行
-...\A0005_EF_Mysql>dotnet ef migrations add FirstMigration
+注意：执行 Update-Database 的时候，可能会报错， 提示  __EFMigrationsHistory' doesn't exist
 
-结果提示：
-Method 'Clone' in type 'MySql.Data.EntityFrameworkCore.Infraestructure.Internal.MySQLOptionsExtension' from assembly 'MySql.Data.EntityFrameworkCore, Version=6.10.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d' does not have an implementation.
+处理办法：
+运行 Script-Migration 生成创建表的 SQL 语句.
+手动创建 __EFMigrationsHistory 表. 并手动插入相关数据.
 
-导致无法完成其他的相关操作。
+CREATE TABLE `__EFMigrationsHistory` (
+    `MigrationId` varchar(150) NOT NULL,
+    `ProductVersion` varchar(32) NOT NULL,
+    PRIMARY KEY (`MigrationId`)
+);
+
+INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`) ......
+
+
+
+### 一对多的测试代码.
+
+添加一对多的相关代码。
+主要是 DocumentTypes 与 Documents 形成一对多.
+
+Add-Migration AddOneToManyCode
+Update-Database
+
+
+
+
+
+### 多对多的测试代码.
+
+添加多对多的相关代码。
+主要是 MrRole 与 MrUser 形成多对多.  中间关联表为 MrUserRole
+实际做法，相当于两个一对多的处理。
+中间表需要额外做一个 复合主键的设置。
+
+Add-Migration AddManyToManyCode
+Update-Database
+
+
+
+
+### 一对一的测试代码.
+添加一对一的相关代码。
+主要是 MrUser 与 MrUserExp 形成一对一
+
+Add-Migration AddOneToOneCode
+Update-Database
+
 
