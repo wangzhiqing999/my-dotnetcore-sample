@@ -8,3 +8,47 @@ https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api
 ### 整合 Swagger 的操作
 https://docs.microsoft.com/en-us/aspnet/core/tutorials/web-api-help-pages-using-swagger?tabs=visual-studio
 
+
+
+
+
+
+### 在 ASP.NET Core 中使用JWT
+
+安装nuget包
+System.IdentityModel.Tokens.Jwt
+Microsoft.AspNetCore.Authentication.JwtBearer
+
+
+步骤1.
+编辑  Startup.cs
+添加相关配置代码.
+
+编辑 appsettings.json
+添加相关配置信息.
+
+
+步骤2.
+对于需要有身份验证的 Web Api 控制器. （这里使用 ValuesController 作为测试目标）
+添加
+using Microsoft.AspNetCore.Authorization;
+与
+[Authorize]
+
+此时，测试简单调用这个 Web Api，将返回错误信息。
+
+
+步骤3.
+编写 AuthorizeController
+
+
+步骤4.
+客户端先 获取 Token， 然后在 Http Header 中设置 Token，然后再调用 Web Api， 能够成功调用。
+
+
+
+步骤5.
+测试 通过令牌， 获取【当前登录用户】的详细信息。 （这里使用 UserInfoController 作为测试目标）
+
+
+

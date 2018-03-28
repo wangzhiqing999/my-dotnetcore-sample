@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,6 +17,11 @@ using A0010_TestWebApi.DataAccess;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.Extensions.PlatformAbstractions;
 using System.IO;
+
+
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 
 namespace A0010_TestWebApi
 {
@@ -35,10 +41,8 @@ namespace A0010_TestWebApi
             // 使用内存数据库进行测试.
             services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
 
-            services.AddMvc();
 
-
-            // Register the Swagger generator, defining one or more Swagger documents
+            // ##### Swagger 相关配置 #####
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc(
@@ -58,6 +62,44 @@ namespace A0010_TestWebApi
             });
 
 
+
+
+            // #####  JWT 相关配置. #####
+
+            // 将appsettings.json中的JwtSettings部分文件读取到JwtSettings中，这是给其他地方用的
+            services.Configure<JwtSettings>(Configuration.GetSection("JwtSettings"));
+
+            // 由于初始化的时候我们就需要用，所以使用Bind的方式读取配置
+            // 将配置绑定到JwtSettings实例中
+            var jwtSettings = new JwtSettings();
+            Configuration.Bind("JwtSettings", jwtSettings);
+
+            services.AddAuthentication(options => {
+                //认证middleware配置
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(o => {
+                //主要是jwt  token参数设置
+                o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    //Token颁发机构
+                    ValidIssuer = jwtSettings.Issuer,
+                    //颁发给谁
+                    ValidAudience = jwtSettings.Audience,
+                    //这里的key要进行加密，需要引用Microsoft.IdentityModel.Tokens
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey)),
+                    ValidateIssuerSigningKey=true,
+                    //是否验证Token有效期，使用当前时间与Token的Claims中的NotBefore和Expires对比
+                    ValidateLifetime=true,
+                    //允许的服务器时间偏移量
+                    ClockSkew=TimeSpan.Zero
+                };
+            });
+
+
+
+            services.AddMvc();
         }
 
 
@@ -73,6 +115,8 @@ namespace A0010_TestWebApi
 
 
 
+            // ##### Swagger 相关配置 #####
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
@@ -84,7 +128,35 @@ namespace A0010_TestWebApi
 
 
 
+            // #####  安全相关配置. #####
+            app.UseAuthentication();
+
+
+
             app.UseMvc();
         }
     }
+
+
+
+
+    public class JwtSettings
+    {
+        /// <summary>
+        /// token是谁颁发的
+        /// </summary>
+        public string Issuer { get; set; }
+
+        /// <summary>
+        /// token可以给哪些客户端使用
+        /// </summary>
+        public string Audience { get; set; }
+
+        /// <summary>
+        /// 加密的key
+        /// </summary>
+        public string SecretKey { get; set; }
+    }
+
+
 }
