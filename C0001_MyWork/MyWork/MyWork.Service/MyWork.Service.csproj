@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>MyWork</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Service\" />
+    <Folder Include="ServiceImpl\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\MyFramework\MyFramework.DataAccess\MyFramework.DataAccess.csproj" />
+    <ProjectReference Include="..\..\MyFramework\MyFramework.Service\MyFramework.Service.csproj" />
+    <ProjectReference Include="..\MyWork.DataAccess\MyWork.DataAccess.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -37,6 +37,11 @@
 使用 Visual Studio 2017， 创建一个 Web 项目，测试 React 的使用。(DotNet Core 2.0) 
 
 
+### C0001_MyWork
+使用 Visual Studio 2017， 创建 Web Api . (DotNet Core 2.0)
+使用 framework7， 调用 Web Api.
+
+
 ### W1000_ABP_HelloWorld
 使用 ABP 创建的 HelloWorld 项目.
 

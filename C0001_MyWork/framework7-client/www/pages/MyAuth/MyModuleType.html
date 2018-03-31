@@ -1,0 +1,40 @@
+<template>
+<div class="page" data-name="about">
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+          <span class="ios-only">Back</span>
+        </a>
+      </div>
+      <div class="title">模块类型</div>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="block-title">模块类型</div>
+	<div class="data-table">
+	  <table>
+		<thead>
+		  <tr>
+			<th class="label-cell">模块类型代码</th>
+			<th class="label-cell">模块类型名称</th>
+		  </tr>
+		</thead>
+
+		<tbody>
+		  {{#each moduleTypeData}}
+		  <tr>
+			<td class="label-cell">{{moduleTypeCode}}</td>
+			<td class="label-cell">{{moduleTypeName}}</td>			
+		  </tr>
+		  {{/each}}
+		</tbody>
+	  </table>
+	</div>	
+  </div>
+</div>
+</template>
+<script>
+  return {}
+</script>

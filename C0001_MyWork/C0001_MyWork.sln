@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MyFramework", "MyFramework", "{69818EB3-52F8-45A2-ADFA-92A324A47667}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyFramework.DataAccess", "MyFramework\MyFramework.DataAccess\MyFramework.DataAccess.csproj", "{3FFBF880-42BC-47FE-897A-3FBA5FD8C93D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyFramework.Service", "MyFramework\MyFramework.Service\MyFramework.Service.csproj", "{8693BF7F-D6D2-4463-8788-0E8718C2323F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MyAuthentication", "MyAuthentication", "{01F697F5-EF54-4788-BE87-68EF5582D01E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyAuthentication.DataAccess", "MyAuthentication\MyAuthentication.DataAccess\MyAuthentication.DataAccess.csproj", "{29FDC313-53E9-4F32-8254-025C198546C7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyAuthentication.Service", "MyAuthentication\MyAuthentication.Service\MyAuthentication.Service.csproj", "{67741855-7828-49A8-BEBB-AFFB4433E96E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MyWork", "MyWork", "{7951D287-7D37-4D12-9507-68B663C255D4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWork.DataAccess", "MyWork\MyWork.DataAccess\MyWork.DataAccess.csproj", "{ED90B17D-3214-4BDC-9ECA-B2F6A36E6353}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWork.Service", "MyWork\MyWork.Service\MyWork.Service.csproj", "{D9BB1298-AB02-433E-9AC8-D56A98F4B311}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWork.Web", "MyWork\MyWork.Web\MyWork.Web.csproj", "{8367B740-52C9-4970-808E-83EB75429ECC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAuthentication.Service.Test", "MyAuthentication\MyAuthentication.Service.Test\MyAuthentication.Service.Test.csproj", "{90FB432E-4EEE-4C00-BBA5-55F70F72502C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3FFBF880-42BC-47FE-897A-3FBA5FD8C93D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FFBF880-42BC-47FE-897A-3FBA5FD8C93D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FFBF880-42BC-47FE-897A-3FBA5FD8C93D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FFBF880-42BC-47FE-897A-3FBA5FD8C93D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8693BF7F-D6D2-4463-8788-0E8718C2323F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8693BF7F-D6D2-4463-8788-0E8718C2323F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8693BF7F-D6D2-4463-8788-0E8718C2323F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8693BF7F-D6D2-4463-8788-0E8718C2323F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29FDC313-53E9-4F32-8254-025C198546C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29FDC313-53E9-4F32-8254-025C198546C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29FDC313-53E9-4F32-8254-025C198546C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29FDC313-53E9-4F32-8254-025C198546C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67741855-7828-49A8-BEBB-AFFB4433E96E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67741855-7828-49A8-BEBB-AFFB4433E96E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67741855-7828-49A8-BEBB-AFFB4433E96E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67741855-7828-49A8-BEBB-AFFB4433E96E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED90B17D-3214-4BDC-9ECA-B2F6A36E6353}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED90B17D-3214-4BDC-9ECA-B2F6A36E6353}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED90B17D-3214-4BDC-9ECA-B2F6A36E6353}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED90B17D-3214-4BDC-9ECA-B2F6A36E6353}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9BB1298-AB02-433E-9AC8-D56A98F4B311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9BB1298-AB02-433E-9AC8-D56A98F4B311}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9BB1298-AB02-433E-9AC8-D56A98F4B311}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9BB1298-AB02-433E-9AC8-D56A98F4B311}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8367B740-52C9-4970-808E-83EB75429ECC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8367B740-52C9-4970-808E-83EB75429ECC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8367B740-52C9-4970-808E-83EB75429ECC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8367B740-52C9-4970-808E-83EB75429ECC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90FB432E-4EEE-4C00-BBA5-55F70F72502C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90FB432E-4EEE-4C00-BBA5-55F70F72502C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90FB432E-4EEE-4C00-BBA5-55F70F72502C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90FB432E-4EEE-4C00-BBA5-55F70F72502C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3FFBF880-42BC-47FE-897A-3FBA5FD8C93D} = {69818EB3-52F8-45A2-ADFA-92A324A47667}
+		{8693BF7F-D6D2-4463-8788-0E8718C2323F} = {69818EB3-52F8-45A2-ADFA-92A324A47667}
+		{29FDC313-53E9-4F32-8254-025C198546C7} = {01F697F5-EF54-4788-BE87-68EF5582D01E}
+		{67741855-7828-49A8-BEBB-AFFB4433E96E} = {01F697F5-EF54-4788-BE87-68EF5582D01E}
+		{ED90B17D-3214-4BDC-9ECA-B2F6A36E6353} = {7951D287-7D37-4D12-9507-68B663C255D4}
+		{D9BB1298-AB02-433E-9AC8-D56A98F4B311} = {7951D287-7D37-4D12-9507-68B663C255D4}
+		{8367B740-52C9-4970-808E-83EB75429ECC} = {7951D287-7D37-4D12-9507-68B663C255D4}
+		{90FB432E-4EEE-4C00-BBA5-55F70F72502C} = {01F697F5-EF54-4788-BE87-68EF5582D01E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F5B6B17-3B43-442D-BEF5-BAD0C815374D}
+	EndGlobalSection
+EndGlobal

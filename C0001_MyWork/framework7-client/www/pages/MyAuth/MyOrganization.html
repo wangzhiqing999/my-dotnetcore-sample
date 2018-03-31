@@ -1,0 +1,40 @@
+<template>
+<div class="page" data-name="about">
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+          <span class="ios-only">Back</span>
+        </a>
+      </div>
+      <div class="title">组织机构</div>
+    </div>
+  </div>
+  <div class="page-content">
+    <div class="block-title">组织机构</div>
+	<div class="data-table">
+	  <table>
+		<thead>
+		  <tr>
+			<th class="label-cell">组织机构代码</th>
+			<th class="label-cell">组织机构名称</th>
+		  </tr>
+		</thead>
+
+		<tbody>
+		  {{#each resultData.queryResultData}}
+		  <tr>
+			<td class="label-cell">{{loginOrganizationCode}}</td>
+			<td class="label-cell">{{organizationName}}</td>			
+		  </tr>
+		  {{/each}}
+		</tbody>
+	  </table>
+	</div>	
+  </div>
+</div>
+</template>
+<script>
+  return {}
+</script>
