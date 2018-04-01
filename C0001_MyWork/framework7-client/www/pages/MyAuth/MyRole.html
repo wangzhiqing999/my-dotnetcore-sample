@@ -1,4 +1,3 @@
-<template>
 <div class="page" data-name="about">
   <div class="navbar">
     <div class="navbar-inner sliding">
@@ -11,7 +10,9 @@
       <div class="title">角色</div>
     </div>
   </div>
-  <div class="page-content">
+  
+  
+  <div class="page-content" id="rolePage">
     <div class="block-title">角色</div>
 	<div class="data-table">
 	  <table>
@@ -24,19 +25,20 @@
 		</thead>
 
 		<tbody>
-		  {{#each roleData}}
-		  <tr>
-			<td class="label-cell">{{systemCode}}</td>
-			<td class="label-cell">{{roleCode}}</td>
-			<td class="label-cell">{{roleName}}</td>			
+		  <tr v-for="item in dataList">
+			<td class="label-cell">{{item.systemCode}}</td>
+			<td class="label-cell">{{item.roleCode}}</td>
+			<td class="label-cell">{{item.roleName}}</td>			
 		  </tr>
-		  {{/each}}
 		</tbody>
 	  </table>
+	  
+	  <my-pageinfo 
+		v-bind:page-index="pageIndex"
+		v-bind:page-count="pageCount"
+		v-on:page-up="pageUp" 
+		v-on:page-down="pageDown"></my-pageinfo>
+	  
 	</div>	
   </div>
 </div>
-</template>
-<script>
-  return {}
-</script>

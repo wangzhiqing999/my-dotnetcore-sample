@@ -1,4 +1,3 @@
-<template>
 <div class="page" data-name="about">
   <div class="navbar">
     <div class="navbar-inner sliding">
@@ -11,7 +10,8 @@
       <div class="title">组织机构</div>
     </div>
   </div>
-  <div class="page-content">
+  
+  <div class="page-content" id="organizationPage">
     <div class="block-title">组织机构</div>
 	<div class="data-table">
 	  <table>
@@ -23,18 +23,29 @@
 		</thead>
 
 		<tbody>
-		  {{#each resultData.queryResultData}}
-		  <tr>
-			<td class="label-cell">{{loginOrganizationCode}}</td>
-			<td class="label-cell">{{organizationName}}</td>			
+		  
+		  <tr v-for="item in dataList">
+			<td class="label-cell">{{item.loginOrganizationCode}}</td>
+			<td class="label-cell">{{item.organizationName}}</td>			
 		  </tr>
-		  {{/each}}
+		  
 		</tbody>
 	  </table>
+	  
+	  <div class="block">
+		  <div class="col">
+			{{pageIndex}} / {{pageCount}}
+		  </div>
+	  
+		  <div class="pages row" v-show="showPageInfo">
+			<div class="col">
+				<button class="button button-fill button-round" @click="page('prev')" :disabled='pageIndex==1'>上一页</button>
+			</div>
+			<div class="col">
+				<button class="button button-fill button-round" @click="page('next')" :disabled="pageIndex==pageCount">下一页</button>
+			</div>
+		  </div>
+	  </div>	  
 	</div>	
   </div>
 </div>
-</template>
-<script>
-  return {}
-</script>

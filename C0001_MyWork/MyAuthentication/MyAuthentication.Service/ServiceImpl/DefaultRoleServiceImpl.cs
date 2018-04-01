@@ -5,6 +5,7 @@ using System.Linq;
 
 using MyFramework.ServiceImpl;
 using MyFramework.ServiceModel;
+using MyFramework.Util;
 
 using MyAuthentication.Model;
 using MyAuthentication.DataAccess;
@@ -23,7 +24,7 @@ namespace MyAuthentication.ServiceImpl
     public class DefaultRoleServiceImpl : DefaultCommonService, IRoleService
     {
 
-        List<MyRole> IRoleService.GetAllRoles()
+        CommonQueryResult<MyRole> IRoleService.Query(string systemCode, int pageNo, int pageSize)
         {
             using(MyAuthenticationContext context = new MyAuthenticationContext())
             {
@@ -31,8 +32,32 @@ namespace MyAuthentication.ServiceImpl
                     from data in context.MyRoles
                     select data;
 
-                List<MyRole> resultList = query.ToList();
-                return resultList;
+                if(!String.IsNullOrEmpty(systemCode))
+                {
+                    query = query.Where(p => p.SystemCode == systemCode);
+                }
+
+                // 初始化翻页.
+                PageInfo pgInfo = new PageInfo(
+                    pageSize: pageSize,
+                    pageNo: pageNo,
+                    rowCount: query.Count());
+
+                // 翻页.
+                query = query.OrderByDescending(p => p.LastUpdateTime)
+                    .Skip(pgInfo.SkipValue)
+                    .Take(pgInfo.PageSize);
+
+                List<MyRole> dataList = query.ToList();
+
+
+                CommonQueryResult<MyRole> result = new CommonQueryResult<MyRole>()
+                {
+                    QueryPageInfo = pgInfo,
+                    QueryResultData = dataList
+                };
+
+                return result;
             }
         }
 

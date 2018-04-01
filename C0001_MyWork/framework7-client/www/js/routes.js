@@ -103,70 +103,22 @@ routes = [
 	// 组织机构
 	{
 		path: '/MyAuth/MyOrganization/',
-		async: function (routeTo, routeFrom, resolve, reject) {
-			// Router instance
-			var router = this;
-			// App instance
-			var app = router.app;
-			// Show Preloader
-			app.preloader.show();
-			var apiUrl = myServerHost + 'api/MyAuth/MyOrganization';
-			app.request.json(
-				apiUrl,
-				{ },
-				function (data) {
-					// Hide Preloader
-					app.preloader.hide();
-					resolve(
-						{
-							componentUrl: './pages/MyAuth/MyOrganization.html',
-						},
-						{
-							context: {
-								resultData: data,
-							}
-						}
-					);
-				},
-				function () {
-					// Hide Preloader
-					app.preloader.hide();
-				});
+		url: './pages/MyAuth/MyOrganization.html',
+		on: {
+			pageInit: function (e, page) {
+				initMyAuthOrganization();
+			}
 		}
 	},
 
 	// 角色
 	{
 		path: '/MyAuth/MyRole/',
-		async: function (routeTo, routeFrom, resolve, reject) {
-			// Router instance
-			var router = this;
-			// App instance
-			var app = router.app;
-			// Show Preloader
-			app.preloader.show();
-			var apiUrl = myServerHost + 'api/MyAuth/MyRole';
-			app.request.json(
-				apiUrl,
-				{ },
-				function (data) {
-					// Hide Preloader
-					app.preloader.hide();
-					resolve(
-						{
-							componentUrl: './pages/MyAuth/MyRole.html',
-						},
-						{
-							context: {
-								roleData: data,
-							}
-						}
-					);
-				},
-				function () {
-					// Hide Preloader
-					app.preloader.hide();
-				});
+		url: './pages/MyAuth/MyRole.html',
+		on: {
+			pageInit: function (e, page) {
+				initMyAuthRole();
+			}
 		}
 	},
 

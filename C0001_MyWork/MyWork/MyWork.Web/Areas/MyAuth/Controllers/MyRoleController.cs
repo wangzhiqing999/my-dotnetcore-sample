@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
 
+using MyFramework.ServiceModel;
+
 using MyAuthentication.Model;
 using MyAuthentication.Service;
 using MyAuthentication.ServiceModel;
@@ -32,9 +34,9 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
 
 
         [HttpGet]
-        public IEnumerable<MyRole> GetAll()
+        public CommonQueryResult<MyRole> Query(string systemCode, int pageNo = 1, int pageSize = 10)
         {
-            var result = this._RoleService.GetAllRoles();
+            var result = this._RoleService.Query(systemCode, pageNo, pageSize);
             return result;
         }
 

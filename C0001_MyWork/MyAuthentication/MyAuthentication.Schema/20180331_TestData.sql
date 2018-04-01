@@ -25,3 +25,42 @@ SELECT	'TEST_018', '测试组018',	GETDATE(), 'system', GETDATE(), 'system',  'A
 SELECT	'TEST_019', '测试组019',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'		UNION  ALL
 SELECT	'TEST_020', '测试组020',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'
 ;
+
+
+
+-- 系统数据.
+INSERT INTO [my_system](
+	[system_code],[system_name]
+) VALUES (
+	'TEST', '测试系统'
+);
+
+
+-- 角色.
+INSERT INTO [my_role](
+	[role_code],[system_code],[role_name],
+    [create_time],[create_user],[last_update_time],[last_update_user],[status]
+)
+SELECT	'TEST_001', 'TEST', '测试角色001',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'		UNION  ALL
+SELECT	'TEST_002', 'TEST', '测试角色002',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'		UNION  ALL
+SELECT	'TEST_003', 'TEST', '测试角色003',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'		UNION  ALL
+SELECT	'TEST_004', 'TEST', '测试角色004',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'		UNION  ALL
+SELECT	'TEST_005', 'TEST', '测试角色005',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'		UNION  ALL
+SELECT	'TEST_006', 'TEST', '测试角色006',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'		UNION  ALL
+SELECT	'TEST_007', 'TEST', '测试角色007',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'		UNION  ALL
+SELECT	'TEST_008', 'TEST', '测试角色008',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'		UNION  ALL
+SELECT	'TEST_009', 'TEST', '测试角色009',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'		UNION  ALL
+SELECT	'TEST_010', 'TEST', '测试角色010',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'		UNION  ALL
+SELECT	'TEST_011', 'TEST', '测试角色011',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'		UNION  ALL
+SELECT	'TEST_012', 'TEST', '测试角色012',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'		UNION  ALL
+SELECT	'TEST_013', 'TEST', '测试角色013',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'		UNION  ALL
+SELECT	'TEST_014', 'TEST', '测试角色014',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'		UNION  ALL
+SELECT	'TEST_015', 'TEST', '测试角色015',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'		UNION  ALL
+SELECT	'TEST_016', 'TEST', '测试角色016',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'		UNION  ALL
+SELECT	'TEST_017', 'TEST', '测试角色017',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'		UNION  ALL
+SELECT	'TEST_018', 'TEST', '测试角色018',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'		UNION  ALL
+SELECT	'TEST_019', 'TEST', '测试角色019',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'		UNION  ALL
+SELECT	'TEST_020', 'TEST', '测试角色020',	GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'
+;
+
+

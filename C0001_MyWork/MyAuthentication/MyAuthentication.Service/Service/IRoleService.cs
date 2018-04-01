@@ -18,7 +18,7 @@ namespace MyAuthentication.Service
         /// 获取全部角色.
         /// </summary>
         /// <returns></returns>
-        List<MyRole> GetAllRoles();
+        CommonQueryResult<MyRole> Query(string systemCode, int pageNo = 1, int pageSize = 10);
 
 
         /// <summary>
