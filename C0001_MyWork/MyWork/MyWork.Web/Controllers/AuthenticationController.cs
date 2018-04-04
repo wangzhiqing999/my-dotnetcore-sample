@@ -25,6 +25,9 @@ using MyWork.Web.Models;
 namespace MyWork.Web.Controllers
 {
 
+    /// <summary>
+    /// 认证服务.
+    /// </summary>
     [Produces("application/json")]
     [Route("api/Authentication")]
     public class AuthenticationController : TokenAbleController
@@ -49,6 +52,11 @@ namespace MyWork.Web.Controllers
 
 
 
+        /// <summary>
+        /// 获取登录的 Token.
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Token([FromBody]LoginViewModel viewModel)
         {

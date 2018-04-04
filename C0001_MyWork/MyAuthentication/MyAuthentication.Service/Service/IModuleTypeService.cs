@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
+using MyFramework.ServiceModel;
 using MyAuthentication.Model;
+
 
 namespace MyAuthentication.Service
 {
@@ -17,7 +19,7 @@ namespace MyAuthentication.Service
         /// 获取模块类型列表
         /// </summary>
         /// <returns></returns>
-        List<MyModuleType> GetModuleTypeList();
+        CommonQueryResult<MyModuleType> GetModuleTypeList(int pageNo = 1, int pageSize = 10);
 
     }
 }

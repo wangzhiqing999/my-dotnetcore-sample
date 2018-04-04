@@ -25,7 +25,7 @@ namespace MyAuthentication.Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        MyOrganization GetOrganization(long id);
+        CommonServiceResult GetOrganization(long id);
 
 
 

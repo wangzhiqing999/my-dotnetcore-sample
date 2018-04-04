@@ -63,7 +63,7 @@ namespace MyAuthentication.ServiceImpl
 
 
 
-        MyRole IRoleService.GetRole(string id)
+        CommonServiceResult IRoleService.GetRole(string id)
         {
             using (MyAuthenticationContext context = new MyAuthenticationContext())
             {
@@ -73,7 +73,16 @@ namespace MyAuthentication.ServiceImpl
                         data.RoleCode == id
                     select data;
 
-                MyRole result = query.FirstOrDefault();
+                MyRole roleData = query.FirstOrDefault();
+
+                if (roleData == null)
+                {
+                    // 数据不存在.
+                    return CommonServiceResult.DataNotFoundResult;
+                }
+
+
+                CommonServiceResult result = CommonServiceResult.CreateDefaultSuccessResult(roleData);
                 return result;
             }
         }

@@ -19,11 +19,19 @@ namespace MyAuthentication.ServiceImpl
     public class DefaultOrganizationServiceImpl : DefaultCommonService, IOrganizationService
     {
 
-        MyOrganization IOrganizationService.GetOrganization(long id)
+        CommonServiceResult IOrganizationService.GetOrganization(long id)
         {
             using (MyAuthenticationContext context = new MyAuthenticationContext())
             {
-                MyOrganization result = context.MyOrganizations.Find(id);
+                MyOrganization data = context.MyOrganizations.Find(id);
+
+                if(data == null)
+                {
+                    // 数据不存在.
+                    return CommonServiceResult.DataNotFoundResult;
+                }
+
+                CommonServiceResult result = CommonServiceResult.CreateDefaultSuccessResult(data);
                 return result;
             }
         }

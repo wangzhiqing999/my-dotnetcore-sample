@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 
 using MyAuthentication.Model;
+using MyFramework.ServiceModel;
+
 
 namespace MyAuthentication.Service
 {
@@ -19,7 +21,7 @@ namespace MyAuthentication.Service
         /// <param name="systemCode"> 系统代码 </param>
         /// <param name="moduleType"> 模块类型 </param>
         /// <returns></returns>
-        List<MyModule> GetModuleList(string systemCode, string moduleType);
+        CommonQueryResult<MyModule> GetModuleList(string systemCode, string moduleType, int pageNo = 1, int pageSize = 10);
 
 
 
@@ -29,7 +31,7 @@ namespace MyAuthentication.Service
         /// <param name="systemCode">系统代码</param>
         /// <param name="moduleType">模块类型</param>
         /// <returns></returns>
-        List<MyModule> GetModuleListWithActions(string systemCode, string moduleType);
+        CommonQueryResult<MyModule> GetModuleListWithActions(string systemCode, string moduleType, int pageNo = 1, int pageSize = 10);
 
 
     }

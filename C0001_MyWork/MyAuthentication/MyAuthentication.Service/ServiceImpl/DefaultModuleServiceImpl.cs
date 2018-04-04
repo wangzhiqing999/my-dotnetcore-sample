@@ -4,9 +4,13 @@ using System.Text;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
+using MyFramework.ServiceModel;
+using MyFramework.Util;
+
 using MyAuthentication.Model;
 using MyAuthentication.DataAccess;
 using MyAuthentication.Service;
+
 
 namespace MyAuthentication.ServiceImpl
 {
@@ -15,7 +19,7 @@ namespace MyAuthentication.ServiceImpl
     /// </summary>
     public class DefaultModuleServiceImpl : IModuleService
     {
-        List<MyModule> IModuleService.GetModuleList(string systemCode, string moduleType)
+        CommonQueryResult<MyModule> IModuleService.GetModuleList(string systemCode, string moduleType, int pageNo, int pageSize)
         {
             using (MyAuthenticationContext context = new MyAuthenticationContext())
             {
@@ -32,14 +36,35 @@ namespace MyAuthentication.ServiceImpl
                     query = query.Where(p => p.ModuleTypeCode == moduleType);
                 }
 
-                List<MyModule> resultList = query.ToList();
-                return resultList;
+
+                // 初始化翻页.
+                PageInfo pgInfo = new PageInfo(
+                    pageSize: pageSize,
+                    pageNo: pageNo,
+                    rowCount: query.Count());
+
+                // 翻页.
+                query = query.OrderBy(p => p.ModuleCode)
+                    .Skip(pgInfo.SkipValue)
+                    .Take(pgInfo.PageSize);
+
+
+                List<MyModule> dataList = query.ToList();
+
+
+                CommonQueryResult<MyModule> result = new CommonQueryResult<MyModule>()
+                {
+                    QueryPageInfo = pgInfo,
+                    QueryResultData = dataList
+                };
+
+                return result;
             }
         }
 
 
 
-        List<MyModule> IModuleService.GetModuleListWithActions(string systemCode, string moduleType)
+        CommonQueryResult<MyModule> IModuleService.GetModuleListWithActions(string systemCode, string moduleType, int pageNo, int pageSize)
         {
             using (MyAuthenticationContext context = new MyAuthenticationContext())
             {
@@ -56,8 +81,29 @@ namespace MyAuthentication.ServiceImpl
                     query = query.Where(p => p.ModuleTypeCode == moduleType);
                 }
 
-                List<MyModule> resultList = query.ToList();
-                return resultList;
+
+                // 初始化翻页.
+                PageInfo pgInfo = new PageInfo(
+                    pageSize: pageSize,
+                    pageNo: pageNo,
+                    rowCount: query.Count());
+
+                // 翻页.
+                query = query.OrderBy(p => p.ModuleCode)
+                    .Skip(pgInfo.SkipValue)
+                    .Take(pgInfo.PageSize);
+
+
+                List<MyModule> dataList = query.ToList();
+
+
+                CommonQueryResult<MyModule> result = new CommonQueryResult<MyModule>()
+                {
+                    QueryPageInfo = pgInfo,
+                    QueryResultData = dataList
+                };
+
+                return result;
             }
         }
     }

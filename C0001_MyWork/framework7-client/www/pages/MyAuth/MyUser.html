@@ -7,28 +7,29 @@
           <span class="ios-only">Back</span>
         </a>
       </div>
-      <div class="title">组织机构</div>
+      <div class="title">用户</div>
     </div>
   </div>
   
-  <div class="page-content" id="organizationPage">
-    <div class="block-title">组织机构</div>
+  
+  <div class="page-content" id="userPage">
+    <div class="block-title">用户</div>
 	<div class="data-table">
 	  <table>
 		<thead>
 		  <tr>
-			<th class="label-cell">组织机构代码</th>
-			<th class="label-cell">组织机构名称</th>
+			<th class="label-cell">用户名</th>
+			<th class="label-cell">登录用户代码</th>
+			
 		  </tr>
 		</thead>
 
 		<tbody>
-		  
 		  <tr v-for="item in dataList">
-			<td class="label-cell">{{item.loginOrganizationCode}}</td>
-			<td class="label-cell">{{item.organizationName}}</td>			
+			<td class="label-cell">{{item.userName}}</td>
+			<td class="label-cell">{{item.loginUserCode}}</td>
+			
 		  </tr>
-		  
 		</tbody>
 	  </table>
 	  
@@ -37,7 +38,7 @@
 		v-bind:page-count="pageCount"
 		v-on:page-up="pageUp" 
 		v-on:page-down="pageDown"></my-pageinfo>
-		
+	  
 	</div>	
   </div>
 </div>

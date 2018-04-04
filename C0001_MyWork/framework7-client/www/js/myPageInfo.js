@@ -25,11 +25,11 @@ Vue.component('my-pageinfo', {
 
 	// 模板内容.
 	template: '<div class="block"> \
-		  <div class="col"> {{pageIndex}} / {{pageCount}} </div> \
 		  <div class="pages row" v-show="showPageInfo"> \
 			<div class="col"> \
 				<button class="button button-fill button-round" @click="pageUp()" :disabled="pageIndex==1">上一页</button> \
 			</div> \
+			<div class="col"> {{pageIndex}} / {{pageCount}} </div> \
 			<div class="col"> \
 				<button class="button button-fill button-round" @click="pageDown()" :disabled="pageIndex==pageCount">下一页</button> \
 			</div> \

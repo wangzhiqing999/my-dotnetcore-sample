@@ -6,15 +6,20 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
 
+using MyFramework.ServiceModel;
+
 using MyAuthentication.Model;
 using MyAuthentication.Service;
-using MyAuthentication.ServiceModel;
+
 
 namespace MyWork.Web.Areas.MyAuth.Controllers
 {
+
+    /// <summary>
+    /// 模块服务
+    /// </summary>
     [EnableCors("AllowCors")]
-    [Produces("application/json")]
-    [Route("api/MyAuth/MyModule")]
+    [Produces("application/json")]    
     public class MyModuleController : Controller
     {
         /// <summary>
@@ -22,7 +27,10 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
         /// </summary>
         private IModuleService _ModuleService;
 
-
+        /// <summary>
+        /// 构造函数.
+        /// </summary>
+        /// <param name="moduleService"></param>
         public MyModuleController(IModuleService moduleService)
         {
             this._ModuleService = moduleService;
@@ -34,9 +42,10 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<MyModule> Get(string systemCode, string moduleType)
+        [Route("api/MyAuth/MyModule")]
+        public CommonQueryResult<MyModule> Query(string systemCode, string moduleType, int pageNo = 1, int pageSize = 10)
         {
-            var result = this._ModuleService.GetModuleList(systemCode, moduleType);
+            var result = this._ModuleService.GetModuleList(systemCode, moduleType, pageNo, pageSize);
             return result;
         }
 

@@ -5,6 +5,8 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+using Newtonsoft.Json;
+
 using MyFramework.Model;
 
 using MyAuthentication.IModel;
@@ -44,6 +46,7 @@ namespace MyAuthentication.Model
         /// <summary>
         /// 归属的组织
         /// </summary>
+        [JsonIgnore]
         public virtual MyOrganization Organization { set; get; }
 
 
@@ -92,6 +95,7 @@ namespace MyAuthentication.Model
         /// <summary>
         /// 系统 -- 用户关系.
         /// </summary>
+        [JsonIgnore]
         public virtual List<MySystemUser> SystemUsers { set; get; }
 
         #endregion
@@ -104,6 +108,7 @@ namespace MyAuthentication.Model
         /// <summary>
         /// 用户 -- 角色关系
         /// </summary>
+        [JsonIgnore]
         public virtual List<MyUserRole> UserRoles { set; get; }
 
 

@@ -17,6 +17,8 @@ namespace MyFramework.ServiceModel
         }
 
 
+
+
         /// <summary>
         /// 结果码.
         /// </summary>
@@ -57,6 +59,9 @@ namespace MyFramework.ServiceModel
         }
 
 
+
+
+
         /// <summary>
         /// 处理成功.
         /// </summary>
@@ -70,6 +75,46 @@ namespace MyFramework.ServiceModel
             ResultCode = ResultCodeIsSuccess,
             ResultMessage = "success",
         };
+
+
+
+
+
+        /// <summary>
+        /// 数据不存在.
+        /// </summary>
+        public const int ResultCodeIsDataNotFound = -404;
+
+        /// <summary>
+        /// 默认的，数据不存在的执行结果.
+        /// </summary>
+        public static readonly CommonServiceResult DataNotFoundResult = new CommonServiceResult()
+        {
+            ResultCode = ResultCodeIsDataNotFound,
+            ResultMessage = "数据不存在！",
+        };
+
+
+
+
+
+
+        /// <summary>
+        /// 创建默认的成功的结果.
+        /// </summary>
+        /// <param name="resultData"></param>
+        /// <returns></returns>
+        public static CommonServiceResult CreateDefaultSuccessResult(dynamic resultData)
+        {
+            CommonServiceResult result = new CommonServiceResult()
+            {
+                ResultCode = ResultCodeIsSuccess,
+                ResultMessage = "success",
+                ResultData = resultData
+            };
+            return result;
+        }
+
 
 
     }

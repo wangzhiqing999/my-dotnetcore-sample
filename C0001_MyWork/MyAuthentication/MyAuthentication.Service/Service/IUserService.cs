@@ -24,6 +24,25 @@ namespace MyAuthentication.Service
 
 
 
+
+
+        /// <summary>
+        /// 查询用户.
+        /// </summary>
+        /// <param name="pageNo"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        CommonQueryResult<MyUser> Query(int pageNo = 1, int pageSize = 10);
+
+
+        /// <summary>
+        /// 获取用户.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        CommonServiceResult GetUser(long id);
+
+
         /// <summary>
         /// 新增用户.
         /// </summary>

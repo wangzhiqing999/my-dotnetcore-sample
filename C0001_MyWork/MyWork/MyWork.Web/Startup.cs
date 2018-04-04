@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Text;
+using System.IO;
+using System.Reflection;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +15,10 @@ using MyAuthentication.DataAccess;
 using MyAuthentication.Service;
 using MyAuthentication.ServiceImpl;
 
+
+
+using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.Extensions.PlatformAbstractions;
 
 
 namespace MyWork.Web
@@ -28,6 +35,14 @@ namespace MyWork.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+
+
+
+
+
+
+
 
             // ########## 用ASP.NET Core自带依赖注入(DI)注入使用的类 ##########
 
@@ -109,6 +124,29 @@ namespace MyWork.Web
                         .AllowCredentials();
                 });
             });
+
+
+
+
+            // ##### Swagger 相关配置 #####
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc(
+                    "v1",
+                    new Info
+                    {
+                        Version = "v1",
+                        Title = "MyWork Web API",
+                        Description = "MyWork Web API."
+                    });
+
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetEntryAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
+
         }
 
 
@@ -127,6 +165,19 @@ namespace MyWork.Web
             }
 
             app.UseStaticFiles();
+
+
+
+            // ##### Swagger 相关配置 #####
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyWork API V1");
+            });
 
 
 

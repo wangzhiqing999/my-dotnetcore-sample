@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+
 using MyFramework.ServiceModel;
+using MyFramework.Util;
+
 using MyAuthentication.Model;
 using MyAuthentication.DataAccess;
 using MyAuthentication.Service;
@@ -18,6 +21,7 @@ namespace MyAuthentication.ServiceImpl
     public class DefaultUserServiceImpl : IUserService
     {
 
+
         /// <summary>
         /// 登录.
         /// </summary>
@@ -27,11 +31,11 @@ namespace MyAuthentication.ServiceImpl
         /// <returns></returns>
         public CommonServiceResult DoLogin(string organizationCode, string userName, string password)
         {
-            using(MyAuthenticationContext context = new MyAuthenticationContext())
+            using (MyAuthenticationContext context = new MyAuthenticationContext())
             {
                 // 查询 组织信息.
                 MyOrganization org = context.MyOrganizations.FirstOrDefault(p => p.LoginOrganizationCode == organizationCode);
-                if(org == null)
+                if (org == null)
                 {
                     // 组织代码不存在.
                     return AuthenticationServiceResult.OrganizationCodeNotFoundResult;
@@ -39,14 +43,14 @@ namespace MyAuthentication.ServiceImpl
 
                 // 查询用户信息.
                 MyUser user = context.MyUsers.FirstOrDefault(p => p.OrganizationID == org.OrganizationID && p.LoginUserCode == userName);
-                if(user == null)
+                if (user == null)
                 {
                     // 登录用户代码不存在
                     return AuthenticationServiceResult.LoginUserCodeNotFoundResult;
                 }
 
                 // TODO. 密码计算 / 比较.
-                if(!String.Equals(user.UserPassword, password, StringComparison.CurrentCultureIgnoreCase))
+                if (!String.Equals(user.UserPassword, password, StringComparison.CurrentCultureIgnoreCase))
                 {
                     // 密码不正确.
                     return AuthenticationServiceResult.PasswordNotMatchResult;
@@ -67,6 +71,78 @@ namespace MyAuthentication.ServiceImpl
                 return result;
             }
         }
+
+
+
+        /// <summary>
+        /// 查询用户.
+        /// </summary>
+        /// <param name="pageNo"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public CommonQueryResult<MyUser> Query(int pageNo, int pageSize)
+        {
+            using (MyAuthenticationContext context = new MyAuthenticationContext())
+            {
+                var query =
+                    from data in context.MyUsers
+                    select data;
+
+                // 初始化翻页.
+                PageInfo pgInfo = new PageInfo(
+                    pageSize: pageSize,
+                    pageNo: pageNo,
+                    rowCount: query.Count());
+
+                // 翻页.
+                query = query.OrderByDescending(p => p.LastUpdateTime)
+                    .Skip(pgInfo.SkipValue)
+                    .Take(pgInfo.PageSize);
+
+                List<MyUser> dataList = query.ToList();
+
+
+                CommonQueryResult<MyUser> result = new CommonQueryResult<MyUser>()
+                {
+                    QueryPageInfo = pgInfo,
+                    QueryResultData = dataList
+                };
+
+                return result;
+            }
+        }
+
+
+
+        /// <summary>
+        /// 获取用户.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public CommonServiceResult GetUser(long id)
+        {
+            using (MyAuthenticationContext context = new MyAuthenticationContext())
+            {
+                var query =
+                    from data in context.MyUsers
+                    where
+                        data.UserID == id
+                    select data;
+
+                MyUser userData = query.FirstOrDefault();
+
+                if (userData == null)
+                {
+                    // 数据不存在.
+                    return CommonServiceResult.DataNotFoundResult;
+                }
+
+
+                CommonServiceResult result = CommonServiceResult.CreateDefaultSuccessResult(userData);
+                return result;
+            }
+        }
+
 
 
         /// <summary>
@@ -176,6 +252,6 @@ namespace MyAuthentication.ServiceImpl
             return CommonServiceResult.DefaultSuccessResult;
         }
 
-        
+
     }
 }

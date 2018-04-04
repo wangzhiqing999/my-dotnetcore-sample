@@ -1,6 +1,3 @@
-
-var myServerHost = "http://localhost:24853/";
-
 // 路由的文档， 参考： http://www.framework7.cn/docs/routes.html
 
 routes = [
@@ -31,74 +28,24 @@ routes = [
 	// 模块类型.
 	{
 		path: '/MyAuth/MyModuleType/',
-		async: function (routeTo, routeFrom, resolve, reject) {
-			// Router instance
-			var router = this;
-			// App instance
-			var app = router.app;
-			// Show Preloader
-			app.preloader.show();
-			var apiUrl = myServerHost + 'api/MyAuth/MyModuleType';
-			app.request.json(
-				apiUrl,
-				{ },
-				function (data) {
-					// Hide Preloader
-					app.preloader.hide();
-					resolve(
-						{
-							componentUrl: './pages/MyAuth/MyModuleType.html',
-						},
-						{
-							context: {
-								moduleTypeData: data,
-							}
-						}
-					);
-				},
-				function () {
-					// Hide Preloader
-					app.preloader.hide();
-				});
+		url: './pages/MyAuth/MyModuleType.html',
+		on: {
+			pageInit: function (e, page) {
+				myCommonService.initDefaultDataListView('#moduleTypePage', 'api/MyAuth/MyModuleType');
+			}
 		}
 	},
 
 	// 模块
 	{
 		path: '/MyAuth/MyModule/',
-		async: function (routeTo, routeFrom, resolve, reject) {
-			// Router instance
-			var router = this;
-			// App instance
-			var app = router.app;
-			// Show Preloader
-			app.preloader.show();
-			var apiUrl = myServerHost + 'api/MyAuth/MyModule';
-			app.request.json(
-				apiUrl,
-				{ },
-				function (data) {
-					// Hide Preloader
-					app.preloader.hide();
-					resolve(
-						{
-							componentUrl: './pages/MyAuth/MyModule.html',
-						},
-						{
-							context: {
-								moduleData: data,
-							}
-						}
-					);
-				},
-				function () {
-					// Hide Preloader
-					app.preloader.hide();
-				});
+		url: './pages/MyAuth/MyModule.html',
+		on: {
+			pageInit: function (e, page) {
+				myCommonService.initDefaultDataListView('#modulePage', 'api/MyAuth/MyModule');
+			}
 		}
 	},
-
-
 
 	// 组织机构
 	{
@@ -106,7 +53,7 @@ routes = [
 		url: './pages/MyAuth/MyOrganization.html',
 		on: {
 			pageInit: function (e, page) {
-				initMyAuthOrganization();
+				myCommonService.initDefaultDataListView('#organizationPage', 'api/MyAuth/MyOrganization');
 			}
 		}
 	},
@@ -117,7 +64,18 @@ routes = [
 		url: './pages/MyAuth/MyRole.html',
 		on: {
 			pageInit: function (e, page) {
-				initMyAuthRole();
+				myCommonService.initDefaultDataListView('#rolePage', 'api/MyAuth/MyRole');
+			}
+		}
+	},
+
+	// 用户.
+	{
+		path: '/MyAuth/MyUser/',
+		url: './pages/MyAuth/MyUser.html',
+		on: {
+			pageInit: function (e, page) {
+				myCommonService.initDefaultDataListView('#userPage', 'api/MyAuth/MyUser');
 			}
 		}
 	},

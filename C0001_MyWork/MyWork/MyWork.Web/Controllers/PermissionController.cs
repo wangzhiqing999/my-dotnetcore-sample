@@ -12,8 +12,10 @@ using MyAuthentication.ServiceModel;
 namespace MyWork.Web.Controllers
 {
 
+    /// <summary>
+    /// 权限服务.
+    /// </summary>
     [Produces("application/json")]
-    [Route("api/Permission")]
     public class PermissionController : TokenAbleController
     {
 
@@ -29,7 +31,12 @@ namespace MyWork.Web.Controllers
 
 
 
+        /// <summary>
+        /// 获取当前用户可访问的系统.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
+        [Route("api/Permission/AccessAbleSystems")]
         public IActionResult AccessAbleSystems()
         {
             BasicUserInfo userInfo = base.GetUserInfoFromToken();
@@ -43,7 +50,12 @@ namespace MyWork.Web.Controllers
         }
 
 
+        /// <summary>
+        /// 获取当前用户可访问的模块
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
+        [Route("api/Permission/AccessAbleModules")]
         public IActionResult AccessAbleModules()
         {
             BasicUserInfo userInfo = base.GetUserInfoFromToken();
@@ -58,7 +70,12 @@ namespace MyWork.Web.Controllers
 
 
 
+        /// <summary>
+        /// 获取当前用户可访问的动作.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
+        [Route("api/Permission/AccessAbleActions")]
         public IActionResult AccessAbleActions()
         {
             BasicUserInfo userInfo = base.GetUserInfoFromToken();

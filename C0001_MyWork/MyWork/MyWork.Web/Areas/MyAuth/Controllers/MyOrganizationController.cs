@@ -15,6 +15,10 @@ using MyAuthentication.ServiceModel;
 
 namespace MyWork.Web.Areas.MyAuth.Controllers
 {
+
+    /// <summary>
+    /// 组织机构服务.
+    /// </summary>
     [EnableCors("AllowCors")]
     [Produces("application/json")]
     public class MyOrganizationController : Controller
@@ -26,6 +30,10 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
         private IOrganizationService _OrganizationService;
 
 
+        /// <summary>
+        /// 构造函数.
+        /// </summary>
+        /// <param name="service"></param>
         public MyOrganizationController(IOrganizationService service)
         {
             this._OrganizationService = service;
@@ -34,8 +42,10 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
 
 
         /// <summary>
-        /// 查询 组织机构.
+        /// 查询 组织机构列表
         /// </summary>
+        /// <param name="pageNo">第几页</param>
+        /// <param name="pageSize">每页几行</param>
         /// <returns></returns>
         [HttpGet]
         [Route("api/MyAuth/MyOrganization")]
@@ -49,10 +59,11 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
         /// <summary>
         /// 获取 组织机构.
         /// </summary>
+        /// <param name="id">组织机构代码</param>
         /// <returns></returns>
         [HttpGet]
         [Route("api/MyAuth/MyOrganization/Get/{id}")]
-        public MyOrganization Get(long id)
+        public CommonServiceResult Get(long id)
         {
             var result = this._OrganizationService.GetOrganization(id);
             return result;
@@ -63,7 +74,7 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
         /// <summary>
         /// 新增组织机构.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">组织机构数据</param>
         /// <returns></returns>
         [HttpPost]
         [Route("api/MyAuth/MyOrganization/Insert")]
@@ -75,9 +86,9 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
 
 
         /// <summary>
-        /// 更新.
+        /// 更新组织机构.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">组织机构数据</param>
         /// <returns></returns>
         [HttpPost]
         [Route("api/MyAuth/MyOrganization/Update")]
@@ -89,9 +100,9 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
 
 
         /// <summary>
-        /// 删除.
+        /// 删除组织机构.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="id">组织机构代码</param>
         /// <returns></returns>
         [HttpPost]
         [Route("api/MyAuth/MyOrganization/Delete")]

@@ -15,8 +15,11 @@ namespace MyAuthentication.Service
     {
 
         /// <summary>
-        /// 获取全部角色.
+        /// 查询角色
         /// </summary>
+        /// <param name="systemCode"></param>
+        /// <param name="pageNo"></param>
+        /// <param name="pageSize"></param>
         /// <returns></returns>
         CommonQueryResult<MyRole> Query(string systemCode, int pageNo = 1, int pageSize = 10);
 
@@ -26,7 +29,7 @@ namespace MyAuthentication.Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        MyRole GetRole(string id);
+        CommonServiceResult GetRole(string id);
 
 
         /// <summary>
