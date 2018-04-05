@@ -11,6 +11,13 @@ namespace MyFramework.Model
     public abstract class CommonData : ILogicRemoveAble, IUpdateLogAble
     {
 
+        /// <summary>
+        /// 获取主键.
+        /// </summary>
+        [NotMapped]
+        public abstract dynamic PrimaryKey { get; }
+
+
 
         #region ILogicRemoveAble 实现.
 

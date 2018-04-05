@@ -102,12 +102,13 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
         /// <summary>
         /// 删除组织机构.
         /// </summary>
-        /// <param name="id">组织机构代码</param>
+        /// <param name="data">组织机构代码</param>
         /// <returns></returns>
         [HttpPost]
         [Route("api/MyAuth/MyOrganization/Delete")]
-        public CommonServiceResult Delete(long id)
+        public CommonServiceResult Delete([FromBody]RemoveRequest data)
         {
+            long id = data.id;
             var result = this._OrganizationService.RemoveOrganization(id);
             return result;
         }

@@ -56,11 +56,62 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
             return result;
         }
 
+        /// <summary>
+        /// 获取用户.
+        /// </summary>
+        /// <param name="id">用户代码</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("api/MyAuth/MyUser/Get/{id}")]
+        public CommonServiceResult Get(long id)
+        {
+            var result = this._UserService.GetUser(id);
+            return result;
+        }
+
+
+        /// <summary>
+        /// 新增用户.
+        /// </summary>
+        /// <param name="data">用户数据</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("api/MyAuth/MyUser/Insert")]
+        public CommonServiceResult Insert([FromBody]MyUser data)
+        {
+            var result = this._UserService.NewUser(data);
+            return result;
+        }
 
 
 
+        /// <summary>
+        /// 更新用户.
+        /// </summary>
+        /// <param name="data">用户数据</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("api/MyAuth/MyUser/Update")]
+        public CommonServiceResult Update([FromBody]MyUser data)
+        {
+            var result = this._UserService.UpdateUser(data);
+            return result;
+        }
 
 
+
+        /// <summary>
+        /// 删除用户.
+        /// </summary>
+        /// <param name="id">用户代码</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("api/MyAuth/MyUser/Delete")]
+        public CommonServiceResult Delete(long id)
+        {
+            var result = this._UserService.RemoveUser(id);
+            return result;
+        }
 
     }
 }

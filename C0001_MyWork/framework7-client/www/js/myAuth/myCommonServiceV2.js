@@ -1,9 +1,3 @@
-// 2018年4月5日记录.
-// 这个 js 处理机制，存在一定的问题.
-// 就是页面操作中， 存在 【后退】的情况.
-// 例如用户先点击了 【组织机构】，翻了2页， 再点击【用户】，又翻了2页。 点后退， 返回到 【组织机构】，这种情况下，翻页的功能没有了。
-
-
 var myCommonService = {
 
 	// 服务器地址.
@@ -91,13 +85,14 @@ var myCommonService = {
 
 
 	// 初始化默认的数据明细视图.
-	// 默认数据明细视图，只有单独的主键.
-	initDefaultDataDetailView : function(elName, webApiPath) {
+	initDefaultDataDetailView : function(elName, queryWebApiPath, updateWebApiPath, deleteWebApiPath) {
 		var appVue = new Vue({
 			el: elName,
 			data: {
 				// 数据.
-				dataItem : null
+				dataItem : null,
+				// 编辑模式.
+				editMode : false,
 			},
 			created:function(){
 			　　// ajax获取后台数据
@@ -109,7 +104,7 @@ var myCommonService = {
 					var _this = this;
 					// Show Preloader
 					app.preloader.show();
-					var apiUrl = myCommonService._myServerHost + webApiPath;
+					var apiUrl = myCommonService._myServerHost + queryWebApiPath;
 					Framework7.request.json(
 						apiUrl,
 						{},
@@ -120,13 +115,66 @@ var myCommonService = {
 							_this.dataItem = data.resultData;
 						}
 					);
+				},
+				doEdit:function() {
+					this.editMode = true;
+				},
+				cancelEdit:function() {
+					this.editMode = false;
+				},
+				saveData:function() {
+					var _this = this;
+					// Show Preloader
+					app.preloader.show();
+					var apiUrl = myCommonService._myServerHost + updateWebApiPath;
+					Framework7.request.postJSON(
+						apiUrl,
+						_this.dataItem,
+						function (data) {
+							// Hide Preloader
+							app.preloader.hide();
+							// console.log(data);
+							if(data.isSuccess) {
+								app.router.navigate(_myListUrl);
+							} else {
+								app.dialog.alert(data.resultMessage);
+							}
+						}
+					);
+				},
+				deleteData:function() {
+					var _this = this;
+					app.dialog.confirm('确定要删除此数据么? 此操作不可恢复。', function () {
+						// Show Preloader
+						app.preloader.show();
+						var apiUrl = myCommonService._myServerHost + deleteWebApiPath;
+						Framework7.request.postJSON(
+							apiUrl,
+							{
+								id : _this.dataItem.primaryKey
+							},
+							function (data) {
+								// Hide Preloader
+								app.preloader.hide();
+								// console.log(data);
+								if(data.isSuccess) {
+									app.router.navigate(_myListUrl);
+								} else {
+									app.dialog.alert(data.resultMessage);
+								}
+							}
+						);
+					});
+				},
+				goBack:function() {
+					app.router.navigate(_myListUrl);
 				}
 			}
 		});
 	},
 
 
-	
+
 	// 初始化默认的数据编辑视图.
 	// 默认数据编辑视图，只有单独的主键.
 	initDefaultDataEditView : function(elName, queryWebApiPath, saveWebApiPath) {
@@ -162,7 +210,7 @@ var myCommonService = {
 					var _this = this;
 					// Show Preloader
 					app.preloader.show();
-					
+
 					var apiUrl = myCommonService._myServerHost + saveWebApiPath;
 					Framework7.request.postJSON(
 						apiUrl,
@@ -171,21 +219,21 @@ var myCommonService = {
 							// Hide Preloader
 							app.preloader.hide();
 							console.log(data);
-							
+
 							if(data.isSuccess) {
-								app.dialog.alert('success!');
-								
-								router.back();
-								
+								app.router.navigate(_myListUrl);
 							} else {
 								app.dialog.alert(data.resultMessage);
 							}
 						}
 					);
+				},
+				goBack:function() {
+					app.router.navigate(_myListUrl);
 				}
 			}
 		});
 	}
-	
-	
+
+
 }

@@ -1,11 +1,12 @@
-<div class="page" data-name="about">
+<template>
+<div class="page" data-name="user">
   <div class="navbar">
     <div class="navbar-inner sliding">
       <div class="left">
-        <a href="#" class="link back">
-          <i class="icon icon-back"></i>
-          <span class="ios-only">Back</span>
-        </a>
+		<a href="#" class="link icon-only panel-open" data-panel="left">
+		  <i class="icon f7-icons ios-only">menu</i>
+		  <i class="icon material-icons md-only">menu</i>
+		</a>
       </div>
       <div class="title">用户</div>
     </div>
@@ -25,20 +26,40 @@
 		</thead>
 
 		<tbody>
-		  <tr v-for="item in dataList">
-			<td class="label-cell">{{item.userName}}</td>
-			<td class="label-cell">{{item.loginUserCode}}</td>
-			
+		  {{#each queryResultData}}
+		  <tr>
+			<td class="label-cell">{{userName}}</td>
+			<td class="label-cell">{{loginUserCode}}</td>			
 		  </tr>
+		  {{/each}}
 		</tbody>
 	  </table>
 	  
-	  <my-pageinfo 
-		v-bind:page-index="pageIndex"
-		v-bind:page-count="pageCount"
-		v-on:page-up="pageUp" 
-		v-on:page-down="pageDown"></my-pageinfo>
+	  
+<div class="block">
+  <div class="pages row">
+	<div class="col">
+		{{#if queryPageInfo.hasPreviousPage}}
+		<a href="/MyAuth/MyUser/{{queryPageInfo.pageIndex-1}}/" class="button button-fill button-round">上一页</a>
+		{{else}}
+		<a href="#" class="button button-fill button-round color-gray">上一页</a>
+		{{/if}}
+	</div>
+	<div class="col"> {{queryPageInfo.pageIndex}} / {{queryPageInfo.pageCount}} </div>
+	<div class="col">
+		{{#if queryPageInfo.hasNextPage}}
+		<a href="/MyAuth/MyUser/{{queryPageInfo.pageIndex+1}}/" class="button button-fill button-round">下一页</a>
+		{{else}}
+		<a href="#" class="button button-fill button-round color-gray">下一页</a>
+		{{/if}}
+	</div>
+  </div>
+</div>	
 	  
 	</div>	
   </div>
 </div>
+</template>
+<script>
+  return {}
+</script>

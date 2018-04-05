@@ -20,6 +20,19 @@ namespace MyAuthentication.Model
     {
 
         /// <summary>
+        /// 获取主键.
+        /// </summary>
+        [NotMapped]
+        public override dynamic PrimaryKey
+        {
+            get
+            {
+                return this.RoleCode;
+            }
+        }
+
+
+        /// <summary>
         /// 角色代码
         /// </summary>
         [Column("role_code")]

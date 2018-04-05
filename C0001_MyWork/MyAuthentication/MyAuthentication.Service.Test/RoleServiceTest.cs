@@ -21,11 +21,11 @@ namespace MyAuthentication.Service.Test
         public void TestGetAllRoles()
         {
             // 获取全部角色.
-            var allRole = roleService.GetAllRoles();
+            var allRole = roleService.Query(null);
             // 结果非空.
             Assert.IsNotNull(allRole);
             // 至少1个角色.
-            Assert.IsTrue(allRole.Count > 0);
+            Assert.IsTrue(allRole.QueryResultData.Count > 0);
         }
 
 
@@ -70,14 +70,14 @@ namespace MyAuthentication.Service.Test
             // 结果非空.
             Assert.IsNotNull(oneRole);
             // 数据核对.
-            Assert.AreEqual("测试角色", oneRole.RoleName);
+            Assert.AreEqual("测试角色", oneRole.ResultData.RoleName);
 
             // 测试修改.
-            oneRole.RoleName = "测试角色_100";
+            oneRole.ResultData.RoleName = "测试角色_100";
 
 
             // 测试保存.
-            testResult = this.roleService.UpdateRole(oneRole);
+            testResult = this.roleService.UpdateRole(oneRole.ResultData);
             // 结果非空.
             Assert.IsNotNull(testResult);
             // 处理成功.
@@ -88,8 +88,9 @@ namespace MyAuthentication.Service.Test
             var oneRole2 = roleService.GetRole("TEST");
             // 结果非空.
             Assert.IsNotNull(oneRole2);
+            Assert.IsNotNull(oneRole2.ResultData);
             // 数据核对.
-            Assert.AreEqual("测试角色_100", oneRole2.RoleName);
+            Assert.AreEqual("测试角色_100", oneRole2.ResultData.RoleName);
 
 
             // 测试删除.

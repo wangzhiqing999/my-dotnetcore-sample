@@ -27,7 +27,7 @@ namespace MyAuthentication.Service.Test
             // 结果非空.
             Assert.IsNotNull(result);
             // 有结果.
-            Assert.IsTrue(result.Count > 0);
+            Assert.IsTrue(result.QueryResultData.Count > 0);
         }
 
     }

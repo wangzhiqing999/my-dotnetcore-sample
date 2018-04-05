@@ -64,3 +64,34 @@ SELECT	'TEST_020', 'TEST', '测试角色020',	GETDATE(), 'system', GETDATE(), 's
 ;
 
 
+
+-- 测试用户.
+INSERT INTO [my_user](
+	[login_user_code],[organization_id],[user_name],[user_password],
+	[create_time],[create_user],[last_update_time],[last_update_user],[status]
+)
+SELECT 'TEST_001', 1, '测试用户001', '123456',			GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE' UNION ALL
+SELECT 'TEST_002', 1, '测试用户002', '123456',			GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE' UNION ALL
+SELECT 'TEST_003', 1, '测试用户003', '123456',			GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE' UNION ALL
+SELECT 'TEST_004', 1, '测试用户004', '123456',			GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE' UNION ALL
+SELECT 'TEST_005', 1, '测试用户005', '123456',			GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE' UNION ALL
+SELECT 'TEST_006', 1, '测试用户006', '123456',			GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE' UNION ALL
+SELECT 'TEST_007', 1, '测试用户007', '123456',			GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE' UNION ALL
+SELECT 'TEST_008', 1, '测试用户008', '123456',			GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE' UNION ALL
+SELECT 'TEST_009', 1, '测试用户009', '123456',			GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE' UNION ALL
+SELECT 'TEST_010', 1, '测试用户010', '123456',			GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE' UNION ALL
+SELECT 'TEST_011', 1, '测试用户011', '123456',			GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE' UNION ALL
+SELECT 'TEST_012', 1, '测试用户012', '123456',			GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE' UNION ALL
+SELECT 'TEST_013', 1, '测试用户013', '123456',			GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE' UNION ALL
+SELECT 'TEST_014', 1, '测试用户014', '123456',			GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE' UNION ALL
+SELECT 'TEST_015', 1, '测试用户015', '123456',			GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE' UNION ALL
+SELECT 'TEST_016', 1, '测试用户016', '123456',			GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE' UNION ALL
+SELECT 'TEST_017', 1, '测试用户017', '123456',			GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE' UNION ALL
+SELECT 'TEST_018', 1, '测试用户018', '123456',			GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE' UNION ALL
+SELECT 'TEST_019', 1, '测试用户019', '123456',			GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE' UNION ALL
+SELECT 'TEST_020', 1, '测试用户020', '123456',			GETDATE(), 'system', GETDATE(), 'system',  'ACTIVE'
+;
+
+
+
+

@@ -223,6 +223,31 @@ namespace MyFramework.Util
 
 
 
+
+
+        /// <summary>
+        /// 拥有上一页.
+        /// </summary>
+        public bool HasPreviousPage
+        {
+            get
+            {
+                return this.PageIndex > 1;
+            }
+        }
+
+
+        /// <summary>
+        /// 拥有下一页.
+        /// </summary>
+        public bool HasNextPage
+        {
+            get
+            {
+                return this.PageIndex < this.PageCount;
+            }
+        }
+
     }
 
 

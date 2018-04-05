@@ -24,6 +24,19 @@ namespace MyAuthentication.Model
     {
 
         /// <summary>
+        /// 获取主键.
+        /// </summary>
+        [NotMapped]
+        public override dynamic PrimaryKey
+        {
+            get
+            {
+                return this.UserID;
+            }
+        }
+
+
+        /// <summary>
         /// 用户ID
         /// </summary>
         [Column("user_id")]

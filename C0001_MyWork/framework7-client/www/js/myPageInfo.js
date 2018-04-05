@@ -27,11 +27,11 @@ Vue.component('my-pageinfo', {
 	template: '<div class="block"> \
 		  <div class="pages row" v-show="showPageInfo"> \
 			<div class="col"> \
-				<button class="button button-fill button-round" @click="pageUp()" :disabled="pageIndex==1">上一页</button> \
+				<button class="button button-fill button-round" @click="pageUp()" v-bind:disabled="pageIndex==1">上一页</button> \
 			</div> \
 			<div class="col"> {{pageIndex}} / {{pageCount}} </div> \
 			<div class="col"> \
-				<button class="button button-fill button-round" @click="pageDown()" :disabled="pageIndex==pageCount">下一页</button> \
+				<button class="button button-fill button-round" @click="pageDown()" v-bind:disabled="pageIndex==pageCount">下一页</button> \
 			</div> \
 		  </div> \
 	  </div>',
@@ -40,10 +40,12 @@ Vue.component('my-pageinfo', {
 	methods: {
 		pageUp:function() {
 			// 上一页.
+			console.log("pageUp : ", this.pageIndex);
 			this.$emit('page-up');
 		},
 		pageDown:function() {
 			// 下一页.
+			console.log("pageDown : ", this.pageIndex);
 			this.$emit('page-down');
 		}
 	}

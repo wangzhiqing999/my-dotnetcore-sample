@@ -1,16 +1,17 @@
-<div class="page" data-name="about">
+<template>
+<div class="page" data-name="organization">
   <div class="navbar">
     <div class="navbar-inner sliding">
       <div class="left">
-        <a href="#" class="link back">
-          <i class="icon icon-back"></i>
-          <span class="ios-only">Back</span>
-        </a>
+		<a href="#" class="link icon-only panel-open" data-panel="left">
+		  <i class="icon f7-icons ios-only">menu</i>
+		  <i class="icon material-icons md-only">menu</i>
+		</a>
       </div>
       <div class="title">组织机构</div>
     </div>
   </div>
-  
+
   <div class="page-content" id="organizationPage">
     <div class="block-title">组织机构</div>
 	<div class="data-table">
@@ -19,25 +20,47 @@
 		  <tr>
 			<th class="label-cell">组织机构代码</th>
 			<th class="label-cell">组织机构名称</th>
+			<th class="label-cell">&nbsp;</th>
 		  </tr>
 		</thead>
 
 		<tbody>
-		  
-		  <tr v-for="item in dataList">
-			<td class="label-cell">{{item.loginOrganizationCode}}</td>
-			<td class="label-cell">{{item.organizationName}}</td>			
+		  {{#each queryResultData}}
+		  <tr>
+			<td class="label-cell">{{loginOrganizationCode}}</td>
+			<td class="label-cell">{{organizationName}}</td>
+			<td>
+				<a href="/MyAuth/MyOrganization/Detail/{{organizationID}}" >明细</a>
+			</td>
 		  </tr>
-		  
+		  {{/each}}
 		</tbody>
 	  </table>
-	  
-	  <my-pageinfo 
-		v-bind:page-index="pageIndex"
-		v-bind:page-count="pageCount"
-		v-on:page-up="pageUp" 
-		v-on:page-down="pageDown"></my-pageinfo>
-		
-	</div>	
+
+<div class="block">
+  <div class="pages row">
+	<div class="col">
+		{{#if queryPageInfo.hasPreviousPage}}
+		<a href="/MyAuth/MyOrganization/{{queryPageInfo.pageIndex-1}}/" class="button button-fill button-round">上一页</a>
+		{{else}}
+		<a href="#" class="button button-fill button-round color-gray">上一页</a>
+		{{/if}}
+	</div>
+	<div class="col"> {{queryPageInfo.pageIndex}} / {{queryPageInfo.pageCount}} </div>
+	<div class="col">
+		{{#if queryPageInfo.hasNextPage}}
+		<a href="/MyAuth/MyOrganization/{{queryPageInfo.pageIndex+1}}/" class="button button-fill button-round">下一页</a>
+		{{else}}
+		<a href="#" class="button button-fill button-round color-gray">下一页</a>
+		{{/if}}
+	</div>
   </div>
 </div>
+
+	</div>
+  </div>
+</div>
+</template>
+<script>
+  return {}
+</script>

@@ -24,8 +24,10 @@ namespace MyAuthentication.Service.Test
 
             // 结果非空.
             Assert.IsNotNull(result);
+            Assert.IsNotNull(result.QueryResultData);
+
             // 2个结果.
-            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual(2, result.QueryResultData.Count);
 
         }
 

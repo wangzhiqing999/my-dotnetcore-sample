@@ -21,6 +21,20 @@ namespace MyAuthentication.Model
     {
 
         /// <summary>
+        /// 获取主键.
+        /// </summary>
+        [NotMapped]
+        public override dynamic PrimaryKey
+        {
+            get
+            {
+                return this.OrganizationID;
+            }
+        }
+
+
+
+        /// <summary>
         /// 组织ID
         /// </summary>
         [Column("organization_id")]
@@ -61,6 +75,7 @@ namespace MyAuthentication.Model
         /// </summary>
         [JsonIgnore]
         public virtual List<MyUser> Users { set; get; }
+
 
 
         #endregion 一对多.
