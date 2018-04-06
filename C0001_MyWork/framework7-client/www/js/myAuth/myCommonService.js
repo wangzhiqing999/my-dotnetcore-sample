@@ -1,4 +1,4 @@
-// 2018年4月5日记录.
+// 2018年4月5日废弃记录.
 // 这个 js 处理机制，存在一定的问题.
 // 就是页面操作中， 存在 【后退】的情况.
 // 例如用户先点击了 【组织机构】，翻了2页， 再点击【用户】，又翻了2页。 点后退， 返回到 【组织机构】，这种情况下，翻页的功能没有了。
@@ -126,7 +126,7 @@ var myCommonService = {
 	},
 
 
-	
+
 	// 初始化默认的数据编辑视图.
 	// 默认数据编辑视图，只有单独的主键.
 	initDefaultDataEditView : function(elName, queryWebApiPath, saveWebApiPath) {
@@ -162,7 +162,7 @@ var myCommonService = {
 					var _this = this;
 					// Show Preloader
 					app.preloader.show();
-					
+
 					var apiUrl = myCommonService._myServerHost + saveWebApiPath;
 					Framework7.request.postJSON(
 						apiUrl,
@@ -171,12 +171,12 @@ var myCommonService = {
 							// Hide Preloader
 							app.preloader.hide();
 							console.log(data);
-							
+
 							if(data.isSuccess) {
 								app.dialog.alert('success!');
-								
+
 								router.back();
-								
+
 							} else {
 								app.dialog.alert(data.resultMessage);
 							}
@@ -186,6 +186,6 @@ var myCommonService = {
 			}
 		});
 	}
-	
-	
+
+
 }

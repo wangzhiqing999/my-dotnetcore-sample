@@ -12,6 +12,10 @@ using MyAuthentication.ServiceModel;
 
 namespace MyWork.Web.Areas.MyAuth.Controllers
 {
+
+    /// <summary>
+    /// 动作服务.
+    /// </summary>
     [EnableCors("AllowCors")]
     [Produces("application/json")]
     [Route("api/MyAuth/MyAction")]

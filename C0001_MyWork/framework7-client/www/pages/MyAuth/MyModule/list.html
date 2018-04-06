@@ -1,0 +1,67 @@
+<template>
+<div class="page" data-name="module">
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+		<a href="#" class="link icon-only panel-open" data-panel="left">
+		  <i class="icon f7-icons ios-only">menu</i>
+		  <i class="icon material-icons md-only">menu</i>
+		</a>
+      </div>
+      <div class="title">模块</div>
+    </div>
+  </div>
+  
+  
+  <div class="page-content"  id="modulePage">
+    <div class="block-title">模块</div>
+	<div class="data-table">
+	  <table>
+		<thead>
+		  <tr>
+			<th class="label-cell">系统</th>
+			<th class="label-cell">模块类型</th>
+			<th class="label-cell">模块代码</th>
+			<th class="label-cell">模块名称</th>
+		  </tr>
+		</thead>
+
+		<tbody>
+		  {{#each queryResultData}}
+		  <tr>
+			<td class="label-cell">{{systemCode}}</td>
+			<td class="label-cell">{{moduleTypeCode}}</td>
+			<td class="label-cell">{{moduleCode}}</td>
+			<td class="label-cell">{{moduleName}}</td>			
+		  </tr>
+		  {{/each}}
+		</tbody>
+	  </table>
+	  
+<div class="block">
+  <div class="pages row">
+	<div class="col">
+		{{#if queryPageInfo.hasPreviousPage}}
+		<a href="/MyAuth/MyModule/List/{{queryPageInfo.pageIndex-1}}/" class="button button-fill button-round">上一页</a>
+		{{else}}
+		<a href="#" class="button button-fill button-round color-gray">上一页</a>
+		{{/if}}
+	</div>
+	<div class="col"> {{queryPageInfo.pageIndex}} / {{queryPageInfo.pageCount}} </div>
+	<div class="col">
+		{{#if queryPageInfo.hasNextPage}}
+		<a href="/MyAuth/MyModule/List/{{queryPageInfo.pageIndex+1}}/" class="button button-fill button-round">下一页</a>
+		{{else}}
+		<a href="#" class="button button-fill button-round color-gray">下一页</a>
+		{{/if}}
+	</div>
+  </div>
+</div>	   
+	  
+	</div>	
+  </div>
+</div>
+</template>
+<script>
+  return {}
+</script>

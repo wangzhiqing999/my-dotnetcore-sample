@@ -77,8 +77,8 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
         /// <param name="data">组织机构数据</param>
         /// <returns></returns>
         [HttpPost]
-        [Route("api/MyAuth/MyOrganization/Insert")]
-        public CommonServiceResult Insert([FromBody]MyOrganization data)
+        [Route("api/MyAuth/MyOrganization/Create")]
+        public CommonServiceResult Create([FromBody]MyOrganization data)
         {
             var result = this._OrganizationService.NewOrganization(data);
             return result;
@@ -108,7 +108,7 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
         [Route("api/MyAuth/MyOrganization/Delete")]
         public CommonServiceResult Delete([FromBody]RemoveRequest data)
         {
-            long id = data.id;
+            long id = Convert.ToInt64(data.id);
             var result = this._OrganizationService.RemoveOrganization(id);
             return result;
         }

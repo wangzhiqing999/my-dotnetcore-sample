@@ -78,8 +78,8 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
         /// <param name="data">角色数据</param>
         /// <returns></returns>
         [HttpPost]
-        [Route("api/MyAuth/MyRole/Insert")]
-        public CommonServiceResult Insert([FromBody]MyRole data)
+        [Route("api/MyAuth/MyRole/Create")]
+        public CommonServiceResult Create([FromBody]MyRole data)
         {
             var result = this._RoleService.NewRole(data);
             return result;
@@ -105,12 +105,13 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
         /// <summary>
         /// 删除角色.
         /// </summary>
-        /// <param name="id">角色代码</param>
+        /// <param name="data">角色代码</param>
         /// <returns></returns>
         [HttpPost]
         [Route("api/MyAuth/MyRole/Delete")]
-        public CommonServiceResult Delete(string id)
+        public CommonServiceResult Delete([FromBody]RemoveRequest data)
         {
+            string id = Convert.ToString(data.id);
             var result = this._RoleService.RemoveRole(id);
             return result;
         }

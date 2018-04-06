@@ -76,8 +76,8 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
         /// <param name="data">用户数据</param>
         /// <returns></returns>
         [HttpPost]
-        [Route("api/MyAuth/MyUser/Insert")]
-        public CommonServiceResult Insert([FromBody]MyUser data)
+        [Route("api/MyAuth/MyUser/Create")]
+        public CommonServiceResult Create([FromBody]MyUser data)
         {
             var result = this._UserService.NewUser(data);
             return result;
@@ -103,12 +103,13 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
         /// <summary>
         /// 删除用户.
         /// </summary>
-        /// <param name="id">用户代码</param>
+        /// <param name="data">用户代码</param>
         /// <returns></returns>
         [HttpPost]
         [Route("api/MyAuth/MyUser/Delete")]
-        public CommonServiceResult Delete(long id)
+        public CommonServiceResult Delete([FromBody]RemoveRequest data)
         {
+            long id = Convert.ToInt64(data.id);
             var result = this._UserService.RemoveUser(id);
             return result;
         }

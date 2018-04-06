@@ -1,5 +1,5 @@
 <template>
-<div class="page" data-name="role">
+<div class="page" data-name="user">
   <div class="navbar">
     <div class="navbar-inner sliding">
       <div class="left">
@@ -8,39 +8,39 @@
 		  <i class="icon material-icons md-only">menu</i>
 		</a>
       </div>
-      <div class="title">角色</div>
+      <div class="title">用户</div>
     </div>
   </div>
   
   
-  <div class="page-content" id="rolePage">
-    <div class="block-title">角色</div>
+  <div class="page-content" id="userPage">
+    <div class="block-title">用户</div>
 	<div class="data-table">
 	  <table>
 		<thead>
 		  <tr>
-			<th class="label-cell">系统</th>
-			<th class="label-cell">角色代码</th>
-			<th class="label-cell">角色名称</th>
+			<th class="label-cell">用户名</th>
+			<th class="label-cell">登录用户代码</th>
+			
 		  </tr>
 		</thead>
 
 		<tbody>
 		  {{#each queryResultData}}
 		  <tr>
-			<td class="label-cell">{{systemCode}}</td>
-			<td class="label-cell">{{roleCode}}</td>
-			<td class="label-cell">{{roleName}}</td>			
+			<td class="label-cell">{{userName}}</td>
+			<td class="label-cell">{{loginUserCode}}</td>			
 		  </tr>
 		  {{/each}}
 		</tbody>
 	  </table>
 	  
+	  
 <div class="block">
   <div class="pages row">
 	<div class="col">
 		{{#if queryPageInfo.hasPreviousPage}}
-		<a href="/MyAuth/MyRole/{{queryPageInfo.pageIndex-1}}/" class="button button-fill button-round">上一页</a>
+		<a href="/MyAuth/MyUser/List/{{queryPageInfo.pageIndex-1}}/" class="button button-fill button-round">上一页</a>
 		{{else}}
 		<a href="#" class="button button-fill button-round color-gray">上一页</a>
 		{{/if}}
@@ -48,7 +48,7 @@
 	<div class="col"> {{queryPageInfo.pageIndex}} / {{queryPageInfo.pageCount}} </div>
 	<div class="col">
 		{{#if queryPageInfo.hasNextPage}}
-		<a href="/MyAuth/MyRole/{{queryPageInfo.pageIndex+1}}/" class="button button-fill button-round">下一页</a>
+		<a href="/MyAuth/MyUser/List/{{queryPageInfo.pageIndex+1}}/" class="button button-fill button-round">下一页</a>
 		{{else}}
 		<a href="#" class="button button-fill button-round color-gray">下一页</a>
 		{{/if}}
