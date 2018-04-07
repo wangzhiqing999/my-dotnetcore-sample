@@ -1,7 +1,9 @@
-
+"use strict";
 
 // 服务列表.
 var _myServiceList = {
+	// 系统服务.
+	mySystem : new myCommonService("MySystem"),
 	// 模块类型服务.
 	myModuleType : new myCommonService("MyModuleType"),
 	// 模块.
@@ -40,7 +42,21 @@ var _myEmptyData = {
 			// 角色名称.
 			roleName : "",
 			// 系统代码.
-			systemCode : "",
+			systemCode : "TEST",
+		};
+	},
+
+	// 用户.
+	myUser : function() {
+		return {
+			// 组织机构代码.
+			organizationID : 0,
+			// 登录用户名.
+			loginUserCode : "",
+			// 用户姓名.
+			userName : "",
+			// 用户密码.
+			userPassword : "",
 		};
 	}
 

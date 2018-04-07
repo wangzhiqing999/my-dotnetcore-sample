@@ -28,8 +28,8 @@ namespace MyWork.Web.Controllers
     /// <summary>
     /// 认证服务.
     /// </summary>
-    [Produces("application/json")]
-    [Route("api/Authentication")]
+    [EnableCors("AllowCors")]
+    [Produces("application/json")]    
     public class AuthenticationController : TokenAbleController
     {
 
@@ -43,7 +43,11 @@ namespace MyWork.Web.Controllers
 
 
 
-
+        /// <summary>
+        /// 构造函数.
+        /// </summary>
+        /// <param name="accountService"></param>
+        /// <param name="_jwtSettingsAccesser"></param>
         public AuthenticationController(IUserService accountService, IOptions<JwtSettings> _jwtSettingsAccesser)
         {
             _AccountService = accountService;
@@ -58,6 +62,7 @@ namespace MyWork.Web.Controllers
         /// <param name="viewModel"></param>
         /// <returns></returns>
         [HttpPost]
+        [Route("api/Authentication/Token")]
         public IActionResult Token([FromBody]LoginViewModel viewModel)
         {
             if (ModelState.IsValid)//判断是否合法

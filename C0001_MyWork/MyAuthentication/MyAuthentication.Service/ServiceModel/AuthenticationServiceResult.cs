@@ -6,6 +6,11 @@ using MyFramework.ServiceModel;
 
 namespace MyAuthentication.ServiceModel
 {
+
+    /// <summary>
+    /// 认证模块的执行结果.
+    /// </summary>
+    [Serializable]
     public class AuthenticationServiceResult : CommonServiceResult
     {
 

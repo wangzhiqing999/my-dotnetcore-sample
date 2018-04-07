@@ -46,6 +46,7 @@ routes = [
 		}
 	},
 
+
 	// ###### 模块类型 ######
 	{
 		path: '/MyAuth/MyModuleType/',
@@ -70,7 +71,7 @@ routes = [
 			});
 		}
 	},
-	
+
 
 	// ###### 模块 ######
 	{
@@ -96,7 +97,7 @@ routes = [
 			});
 		}
 	},
-	
+
 	// ###### 组织机构 ######
 	{
 		path: '/MyAuth/MyOrganization/',
@@ -140,13 +141,13 @@ routes = [
 			}
 		}
 	},
-	
-	
+
+
 	// ###### 角色 ######
 	{
 		path: '/MyAuth/MyRole/',
 		redirect: '/MyAuth/MyRole/List/1/'
-	},	
+	},
 	{
 		path: '/MyAuth/MyRole/List/:pageNo/',
 		options: _defaultRouteOptions,
@@ -176,6 +177,15 @@ routes = [
 		}
 	},
 	{
+		path: '/MyAuth/MyRole/Module/:roleCode',
+		url: './pages/MyAuth/MyRole/editModule.html',
+		on: {
+			pageBeforeIn: function (e, page) {
+				_myServiceList.myRole.initEditModuleView('#rolePageModule', page.route.params.roleCode);
+			}
+		}
+	},
+	{
 		path: '/MyAuth/MyRole/Create/',
 		url: './pages/MyAuth/MyRole/create.html',
 		on: {
@@ -185,12 +195,21 @@ routes = [
 			}
 		}
 	},
-	
-	
+
+
 	// 用户.
 	{
 		path: '/MyAuth/MyUser/',
 		redirect: '/MyAuth/MyUser/List/1/'
+	},
+	{
+		path: '/MyAuth/MyUser/Detail/:userID',
+		url: './pages/MyAuth/MyUser/detail.html',
+		on: {
+			pageBeforeIn: function (e, page) {
+				_myServiceList.myUser.initDetailView('#userPageDetail', page.route.params.userID);
+			}
+		}
 	},
 	{
 		path: '/MyAuth/MyUser/List/:pageNo/',
@@ -211,6 +230,18 @@ routes = [
 			});
 		}
 	},
+	{
+		path: '/MyAuth/MyUser/Create/',
+		url: './pages/MyAuth/MyUser/create.html',
+		on: {
+			pageBeforeIn: function (e, page) {
+				var data = _myEmptyData.myUser();
+				_myServiceList.myUser.initCreateView('#userPageCreate', data);
+			}
+		}
+	},
+
+
 
 	// Default route (404 page). MUST BE THE LAST
 	{

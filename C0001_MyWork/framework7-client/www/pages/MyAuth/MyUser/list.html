@@ -15,13 +15,20 @@
   
   <div class="page-content" id="userPage">
     <div class="block-title">用户</div>
+	
+<div class="block">
+  <div class="pages row">	
+	<a href="/MyAuth/MyUser/Create/" class="col button button-fill button-round">创建</a>
+  </div>
+</div>		
+	
 	<div class="data-table">
 	  <table>
 		<thead>
 		  <tr>
 			<th class="label-cell">用户名</th>
 			<th class="label-cell">登录用户代码</th>
-			
+			<th class="label-cell">&nbsp;</th>
 		  </tr>
 		</thead>
 
@@ -29,7 +36,10 @@
 		  {{#each queryResultData}}
 		  <tr>
 			<td class="label-cell">{{userName}}</td>
-			<td class="label-cell">{{loginUserCode}}</td>			
+			<td class="label-cell">{{loginUserCode}}</td>
+			<td>
+				<a href="/MyAuth/MyUser/Detail/{{userID}}" >明细</a>
+			</td>
 		  </tr>
 		  {{/each}}
 		</tbody>

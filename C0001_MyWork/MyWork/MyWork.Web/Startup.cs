@@ -36,35 +36,22 @@ namespace MyWork.Web
         public void ConfigureServices(IServiceCollection services)
         {
 
-
-
-
-
-
-
-
-
             // ########## 用ASP.NET Core自带依赖注入(DI)注入使用的类 ##########
 
+            // 系统服务.
+            services.AddScoped(typeof(ISystemService), typeof(DefaultSystemServiceImpl));
             // 用户服务.
-            services.AddScoped(typeof(IUserService), typeof(DefaultUserServiceImpl));
-            // 权限认证服务
-            services.AddScoped(typeof(IAuthenticationService), typeof(DefaultAuthenticationService));
-
+            services.AddScoped(typeof(IUserService), typeof(DefaultUserServiceImpl));            
             // 组织机构服务.
             services.AddScoped(typeof(IOrganizationService), typeof(DefaultOrganizationServiceImpl));
-
             // 角色服务.
             services.AddScoped(typeof(IRoleService), typeof(DefaultRoleServiceImpl));
-
             // 模块类型服务.
             services.AddScoped(typeof(IModuleTypeService), typeof(DefaultModuleTypeServiceImpl));
             // 模块服务.
             services.AddScoped(typeof(IModuleService), typeof(DefaultModuleServiceImpl));
             // 动作服务.
             services.AddScoped(typeof(IActionService), typeof(DefaultActionServiceImpl));
-
-
             // 角色-模块服务.
             services.AddScoped(typeof(IRoleModuleService), typeof(DefaultRoleModuleServiceImpl));
             // 角色-动作服务.
@@ -72,7 +59,8 @@ namespace MyWork.Web
             // 用户-角色服务.
             services.AddScoped(typeof(IUserRoleService), typeof(DefaultUserRoleServiceImpl));
 
-
+            // 权限认证服务
+            services.AddScoped(typeof(IAuthenticationService), typeof(DefaultAuthenticationService));
 
 
             // ##########  JWT 相关配置  ########## 

@@ -11,47 +11,45 @@ using MyFramework.ServiceModel;
 
 using MyAuthentication.Model;
 using MyAuthentication.Service;
-using MyAuthentication.ServiceModel;
 
 
 namespace MyWork.Web.Areas.MyAuth.Controllers
 {
 
     /// <summary>
-    /// 模块类型服务
+    /// 系统服务
     /// </summary>
     [EnableCors("AllowCors")]
     [Produces("application/json")]
     [Area("MyAuth")]
     [Authorize]
-    public class MyModuleTypeController : Controller
+    public class MySystemController : Controller
     {
         /// <summary>
-        /// 模块类型服务.
+        /// 系统服务.
         /// </summary>
-        private IModuleTypeService _ModuleTypeService;
-
+        private ISystemService _SystemService;
 
         /// <summary>
         /// 构造函数.
         /// </summary>
-        /// <param name="moduleTypeService"></param>
-        public MyModuleTypeController(IModuleTypeService moduleTypeService)
+        /// <param name="systemService"></param>
+        public MySystemController(ISystemService systemService)
         {
-            this._ModuleTypeService = moduleTypeService;
+            this._SystemService = systemService;
         }
 
 
 
         /// <summary>
-        /// 获取模块类型列表.
+        /// 获取系统.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("api/MyAuth/MyModuleType")]
-        public CommonQueryResult<MyModuleType> Query(int pageNo = 1, int pageSize = 10)
+        [Route("api/MyAuth/MySystem")]
+        public CommonQueryResult<MySystem> Query(int pageNo = 1, int pageSize = 10)
         {
-            var result = this._ModuleTypeService.GetModuleTypeList(pageNo, pageSize);
+            var result = this._SystemService.Query(pageNo, pageSize);
             return result;
         }
 

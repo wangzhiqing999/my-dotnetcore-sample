@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-using MyAuthentication.Model;
 using MyFramework.ServiceModel;
-
+using MyAuthentication.Model;
+using MyAuthentication.ServiceModel;
 
 namespace MyAuthentication.Service
 {
@@ -30,5 +30,23 @@ namespace MyAuthentication.Service
         /// <returns></returns>
         CommonServiceResult UpdateRolesModule(string roleCode, List<string> moduleCodeList);
 
+
+
+
+        /// <summary>
+        /// 获取指定角色的 可管理模块列表.
+        /// </summary>
+        /// <param name="roleCode"></param>
+        /// <returns></returns>
+        List<ManagerAbleModule> GetManagerAbleModuleByRoleCode(string roleCode);
+
+
+        /// <summary>
+        /// 更新指定角色的 可管理模块列表.
+        /// </summary>
+        /// <param name="roleCode"></param>
+        /// <param name="dataList"></param>
+        /// <returns></returns>
+        CommonServiceResult UpdateManagerAbleModule(string roleCode, List<ManagerAbleModule> dataList);
     }
 }

@@ -40,18 +40,23 @@ var mainView = app.views.create('.view-main', {
   url: '/'
 });
 
-// Login Screen Demo
+
+
+
+// Login Screen
 $$('#my-login-screen .login-button').on('click', function () {
-  var username = $$('#my-login-screen [name="username"]').val();
-  var password = $$('#my-login-screen [name="password"]').val();
 
-  // Close login screen
-  app.loginScreen.close('#my-login-screen');
+  myAuthentication.orgCode = $$('#my-login-screen [name="orgCode"]').val();
+  myAuthentication.username = $$('#my-login-screen [name="username"]').val();
+  myAuthentication.password = $$('#my-login-screen [name="password"]').val();
 
-  // Alert username and password
-  app.dialog.alert('Username: ' + username + '<br>Password: ' + password);
+  myAuthentication.doLogin(doLoginSuccess);
 });
 
+function doLoginSuccess() {
+  // Close login screen
+  app.loginScreen.close('#my-login-screen');
+}
 
 
 

@@ -1,4 +1,4 @@
-
+"use strict";
 
 // 默认的配置.
 var _defaultConfig = {
@@ -35,7 +35,7 @@ function myCommonService(serviceName) {
 	this.webApiPath = _defaultWebApiPath;
 	// 格式化服务地址.
 	this._formatServiceAddress = function(path) {
-		return this.config.myServerHost + "/api/" + this.config.myArea + "/" + this.serviceName + path;
+		return this.config.myServerHost + "api/" + this.config.myArea + "/" + this.serviceName + path;
 	}
 
 	// 列表数据的 Web Api 地址.
@@ -179,7 +179,7 @@ function myCommonService(serviceName) {
 				saveData:function() {
 					var _this = this;
 					_thisService.updateData(_this.dataItem, function (data) {
-						console.log(data);
+						// console.log(data);
 						if(data.isSuccess) {
 							app.router.navigate(_myListUrl);
 						} else {
@@ -206,8 +206,8 @@ function myCommonService(serviceName) {
 			}
 		});
 	};
-	
-	
+
+
 	// 初始化创建画面.
 	this.initCreateView = function(elName, emptyData) {
 		// 当前服务.
@@ -224,7 +224,7 @@ function myCommonService(serviceName) {
 				createData:function() {
 					var _this = this;
 					_thisService.createData(_this.dataItem, function (data) {
-						console.log(data);
+						// console.log(data);
 						if(data.isSuccess) {
 							app.router.navigate(_myListUrl);
 						} else {

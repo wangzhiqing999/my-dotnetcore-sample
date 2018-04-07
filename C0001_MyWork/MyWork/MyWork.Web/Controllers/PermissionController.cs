@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
+
 
 using MyAuthentication.Service;
 using MyAuthentication.ServiceModel;
@@ -15,7 +18,9 @@ namespace MyWork.Web.Controllers
     /// <summary>
     /// 权限服务.
     /// </summary>
+    [EnableCors("AllowCors")]
     [Produces("application/json")]
+    [Authorize]
     public class PermissionController : TokenAbleController
     {
 
@@ -24,6 +29,11 @@ namespace MyWork.Web.Controllers
         /// </summary>
         private IAuthenticationService _AuthenticationService;
 
+
+        /// <summary>
+        /// 构造函数.
+        /// </summary>
+        /// <param name="authenticationService"></param>
         public PermissionController(IAuthenticationService authenticationService)
         {
             this._AuthenticationService = authenticationService;

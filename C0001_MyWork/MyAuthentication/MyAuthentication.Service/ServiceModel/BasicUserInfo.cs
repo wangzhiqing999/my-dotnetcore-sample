@@ -4,6 +4,11 @@ using System.Text;
 
 namespace MyAuthentication.ServiceModel
 {
+
+    /// <summary>
+    /// 基本用户信息.
+    /// </summary>
+    [Serializable]
     public class BasicUserInfo
     {
         /// <summary>

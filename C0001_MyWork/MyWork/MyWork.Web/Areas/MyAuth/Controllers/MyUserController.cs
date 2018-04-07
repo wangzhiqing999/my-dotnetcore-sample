@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
 
 using MyFramework.ServiceModel;
 
@@ -23,6 +24,7 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
     [EnableCors("AllowCors")]
     [Produces("application/json")]
     [Area("MyAuth")]
+    [Authorize]
     public class MyUserController : Controller
     {
 

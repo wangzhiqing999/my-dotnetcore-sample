@@ -1,0 +1,68 @@
+<div class="page" data-name="role">
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+		<a href="#" class="link icon-only panel-open" data-panel="left">
+		  <i class="icon f7-icons ios-only">menu</i>
+		  <i class="icon material-icons md-only">menu</i>
+		</a>
+      </div>
+      <div class="title">角色-权限管理</div>
+    </div>
+  </div>
+
+  <div class="page-content" id="rolePageModule">
+
+    <div class="block-title">
+	  全部模块
+	  <label class="toggle">
+		<input type="checkbox"  v-model="allModuleAccessAble" v-on:change="allModuleAccessAbleChange">
+		<span class="toggle-icon"></span>
+	  </label>
+	</div>
+	<div class="list" >
+	  <ul>
+		<li>
+		  <span> 全部可访问模块的动作 </span>
+		  <label class="toggle toggle-init toggle-orange">
+			<input type="checkbox" v-model="allActionAccessAble" v-on:change="allActionAccessAbleChange">
+			<span class="toggle-icon"></span>
+		  </label>
+		</li>
+	  </ul>
+	</div>
+
+
+	<div v-for="module in dataList">
+	  <div class="block-title">
+	    {{module.moduleName}}
+		<label class="toggle">
+		  <input type="checkbox" v-model="module.accessAble" v-on:change="oneModuleAccessAbleChange(module)">
+		  <span class="toggle-icon"></span>
+		</label>
+	  </div>
+	  <div class="list" >
+	    <ul v-for="action in module.actions">
+		  <li>
+		    <span>{{action.actionName}}</span>
+			<label class="toggle toggle-init toggle-orange">
+			  <input type="checkbox" v-model="action.accessAble" v-bind:disabled="!module.accessAble">
+			  <span class="toggle-icon"></span>
+			</label>
+		  </li>
+		</ul>
+	  </div>
+	</div>
+
+
+
+	  <div class="block">
+		<div class="row">
+	  	  <button class="col button button-fill button-round" v-on:click="goBack()">返回</a>
+	  	  <button class="col button button-fill button-round" v-on:click="saveData()">保存</button>
+	    </div>
+	  </div>
+
+
+  </div>
+</div>

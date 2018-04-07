@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
 
 using MyFramework.ServiceModel;
 
@@ -22,6 +23,7 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
     [EnableCors("AllowCors")]
     [Produces("application/json")]
     [Area("MyAuth")]
+    [Authorize]
     public class MyRoleController : Controller
     {
         /// <summary>
@@ -31,12 +33,20 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
 
 
         /// <summary>
+        /// 角色-功能模块关系服务.
+        /// </summary>
+        private IRoleModuleService _RoleModuleService;
+
+
+        /// <summary>
         /// 构造函数.
         /// </summary>
         /// <param name="roleService"></param>
-        public MyRoleController(IRoleService roleService)
+        /// <param name="roleModuleService"></param>
+        public MyRoleController(IRoleService roleService, IRoleModuleService roleModuleService)
         {
             this._RoleService = roleService;
+            this._RoleModuleService = roleModuleService;
         }
 
 
@@ -116,6 +126,39 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
             return result;
         }
 
+
+
+
+
+
+
+        /// <summary>
+        /// 获取角色可访问的模块..
+        /// </summary>
+        /// <param name="id">角色代码</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("api/MyAuth/MyRole/GetManagerAbleModule/{id}")]
+        public List<ManagerAbleModule> GetManagerAbleModule(string id)
+        {
+            var result = this._RoleModuleService.GetManagerAbleModuleByRoleCode(id);
+            return result;
+        }
+
+
+        /// <summary>
+        /// 更新角色可访问的模块.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("api/MyAuth/MyRole/UpdateManagerAbleModule/{id}")]
+        public CommonServiceResult UpdateManagerAbleModule(string id, [FromBody]List<ManagerAbleModule> data)
+        {            
+            var result = this._RoleModuleService.UpdateManagerAbleModule(id, data);
+            return result;
+        }
 
 
     }

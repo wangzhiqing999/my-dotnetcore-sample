@@ -95,3 +95,35 @@ SELECT 'TEST_020', 1, '测试用户020', '123456',			GETDATE(), 'system', GETDAT
 
 
 
+-- 测试模块
+INSERT INTO [my_module](
+	[system_code],[module_type_code],
+	[module_code],[module_name],[module_expand]
+)
+SELECT 'TEST','API',	'TEST_API_01', '测试模块01','api/TEST/01'				UNION ALL
+SELECT 'TEST','API',	'TEST_API_02', '测试模块02','api/TEST/02'				UNION ALL
+SELECT 'TEST','API',	'TEST_API_03', '测试模块03','api/TEST/03'				UNION ALL
+SELECT 'TEST','API',	'TEST_API_04', '测试模块04','api/TEST/04'
+;
+
+-- 测试动作.
+INSERT INTO [my_action](
+	[module_code],[action_code],[action_expand],[action_name],[default_useable]
+)
+SELECT 'TEST_API_01','TEST_API_01_01','',		'测试模块01-动作01',0		UNION ALL
+SELECT 'TEST_API_01','TEST_API_01_02','',		'测试模块01-动作02',0		UNION ALL
+SELECT 'TEST_API_01','TEST_API_01_03','',		'测试模块01-动作03',0		UNION ALL
+SELECT 'TEST_API_01','TEST_API_01_04','',		'测试模块01-动作04',0		UNION ALL
+SELECT 'TEST_API_02','TEST_API_02_01','',		'测试模块02-动作01',0		UNION ALL
+SELECT 'TEST_API_02','TEST_API_02_02','',		'测试模块02-动作02',0		UNION ALL
+SELECT 'TEST_API_02','TEST_API_02_03','',		'测试模块02-动作03',0		UNION ALL
+SELECT 'TEST_API_02','TEST_API_02_04','',		'测试模块02-动作04',0		UNION ALL
+SELECT 'TEST_API_03','TEST_API_03_01','',		'测试模块03-动作01',0		UNION ALL
+SELECT 'TEST_API_03','TEST_API_03_02','',		'测试模块03-动作02',0		UNION ALL
+SELECT 'TEST_API_03','TEST_API_03_03','',		'测试模块03-动作03',0		UNION ALL
+SELECT 'TEST_API_03','TEST_API_03_04','',		'测试模块03-动作04',0		UNION ALL
+SELECT 'TEST_API_04','TEST_API_04_01','',		'测试模块04-动作01',0		UNION ALL
+SELECT 'TEST_API_04','TEST_API_04_02','',		'测试模块04-动作02',0		UNION ALL
+SELECT 'TEST_API_04','TEST_API_04_03','',		'测试模块04-动作03',0		UNION ALL
+SELECT 'TEST_API_04','TEST_API_04_04','',		'测试模块04-动作04',0
+;

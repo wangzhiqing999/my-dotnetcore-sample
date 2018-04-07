@@ -49,18 +49,20 @@
                 <li><a href="/MyAuth/MyUser/" data-view=".view-main" class="panel-close">用户</a></li>
               </ul>
             </div>
-			
-			
+
+
 			<div class="block-title">其它</div>
             <div class="list links-list">
               <ul>
-				<li><a href="/about/" data-view=".view-main" class="panel-close">关于</a></li>				
+				<li><a href="/about/" data-view=".view-main" class="panel-close">关于</a></li>
+				<!--
                 <li>
                   <a href="#" data-view=".view-main" class="back">返回</a>
                 </li>
+				-->
               </ul>
             </div>
-			
+
           </div>
         </div>
       </div>
@@ -101,25 +103,8 @@
         </div>
 
 
-
         <!-- Scrollable page content-->
         <div class="page-content">
-
-
-<!--
-          <div class="block-title">Modals</div>
-          <div class="block block-strong">
-            <div class="row">
-              <div class="col-50">
-                <a href="#" class="button button-raised button-fill popup-open" data-popup="#my-popup">Popup</a>
-              </div>
-              <div class="col-50">
-                <a href="#" class="button button-raised button-fill login-screen-open" data-login-screen="#my-login-screen">Login Screen</a>
-              </div>
-            </div>
-          </div>
--->
-
 
 
         </div>
@@ -157,22 +142,31 @@
       <div class="view">
         <div class="page">
           <div class="page-content login-screen-content">
-            <div class="login-screen-title">Login</div>
+            <div class="login-screen-title">登录</div>
             <div class="list">
               <ul>
+			    <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">组织机构代码</div>
+                    <div class="item-input-wrap">
+                      <input type="text" name="orgCode" placeholder="填写你的组织机构代码" value="MANAGER">
+                    </div>
+                  </div>
+                </li>
+
                 <li class="item-content item-input">
                   <div class="item-inner">
-                    <div class="item-title item-label">Username</div>
+                    <div class="item-title item-label">用户名</div>
                     <div class="item-input-wrap">
-                      <input type="text" name="username" placeholder="Your username">
+                      <input type="text" name="username" placeholder="填写你的用户名" value="admin">
                     </div>
                   </div>
                 </li>
                 <li class="item-content item-input">
                   <div class="item-inner">
-                    <div class="item-title item-label">Password</div>
+                    <div class="item-title item-label">密码</div>
                     <div class="item-input-wrap">
-                      <input type="password" name="password" placeholder="Your password">
+                      <input type="password" name="password" placeholder="填写你的密码" value="123456">
                     </div>
                   </div>
                 </li>
@@ -181,10 +175,9 @@
             <div class="list">
               <ul>
                 <li>
-                  <a href="#" class="item-link list-button login-button">Sign In</a>
+                  <a href="#" class="item-link list-button login-button">登录</a>
                 </li>
               </ul>
-              <div class="block-footer">Some text about login information.<br>Click "Sign In" to close Login Screen</div>
             </div>
           </div>
         </div>
@@ -210,20 +203,37 @@
   <!-- Framework7-Vue plugin -->
   <script src="libs/framework7-vue/framework7-vue.min.js"></script>
 
-  
-  
+
+
+
   <script src="js/myAuth/myCommonServiceV3.js"></script>
   <script src="js/myAuth/myServiceConfig.js"></script>
-  
-  
-  
+
+
+
+  <script src="js/myAuth/myRoleService.js"></script>
+
+
+
+  <script src="js/myAuth/components/mySystemSelectBox.js"></script>
+  <script src="js/myAuth/components/myOrganizationSelectBox.js"></script>
+
+
+
+  <!-- 认证处理. -->
+  <script src="js/myAuthentication.js"></script>
+
   <!-- App routes -->
   <script src="js/routes.js"></script>
 
   <!-- Your custom app scripts -->
   <script src="js/app.js"></script>
-  
 
-  
+
+  <script>
+	var loginScreen = app.loginScreen.create({ el : $$("#my-login-screen") });
+	loginScreen.open(true);
+  </script>
+
 </body>
 </html>

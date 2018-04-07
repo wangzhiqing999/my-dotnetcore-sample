@@ -1,4 +1,4 @@
-<div class="page" data-name="role">
+<div class="page" data-name="user">
   <div class="navbar">
     <div class="navbar-inner sliding">
       <div class="left">
@@ -7,12 +7,12 @@
 		  <i class="icon material-icons md-only">menu</i>
 		</a>
       </div>
-      <div class="title">角色</div>
+      <div class="title">用户</div>
     </div>
   </div>
 
-  <div class="page-content" id="rolePageCreate">
-    <div class="block-title">角色</div>
+  <div class="page-content" id="userPageCreate">
+    <div class="block-title">用户</div>
 	<div class="list inline-labels no-hairlines-md" v-if="dataItem != null">
 
 	  <ul>
@@ -22,9 +22,22 @@
 			<i class="icon demo-list-icon"></i>
 		  </div>
 		  <div class="item-inner">
-			<div class="item-title item-label">角色代码</div>
+			<div class="item-title item-label">组织机构</div>
 			<div class="item-input-wrap">
-			  <input type="text" v-model="dataItem.roleCode" placeholder="请填写角色代码">
+			  <my-organization-select-box v-bind:selected.sync="dataItem.organizationID">
+			  </my-organization-select-box>
+			</div>
+		  </div>
+		</li>	  
+	  
+		<li class="item-content item-input">
+		  <div class="item-media">
+			<i class="icon demo-list-icon"></i>
+		  </div>
+		  <div class="item-inner">
+			<div class="item-title item-label">用户登录名</div>
+			<div class="item-input-wrap">
+			  <input type="text" v-model="dataItem.loginUserCode" placeholder="请填写用户登录名">
 			  <span class="input-clear-button"></span>
 			</div>
 		  </div>
@@ -36,26 +49,28 @@
 			<i class="icon demo-list-icon"></i>
 		  </div>
 		  <div class="item-inner">
-			<div class="item-title item-label">角色名称</div>
+			<div class="item-title item-label">用户姓名</div>
 			<div class="item-input-wrap">
-			  <input type="text" v-model="dataItem.roleName" placeholder="请填写角色名称">
+			  <input type="text" v-model="dataItem.userName" placeholder="请填写用户姓名">
 			  <span class="input-clear-button"></span>
 			</div>
 		  </div>
 		</li>
-
+		
 		<li class="item-content item-input">
 		  <div class="item-media">
 			<i class="icon demo-list-icon"></i>
 		  </div>
 		  <div class="item-inner">
-			<div class="item-title item-label">系统</div>
+			<div class="item-title item-label">用户密码</div>
 			<div class="item-input-wrap">
-			  <my-system-select-box v-bind:selected.sync="dataItem.systemCode">
-			  </my-system-select-box>
+			  <input type="text" v-model="dataItem.userPassword" placeholder="请填写用户密码">
+			  <span class="input-clear-button"></span>
 			</div>
 		  </div>
-		</li>
+		</li>		
+
+
 	  </ul>
 
 	  <div class="block">
