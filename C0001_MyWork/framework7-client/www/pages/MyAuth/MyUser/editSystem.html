@@ -1,0 +1,68 @@
+<div class="page" data-name="user">
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+		<a href="#" class="link icon-only panel-open" data-panel="left">
+		  <i class="icon f7-icons ios-only">menu</i>
+		  <i class="icon material-icons md-only">menu</i>
+		</a>
+      </div>
+      <div class="title">用户-系统管理</div>
+    </div>
+  </div>
+
+  <div class="page-content" id="userPageSystem">
+
+    <div class="block-title">
+	  全部系统
+	  <label class="toggle">
+		<input type="checkbox"  v-model="allSystemAccessAble" v-on:change="allSystemAccessAbleChange">
+		<span class="toggle-icon"></span>
+	  </label>
+	</div>
+	<div class="list" >
+	  <ul>
+		<li>
+		  <span> 全部可访问系统的角色 </span>
+		  <label class="toggle toggle-init toggle-orange">
+			<input type="checkbox" v-model="allRoleAccessAble" v-on:change="allRoleAccessAbleChange">
+			<span class="toggle-icon"></span>
+		  </label>
+		</li>
+	  </ul>
+	</div>
+
+
+	<div v-for="system in dataList">
+	  <div class="block-title">
+	    {{system.systemName}}
+		<label class="toggle">
+		  <input type="checkbox" v-model="system.accessAble" v-on:change="oneSystemAccessAbleChange(system)">
+		  <span class="toggle-icon"></span>
+		</label>
+	  </div>
+	  <div class="list" >
+	    <ul v-for="role in system.roles">
+		  <li>
+		    <span>{{role.roleName}}</span>
+			<label class="toggle toggle-init toggle-orange">
+			  <input type="checkbox" v-model="role.accessAble" v-bind:disabled="!system.accessAble">
+			  <span class="toggle-icon"></span>
+			</label>
+		  </li>
+		</ul>
+	  </div>
+	</div>
+
+
+
+	  <div class="block">
+		<div class="row">
+	  	  <button class="col button button-fill button-round" v-on:click="goBack()">返回</a>
+	  	  <button class="col button button-fill button-round" v-on:click="saveData()">保存</button>
+	    </div>
+	  </div>
+
+
+  </div>
+</div>

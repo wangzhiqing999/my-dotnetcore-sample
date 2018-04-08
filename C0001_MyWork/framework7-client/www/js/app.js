@@ -43,6 +43,7 @@ var mainView = app.views.create('.view-main', {
 
 
 
+
 // Login Screen
 $$('#my-login-screen .login-button').on('click', function () {
 
@@ -58,6 +59,12 @@ function doLoginSuccess() {
   app.loginScreen.close('#my-login-screen');
 }
 
+// Log Off.
+$$('#logOff').on('click', function () {
+	app.router.navigate("/");
+	var loginScreen = app.loginScreen.create({ el : $$("#my-login-screen") });
+	loginScreen.open(true);
+});
 
 
 

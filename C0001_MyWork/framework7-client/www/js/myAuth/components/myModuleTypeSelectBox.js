@@ -1,6 +1,6 @@
 "use strict";
 
-Vue.component('my-organization-select-box', {
+Vue.component('my-moduletype-select-box', {
 
 	// 声明 props
 	props: {
@@ -26,15 +26,15 @@ Vue.component('my-organization-select-box', {
 			pageNo : 1,
 			pageSize : 100,
 		};
-		_myServiceList.myOrganization.list(requestData, function(data) {
+		_myServiceList.myModuleType.list(requestData, function(data) {
 			_this.dataListChange(data.queryResultData);
 		});
 	},
 
 	// 模板内容.
-	template: '<select name="organization" v-model="selectedItem" v-on:change="selectedChange"> \
-		<option v-for="option in dataList" v-bind:value="option.organizationID" > \
-			{{ option.organizationName }} \
+	template: '<select name="moduletype" v-model="selectedItem" v-on:change="selectedChange"> \
+		<option v-for="option in dataList" v-bind:value="option.moduleTypeCode" > \
+			{{ option.moduleTypeName }} \
 		</option> \
 	</select>',
 

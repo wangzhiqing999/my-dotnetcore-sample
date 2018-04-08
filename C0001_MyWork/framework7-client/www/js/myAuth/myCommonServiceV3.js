@@ -8,6 +8,9 @@ var _defaultConfig = {
 	myArea : "MyAuth",
 	// 翻页大小.
 	myPageSize : 5,
+	
+	// 空白查询条件.
+	myEmpryQueryString : "_xyz_"
 };
 
 // 空白的 Web Api 地址.
@@ -59,6 +62,23 @@ function myCommonService(serviceName) {
 		return this._formatServiceAddress(this.webApiPath.deleteWebApiPath);
 	};
 
+	
+	// 获取查询条件.
+	this.getSearchInfo = function(data) {
+		if(data == _defaultConfig.myEmpryQueryString) {
+			return "";
+		}
+		return data;
+	}
+	// 格式化查询条件.
+	this.formatSearchInfo = function(data) {
+		if(data == null || data == "") {
+			return _defaultConfig.myEmpryQueryString;
+		}
+		return data;
+	}
+	
+	
 	// 获取列表的请求.
 	this.getListRequest = function(pageIndex) {
 		return {
@@ -66,6 +86,9 @@ function myCommonService(serviceName) {
 			pageSize : this.config.myPageSize,
 		};
 	};
+	
+	
+	
 
 	// 查询列表
 	this.list = function(requestData, callback) {

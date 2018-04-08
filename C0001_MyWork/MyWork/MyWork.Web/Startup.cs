@@ -58,6 +58,8 @@ namespace MyWork.Web
             services.AddScoped(typeof(IRoleActionService), typeof(DefaultRoleActionServiceImpl));
             // 用户-角色服务.
             services.AddScoped(typeof(IUserRoleService), typeof(DefaultUserRoleServiceImpl));
+            // 用户-系统服务.
+            services.AddScoped(typeof(IUserSystemService), typeof(DefaultUserSystemServiceImpl));
 
             // 权限认证服务
             services.AddScoped(typeof(IAuthenticationService), typeof(DefaultAuthenticationService));

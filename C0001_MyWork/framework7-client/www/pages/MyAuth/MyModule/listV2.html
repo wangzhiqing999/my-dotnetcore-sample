@@ -1,0 +1,67 @@
+<div class="page" data-name="module">
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+		<a href="#" class="link icon-only panel-open" data-panel="left">
+		  <i class="icon f7-icons ios-only">menu</i>
+		  <i class="icon material-icons md-only">menu</i>
+		</a>
+      </div>
+
+      <div class="title">模块</div>
+
+      <div class="right">
+	    <a href="/MyAuth/MyModule/Search/" class="link icon-only">
+		  <i class="icon f7-icons ios-only">search</i>
+		  <i class="icon material-icons md-only">search</i>
+	    </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content"  id="modulePageList">
+    <div class="block-title">模块</div>
+	<div class="data-table">
+	  <table>
+		<thead>
+		  <tr>
+			<th class="label-cell">系统</th>
+			<th class="label-cell">模块类型</th>
+			<th class="label-cell">模块代码</th>
+			<th class="label-cell">模块名称</th>
+		  </tr>
+		</thead>
+
+		<tbody>
+		  <tr v-for="item in dataList">
+			<td class="label-cell">{{item.systemCode}}</td>
+			<td class="label-cell">{{item.moduleTypeCode}}</td>
+			<td class="label-cell">{{item.moduleCode}}</td>
+			<td class="label-cell">{{item.moduleName}}</td>
+		  </tr>
+		</tbody>
+	  </table>
+
+<div class="block" v-show="showPageInfo">
+  <div class="pages row">
+	<div class="col">
+
+		<a v-if="pageIndex>1" v-bind:href="'/MyAuth/MyModule/List/' + (pageIndex-1) + '/' + searchSystemCode + '/' + searchModuleType + '/'" class="button button-fill button-round">上一页</a>
+
+		<a v-if="pageIndex==1" href="#" class="button button-fill button-round color-gray">上一页</a>
+
+	</div>
+	<div class="col"> {{pageIndex}} / {{pageCount}} </div>
+	<div class="col">
+
+		<a v-if="pageIndex<pageCount" v-bind:href="'/MyAuth/MyModule/List/' + (pageIndex+1) + '/' + searchSystemCode + '/' + searchModuleType + '/'" class="button button-fill button-round">下一页</a>
+
+		<a v-if="pageIndex==pageCount" href="#" class="button button-fill button-round color-gray">下一页</a>
+
+	</div>
+  </div>
+</div>
+
+	</div>
+  </div>
+</div>

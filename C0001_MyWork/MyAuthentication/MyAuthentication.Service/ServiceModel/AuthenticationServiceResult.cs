@@ -21,7 +21,7 @@ namespace MyAuthentication.ServiceModel
         /// <summary>
         /// 角色代码不存在.
         /// </summary>
-        public const int ResultCodeIsRoleCodeNotFound = -1001;
+        public const int ResultCodeIsRoleCodeNotFound = -10001;
 
         /// <summary>
         /// 角色代码不存在的执行结果.
@@ -37,7 +37,7 @@ namespace MyAuthentication.ServiceModel
         /// <summary>
         /// 角色代码已存在.
         /// </summary>
-        public const int ResultCodeIsRoleCodeHadExists = -1002;
+        public const int ResultCodeIsRoleCodeHadExists = -10002;
 
         /// <summary>
         /// 角色代码已存在的执行结果.
@@ -59,7 +59,7 @@ namespace MyAuthentication.ServiceModel
         /// <summary>
         /// 组织代码不存在.
         /// </summary>
-        public const int ResultCodeIsOrganizationCodeNotFound = -10001;
+        public const int ResultCodeIsOrganizationCodeNotFound = -10011;
 
         /// <summary>
         /// 组织代码不存在的执行结果.
@@ -75,7 +75,7 @@ namespace MyAuthentication.ServiceModel
         /// <summary>
         /// 组织代码已存在.
         /// </summary>
-        public const int ResultCodeIsOrganizationCodeHadExists = -10002;
+        public const int ResultCodeIsOrganizationCodeHadExists = -10012;
 
         /// <summary>
         /// 组织代码已存在的执行结果.
@@ -91,7 +91,7 @@ namespace MyAuthentication.ServiceModel
         /// <summary>
         /// 不允许修改组织代码.
         /// </summary>
-        public const int ResultCodeIsOrganizationCodeModify = -10003;
+        public const int ResultCodeIsOrganizationCodeModify = -10013;
 
         /// <summary>
         /// 不允许修改组织代码的执行结果.
@@ -108,7 +108,7 @@ namespace MyAuthentication.ServiceModel
         /// <summary>
         /// 组织ID不存在.
         /// </summary>
-        public const int ResultCodeIsOrganizationIDNotFound = -10005;
+        public const int ResultCodeIsOrganizationIDNotFound = -10015;
 
         /// <summary>
         /// 组织ID不存在的执行结果.
@@ -123,7 +123,7 @@ namespace MyAuthentication.ServiceModel
         /// <summary>
         /// 组织ID已存在.
         /// </summary>
-        public const int ResultCodeIsOrganizationIDHadExists = -10006;
+        public const int ResultCodeIsOrganizationIDHadExists = -10016;
 
         /// <summary>
         /// 组织ID已存在的执行结果.
@@ -139,7 +139,7 @@ namespace MyAuthentication.ServiceModel
         /// <summary>
         /// 组织下存在有用户数据.
         /// </summary>
-        public const int ResultCodeIsOrganizationExistsSubUser = -10008;
+        public const int ResultCodeIsOrganizationExistsSubUser = -10018;
 
         /// <summary>
         /// 组织下存在有用户数据的结果.
@@ -155,10 +155,13 @@ namespace MyAuthentication.ServiceModel
 
 
 
+        #region 用户相关.
+
+
         /// <summary>
         /// 用户代码不存在.
         /// </summary>
-        public const int ResultCodeIsUserIDNotFound = -10011;
+        public const int ResultCodeIsUserIDNotFound = -10021;
 
         /// <summary>
         /// 用户代码不存在的执行结果.
@@ -174,7 +177,7 @@ namespace MyAuthentication.ServiceModel
         /// <summary>
         /// 登录用户代码不存在.
         /// </summary>
-        public const int ResultCodeIsLoginUserCodeNotFound = -10012;
+        public const int ResultCodeIsLoginUserCodeNotFound = -10022;
 
         /// <summary>
         /// 登录用户代码不存在的执行结果.
@@ -191,7 +194,7 @@ namespace MyAuthentication.ServiceModel
         /// <summary>
         /// 登录用户代码已存在.
         /// </summary>
-        public const int ResultCodeIsLoginUserCodeHadExists = -10013;
+        public const int ResultCodeIsLoginUserCodeHadExists = -10023;
 
         /// <summary>
         /// 登录用户代码不存在的执行结果.
@@ -206,7 +209,7 @@ namespace MyAuthentication.ServiceModel
         /// <summary>
         /// 不允许修改登录用户代码.
         /// </summary>
-        public const int ResultCodeIsLoginUserCodeModify = -10013;
+        public const int ResultCodeIsLoginUserCodeModify = -10024;
 
         /// <summary>
         /// 不允许修改登录用户代码的执行结果.
@@ -224,7 +227,7 @@ namespace MyAuthentication.ServiceModel
         /// <summary>
         /// 登录密码不匹配.
         /// </summary>
-        public const int ResultCodeIsPasswordNotMatch = -10021;
+        public const int ResultCodeIsPasswordNotMatch = -10025;
 
         /// <summary>
         /// 登录用户代码不存在的执行结果.
@@ -234,6 +237,13 @@ namespace MyAuthentication.ServiceModel
             ResultCode = ResultCodeIsPasswordNotMatch,
             ResultMessage = "登录密码不正确",
         };
+
+
+
+
+        #endregion 用户相关.
+
+
 
     }
 }

@@ -16,6 +16,27 @@
 	<div class="list inline-labels no-hairlines-md" v-if="dataItem != null">
 
 	  <ul>
+		<li class="item-content item-input">
+		  <div class="item-media">
+			<i class="icon demo-list-icon"></i>
+		  </div>
+		  <div class="item-inner">
+
+		    <a href="#" class="item-link smart-select smart-select-init" data-open-in="popover">
+
+			  <my-system-select-box v-bind:selected.sync="dataItem.systemCode">
+			  </my-system-select-box>
+
+			  <div class="item-content">
+				<div class="item-inner">
+					<div class="item-title">所属系统</div>
+				</div>
+			  </div>
+			</a>
+
+		  </div>
+		</li>
+
 
 		<li class="item-content item-input">
 		  <div class="item-media">
@@ -44,18 +65,7 @@
 		  </div>
 		</li>
 
-		<li class="item-content item-input">
-		  <div class="item-media">
-			<i class="icon demo-list-icon"></i>
-		  </div>
-		  <div class="item-inner">
-			<div class="item-title item-label">系统</div>
-			<div class="item-input-wrap">
-			  <my-system-select-box v-bind:selected.sync="dataItem.systemCode">
-			  </my-system-select-box>
-			</div>
-		  </div>
-		</li>
+
 	  </ul>
 
 	  <div class="block">

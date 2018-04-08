@@ -9,19 +9,19 @@
 		</a>
       </div>
       <div class="title">用户</div>
+      <div class="right">
+	    <a href="/MyAuth/MyUser/Create/" class="link icon-only">
+		  <i class="icon f7-icons ios-only">add</i>
+		  <i class="icon material-icons md-only">add</i>
+	    </a>
+      </div>
     </div>
   </div>
   
   
   <div class="page-content" id="userPage">
     <div class="block-title">用户</div>
-	
-<div class="block">
-  <div class="pages row">	
-	<a href="/MyAuth/MyUser/Create/" class="col button button-fill button-round">创建</a>
-  </div>
-</div>		
-	
+
 	<div class="data-table">
 	  <table>
 		<thead>
@@ -39,6 +39,7 @@
 			<td class="label-cell">{{loginUserCode}}</td>
 			<td>
 				<a href="/MyAuth/MyUser/Detail/{{userID}}" >明细</a>
+				<a href="/MyAuth/MyUser/System/{{userID}}" >权限</a>
 			</td>
 		  </tr>
 		  {{/each}}

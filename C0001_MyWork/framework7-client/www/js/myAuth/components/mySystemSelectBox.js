@@ -32,7 +32,7 @@ Vue.component('my-system-select-box', {
 	},
 
 	// 模板内容.
-	template: '<select v-model="selectedItem" v-on:change="selectedChange"> \
+	template: '<select name="system" v-model="selectedItem" v-on:change="selectedChange"> \
 		<option v-for="option in dataList" v-bind:value="option.systemCode" > \
 			{{ option.systemName }} \
 		</option> \

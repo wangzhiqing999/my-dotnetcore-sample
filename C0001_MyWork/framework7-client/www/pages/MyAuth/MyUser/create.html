@@ -22,14 +22,20 @@
 			<i class="icon demo-list-icon"></i>
 		  </div>
 		  <div class="item-inner">
-			<div class="item-title item-label">组织机构</div>
-			<div class="item-input-wrap">
+		    <a href="#" class="item-link smart-select smart-select-init"
+				data-open-in="popup" data-searchbar="true" data-searchbar-placeholder="过滤组织机构">
 			  <my-organization-select-box v-bind:selected.sync="dataItem.organizationID">
 			  </my-organization-select-box>
-			</div>
+
+			  <div class="item-content">
+				<div class="item-inner">
+					<div class="item-title">组织机构</div>
+				</div>
+			  </div>
+			</a>
 		  </div>
-		</li>	  
-	  
+		</li>
+
 		<li class="item-content item-input">
 		  <div class="item-media">
 			<i class="icon demo-list-icon"></i>
@@ -56,7 +62,7 @@
 			</div>
 		  </div>
 		</li>
-		
+
 		<li class="item-content item-input">
 		  <div class="item-media">
 			<i class="icon demo-list-icon"></i>
@@ -68,7 +74,7 @@
 			  <span class="input-clear-button"></span>
 			</div>
 		  </div>
-		</li>		
+		</li>
 
 
 	  </ul>

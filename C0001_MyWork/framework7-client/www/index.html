@@ -55,6 +55,7 @@
             <div class="list links-list">
               <ul>
 				<li><a href="/about/" data-view=".view-main" class="panel-close">关于</a></li>
+				<li><a href="#" id="logOff" data-view=".view-main" class="panel-close">登出</a></li>
 				<!--
                 <li>
                   <a href="#" data-view=".view-main" class="back">返回</a>
@@ -205,16 +206,20 @@
 
 
 
-
+  <!-- 共通服务处理代码 -->
   <script src="js/myAuth/myCommonServiceV3.js"></script>
   <script src="js/myAuth/myServiceConfig.js"></script>
 
-
-
+  <!-- 模块服务. -->
+  <script src="js/myAuth/myModuleService.js"></script>
+  <!-- 角色服务. -->
   <script src="js/myAuth/myRoleService.js"></script>
+  <!-- 用户服务. -->
+  <script src="js/myAuth/myUserService.js"></script>
 
 
-
+  <!-- 相关下拉列表组件. -->
+  <script src="js/myAuth/components/myModuleTypeSelectBox.js"></script>
   <script src="js/myAuth/components/mySystemSelectBox.js"></script>
   <script src="js/myAuth/components/myOrganizationSelectBox.js"></script>
 

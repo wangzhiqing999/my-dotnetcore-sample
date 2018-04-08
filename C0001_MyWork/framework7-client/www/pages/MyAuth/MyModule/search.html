@@ -1,0 +1,66 @@
+<div class="page">
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+        <a class="link back">
+          <i class="icon icon-back"></i>
+          <span class="ios-only">取消</span>
+        </a>
+      </div>
+      <div class="title">筛选条件</div>
+	  
+    </div>
+  </div>
+  
+  
+  <div class="page-content"  id="modulePageSearch">
+    <div class="list inline-labels no-hairlines-md">
+      
+	  <ul>
+		<li class="item-content item-input">
+		  <div class="item-inner">
+		    <a href="#" class="item-link smart-select smart-select-init" data-open-in="popover">
+
+			  <my-system-select-box v-bind:selected.sync="systemCode">
+			  </my-system-select-box>
+
+			  <div class="item-content">
+				<div class="item-inner">
+					<div class="item-title">所属系统</div>
+				</div>
+			  </div>
+			</a>
+
+		  </div>
+		</li>	  
+		
+		
+		<li class="item-content item-input">
+		  <div class="item-inner">
+		    <a href="#" class="item-link smart-select smart-select-init" data-open-in="popover">
+
+			  <my-moduletype-select-box v-bind:selected.sync="moduletypeCode">
+			  </my-moduletype-select-box>
+
+			  <div class="item-content">
+				<div class="item-inner">
+					<div class="item-title">模块类型</div>
+				</div>
+			  </div>
+			</a>
+
+		  </div>
+		</li>	 
+		
+	  </ul>
+	  
+	  <div class="block">
+		<div class="row">
+	  	  
+	  	  <button class="col button button-fill button-round" v-on:click="doSearch()">确定</button>
+	    </div>
+	  </div>
+	  
+    </div>
+  </div>
+</div>

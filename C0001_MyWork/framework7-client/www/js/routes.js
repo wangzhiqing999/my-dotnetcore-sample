@@ -12,6 +12,12 @@ var _defaultRouteOptions = {
 // 列表页面URL地址.
 var _myListUrl = "";
 
+// 前往列表页面.
+function gotoListPage() {
+	app.router.navigate(_myListUrl);
+}
+
+
 routes = [
 	{
 		path: '/',
@@ -76,11 +82,33 @@ routes = [
 	// ###### 模块 ######
 	{
 		path: '/MyAuth/MyModule/',
-		redirect: '/MyAuth/MyModule/List/1/'
+		redirect: '/MyAuth/MyModule/List/1/' + _defaultConfig.myEmpryQueryString + '/' + _defaultConfig.myEmpryQueryString + '/'
 	},
 	{
-		path: '/MyAuth/MyModule/List/:pageNo/',
+		path: '/MyAuth/MyModule/Search/',
+		url: './pages/MyAuth/MyModule/search.html',
+		on: {
+			pageInit: function (e, page) {
+				_myServiceList.myModule.initSearchView('#modulePageSearch');
+			}
+		}
+	},
+	{
+		path: '/MyAuth/MyModule/List/:pageNo/:systemCode/:moduleType/',
+		url: './pages/MyAuth/MyModule/listv2.html',
 		options: _defaultRouteOptions,
+		on: {
+			pageInit: function (e, page) {
+				_myListUrl = page.route.path;
+				_myServiceList.myModule.initListView(
+					'#modulePageList', 
+					page.route.params.pageNo, 
+					page.route.params.systemCode, 
+					page.route.params.moduleType);
+			}
+		}
+		
+		/*
 		async: function (routeTo, routeFrom, resolve, reject) {
 			_myListUrl = routeTo.url;
 			var pageNo = routeTo.params.pageNo;
@@ -96,6 +124,7 @@ routes = [
 					);
 			});
 		}
+		*/
 	},
 
 	// ###### 组织机构 ######
@@ -197,19 +226,10 @@ routes = [
 	},
 
 
-	// 用户.
+	// ###### 用户 ######
 	{
 		path: '/MyAuth/MyUser/',
 		redirect: '/MyAuth/MyUser/List/1/'
-	},
-	{
-		path: '/MyAuth/MyUser/Detail/:userID',
-		url: './pages/MyAuth/MyUser/detail.html',
-		on: {
-			pageBeforeIn: function (e, page) {
-				_myServiceList.myUser.initDetailView('#userPageDetail', page.route.params.userID);
-			}
-		}
 	},
 	{
 		path: '/MyAuth/MyUser/List/:pageNo/',
@@ -228,6 +248,24 @@ routes = [
 						}
 					);
 			});
+		}
+	},
+	{
+		path: '/MyAuth/MyUser/Detail/:userID',
+		url: './pages/MyAuth/MyUser/detail.html',
+		on: {
+			pageBeforeIn: function (e, page) {
+				_myServiceList.myUser.initDetailView('#userPageDetail', page.route.params.userID);
+			}
+		}
+	},
+	{
+		path: '/MyAuth/MyUser/System/:userID',
+		url: './pages/MyAuth/MyUser/editSystem.html',
+		on: {
+			pageBeforeIn: function (e, page) {
+				_myServiceList.myUser.initEditSystemView('#userPageSystem', page.route.params.userID);
+			}
 		}
 	},
 	{

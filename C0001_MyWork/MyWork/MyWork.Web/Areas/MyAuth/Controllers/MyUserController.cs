@@ -35,12 +35,21 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
 
 
         /// <summary>
+        /// 用户系统服务.
+        /// </summary>
+        private IUserSystemService _UserSystemService;
+
+
+
+        /// <summary>
         /// 构造函数.
         /// </summary>
         /// <param name="userService"></param>
-        public MyUserController(IUserService userService)
+        /// <param name="userSystemService"></param>
+        public MyUserController(IUserService userService, IUserSystemService userSystemService)
         {
             this._UserService = userService;
+            this._UserSystemService = userSystemService;
         }
 
 
@@ -116,5 +125,37 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
             return result;
         }
 
+
+
+
+
+
+        /// <summary>
+        /// 获取用户可访问的系统..
+        /// </summary>
+        /// <param name="id">用户ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("api/MyAuth/MyUser/GetManagerAbleSystem/{id}")]
+        public List<ManagerAbleSystem> GetManagerAbleSystem(long id)
+        {
+            var result = this._UserSystemService.GetManagerAbleSystemByUserID(id);
+            return result;
+        }
+
+
+        /// <summary>
+        /// 更新用户可访问的系统.
+        /// </summary>
+        /// <param name="id">用户ID</param>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("api/MyAuth/MyUser/UpdateManagerAbleSystem/{id}")]
+        public CommonServiceResult UpdateManagerAbleSystem(long id, [FromBody]List<ManagerAbleSystem> data)
+        {
+            var result = this._UserSystemService.UpdateManagerAbleSystem(id, data);
+            return result;
+        }
     }
 }
