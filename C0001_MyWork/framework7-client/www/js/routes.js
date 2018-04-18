@@ -95,19 +95,19 @@ routes = [
 	},
 	{
 		path: '/MyAuth/MyModule/List/:pageNo/:systemCode/:moduleType/',
-		url: './pages/MyAuth/MyModule/listv2.html',
+		url: './pages/MyAuth/MyModule/listV2.html',
 		options: _defaultRouteOptions,
 		on: {
 			pageInit: function (e, page) {
 				_myListUrl = page.route.path;
 				_myServiceList.myModule.initListView(
-					'#modulePageList', 
-					page.route.params.pageNo, 
-					page.route.params.systemCode, 
+					'#modulePageList',
+					page.route.params.pageNo,
+					page.route.params.systemCode,
 					page.route.params.moduleType);
 			}
 		}
-		
+
 		/*
 		async: function (routeTo, routeFrom, resolve, reject) {
 			_myListUrl = routeTo.url;
@@ -175,11 +175,33 @@ routes = [
 	// ###### 角色 ######
 	{
 		path: '/MyAuth/MyRole/',
-		redirect: '/MyAuth/MyRole/List/1/'
+		redirect: '/MyAuth/MyRole/List/1/' + _defaultConfig.myEmpryQueryString + '/'
 	},
 	{
-		path: '/MyAuth/MyRole/List/:pageNo/',
+		path: '/MyAuth/MyRole/Search/',
+		url: './pages/MyAuth/MyRole/search.html',
+		on: {
+			pageInit: function (e, page) {
+				_myServiceList.myRole.initSearchView('#rolePageSearch');
+			}
+		}
+	},
+	{
+		path: '/MyAuth/MyRole/List/:pageNo/:systemCode/',
+		url: './pages/MyAuth/MyRole/listV2.html',
 		options: _defaultRouteOptions,
+		on: {
+			pageInit: function (e, page) {
+				_myListUrl = page.route.path;
+				_myServiceList.myRole.initListView(
+					'#rolePageList',
+					page.route.params.pageNo,
+					page.route.params.systemCode);
+			}
+		}
+
+
+		/*
 		async: function (routeTo, routeFrom, resolve, reject) {
 			_myListUrl = routeTo.url;
 			var pageNo = routeTo.params.pageNo;
@@ -195,6 +217,7 @@ routes = [
 					);
 			});
 		}
+		*/
 	},
 	{
 		path: '/MyAuth/MyRole/Detail/:roleCode',
@@ -229,11 +252,32 @@ routes = [
 	// ###### 用户 ######
 	{
 		path: '/MyAuth/MyUser/',
-		redirect: '/MyAuth/MyUser/List/1/'
+		redirect: '/MyAuth/MyUser/List/1/' + _defaultConfig.myEmpryQueryString + '/'
 	},
 	{
-		path: '/MyAuth/MyUser/List/:pageNo/',
+		path: '/MyAuth/MyUser/Search/',
+		url: './pages/MyAuth/MyUser/search.html',
+		on: {
+			pageInit: function (e, page) {
+				_myServiceList.myUser.initSearchView('#userPageSearch');
+			}
+		}
+	},
+	{
+		path: '/MyAuth/MyUser/List/:pageNo/:organizationID/',
+		url: './pages/MyAuth/MyUser/listV2.html',
 		options: _defaultRouteOptions,
+		on: {
+			pageInit: function (e, page) {
+				_myListUrl = page.route.path;
+				_myServiceList.myUser.initListView(
+					'#userPageList',
+					page.route.params.pageNo,
+					page.route.params.organizationID);
+			}
+		}
+
+		/*
 		async: function (routeTo, routeFrom, resolve, reject) {
 			_myListUrl = routeTo.url;
 			var pageNo = routeTo.params.pageNo;
@@ -249,6 +293,7 @@ routes = [
 					);
 			});
 		}
+		*/
 	},
 	{
 		path: '/MyAuth/MyUser/Detail/:userID',

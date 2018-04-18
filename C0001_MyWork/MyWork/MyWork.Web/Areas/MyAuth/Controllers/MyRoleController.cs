@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Authorization;
 
 using MyFramework.ServiceModel;
 
+using MyWork.Web.Filters;
+
 using MyAuthentication.Model;
 using MyAuthentication.Service;
 using MyAuthentication.ServiceModel;
@@ -89,6 +91,7 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("api/MyAuth/MyRole/Create")]
+        [WithCreater]
         public CommonServiceResult Create([FromBody]MyRole data)
         {
             var result = this._RoleService.NewRole(data);
@@ -104,6 +107,7 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("api/MyAuth/MyRole/Update")]
+        [WithLastUpdater]
         public CommonServiceResult Update([FromBody]MyRole data)
         {
             var result = this._RoleService.UpdateRole(data);

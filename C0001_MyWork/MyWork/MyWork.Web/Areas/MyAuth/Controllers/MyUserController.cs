@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Authorization;
 
 using MyFramework.ServiceModel;
 
+using MyWork.Web.Filters;
+
 using MyAuthentication.Model;
 using MyAuthentication.Service;
 using MyAuthentication.ServiceModel;
@@ -56,14 +58,15 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
         /// <summary>
         /// 查询用户列表
         /// </summary>
+        /// <param name="organizationID">机构代码</param>
         /// <param name="pageNo">第几页</param>
         /// <param name="pageSize">每页几行</param>
         /// <returns></returns>
         [HttpGet]
         [Route("api/MyAuth/MyUser")]
-        public CommonQueryResult<MyUser> Query(int pageNo = 1, int pageSize = 10)
+        public CommonQueryResult<MyUser> Query(long? organizationID, int pageNo = 1, int pageSize = 10)
         {
-            var result = this._UserService.Query(pageNo, pageSize);
+            var result = this._UserService.Query(organizationID, pageNo, pageSize);
             return result;
         }
 
@@ -88,6 +91,7 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("api/MyAuth/MyUser/Create")]
+        [WithCreater]
         public CommonServiceResult Create([FromBody]MyUser data)
         {
             var result = this._UserService.NewUser(data);
@@ -103,6 +107,7 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("api/MyAuth/MyUser/Update")]
+        [WithLastUpdater]
         public CommonServiceResult Update([FromBody]MyUser data)
         {
             var result = this._UserService.UpdateUser(data);

@@ -38,11 +38,17 @@ namespace MyFramework.ServiceImpl
                     continue;
                 }
 
-                if (dataProp.Name == "CreateUser" || dataProp.Name == "CreateTime" || dataProp.Name == "LastUpdateUser" || dataProp.Name == "LastUpdateTime")
+                if (dataProp.Name == "CreateUser" || dataProp.Name == "CreateTime")
                 {
-                    // 忽略 创建人 / 创建时间 / 最后更新人 / 最后更新时间.
+                    // 忽略 创建人 / 创建时间
                     continue;
                 }
+
+                //if (dataProp.Name == "LastUpdateUser" || dataProp.Name == "LastUpdateTime")
+                //{
+                //    // 忽略  最后更新人 / 最后更新时间.
+                //    continue;
+                //}
 
                 if (dataProp.CustomAttributes.Count(p => p.AttributeType.Name == "ColumnAttribute") == 0)
                 {

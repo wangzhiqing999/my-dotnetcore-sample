@@ -60,7 +60,24 @@ namespace MyAuthentication.Model
         /// 归属的组织
         /// </summary>
         [JsonIgnore]
-        public virtual MyOrganization Organization { set; get; }
+        public MyOrganization Organization { set; get; }
+
+
+        /// <summary>
+        /// 组织名称.
+        /// </summary>
+        [NotMapped]
+        public string DisplayOrganizationName
+        {
+            get
+            {
+                if(this.Organization == null)
+                {
+                    return String.Empty;
+                }
+                return this.Organization.OrganizationName;
+            }
+        }
 
 
         #endregion

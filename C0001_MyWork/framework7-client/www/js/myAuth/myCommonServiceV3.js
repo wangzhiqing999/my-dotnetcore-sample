@@ -10,7 +10,7 @@ var _defaultConfig = {
 	myPageSize : 5,
 	
 	// 空白查询条件.
-	myEmpryQueryString : "_xyz_"
+	myEmpryQueryString : "_"
 };
 
 // 空白的 Web Api 地址.

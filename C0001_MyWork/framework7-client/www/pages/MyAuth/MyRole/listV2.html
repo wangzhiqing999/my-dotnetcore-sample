@@ -1,4 +1,4 @@
-<div class="page" data-name="module">
+<div class="page" data-name="role">
   <div class="navbar">
     <div class="navbar-inner sliding">
       <div class="left">
@@ -7,37 +7,47 @@
 		  <i class="icon material-icons md-only">menu</i>
 		</a>
       </div>
-
-      <div class="title">模块</div>
-
+	  
+      <div class="title">角色</div>
+	  
       <div class="right">
-	    <a href="/MyAuth/MyModule/Search/" class="link icon-only">
+	    <a href="/MyAuth/MyRole/Search/" class="link icon-only">
 		  <i class="icon f7-icons ios-only">search</i>
 		  <i class="icon material-icons md-only">search</i>
+	    </a>
+	  
+	    <a href="/MyAuth/MyRole/Create/" class="link icon-only">
+		  <i class="icon f7-icons ios-only">add</i>
+		  <i class="icon material-icons md-only">add</i>
 	    </a>
       </div>
     </div>
   </div>
 
-  <div class="page-content"  id="modulePageList">
-    <div class="block-title">模块</div>
+
+  <div class="page-content" id="rolePageList">
+    <div class="block-title">角色</div>
+	
 	<div class="data-table">
 	  <table>
 		<thead>
 		  <tr>
 			<th class="label-cell">系统</th>
-			<th class="label-cell">模块类型</th>
-			<th class="label-cell">模块代码</th>
-			<th class="label-cell">模块名称</th>
+			<th class="label-cell">角色代码</th>
+			<th class="label-cell">角色名称</th>
+			<th class="label-cell">&nbsp;</th>
 		  </tr>
 		</thead>
 
 		<tbody>
 		  <tr v-for="item in dataList">
 			<td class="label-cell">{{item.systemCode}}</td>
-			<td class="label-cell">{{item.moduleTypeCode}}</td>
-			<td class="label-cell">{{item.moduleCode}}</td>
-			<td class="label-cell">{{item.moduleName}}</td>
+			<td class="label-cell">{{item.roleCode}}</td>
+			<td class="label-cell">{{item.roleName}}</td>
+			<td>
+				<a v-bind:href="'/MyAuth/MyRole/Detail/' + item.roleCode" >明细</a>
+				<a v-bind:href="'/MyAuth/MyRole/Module/' + item.roleCode" >权限</a>
+			</td>
 		  </tr>
 		</tbody>
 	  </table>
@@ -45,8 +55,9 @@
 	  <my-pageinfo 
 		v-bind:page-index="pageIndex"
 		v-bind:page-count="pageCount"
-		base-path="/MyAuth/MyModule/List/" 
+		base-path="/MyAuth/MyRole/List/" 
 		v-bind:exp-path="expPath"></my-pageinfo>
+
 
 	</div>
   </div>

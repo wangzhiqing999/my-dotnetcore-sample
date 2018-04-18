@@ -4,6 +4,96 @@
 var myRoleService = _myServiceList.myRole;
 
 
+
+
+// 初始化 列表画面.
+myRoleService.initListView = function(elName, pageNo, systemCode) {
+
+	var _thisService = this;
+
+	// 当前服务.
+	var appVue = new Vue({
+		el: elName,
+		data: {
+			// 数据列表.
+			dataList:[],
+			// 第几页.
+			pageIndex:pageNo,
+			// 共几页.
+			pageCount:1,
+
+			// 查询的系统代码.
+			searchSystemCode:systemCode
+		},
+		// 计算值.
+		computed: {
+			// 额外的路径.
+			expPath: function () {
+				return '/' + this.searchSystemCode + '/';
+			}
+		},		
+		created:function(){
+		　　// ajax获取后台数据
+			this.loadData();
+		},
+		methods:{
+			// ajax 加载数据.
+			loadData:function() {
+				var _this = this;
+				// Show Preloader
+				app.preloader.show();
+				var apiUrl = _thisService.listWebApiAddress();
+				var apiData = _thisService.getListRequest(_this.pageIndex);
+				
+				apiData.systemCode = _thisService.getSearchInfo(_this.searchSystemCode);
+				
+				Framework7.request.json(
+					apiUrl,
+					apiData,
+					function (data) {
+						// Hide Preloader
+						app.preloader.hide();
+						_this.dataList=[];
+						var rowCount = data.queryResultData.length;
+						for(var i = 0; i < rowCount; i ++) {
+							_this.dataList.push(data.queryResultData[i]);
+						}
+						// 第几页.
+						_this.pageIndex = data.queryPageInfo.pageIndex;
+						// 共几页.
+						_this.pageCount = data.queryPageInfo.pageCount;
+					}
+				);
+			}
+		}
+	});
+};
+
+
+
+// 打开查询面板.
+myRoleService.initSearchView = function(elName) {
+	var _thisService = this;
+	// 当前服务.
+	var appVue = new Vue({
+		el: elName,
+		data: {
+			// 系统代码.
+			systemCode:""
+		},
+		methods:{
+			doSearch: function() {
+				var queryUrl = "/MyAuth/MyRole/List/1/" 
+					+ _thisService.formatSearchInfo(this.systemCode) + "/";
+				app.router.navigate(queryUrl);
+			}
+		}
+	});
+}
+
+
+
+
 // 初始化 角色-模块管理画面.
 myRoleService.initEditModuleView = function(elName, id) {
 

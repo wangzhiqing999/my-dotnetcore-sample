@@ -29,10 +29,11 @@ namespace MyAuthentication.Service
         /// <summary>
         /// 查询用户.
         /// </summary>
+        /// <param name="organizationID"></param>
         /// <param name="pageNo"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        CommonQueryResult<MyUser> Query(int pageNo = 1, int pageSize = 10);
+        CommonQueryResult<MyUser> Query(long? organizationID, int pageNo = 1, int pageSize = 10);
 
 
         /// <summary>

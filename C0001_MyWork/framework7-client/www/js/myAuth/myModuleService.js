@@ -27,6 +27,13 @@ myModuleService.initListView = function(elName, pageNo, systemCode, moduleTypeCo
 			// 查询的模块类型.
 			searchModuleType:moduleTypeCode,
 		},
+		// 计算值.
+		computed: {
+			// 额外的路径.
+			expPath: function () {
+				return '/' + this.searchSystemCode + '/' + this.searchModuleType + '/';
+			}
+		},		
 		created:function(){
 		　　// ajax获取后台数据
 			this.loadData();

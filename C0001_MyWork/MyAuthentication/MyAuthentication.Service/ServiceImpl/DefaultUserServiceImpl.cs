@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 using MyFramework.ServiceModel;
 using MyFramework.Util;
@@ -80,13 +81,19 @@ namespace MyAuthentication.ServiceImpl
         /// <param name="pageNo"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public CommonQueryResult<MyUser> Query(int pageNo, int pageSize)
+        public CommonQueryResult<MyUser> Query(long? organizationID, int pageNo, int pageSize)
         {
             using (MyAuthenticationContext context = new MyAuthenticationContext())
             {
                 var query =
-                    from data in context.MyUsers
+                    from data in context.MyUsers.Include("Organization")
                     select data;
+
+                if(organizationID != null)
+                {
+                    query = query.Where(p => p.OrganizationID == organizationID);
+                }
+
 
                 // 初始化翻页.
                 PageInfo pgInfo = new PageInfo(
@@ -124,7 +131,7 @@ namespace MyAuthentication.ServiceImpl
             using (MyAuthenticationContext context = new MyAuthenticationContext())
             {
                 var query =
-                    from data in context.MyUsers
+                    from data in context.MyUsers.Include("Organization")
                     where
                         data.UserID == id
                     select data;

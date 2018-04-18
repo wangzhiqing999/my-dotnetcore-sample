@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Authorization;
 
 using MyFramework.ServiceModel;
 
+using MyWork.Web.Filters;
+
 using MyAuthentication.Model;
 using MyAuthentication.Service;
 using MyAuthentication.ServiceModel;
@@ -81,6 +83,7 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("api/MyAuth/MyOrganization/Create")]
+        [WithCreater]
         public CommonServiceResult Create([FromBody]MyOrganization data)
         {
             var result = this._OrganizationService.NewOrganization(data);
@@ -95,6 +98,7 @@ namespace MyWork.Web.Areas.MyAuth.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("api/MyAuth/MyOrganization/Update")]
+        [WithLastUpdater]
         public CommonServiceResult Update([FromBody]MyOrganization data)
         {
             var result = this._OrganizationService.UpdateOrganization(data);
