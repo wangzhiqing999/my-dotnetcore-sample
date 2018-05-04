@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using MyAuthentication.DataAccess;
 using MyAuthentication.Model;
 using MyAuthentication.ServiceImpl;
 
@@ -13,7 +14,16 @@ namespace MyAuthentication.Service.Test
         /// <summary>
         /// 模块类型服务
         /// </summary>
-        private IModuleTypeService moduleTypeService = new DefaultModuleTypeServiceImpl();
+        private IModuleTypeService moduleTypeService;
+
+
+        [TestInitialize]
+        public void TestInit()
+        {
+            MyAuthenticationContext context = new MyAuthenticationContext();
+            moduleTypeService = new DefaultModuleTypeServiceImpl(context);
+        }
+
 
 
         [TestMethod]

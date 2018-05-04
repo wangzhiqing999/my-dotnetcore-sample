@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-
+using MyAuthentication.DataAccess;
 using MyAuthentication.Model;
 using MyAuthentication.ServiceImpl;
 using MyAuthentication.ServiceModel;
@@ -14,7 +14,17 @@ namespace MyAuthentication.Service.Test
         /// <summary>
         /// 组织机构服务.
         /// </summary>
-        private IOrganizationService organizationService = new DefaultOrganizationServiceImpl();
+        private IOrganizationService organizationService;
+
+
+        [TestInitialize]
+        public void TestInit()
+        {
+            MyAuthenticationContext context = new MyAuthenticationContext();
+            organizationService = new DefaultOrganizationServiceImpl(context);
+        }
+
+
 
 
 
@@ -51,13 +61,17 @@ namespace MyAuthentication.Service.Test
             // 尝试获取单行数据.
             var oneOrg = this.organizationService.GetOrganization(-1);
             // 数据不存在.
-            Assert.IsNull(oneOrg);
+            // 结果非空.
+            Assert.IsNotNull(oneOrg);
+            // 结果为不成功.
+            Assert.IsFalse(oneOrg.IsSuccess);
 
 
             oneOrg = this.organizationService.GetOrganization(org.OrganizationID);
             // 数据存在.
             Assert.IsNotNull(oneOrg);
-
+            // 结果为成功.
+            Assert.IsTrue(oneOrg.IsSuccess);
 
 
 

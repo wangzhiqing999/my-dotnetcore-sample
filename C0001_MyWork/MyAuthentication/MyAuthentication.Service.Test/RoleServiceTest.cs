@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-
+using MyAuthentication.DataAccess;
 using MyAuthentication.Model;
 using MyAuthentication.ServiceImpl;
 
@@ -14,7 +14,18 @@ namespace MyAuthentication.Service.Test
         /// <summary>
         /// 角色服务.
         /// </summary>
-        private IRoleService roleService = new DefaultRoleServiceImpl();
+        private IRoleService roleService;
+
+
+
+        [TestInitialize]
+        public void TestInit()
+        {
+            MyAuthenticationContext context = new MyAuthenticationContext();
+            roleService = new DefaultRoleServiceImpl(context);
+        }
+
+
 
 
         [TestMethod]
@@ -36,8 +47,11 @@ namespace MyAuthentication.Service.Test
 
             // 测试查询单个角色.
             var oneRole = roleService.GetRole("TEST");
-            // 结果为空.
-            Assert.IsNull(oneRole);
+            // 结果非空.
+            Assert.IsNotNull(oneRole);
+            // 结果为不成功.
+            Assert.IsFalse(oneRole.IsSuccess);
+            
 
 
             MyRole testRole = new MyRole()

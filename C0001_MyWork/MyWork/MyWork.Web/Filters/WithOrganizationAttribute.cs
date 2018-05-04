@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-using MyFramework.IModel;
+using MyAuthentication.IModel;
 using System.Security.Claims;
 
 namespace MyWork.Web.Filters
 {
 
     /// <summary>
-    /// 创建的时候，填写更新记录信息的 Filter
+    /// 创建的时候，自动填写组织ID的 Filter
     /// </summary>
-    public class WithCreaterAttribute : Attribute, IActionFilter
+    public class WithOrganizationAttribute : Attribute, IActionFilter
     {
 
         /// <summary>
@@ -32,33 +31,20 @@ namespace MyWork.Web.Filters
                 return;
             }
 
-            // 获取用户名.
-            string username = claimsIdentity.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name).Value;
+            // 获取组织ID.
+            long orgID = Convert.ToInt64(claimsIdentity.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GroupSid).Value);
 
             // 获取首个参数.
             foreach (var kv in context.ActionArguments)
             {
                 // 忽略 Key， 只看 Value.
                 var value = kv.Value;
-                if(value is IUpdateLogAble)
+                if (value is IOrganizationManagerAble)
                 {
-                    // 需要记录更新日志的接口.
-                    IUpdateLogAble data = (IUpdateLogAble)value;
-                    // 创建人.
-                    data.CreateUser = username;
-                    // 最后更新人.
-                    data.LastUpdateUser = username;
-                    // 创建时间.
-                    data.CreateTime = DateTime.Now;
-                    // 最后更新时间.
-                    data.LastUpdateTime = DateTime.Now;
-                }
-
-                if(value is ILogicRemoveAble)
-                {
-                    ILogicRemoveAble data = (ILogicRemoveAble)value;
-                    // 默认情况下， 插入的数据是有效的.
-                    data.IsActive = true;
+                    // 可由组织管理的数据的接口.
+                    IOrganizationManagerAble data = (IOrganizationManagerAble)value;
+                    // 组织ID.
+                    data.OrganizationID = orgID;
                 }
             }
         }
@@ -70,7 +56,9 @@ namespace MyWork.Web.Filters
         /// <param name="context"></param>
         public void OnActionExecuted(ActionExecutedContext context)
         {
- 
+
         }
+
+
     }
 }

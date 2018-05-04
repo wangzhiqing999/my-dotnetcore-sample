@@ -20,9 +20,22 @@ namespace MyAuthentication.ServiceImpl
     {
 
 
+        private readonly MyAuthenticationContext context;
+
+
+        public DefaultRoleModuleServiceImpl(MyAuthenticationContext context)
+        {
+            this.context = context;
+        }
+
+
+
+
+
+
         List<MyModule> IRoleModuleService.GetModuleByRoleCode(string roleCode)
         {
-            using (MyAuthenticationContext context = new MyAuthenticationContext())
+            //using (MyAuthenticationContext context = new MyAuthenticationContext())
             {
                 var query =
                     from data in context.MyRoleModules
@@ -41,7 +54,7 @@ namespace MyAuthentication.ServiceImpl
         {
             try
             {
-                using (MyAuthenticationContext context = new MyAuthenticationContext())
+                //using (MyAuthenticationContext context = new MyAuthenticationContext())
                 {
                     var query =
                         from data in context.MyRoleModules
@@ -107,7 +120,7 @@ namespace MyAuthentication.ServiceImpl
             // 结果列表.
             List<ManagerAbleModule> resultList = new List<ManagerAbleModule>();
 
-            using (MyAuthenticationContext context = new MyAuthenticationContext())
+            //using (MyAuthenticationContext context = new MyAuthenticationContext())
             {
                 // 查询角色.
                 MyRole role = context.MyRoles.Find(roleCode);
@@ -175,7 +188,7 @@ namespace MyAuthentication.ServiceImpl
 
             try
             {
-                using (MyAuthenticationContext context = new MyAuthenticationContext())
+                //using (MyAuthenticationContext context = new MyAuthenticationContext())
                 {
                     // 查询角色.
                     MyRole role = context.MyRoles.Find(roleCode);

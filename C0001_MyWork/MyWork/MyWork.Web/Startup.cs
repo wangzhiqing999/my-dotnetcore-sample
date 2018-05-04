@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using Microsoft.EntityFrameworkCore;
+
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
@@ -15,6 +17,10 @@ using MyAuthentication.DataAccess;
 using MyAuthentication.Service;
 using MyAuthentication.ServiceImpl;
 
+
+using MyWork.DataAccess;
+using MyWork.Service;
+using MyWork.ServiceImpl;
 
 
 using Swashbuckle.AspNetCore.Swagger;
@@ -35,6 +41,18 @@ namespace MyWork.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+
+            // 数据库连接字符串，定义在 appsettings.json 文件中.
+            string connString = Configuration.GetConnectionString("MyAuthenticationConnection");
+            string workConnString = Configuration.GetConnectionString("MyWorkConnection");
+
+            // 数据库配置
+            services.AddDbContext<MyAuthenticationContext>(options => options.UseSqlServer(connString));
+            services.AddDbContext<MyWorkContext>(options => options.UseSqlServer(workConnString));
+
+
+
 
             // ########## 用ASP.NET Core自带依赖注入(DI)注入使用的类 ##########
 
@@ -60,9 +78,19 @@ namespace MyWork.Web
             services.AddScoped(typeof(IUserRoleService), typeof(DefaultUserRoleServiceImpl));
             // 用户-系统服务.
             services.AddScoped(typeof(IUserSystemService), typeof(DefaultUserSystemServiceImpl));
-
             // 权限认证服务
             services.AddScoped(typeof(IAuthenticationService), typeof(DefaultAuthenticationService));
+
+
+
+            // 股票池服务.
+            services.AddScoped(typeof(IStockPoolService), typeof(DefaultStockPoolServiceImpl));
+            // 股票池服务.
+            services.AddScoped(typeof(IStockInfoService), typeof(DefaultStockInfoServiceImpl));
+
+
+
+
 
 
             // ##########  JWT 相关配置  ########## 

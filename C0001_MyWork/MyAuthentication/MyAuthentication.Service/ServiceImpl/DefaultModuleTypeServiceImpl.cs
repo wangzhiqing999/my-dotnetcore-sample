@@ -18,9 +18,20 @@ namespace MyAuthentication.ServiceImpl
     /// </summary>
     public class DefaultModuleTypeServiceImpl : IModuleTypeService
     {
+
+        private readonly MyAuthenticationContext context;
+
+
+        public DefaultModuleTypeServiceImpl(MyAuthenticationContext context)
+        {
+            this.context = context;
+        }
+
+
+
         CommonQueryResult<MyModuleType> IModuleTypeService.GetModuleTypeList(int pageNo, int pageSize)
         {
-            using (MyAuthenticationContext context = new MyAuthenticationContext())
+            //using (MyAuthenticationContext context = new MyAuthenticationContext())
             {
                 var query =
                     from data in context.MyModuleTypes

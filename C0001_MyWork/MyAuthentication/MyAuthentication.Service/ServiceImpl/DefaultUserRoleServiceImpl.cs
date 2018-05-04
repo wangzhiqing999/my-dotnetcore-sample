@@ -13,9 +13,20 @@ namespace MyAuthentication.ServiceImpl
 {
     public class DefaultUserRoleServiceImpl : IUserRoleService
     {
+
+        private readonly MyAuthenticationContext context;
+
+
+        public DefaultUserRoleServiceImpl(MyAuthenticationContext context)
+        {
+            this.context = context;
+        }
+
+
+
         List<MyRole> IUserRoleService.GetRoleByUserID(long userID)
         {
-            using (MyAuthenticationContext context = new MyAuthenticationContext())
+            //using (MyAuthenticationContext context = new MyAuthenticationContext())
             {
                 var query =
                     from data in context.MyUserRoles
@@ -32,7 +43,7 @@ namespace MyAuthentication.ServiceImpl
         {
             try
             {
-                using (MyAuthenticationContext context = new MyAuthenticationContext())
+                //using (MyAuthenticationContext context = new MyAuthenticationContext())
                 {
                     var query =
                         from data in context.MyUserRoles

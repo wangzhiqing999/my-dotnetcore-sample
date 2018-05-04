@@ -324,8 +324,62 @@ routes = [
 		}
 	},
 
+	
+	
+	
+	
+	
 
+	// ###### 股票池 ######
+	{
+		path: '/MyWork/StockPool/',
+		redirect: '/MyWork/StockPool/List/1/'
+	},	
+	{
+		path: '/MyWork/StockPool/List/:pageNo/',
+		url: './pages/MyWork/StockPool/listV2.html',
+		options: _defaultRouteOptions,
+		on: {
+			pageInit: function (e, page) {
+				_myListUrl = page.route.path;
+				_myWorkServiceList.stockPool.initListView(
+					'#stockPoolPageList',
+					page.route.params.pageNo);
+			}
+		}
+	},
+	{
+		path: '/MyWork/StockPool/Create/',
+		url: './pages/MyWork/StockPool/create.html',
+		on: {
+			pageBeforeIn: function (e, page) {
+				var data = _myWorkEmptyData.myStockPool();
+				_myWorkServiceList.stockPool.initCreateView('#stockPoolPageCreate', data);
+			}
+		}
+	},
+	{
+		path: '/MyWork/StockPool/Detail/:stockPoolID',
+		url: './pages/MyWork/StockPool/detail.html',
+		on: {
+			pageBeforeIn: function (e, page) {
+				_myWorkServiceList.stockPool.initDetailView('#stockPoolPageDetail', page.route.params.stockPoolID);
+			}
+		}
+	},
+	{
+		path: '/MyWork/StockPool/Stock/:stockPoolID',
+		url: './pages/MyWork/StockPool/stock.html',
+		on: {
+			pageBeforeIn: function (e, page) {
+				// _myWorkServiceList.stockPool.initDetailView('#stockPoolPageDetail', page.route.params.stockPoolID);
+			}
+		}
+	},	
 
+	
+	
+	
 	// Default route (404 page). MUST BE THE LAST
 	{
 		path: '(.*)',

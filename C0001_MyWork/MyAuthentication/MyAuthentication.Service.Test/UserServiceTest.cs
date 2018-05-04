@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+using MyAuthentication.DataAccess;
 using MyAuthentication.Model;
 using MyAuthentication.ServiceImpl;
 using MyAuthentication.ServiceModel;
@@ -13,7 +14,17 @@ namespace MyAuthentication.Service.Test
         /// <summary>
         /// 用户服务.
         /// </summary>
-        private IUserService userService = new DefaultUserServiceImpl();
+        private IUserService userService = null; // new DefaultUserServiceImpl();
+
+
+
+        [TestInitialize]
+        public void TestInit()
+        {
+            MyAuthenticationContext context = new MyAuthenticationContext();
+            userService = new DefaultUserServiceImpl(context);
+        }
+
 
 
 

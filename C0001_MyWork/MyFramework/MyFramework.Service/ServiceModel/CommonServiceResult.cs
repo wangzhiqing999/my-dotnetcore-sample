@@ -12,7 +12,7 @@ namespace MyFramework.ServiceModel
 
         public CommonServiceResult(Exception ex)
         {
-            this.ResultCode = -99999;
+            this.ResultCode = "SYSTEM_EXCEPTION";
             this.ResultMessage = ex.Message;
         }
 
@@ -22,7 +22,7 @@ namespace MyFramework.ServiceModel
         /// <summary>
         /// 结果码.
         /// </summary>
-        public int ResultCode { set; get; }
+        public string ResultCode { set; get; }
 
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace MyFramework.ServiceModel
         /// <summary>
         /// 处理成功.
         /// </summary>
-        public const int ResultCodeIsSuccess = 0;
+        public const string ResultCodeIsSuccess = "0";
 
         /// <summary>
         /// 默认的，成功的执行结果.
@@ -83,7 +83,7 @@ namespace MyFramework.ServiceModel
         /// <summary>
         /// 数据不存在.
         /// </summary>
-        public const int ResultCodeIsDataNotFound = -404;
+        public const string ResultCodeIsDataNotFound = "COMMON_DATA_NOT_FOUND";
 
         /// <summary>
         /// 默认的，数据不存在的执行结果.

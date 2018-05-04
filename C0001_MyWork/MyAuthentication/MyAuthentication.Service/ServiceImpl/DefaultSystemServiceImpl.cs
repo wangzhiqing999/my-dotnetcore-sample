@@ -18,9 +18,20 @@ namespace MyAuthentication.ServiceImpl
     /// </summary>
     public class DefaultSystemServiceImpl : DefaultCommonService, ISystemService
     {
+
+
+        private readonly MyAuthenticationContext context;
+
+
+        public DefaultSystemServiceImpl(MyAuthenticationContext context)
+        {
+            this.context = context;
+        }
+
+
         CommonQueryResult<MySystem> ISystemService.Query(int pageNo, int pageSize)
         {
-            using (MyAuthenticationContext context = new MyAuthenticationContext())
+            //using (MyAuthenticationContext context = new MyAuthenticationContext())
             {
                 var query =
                     from data in context.MySystems

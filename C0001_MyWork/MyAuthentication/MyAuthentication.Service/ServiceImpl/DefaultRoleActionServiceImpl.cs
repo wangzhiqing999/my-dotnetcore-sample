@@ -12,9 +12,22 @@ namespace MyAuthentication.ServiceImpl
 {
     public class DefaultRoleActionServiceImpl : IRoleActionService
     {
+
+        private readonly MyAuthenticationContext context;
+
+
+        public DefaultRoleActionServiceImpl(MyAuthenticationContext context)
+        {
+            this.context = context;
+        }
+
+
+
+
+
         List<MyAction> IRoleActionService.GetActionByRoleCode(string roleCode)
         {
-            using (MyAuthenticationContext context = new MyAuthenticationContext())
+            //using (MyAuthenticationContext context = new MyAuthenticationContext())
             {
                 var query =
                     from data in context.MyRoleActions
@@ -31,7 +44,7 @@ namespace MyAuthentication.ServiceImpl
         {
             try
             {
-                using (MyAuthenticationContext context = new MyAuthenticationContext())
+                //using (MyAuthenticationContext context = new MyAuthenticationContext())
                 {
                     var query =
                         from data in context.MyRoleActions

@@ -34,6 +34,9 @@
     <Folder Include="Areas\MyAuth\Data\" />
     <Folder Include="Areas\MyAuth\Models\" />
     <Folder Include="Areas\MyAuth\Views\" />
+    <Folder Include="Areas\MyWork\Data\" />
+    <Folder Include="Areas\MyWork\Models\" />
+    <Folder Include="Areas\MyWork\Views\" />
   </ItemGroup>
 
 </Project>

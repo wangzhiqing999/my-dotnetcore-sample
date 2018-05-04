@@ -19,9 +19,18 @@ namespace MyAuthentication.ServiceImpl
     public class DefaultOrganizationServiceImpl : DefaultCommonService, IOrganizationService
     {
 
+        private readonly MyAuthenticationContext context;
+
+
+        public DefaultOrganizationServiceImpl(MyAuthenticationContext context)
+        {
+            this.context = context;
+        }
+
+
         CommonServiceResult IOrganizationService.GetOrganization(long id)
         {
-            using (MyAuthenticationContext context = new MyAuthenticationContext())
+            //using (MyAuthenticationContext context = new MyAuthenticationContext())
             {
                 MyOrganization data = context.MyOrganizations.Find(id);
 
@@ -42,7 +51,7 @@ namespace MyAuthentication.ServiceImpl
         {
             try
             {
-                using (MyAuthenticationContext context = new MyAuthenticationContext())
+                //using (MyAuthenticationContext context = new MyAuthenticationContext())
                 {
                     MyOrganization dbData = context.MyOrganizations.Find(organization.OrganizationID);
                     if (dbData != null)
@@ -78,7 +87,7 @@ namespace MyAuthentication.ServiceImpl
 
         CommonQueryResult<MyOrganization> IOrganizationService.Query(int pageNo, int pageSize)
         {
-            using (MyAuthenticationContext context = new MyAuthenticationContext())
+            //using (MyAuthenticationContext context = new MyAuthenticationContext())
             {
                 var query =
                     from data in context.MyOrganizations
@@ -114,7 +123,7 @@ namespace MyAuthentication.ServiceImpl
         {
             try
             {
-                using (MyAuthenticationContext context = new MyAuthenticationContext())
+                //using (MyAuthenticationContext context = new MyAuthenticationContext())
                 {
                     MyOrganization dbData = context.MyOrganizations.Find(id);
                     if (dbData == null)
@@ -156,7 +165,7 @@ namespace MyAuthentication.ServiceImpl
         {
             try
             {
-                using (MyAuthenticationContext context = new MyAuthenticationContext())
+                //using (MyAuthenticationContext context = new MyAuthenticationContext())
                 {
                     MyOrganization dbData = context.MyOrganizations.Find(organization.OrganizationID);
                     if (dbData == null)

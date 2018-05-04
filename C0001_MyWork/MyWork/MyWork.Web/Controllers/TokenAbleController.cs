@@ -9,11 +9,19 @@ using MyAuthentication.ServiceModel;
 
 namespace MyWork.Web.Controllers
 {
+
+    /// <summary>
+    /// 支持 Token 处理的控制器.
+    /// </summary>
     [Produces("application/json")]
     public abstract class TokenAbleController : Controller
     {
 
 
+        /// <summary>
+        /// 获取登录用户信息.
+        /// </summary>
+        /// <returns></returns>
         protected BasicUserInfo GetUserInfoFromToken()
         {
             // 获取令牌内的详细信息.

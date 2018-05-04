@@ -1,0 +1,45 @@
+<div class="page" data-name="stockPool">
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+		<a href="#" class="link icon-only panel-open" data-panel="left">
+		  <i class="icon f7-icons ios-only">menu</i>
+		  <i class="icon material-icons md-only">menu</i>
+		</a>
+      </div>
+      <div class="title">股票池</div>
+    </div>
+  </div>
+
+  <div class="page-content" id="stockPoolPageCreate">
+    <div class="block-title">股票池</div>
+	<div class="list inline-labels no-hairlines-md" v-if="dataItem != null">
+
+	  <ul>
+
+		<li class="item-content item-input">
+		  <div class="item-media">
+			<i class="icon demo-list-icon"></i>
+		  </div>
+		  <div class="item-inner">
+			<div class="item-title item-label">股票池名称</div>
+			<div class="item-input-wrap">
+			  <input type="text" v-model="dataItem.stockPoolName" placeholder="请填写股票池名称">
+			  <span class="input-clear-button"></span>
+			</div>
+		  </div>
+		</li>
+
+
+	  </ul>
+
+	  <div class="block">
+		<div class="row">
+	  	  <button class="col button button-fill button-round" v-on:click="cancelCreate()">返回</a>
+	  	  <button class="col button button-fill button-round" v-on:click="createData()">保存</button>
+	    </div>
+	  </div>
+
+	</div>
+  </div>
+</div>

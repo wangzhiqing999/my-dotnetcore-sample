@@ -24,9 +24,20 @@ namespace MyAuthentication.ServiceImpl
     public class DefaultRoleServiceImpl : DefaultCommonService, IRoleService
     {
 
+        private readonly MyAuthenticationContext context;
+
+
+        public DefaultRoleServiceImpl(MyAuthenticationContext context)
+        {
+            this.context = context;
+        }
+
+
+
+
         CommonQueryResult<MyRole> IRoleService.Query(string systemCode, int pageNo, int pageSize)
         {
-            using(MyAuthenticationContext context = new MyAuthenticationContext())
+            //using(MyAuthenticationContext context = new MyAuthenticationContext())
             {
                 var query =
                     from data in context.MyRoles
@@ -65,7 +76,7 @@ namespace MyAuthentication.ServiceImpl
 
         CommonServiceResult IRoleService.GetRole(string id)
         {
-            using (MyAuthenticationContext context = new MyAuthenticationContext())
+            //using (MyAuthenticationContext context = new MyAuthenticationContext())
             {
                 var query =
                     from data in context.MyRoles
@@ -91,7 +102,7 @@ namespace MyAuthentication.ServiceImpl
         {
             try
             {
-                using (MyAuthenticationContext context = new MyAuthenticationContext())
+                //using (MyAuthenticationContext context = new MyAuthenticationContext())
                 {
                     var query =
                         from data in context.MyRoles
@@ -122,7 +133,7 @@ namespace MyAuthentication.ServiceImpl
         {
             try
             {
-                using (MyAuthenticationContext context = new MyAuthenticationContext())
+                //using (MyAuthenticationContext context = new MyAuthenticationContext())
                 {
                     MyRole dbData = context.MyRoles.Find(roleCode);
                     if (dbData == null)
@@ -148,7 +159,7 @@ namespace MyAuthentication.ServiceImpl
         {
             try
             {
-                using (MyAuthenticationContext context = new MyAuthenticationContext())
+                //using (MyAuthenticationContext context = new MyAuthenticationContext())
                 {
                     MyRole dbData = context.MyRoles.Find(role.RoleCode);
                     if (dbData == null)

@@ -1,0 +1,51 @@
+<div class="page" data-name="stockPool">
+  <div class="navbar">
+    <div class="navbar-inner sliding">
+      <div class="left">
+		<a href="#" class="link icon-only panel-open" data-panel="left">
+		  <i class="icon f7-icons ios-only">menu</i>
+		  <i class="icon material-icons md-only">menu</i>
+		</a>
+      </div>
+
+      <div class="title">股票池</div>
+
+      <div class="right">
+	    <a href="/MyWork/StockPool/Create/" class="link icon-only">
+		  <i class="icon f7-icons ios-only">add</i>
+		  <i class="icon material-icons md-only">add</i>
+	    </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content"  id="stockPoolPageList">
+    <div class="block-title">股票池</div>
+	<div class="data-table">
+	  <table>
+		<thead>
+		  <tr>
+			<th class="label-cell">名称</th>
+			<th class="label-cell">&nbsp;</th>
+		  </tr>
+		</thead>
+
+		<tbody>
+		  <tr v-for="item in dataList">
+			<td class="label-cell">{{item.stockPoolName}}</td>
+			<td>
+				<a v-bind:href="'/MyWork/StockPool/Detail/' + item.primaryKey" >明细</a>
+				<!-- <a v-bind:href="'/MyWork/StockPool/Stock/' + item.primaryKey" >股票</a> -->
+			</td>
+		  </tr>
+		</tbody>
+	  </table>
+
+	  <my-pageinfo 
+		v-bind:page-index="pageIndex"
+		v-bind:page-count="pageCount"
+		base-path="/MyWork/StockPool/List/"></my-pageinfo>
+
+	</div>
+  </div>
+</div>

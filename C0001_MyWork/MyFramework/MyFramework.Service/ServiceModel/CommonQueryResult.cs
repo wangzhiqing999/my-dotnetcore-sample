@@ -24,5 +24,22 @@ namespace MyFramework.ServiceModel
         /// </summary>
         public List<T> QueryResultData { set; get; }
 
+
+
+        /// <summary>
+        /// 获取空白结果.
+        /// </summary>
+        public static CommonQueryResult<T> GetEmptyResult()
+        {            
+            CommonQueryResult<T> result = new CommonQueryResult<T>()
+            {
+                // 翻页信息
+                QueryPageInfo = new PageInfo(10, 1, 0),
+                // 数据.
+                QueryResultData = new List<T>(),
+            };
+            return result;            
+        }
+
     }
 }

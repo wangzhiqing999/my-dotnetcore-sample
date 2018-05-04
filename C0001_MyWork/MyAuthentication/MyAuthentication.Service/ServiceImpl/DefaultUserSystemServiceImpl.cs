@@ -16,13 +16,21 @@ namespace MyAuthentication.ServiceImpl
     public class DefaultUserSystemServiceImpl : IUserSystemService
     {
 
+        private readonly MyAuthenticationContext context;
+
+
+        public DefaultUserSystemServiceImpl(MyAuthenticationContext context)
+        {
+            this.context = context;
+        }
+
 
         public List<ManagerAbleSystem> GetManagerAbleSystemByUserID(long userID)
         {
             // 结果列表.
             List<ManagerAbleSystem> resultList = new List<ManagerAbleSystem>();
 
-            using (MyAuthenticationContext context = new MyAuthenticationContext())
+            //using (MyAuthenticationContext context = new MyAuthenticationContext())
             {
                 // 查询用户.
                 MyUser user = context.MyUsers.Find(userID);
@@ -91,7 +99,7 @@ namespace MyAuthentication.ServiceImpl
         {
             try
             {
-                using (MyAuthenticationContext context = new MyAuthenticationContext())
+                //using (MyAuthenticationContext context = new MyAuthenticationContext())
                 {
                     // 查询用户.
                     MyUser user = context.MyUsers.Find(userID);
