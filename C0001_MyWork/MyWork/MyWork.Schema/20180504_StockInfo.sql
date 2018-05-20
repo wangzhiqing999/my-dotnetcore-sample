@@ -16,7 +16,7 @@ SELECT '000010','美丽生态',	'MLST',	'SZ'
 INSERT INTO [mw_stock_info](
 	[stock_code],[stock_name],[stock_name_pinyin],[market]
 )
-SELECT '600001','邯郸钢铁',	'HDGT',	'SH'	UNION ALL
+SELECT '600000','浦发银行',	'PFYH',	'SH'	UNION ALL
 SELECT '600002','齐鲁石化',	'QLSH',	'SH'    UNION ALL
 SELECT '600003','ST东北高',	'STDBG','SH'    UNION ALL
 SELECT '600004','白云机场',	'BYJC',	'SH'    UNION ALL

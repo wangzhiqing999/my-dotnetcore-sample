@@ -17,7 +17,7 @@ namespace MyWork.ServiceModel
     {
 
 
-        #region 股票池相关.
+        #region 股票/股票池相关.
 
 
         /// <summary>
@@ -84,6 +84,47 @@ namespace MyWork.ServiceModel
 
         #endregion
 
+
+
+
+
+        #region 账户相关.
+
+
+        /// <summary>
+        /// 账户ID不存在.
+        /// </summary>
+        public const string ResultCodeIsAccountIdNotFound = "WORK_ACCOUNT_ID__NOT_FOUND";
+
+        /// <summary>
+        /// 账户ID不存在的执行结果.
+        /// </summary>
+        public static readonly CommonServiceResult AccountIdNotFoundResult = new CommonServiceResult()
+        {
+            ResultCode = ResultCodeIsAccountIdNotFound,
+            ResultMessage = "账户ID不存在",
+        };
+
+
+
+        /// <summary>
+        /// 账户余额错误
+        /// </summary>
+        public const string ResultCodeIsAccountBalanceError = "WORK_ACCOUNT_BALANCE_ERROR";
+
+        /// <summary>
+        /// 账户余额错误的执行结果.
+        /// </summary>
+        public static readonly CommonServiceResult AccountBalanceErrorResult = new CommonServiceResult()
+        {
+            ResultCode = ResultCodeIsAccountBalanceError,
+            ResultMessage = "账户余额不足",
+        };
+
+
+
+
+        #endregion
 
 
     }

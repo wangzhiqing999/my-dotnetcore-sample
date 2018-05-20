@@ -88,7 +88,8 @@ namespace MyWork.Web
             // 股票池服务.
             services.AddScoped(typeof(IStockInfoService), typeof(DefaultStockInfoServiceImpl));
 
-
+            // 交易服务.
+            services.AddScoped(typeof(ITradingService), typeof(DefaultTradingServiceImpl));
 
 
 

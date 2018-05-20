@@ -175,7 +175,6 @@ namespace MyAuthentication.ServiceImpl
                         return errResult;
                     }
 
-
                     if(organization.LoginOrganizationCode != dbData.LoginOrganizationCode)
                     {
                         // 不允许修改组织代码

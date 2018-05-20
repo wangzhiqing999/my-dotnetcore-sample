@@ -69,5 +69,44 @@ namespace MyWork.Model
         #endregion
 
 
+
+
+
+
+        #region 一对多 (交易 / 持仓)
+
+
+        /// <summary>
+        /// 交易
+        /// </summary>
+        [JsonIgnore]
+        public virtual List<Trading> TradingList { set; get; }
+
+
+        /// <summary>
+        /// 持仓列表
+        /// </summary>
+        [JsonIgnore]
+        public virtual List<Position> PositionList { set; get; }
+
+
+        #endregion
+
+
+
+        #region 一对多 (每日总结)
+
+
+        /// <summary>
+        /// 每日总结
+        /// </summary>
+        [JsonIgnore]
+        public virtual List<DailySummary> DailySummaryList { set; get; }
+
+
+        #endregion
+
+
+
     }
 }
