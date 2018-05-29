@@ -21,5 +21,16 @@ namespace MyWork.Service
         /// <returns></returns>
         CommonServiceResult BuildDailySummary(DateTime date);
 
+
+
+
+
+        /// <summary>
+        /// 生成账户的日结报表
+        /// </summary>
+        /// <param name="reportDate"></param>
+        /// <returns></returns>
+        CommonServiceResult BuildDailyReport(DateTime reportDate);
+
     }
 }

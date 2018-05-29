@@ -55,6 +55,21 @@ namespace MyWork.Model
 
 
 
+        /// <summary>
+        /// 查询代码.
+        /// </summary>
+        [Display(Name = "查询代码")]
+        [NotMapped]
+        public string QueryCode
+        {
+            get
+            {
+                return String.Format("{0}{1}", this.Market, this.StockCode);
+            }
+        }
+
+
+
 
 
         #region 一对多的部分.  (股票池-股票关系)

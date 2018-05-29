@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWork.Web", "MyWork\MyWork
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyAuthentication.Service.Test", "MyAuthentication\MyAuthentication.Service.Test\MyAuthentication.Service.Test.csproj", "{90FB432E-4EEE-4C00-BBA5-55F70F72502C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWork.Service.Test", "MyWork\MyWork.Service.Test\MyWork.Service.Test.csproj", "{769E10F1-81FE-4306-BEF0-A32D3785160D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyWork.Service.Test", "MyWork\MyWork.Service.Test\MyWork.Service.Test.csproj", "{769E10F1-81FE-4306-BEF0-A32D3785160D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
