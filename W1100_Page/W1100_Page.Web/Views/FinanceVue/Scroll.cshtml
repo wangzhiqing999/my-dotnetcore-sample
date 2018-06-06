@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewData["Title"] = "滚动条方式，加载数据";
+}
+
+<h2>Scroll</h2>
+
+
+
+<div id="master">
+    <table>
+        <tbody id="testTable">
+            <tr>
+                <th width="10%">时间</th>
+                <th width="10%">&nbsp;</th>
+                <th width="10%">国家</th>
+                <th width="40%">指标名称</th>
+                <th width="10%">前值</th>
+                <th width="10%">预测值</th>
+                <th width="10%">公布值</th>
+            </tr>
+
+            <tr v-for="item in dataList">
+                <td> {{item.displayFinanceDate}} </td>
+                <td> <img v-bind:src="'/images/Country/' + item.countryClassName + '.png'"> </td>
+                <td> {{item.countryName}} </td>
+                <td> {{item.content}} </td>
+                <td> {{item.previous}} </td>
+                <td> {{item.predict}} </td>
+                <td> {{item.currentValue}} </td>
+            </tr>
+
+            
+        </tbody>
+    </table>
+</div>
+
+
+
+@section Scripts
+    {
+
+    <script src="~/js/vue.js"></script>
+
+
+    <script>
+
+
+        // 当前服务.
+        var appVue = new Vue({
+            el: "#master",
+            data: {
+                // 数据列表.
+                dataList: [],
+                // 页面索引.
+                pageIndex: 1,
+                // 总页面大小.
+                pageCount: 1,
+                // 是否正在加载.
+                loadingFlag: false
+            },
+            created: function () {                
+                // 加载数据.
+                this.getData();               
+            },
+            mounted: function () {
+                // 滚动事件.
+                window.addEventListener('scroll', this.handleTouchMove, true);
+            },
+            methods: {
+                // 加载数据.
+                getData: function () {
+                    var _self = this;
+                    _self.loadingFlag = true;
+                    $.post(
+                        "/Finance/GetFinanceData",
+                        {
+                            pageNo: _self.pageIndex,
+                            pageSize: 30
+                        },
+                        function (data, status) {
+                            for (var i = 0, len = data.financeDataList.length; i < len; i++) {
+                                var item = data.financeDataList[i];
+                                _self.dataList.push(item);
+                            }
+                            _self.pageCount = data.pageCount;
+                            _self.pageIndex++;
+                            _self.loadingFlag = false;
+                        });
+                },
+                // 处理滚动.
+                handleTouchMove(e) {
+                    var _self = this;
+                    var lazyheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
+                    if ($(document).height() - 120 <= lazyheight) {
+                        if (_self.pageIndex <= _self.pageCount && !_self.loadingFlag) {
+                            // 翻页.
+                            console.log("加载新的页：", _self.pageIndex);
+                            _self.getData(); 
+                        }
+                    }
+                }
+            }
+        });
+
+    </script>
+}

@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewData["Title"] = "点击更多加载数据";
+}
+
+<h2>More</h2>
+
+
+<div id="master">
+    <table>
+        <tbody id="testTable">
+            <tr>
+                <th width="10%">时间</th>
+                <th width="10%">&nbsp;</th>
+                <th width="10%">国家</th>
+                <th width="40%">指标名称</th>
+                <th width="10%">前值</th>
+                <th width="10%">预测值</th>
+                <th width="10%">公布值</th>
+            </tr>
+
+            <tr v-for="item in dataList">
+                <td> {{item.displayFinanceDate}} </td>
+                <td> <img v-bind:src="'/images/Country/' + item.countryClassName + '.png'"> </td>
+                <td> {{item.countryName}} </td>
+                <td> {{item.content}} </td>
+                <td> {{item.previous}} </td>
+                <td> {{item.predict}} </td>
+                <td> {{item.currentValue}} </td>
+            </tr>
+
+            <tr>
+                <td colspan='7'>
+                    <div v-if="pageIndex === 1">
+                        数据加载中...
+                    </div>
+                    <div v-else-if="pageIndex < pageCount">
+                        <a v-on:click="getData">更多</a>
+                    </div>
+                    <div v-else>
+                        没有更多数据了...
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+@section Scripts
+{
+
+    <script src="~/js/vue.js"></script>
+
+
+    <script>
+
+
+        // 当前服务.
+        var appVue = new Vue({
+            el: "#master",
+            data: {
+                // 数据列表.
+                dataList: [],
+                // 页面索引.
+                pageIndex: 1,
+                // 总页面大小.
+                pageCount: 1
+            },
+            created: function () {
+                // 加载数据.
+                this.getData();
+            },
+            methods: {
+                getData: function () {
+                    var _self = this;
+                    $.post(
+                        "/Finance/GetFinanceData",
+                        {
+                            pageNo: _self.pageIndex,
+                            pageSize: 30
+                        },
+                        function (data, status) {
+                            for (var i = 0, len = data.financeDataList.length; i < len; i++) {
+                                var item = data.financeDataList[i];
+                                _self.dataList.push(item);
+                            }
+                            _self.pageCount = data.pageCount;
+                            _self.pageIndex++;
+                        });
+                }
+            }
+        });
+
+    </script>
+}
