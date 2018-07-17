@@ -13,6 +13,9 @@ using Microsoft.AspNetCore.Rewrite;
 using System.Net.WebSockets;
 using System.Threading;
 
+using A0020_Fundamentals.Filters;
+
+
 namespace A0020_Fundamentals
 {
     public class Startup
@@ -41,6 +44,10 @@ namespace A0020_Fundamentals
 
             // 添加 MVC 的服务.
             services.AddMvc();
+
+
+            services.AddScoped<HelloWorldActionFilter>();
+            services.AddScoped<HelloWorldResultFilter>();
         }
 
 
@@ -159,6 +166,7 @@ namespace A0020_Fundamentals
 
 
 
+            
 
 
             // 使用 mvc 默认路由.
