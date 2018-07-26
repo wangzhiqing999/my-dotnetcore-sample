@@ -69,7 +69,9 @@ namespace A0020_Fundamentals
             // index.html
             app.UseDefaultFiles();
 
-
+            // 自定义错误页面.
+            app.UseExceptionHandler("/errors/500");
+            app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
 
             // ########## Static files 设置 ##########
@@ -209,6 +211,11 @@ namespace A0020_Fundamentals
             //{
             //    await context.Response.WriteAsync("Hello World!");
             //});
+
+
+
+
+
         }
 
 
