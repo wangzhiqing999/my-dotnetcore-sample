@@ -34,12 +34,17 @@
 
 
 ### A0040_React
-使用 Visual Studio 2017， 创建一个 Web 项目，测试 React 的使用。(DotNet Core 2.0) 
+使用 Visual Studio 2017， 创建一个 Web 项目，测试 React 的使用。(DotNet Core 2.0)
 
 
 ### C0001_MyWork
 使用 Visual Studio 2017， 创建 Web Api . (DotNet Core 2.0)
 使用 framework7， 调用 Web Api.
+
+
+### D0001_Docker_HelloWorld
+使用 Visual Studio 2017，创建一个 Web 项目 （本例子仅仅为了测试在 Docker 下发布，因此，啥代码也没有写）。
+然后，在 Ubuntu 下面，创建 Docker 镜像，并运行的处理步骤。
 
 
 ### W1000_ABP_HelloWorld
