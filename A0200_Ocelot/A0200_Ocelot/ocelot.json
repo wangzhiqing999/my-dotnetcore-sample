@@ -1,0 +1,94 @@
+﻿{
+
+  "ReRoutes": [
+
+    {
+      "DownstreamPathTemplate": "/UserApi/swagger.json",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 9091
+        }
+      ],
+      "LoadBalancer": "RoundRobin",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/UserApi/swagger.json",
+      "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/OrderApi/swagger.json",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 9092
+        }
+      ],
+      "LoadBalancer": "RoundRobin",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/OrderApi/swagger.json",
+      "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT" ]
+    },
+
+
+
+    {
+      "DownstreamPathTemplate": "/api/Users",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 9091
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Users",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Users/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 9091
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Users/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE", "PUT" ]
+    },
+
+
+
+    {
+      "DownstreamPathTemplate": "/api/Orders",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 9092
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Orders",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Orders/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 9092
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Orders/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE", "PUT" ]
+    }
+  ],
+
+
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:9090"
+  }
+
+}
