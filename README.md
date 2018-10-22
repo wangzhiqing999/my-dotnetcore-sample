@@ -45,6 +45,10 @@
 Ocelot 网关使用的例子代码.
 
 
+### A0210_WebApiClient
+调用 Web Api 的客户端写法. (使用 Refit 或者 WebApiClient.JIT)
+
+
 ### C0001_MyWork
 使用 Visual Studio 2017， 创建 Web Api . (DotNet Core 2.0)
 使用 framework7， 调用 Web Api.
