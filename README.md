@@ -21,6 +21,14 @@
 使用 Visual Studio 2017， 开发 EntityFramework Code First 的例子.  (使用 Mysql 数据库)
 
 
+### A0006_EF_Sqlite
+使用 Visual Studio 2017， 开发 EntityFramework Code First 的例子.  (使用 Sqlite 数据库)
+
+
+### A0007_EF_QueryFilter
+EntityFramework Code 中， 使用 QueryFilter， 实现 逻辑删除的例子. (使用 SQL Server 数据库)
+
+
 ### A0010_TestWebApi
 使用 Visual Studio 2017， 创建一个 Web Api 项目的例子. (DotNet Core 2.0)
 
