@@ -12,6 +12,9 @@ namespace A0100_MySQL.Sample
     {
 
         private const string SelectSql = @"SELECT id, a, b, c FROM test_abc WHERE id = ?id";
+
+        private const string SelectLikeSql = @"SELECT id, a, b, c FROM test_abc WHERE id LIKE ?id";
+
         private const string UpdateSql = @"UPDATE test_abc SET a = a + 1, b = b + 2, c = c + 3 WHERE id = ?id";
 
 
@@ -24,6 +27,9 @@ namespace A0100_MySQL.Sample
             {
                 conn.Open();
 
+
+                Console.WriteLine("----- Select ----- ");
+
                 using (MySqlCommand cmd = new MySqlCommand(SelectSql, conn))
                 {
                     MySqlParameter param = new MySqlParameter("id", id);
@@ -35,10 +41,28 @@ namespace A0100_MySQL.Sample
                         {
                             Console.WriteLine("id = {0}; a = {1}; b = {2}; c = {3}", reader["id"], reader["a"], reader["b"], reader["c"]);
                         }
-                    }                        
+                    }
                 }
 
 
+                Console.WriteLine("----- Select ----- Where Like ----- ");
+
+                using (MySqlCommand likeCmd = new MySqlCommand(SelectLikeSql, conn))
+                {
+                    MySqlParameter param = new MySqlParameter("id", id + "%");
+                    likeCmd.Parameters.Add(param);
+
+                    using (MySqlDataReader reader = likeCmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Console.WriteLine("id = {0}; a = {1}; b = {2}; c = {3}", reader["id"], reader["a"], reader["b"], reader["c"]);
+                        }
+                    }
+                }
+
+
+                Console.WriteLine("----- Update ----- ");
 
                 using (MySqlCommand cmd2 = new MySqlCommand(UpdateSql, conn))
                 {

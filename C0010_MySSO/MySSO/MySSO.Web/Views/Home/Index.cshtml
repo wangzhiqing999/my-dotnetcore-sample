@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>
+
+        我是 SSO 的登录网站.
+
+        此网站只有一个 登录 / 登出 功能。
+
+        <br/>
+
+        当前用户状态：
+        @if (User.Identity.IsAuthenticated)
+        {
+            <span>已登录</span>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogOff">LogOff</a>
+        }
+        else
+        {
+            <span>未登录</span>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+        }
+    </p>
+</div>
+
+

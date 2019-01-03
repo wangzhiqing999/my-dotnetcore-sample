@@ -62,6 +62,10 @@ Ocelot 网关使用的例子代码.
 使用 framework7， 调用 Web Api.
 
 
+### C0010_MySSO
+使用 Visual Studio 2017， 创建 单点登录（SSO）的网站.  (DotNet Core 2.2)
+
+
 ### D0001_Docker_HelloWorld
 使用 Visual Studio 2017，创建一个 Web 项目 （本例子仅仅为了测试在 Docker 下发布，因此，啥代码也没有写）。
 然后，在 Ubuntu 下面，创建 Docker 镜像，并运行的处理步骤。
