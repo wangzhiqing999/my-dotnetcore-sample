@@ -12,7 +12,28 @@
         returnUrl = "/";
     }
 
+    string crossdomain = ViewBag.CrossDomain;
+    crossdomain = crossdomain.ToLower();
+
+
     CommonServiceResult<LoginResultData> loginResult = ViewBag.LoginResult;
+
+    if (loginResult != null)
+    {
+        if (loginResult.IsSuccess && crossdomain == "true" && returnUrl != "/")
+        {
+            // 登录成功， 且跨域的情况下. 页面跳转加参数.
+            if (returnUrl.IndexOf('?') > 0)
+            {
+                returnUrl = String.Format("{0}&authToken={1}", returnUrl, loginResult.ResultData.TokenID);
+            }
+            else
+            {
+                returnUrl = String.Format("{0}?authToken={1}", returnUrl, loginResult.ResultData.TokenID);
+            }
+        }
+    }
+
 
 }
 
@@ -24,6 +45,8 @@
     <div class="col-md-4">
         <form asp-action="Login">
             <input type="hidden" name="returnUrl" value="@(returnUrl)" />
+            <input type="hidden" name="crossdomain" value="@(crossdomain)" />
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="UserName" class="control-label"></label>

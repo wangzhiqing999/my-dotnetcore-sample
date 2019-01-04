@@ -34,11 +34,27 @@ namespace MySSO.Web.Controllers
         /// <summary>
         /// 登录
         /// </summary>
-        /// <param name="returnUrl"></param>
+        /// <param name="returnUrl">返回地址</param>
+        /// <param name="crossdomain">是否跨域</param>
         /// <returns></returns>
-        public IActionResult Login(string returnUrl)
+        public IActionResult Login(string returnUrl, bool crossdomain = false)
         {
             ViewBag.ReturnUrl = returnUrl;
+            // 直接在 ViewBag 里面， 放个布尔类型的，最后在页面上，会出现一些小问题.
+            ViewBag.CrossDomain = crossdomain.ToString();
+
+            if (User.Identity.IsAuthenticated)
+            {
+                // 已经登录的情况下，准备做直接跳转的操作。
+                string tokenString = User.FindFirst(ClaimTypes.Sid).Value;
+                Guid tokenID;
+                if (Guid.TryParse(tokenString, out tokenID))
+                {
+                    CommonServiceResult<LoginResultData> result = this._LoginService.IsLogin(tokenID);
+                    ViewBag.LoginResult = result;
+                }
+            }
+
             return View();
         }
 
@@ -47,13 +63,15 @@ namespace MySSO.Web.Controllers
         /// <summary>
         /// 提交登录.
         /// </summary>
-        /// <param name="model"></param>
-        /// <param name="returnUrl"></param>
+        /// <param name="model">登录数据</param>
+        /// <param name="returnUrl">返回地址</param>
+        /// <param name="crossdomain">是否跨域</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Login(LoginViewModel model, string returnUrl)
+        public IActionResult Login(LoginViewModel model, string returnUrl, bool crossdomain = false)
         {
             ViewBag.ReturnUrl = returnUrl;
+            ViewBag.CrossDomain = crossdomain.ToString();
 
             // 登录.
             CommonServiceResult<LoginResultData> result = this._LoginService.DoLogin(model.UserName, model.Password);
@@ -90,8 +108,36 @@ namespace MySSO.Web.Controllers
 
 
 
+        /// <summary>
+        /// 是否登录.
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
+        public IActionResult IsLogin(string returnUrl)
+        {
+            if(User.Identity.IsAuthenticated)
+            {
+                // 已登录.
+                string tokenString = User.FindFirst(ClaimTypes.Sid).Value;
+                Guid tokenID;
+                if (Guid.TryParse(tokenString, out tokenID))
+                {
+                    CommonServiceResult<LoginResultData> result = this._LoginService.IsLogin(tokenID);
+                    return Json(result);
+                }
+            }
+
+            CommonServiceResult notLoginResult = CommonServiceResult.CreateFailResult("NOT_LOGIN", "用户未登录");
+            return Json(notLoginResult);
+        }
 
 
+
+
+        /// <summary>
+        /// 登出.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult LogOff()
         {
             string tokenString = User.FindFirst(ClaimTypes.Sid).Value;
