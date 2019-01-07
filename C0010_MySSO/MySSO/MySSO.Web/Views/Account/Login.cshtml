@@ -41,7 +41,13 @@
 
 <h4> MySSO Login </h4>
 <hr />
+
+
 <div class="row">
+
+
+@if (loginResult == null || !loginResult.IsSuccess)
+{
     <div class="col-md-4">
         <form asp-action="Login">
             <input type="hidden" name="returnUrl" value="@(returnUrl)" />
@@ -63,6 +69,9 @@
             </div>
         </form>
     </div>
+}
+
+
 
 @if(loginResult != null)
 {

@@ -111,22 +111,16 @@ namespace MySSO.Web.Controllers
         /// <summary>
         /// 是否登录.
         /// </summary>
-        /// <param name="returnUrl"></param>
+        /// <param name="token"></param>
         /// <returns></returns>
-        public IActionResult IsLogin(string returnUrl)
+        public IActionResult IsLogin(string token)
         {
-            if(User.Identity.IsAuthenticated)
+            Guid tokenID;
+            if (Guid.TryParse(token, out tokenID))
             {
-                // 已登录.
-                string tokenString = User.FindFirst(ClaimTypes.Sid).Value;
-                Guid tokenID;
-                if (Guid.TryParse(tokenString, out tokenID))
-                {
-                    CommonServiceResult<LoginResultData> result = this._LoginService.IsLogin(tokenID);
-                    return Json(result);
-                }
+                CommonServiceResult<LoginResultData> result = this._LoginService.IsLogin(tokenID);
+                return Json(result);
             }
-
             CommonServiceResult notLoginResult = CommonServiceResult.CreateFailResult("NOT_LOGIN", "用户未登录");
             return Json(notLoginResult);
         }

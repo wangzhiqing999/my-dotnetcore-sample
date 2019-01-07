@@ -35,16 +35,16 @@ https://dotnet.microsoft.com/download/thank-you/dotnet-runtime-2.2.0-windows-hos
 
 ## 测试网站说明
 
-reg.test.com 专门用于 登录的网站.  （ ASP.NET Core 网站 ）
+reg.test.com 专门用于 登录的网站.  （ ASP.NET Core 网站 .Net Core 2.2）
 项目：MySSO\MySSO.Web
 
-a.test.com 用于测试的 业务网站. （ ASP.NET Core 网站 / 相同主域名 test.com ）
+a.test.com 用于测试的 同域的业务网站. （ ASP.NET Core 网站  .Net Core 2.2 / 相同主域名 test.com ）
 项目：MyTest\Test.Web
 
-b.test.com 用于测试的 业务网站. （ ASP.NET 网站 / 相同主域名 test.com）
-项目：todo ...
+b.test.com 用于测试的 老版本项目的业务网站. （ ASP.NET 网站  .Net Frameword 4.5 / 相同主域名 test.com）
+项目：MyTest\TestOld.Web
 
-c.test123.com 用于测试的 业务网站. （ ASP.NET Core 网站 / 不同主域名 test123.com  ）
+c.test123.com 用于测试的 跨域的业务网站. （ ASP.NET Core 网站 .Net Core 2.2 / 不同主域名 test123.com  ）
 项目：MyTest\TestDomain.Web
 
 
@@ -57,7 +57,8 @@ IIS 管理器， 分别创建网站
 注意：将项目发布以后才能部署到IIS，不能直接指定项目的物理路径。
 发到文件系统默认的路径应该是 bin\Release\PublishOutput，应该指定这个路径。
 
-网站创建完毕后，到应用程序池， 将 .NET CLR 版本， 修改为 “无托管代码”
+对于 .Net Core 的网站， 网站创建完毕后，到应用程序池， 将 .NET CLR 版本， 修改为 “无托管代码”
+
 
 
 
@@ -91,7 +92,6 @@ reg.test.com 登出后， 刷新 a.test.com ， 也是登出状态。
 
 
 
-
 ### 跨域测试
 
 访问 http://c.test123.com
@@ -103,5 +103,15 @@ reg.test.com 登录后，要 c.test123.com 访问特定页面，触发到 “需
 
 在 c.test123.com 点击登出按钮时，会先在 c.test123.com 进行登出，然后跳转至 reg.test.com 完成登出，最后再跳转回 c.test123.com
 在 reg.test.com 点击登出按钮时，暂时没有去 c.test123.com 执行自动登出的操作。
+
+
+
+### 老版本项目的测试.
+
+ASP.NET 网站  .Net Frameword 4.5 的网站.
+
+由于 将 .Net Core 的 AddDataProtection / AddAuthentication 一套东西， 移植到 .Net Framework 的操作， 尚不明确。
+这里是简单按照 跨域的操作， 进行处理。
+最终测试结果， 与前面的 跨域测试 的结果相同。
 
 
