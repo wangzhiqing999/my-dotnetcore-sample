@@ -29,6 +29,10 @@
 EntityFramework Code 中， 使用 QueryFilter， 实现 逻辑删除的例子. (使用 SQL Server 数据库)
 
 
+### A0008_EF_ExistingDb
+使用 以前 .Net Framework 4.5 + EF 6 生成的数据库表结构， 编写新的 .Net Core + EF Core 的代码.
+
+
 ### A0010_TestWebApi
 使用 Visual Studio 2017， 创建一个 Web Api 项目的例子. (DotNet Core 2.0)
 
