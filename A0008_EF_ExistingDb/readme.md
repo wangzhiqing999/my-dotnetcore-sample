@@ -77,7 +77,7 @@ using 变更， using Microsoft.EntityFrameworkCore;
 追加 OnConfiguring 函数
 修改 OnModelCreating 函数
 （之前写在 Config 里面的 一对多定义， 需要手工， 按照新的语法， 移植在这里。偷懒的话，可以直接复制 Scaffold-DbContext 一对多定义的那一行代码 ）
-
+（需要注意的是，多对多的情况下， EntityFrameworkCore 需要增加一个中间表的类 ）
 
 ### 结果总结
 1.复制的 Model， 有注释.
