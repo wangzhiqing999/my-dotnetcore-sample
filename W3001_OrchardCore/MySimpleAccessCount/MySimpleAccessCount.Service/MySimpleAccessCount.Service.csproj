@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>MySimpleAccessCount</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="ServiceModel\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MySimpleAccessCount.DataAccess\MySimpleAccessCount.DataAccess.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,28 @@
+﻿@model List< MySample.Model.TestSchool>
+@{
+    ViewData["Title"] = "测试学校";
+}
+
+<div class="text-center">
+    <h1 class="display-4">测试学校</h1>
+    
+
+    <table>
+
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.SchoolID</td>
+                <td>@item.SchoolName</td>
+            </tr>
+        }
+
+    </table>
+
+
+</div>

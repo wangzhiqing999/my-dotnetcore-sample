@@ -89,3 +89,7 @@ Ocelot 网关使用的例子代码.
 
 ### W1100_Page
 Ajax 数据翻页的例子.
+
+
+### W3001_OrchardCore
+使用 OrchardCore 开发 Web 项目的例子  (.NET Core 3.0 版本)

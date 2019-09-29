@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "测试访问页面计数";
+}
+
+<h1>测试访问页面计数</h1>
+
+<div>
+    <h3>页面代码：@(ViewData["PageCode"]) </h3>
+
+    <p> 访问次数： <span id="resultCount">1</span></p>
+
+</div>
+
+
+
+
+@section Scripts {
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $.ajax({
+        url: '/api/MySimpleAccessCount/GetAccessCount?id=@(ViewData["PageCode"])',
+        type: 'GET',
+        success: function (data) {
+            $("#resultCount").html(data);
+        }
+    });
+});
+
+</script>
+
+}

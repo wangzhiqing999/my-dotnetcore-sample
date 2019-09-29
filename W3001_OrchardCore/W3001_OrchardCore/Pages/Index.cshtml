@@ -1,0 +1,59 @@
+﻿@page
+@using Microsoft.Extensions.Configuration
+@using OrchardCore.Environment.Shell.Configuration
+@inject IShellConfiguration configuration
+@inject OrchardCore.Modules.IApplicationContext app
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@configuration["CustomTitle"]</h1>
+    <p class="lead">@configuration["CustomSetting"]</p>
+</div>
+
+
+<h2>Module Endpoints</h2>
+<ul>
+
+    <li>
+        <h4>MySample</h4>
+        <ul>
+            <li><a href="/MySample/TestSchool">TestSchool</a></li>
+            <li><a href="/MySample/TestTeacher">TestTeacher</a></li>
+        </ul>
+    </li>
+
+
+    <li>
+        <h4>MySample2 (Web Api)</h4>
+        <ul>
+            <li><a href="/api/MySample2/TestSchool">TestSchool</a></li>
+            <li><a href="/api/MySample2/TestTeacher">TestTeacher</a></li>
+        </ul>
+    </li>
+
+
+    <li>
+        <h4> MySimpleAccessCount (Web Page call Web Api) </h4>
+        <ul>
+            <li><a href="/MySimpleAccessCount/Test?id=TEST_PAGE_1">测试页面1</a></li>
+            <li><a href="/MySimpleAccessCount/Test?id=TEST_PAGE_2">测试页面2</a></li>
+        </ul>
+    </li>
+
+</ul>
+
+
+
+
+<h2>OrchardCore.Modules.IApplicationContext:</h2>
+<ul>
+    <li>ModulePath: @app.Application.ModulePath</li>
+    <li>ModuleRoot: @app.Application.ModuleRoot</li>
+    <li>Modules: @string.Join(", ", app.Application.Modules.Select(m => m.Name))</li>
+    <li>Name: @app.Application.Name</li>
+    <li>Path: @app.Application.Path</li>
+    <li>Root: @app.Application.Root</li>
+</ul>
