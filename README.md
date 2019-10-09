@@ -61,6 +61,19 @@ Ocelot 网关使用的例子代码.
 调用 Web Api 的客户端写法. (使用 Refit 或者 WebApiClient.JIT)
 
 
+
+### A3001_Json
+System.Text.Json 使用的例子 (DotNet Core 3.0)
+
+
+### A3002_Logger
+Microsoft.Extensions.Logging.ILogger 使用的例子 (DotNet Core 3.0)
+包含默认的，独立的使用
+以及与 Log4Net 进行整合的使用。
+
+
+
+
 ### C0001_MyWork
 使用 Visual Studio 2017， 创建 Web Api . (DotNet Core 2.0)
 使用 framework7， 调用 Web Api.
