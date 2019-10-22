@@ -50,9 +50,30 @@ namespace A3001_Json.Model
 
 
 
+
+
+
+        /// <summary>
+        /// 测试稍微复杂一点的数据类型.
+        /// </summary>
+        public List<string> TestList { set; get; }
+
+
+        public HashSet<string> TestSet { set; get; }
+
+
+
         public override string ToString()
         {
-            return $"TestCode={TestCode}; TestName={TestName}; TestAge={TestAge}；IsAdult={IsAdult}；TestRemark={TestRemark}";
+            StringBuilder buff = new StringBuilder();
+
+            buff.AppendLine( $"TestCode={TestCode}; TestName={TestName}; TestAge={TestAge}；IsAdult={IsAdult}；TestRemark={TestRemark}");
+
+            buff.AppendLine($"TestList = {string.Join(",", TestList)}");
+
+            buff.AppendLine($"TestSet = {string.Join(",", TestSet)}");
+
+            return buff.ToString();
         }
 
     }

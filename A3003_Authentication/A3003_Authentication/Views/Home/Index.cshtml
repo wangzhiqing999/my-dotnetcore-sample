@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+
+<div class="text-center">
+    @if(Context.User.Identity.IsAuthenticated)
+    {
+        <h3>已登录</h3>
+        <p>
+            @Context.User.Identity.Name
+            <br/>
+            <a asp-action="LogOff" asp-controller="Account">登出</a>
+        </p>
+
+    } 
+    else
+    {
+        <h3>未登录</h3>
+        <p>
+            <a asp-action="LogIn" asp-controller="Account">登录</a>
+        </p>
+    }
+</div>

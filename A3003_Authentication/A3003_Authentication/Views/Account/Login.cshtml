@@ -1,0 +1,38 @@
+﻿@model A3003_Authentication.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+    string returnUrl = ViewBag.ReturnUrl;
+}
+
+<h1>Login</h1>
+
+<form asp-action="Login" role="form" class="form-horizontal" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" name="returnUrl" value="@(returnUrl)" />
+
+    <div class="form-group has-feedback">
+        @Html.TextBoxFor(m => m.UserName, null, new { @class = "form-control", placeholder = "用户名" })
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+    </div>
+
+    <div class="form-group has-feedback">
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "登录密码" })
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-8">
+        </div>
+
+        <div class="col-xs-4">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
+        </div>
+    </div>
+
+</form>
+
+
+<div class="social-auth-links text-center">
+    <p>@ViewBag.Message</p>
+</div>

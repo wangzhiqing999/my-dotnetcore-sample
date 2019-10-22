@@ -21,8 +21,18 @@ namespace A3001_Json.Sample
             {
                 TestCode = "Z3",
                 TestName = "张三",
-                TestAge = 33
+                TestAge = 33,
+                TestList = new List<string> (),
+                TestSet = new HashSet<string> ()
             };
+
+            testData.TestList.Add("A");
+            testData.TestList.Add("B");
+            testData.TestList.Add("C");
+
+            testData.TestSet.Add("1");
+            testData.TestSet.Add("2");
+            testData.TestSet.Add("3");
 
             Console.WriteLine(testData);
 
@@ -59,8 +69,18 @@ namespace A3001_Json.Sample
             {
                 TestCode = "Z3",
                 TestName = "张三",
-                TestAge = 33
+                TestAge = 33,
+                TestList = new List<string>(),
+                TestSet = new HashSet<string>()
             };
+
+            testData.TestList.Add("A");
+            testData.TestList.Add("B");
+            testData.TestList.Add("C");
+
+            testData.TestSet.Add("1");
+            testData.TestSet.Add("2");
+            testData.TestSet.Add("3");
 
             Console.WriteLine(testData);
 

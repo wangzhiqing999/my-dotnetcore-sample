@@ -72,6 +72,10 @@ Microsoft.Extensions.Logging.ILogger 使用的例子 (DotNet Core 3.0)
 以及与 Log4Net 进行整合的使用。
 
 
+### A3003_Authentication
+ASP.Net Code，基本登录的测试 (DotNet Core 3.0)
+测试下来，基本操作，与 DotNet Core 2.0 一样.
+
 
 
 ### C0001_MyWork
