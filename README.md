@@ -77,6 +77,11 @@ ASP.Net Code，基本登录的测试 (DotNet Core 3.0)
 测试下来，基本操作，与 DotNet Core 2.0 一样.
 
 
+### A3004_Middleware
+ASP.Net Code，中间件的例子代码 (DotNet Core 3.0)
+
+
+
 
 ### C0001_MyWork
 使用 Visual Studio 2017， 创建 Web Api . (DotNet Core 2.0)
