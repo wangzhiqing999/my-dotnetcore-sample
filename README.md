@@ -113,6 +113,7 @@ ASP.Net Code，中间件的例子代码 (DotNet Core 3.0)
 
 ### W1100_Page
 Ajax 数据翻页的例子.
+[2021-02-01 更新 使用 Visual Studio 2019， 框架升级为  .NET 5.0]
 
 
 ### W3001_OrchardCore

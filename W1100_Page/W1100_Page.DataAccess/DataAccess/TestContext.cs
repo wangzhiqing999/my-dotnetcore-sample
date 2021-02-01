@@ -33,7 +33,7 @@ namespace W1100_Page.DataAccess
             {
                 if (optionsBuilder.IsConfigured == false)
                 {
-                    optionsBuilder.UseSqlServer(@"Data Source=localhost\SQLEXPRESS;Initial Catalog=MyTest; Integrated Security=True;");
+                    optionsBuilder.UseSqlServer(@"Data Source=localhost\SQLEXPRESS;Initial Catalog=MyTest;User Id=sa;Password=123456;");
                 }
                 base.OnConfiguring(optionsBuilder);
             }
