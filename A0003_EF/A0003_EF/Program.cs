@@ -25,7 +25,7 @@ namespace A0003_EF
 
 
             var optionsBuilder = new DbContextOptionsBuilder<TestContext>();
-            optionsBuilder.UseSqlServer(@"Data Source=localhost\SQLEXPRESS;Initial Catalog=Test; Integrated Security=True;");
+            optionsBuilder.UseSqlServer(@"Data Source=localhost\SQLEXPRESS;Initial Catalog=Test;User Id=sa;Password=123456;");
             
             using (TestContext context = new TestContext(optionsBuilder.Options))
             {

@@ -36,7 +36,7 @@ namespace A0003_EF.DataAccess
             {
                 if (optionsBuilder.IsConfigured == false)
                 {
-                    optionsBuilder.UseSqlServer(@"Data Source=localhost\SQLEXPRESS;Initial Catalog=Test; Integrated Security=True;");
+                    optionsBuilder.UseSqlServer(@"Data Source=localhost\SQLEXPRESS;Initial Catalog=Test;User Id=sa;Password=123456;");
                 }
                 base.OnConfiguring(optionsBuilder);
             }
