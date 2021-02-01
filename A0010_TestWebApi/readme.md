@@ -66,3 +66,63 @@ using Microsoft.AspNetCore.Authorization;
 
 
 
+
+
+
+
+
+
+
+
+
+
+## 2021-02-01 更新 使用 Visual Studio 2019， 框架升级为  .NET 5.0
+
+
+创建一个新的 Web Api 项目  A0010_TestWebApiV5
+
+
+
+### 创建 Web Api 的操作
+https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-5.0&tabs=visual-studio
+
+
+创建完 Web API 项目后，啥事情不干，直接运行。
+应该能看到一个默认的 swagger 页面。
+http://localhost:62255/swagger/index.html
+
+包含一个 /WeatherForecast Web API
+
+
+也就是，创建项目的时候， Swashbuckle.AspNetCore 就已经被自动添加了，不需要自己手动再添加了。
+
+
+
+
+### 数据库相关
+
+NuGet 引用
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.InMemory
+
+从 A0010_TestWebApi 项目
+复制 
+DataAccess/TodoContext.cs
+Models/TodoItem.cs
+Controllers/TodoController.cs
+
+修改 Startup.cs
+
+测试允许
+
+
+
+### JWT 相关
+
+安装nuget包
+Microsoft.AspNetCore.Authentication.JwtBearer
+
+后续操作，与之前的版本，差别不大。
+
+
+

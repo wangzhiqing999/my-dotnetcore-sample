@@ -36,6 +36,7 @@ EntityFramework Code 中， 使用 QueryFilter， 实现 逻辑删除的例子. 
 
 ### A0010_TestWebApi
 使用 Visual Studio 2017， 创建一个 Web Api 项目的例子. (DotNet Core 2.0)
+[2021-02-01 更新 使用 Visual Studio 2019， 框架升级为  .NET 5.0]
 
 
 ### A0020_Fundamentals

@@ -19,17 +19,17 @@ namespace TestWebApiClient
         /// <summary>
         /// 测试基础服务的 URL.
         /// </summary>
-        private string url = "http://localhost:8227/api/values";
+        private string url = "http://localhost:62255/api/values";
 
         /// <summary>
         /// 获取 Token 的 URL.
         /// </summary>
-        private string tokenUrl = "http://localhost:8227/api/Authorize";
+        private string tokenUrl = "http://localhost:62255/api/Authorize";
 
         /// <summary>
         /// 获取当前登录信息的 URL.
         /// </summary>
-        private string userInfoUrl = "http://localhost:8227/api/UserInfo";
+        private string userInfoUrl = "http://localhost:62255/api/UserInfo";
 
 
 
