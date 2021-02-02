@@ -53,3 +53,33 @@ http://localhost:9090/swagger
 在 swagger 的页面上，能够看到， 但是不能立即调用。
 因为这个新的地址，没有做配置，A0200_Ocelot 不知道要将这个请求，提交到 9091 还是 9092，结果就只能报 404 了。
 
+
+
+
+
+
+
+
+
+
+
+## 网关项目，升级到 .NET 5.0
+之前的 A0200_Ocelot 项目， 框架是 .NET Core 2.0
+新增的 A0205_Ocelot 项目， 框架是 .NET 5.0
+
+创建项目类型， Web API 项目.
+安装nuget包: Ocelot 版本 17.0.0
+
+从  A0205_Ocelot 项目， 复制 ocelot.json 到 A0205_Ocelot 项目
+将 "ReRoutes" 修改为 "Routes"
+
+修改 Startup.cs
+测试运行。
+
+对比 A0200_Ocelot 与 A0205_Ocelot 的运行结果。
+
+
+
+
+
+
