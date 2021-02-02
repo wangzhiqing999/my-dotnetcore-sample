@@ -37,6 +37,26 @@
 
 
     {
+      "DownstreamPathTemplate": "/ItemApi/swagger.json",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 9095
+        }
+      ],
+      "LoadBalancer": "RoundRobin",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/ItemApi/swagger.json",
+      "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT" ]
+    },
+
+
+
+
+
+
+    {
       "DownstreamPathTemplate": "/api/Users",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -86,7 +106,41 @@
       ],
       "UpstreamPathTemplate": "/api/Orders/{id}",
       "UpstreamHttpMethod": [ "GET", "DELETE", "PUT" ]
+    },
+
+
+
+
+
+
+
+
+    {
+      "DownstreamPathTemplate": "/api/Item",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 9095
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Item",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Item/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 9095
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Item/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE", "PUT" ]
     }
+
+
   ],
 
 

@@ -63,6 +63,7 @@ http://localhost:9090/swagger
 
 
 
+
 ## 网关项目，升级到 .NET 5.0
 之前的 A0200_Ocelot 项目， 框架是 .NET Core 2.0
 新增的 A0205_Ocelot 项目， 框架是 .NET 5.0
@@ -79,6 +80,27 @@ http://localhost:9090/swagger
 对比 A0200_Ocelot 与 A0205_Ocelot 的运行结果。
 
 
+
+
+## Web Api 项目， 升级到  .NET 5.0
+
+### A0205_TestItemWebApi
+项目类型： ASP.Net Core Web API 项目，框架是 .NET 5.0
+添加一个 ItemController ， 并编写相关 web api 测试代码.
+完成 Swagger 相关配置代码. 
+配置此项目，运行在 9095端口上.
+测试运行
+http://localhost:9095/swagger
+
+
+修改  A0205_Ocelot 项目的 ocelot.json 文件。
+测试运行，观察结果。
+
+当前这个节点下：
+网关 A0205_Ocelot  		.NET 5.0
+A0200_TestUserWebApi  	.NET Core 2.0
+A0200_TestOrderWebApi  	.NET Core 2.0
+A0205_TestItemWebApi  	.NET 5.0
 
 
 

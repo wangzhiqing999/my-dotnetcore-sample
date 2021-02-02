@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>A0205_TestItemWebApi</name>
+    </assembly>
+    <members>
+        <member name="T:A0205_TestItemWebApi.Controllers.ItemController.TestItem">
+            <summary>
+            用于测试的 商品信息类.
+            </summary>
+        </member>
+        <member name="P:A0205_TestItemWebApi.Controllers.ItemController.TestItem.ItemCode">
+            <summary>
+            商品代码.
+            </summary>
+        </member>
+        <member name="P:A0205_TestItemWebApi.Controllers.ItemController.TestItem.ItemName">
+            <summary>
+            商品名称.
+            </summary>
+        </member>
+        <member name="M:A0205_TestItemWebApi.Controllers.ItemController.Get">
+            <summary>
+            获取所有商品信息.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:A0205_TestItemWebApi.Controllers.ItemController.Get(System.String)">
+            <summary>
+            获取指定商品信息
+            </summary>
+            <param name="id">商品代码</param>
+            <returns></returns>
+        </member>
+        <member name="M:A0205_TestItemWebApi.Controllers.ItemController.Post(A0205_TestItemWebApi.Controllers.ItemController.TestItem)">
+            <summary>
+            新增商品信息
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:A0205_TestItemWebApi.Controllers.ItemController.Put(System.String,System.String)">
+            <summary>
+            更新商品信息.
+            </summary>
+            <param name="id">商品代码</param>
+            <param name="value"></param>
+        </member>
+        <member name="M:A0205_TestItemWebApi.Controllers.ItemController.Delete(System.String)">
+            <summary>
+            删除商品信息
+            </summary>
+            <param name="id">商品代码</param>
+        </member>
+    </members>
+</doc>

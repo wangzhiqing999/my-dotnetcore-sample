@@ -6,14 +6,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Ocelot.DependencyInjection;
-using Ocelot.Middleware;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
+using System.Reflection;
 
-namespace A0205_Ocelot
+namespace A0205_TestItemWebApi
 {
     public class Startup
     {
@@ -28,43 +28,39 @@ namespace A0205_Ocelot
         public void ConfigureServices(IServiceCollection services)
         {
 
-            var config = new ConfigurationBuilder().AddJsonFile("ocelot.json").Build();
-            services.AddOcelot(config);
-
-
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "网关服务", Version = "v1" });
+                c.SwaggerDoc("ItemApi", 
+                    new OpenApiInfo { 
+                        Title = "My Test Item Web API", 
+                        Version = "v1",
+                        Description = "测试的 商品服务 Web API."
+                    });
+
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
-            
-
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-
             }
 
-
-            app.UseSwagger();
-            var apis = new List<string> { "OrderApi", "UserApi", "ItemApi" };
-            app.UseSwaggerUI(options =>
+            
+            app.UseSwagger(c =>
             {
-                apis.ForEach(m =>
-                {
-                    options.SwaggerEndpoint($"/{m}/swagger.json", m);
-                });
+                c.RouteTemplate = "{documentName}/swagger.json";
             });
-
-            app.UseOcelot().Wait();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/ItemApi/swagger.json", "ItemApi"));
 
 
             app.UseRouting();
