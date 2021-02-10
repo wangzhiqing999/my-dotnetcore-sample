@@ -55,6 +55,13 @@ EntityFramework Code 中， 使用 QueryFilter， 实现 逻辑删除的例子. 
 基本的访问数据库的例子代码.
 
 
+### A0110_Excel
+使用 NPOI 读写 Excel 的例子代码。
+（NPOI 库支持  .Net Core 与 .Net Framework ， 直接从 my-csharp-sample 那里复制之前的例子代码过来，测试可运行 ）
+
+
+
+
 ### A0200_Ocelot
 Ocelot 网关使用的例子代码.
 
