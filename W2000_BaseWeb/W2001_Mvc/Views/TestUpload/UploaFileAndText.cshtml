@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewData["Title"] = "UploaFileAndText";
+}
+
+<h1>测试 文本 与 图片一同提交</h1>
+
+<p>
+    这个例子，是用于完成那种，一个表单，需要同时提交 普通字段 与 图片 的情况。
+</p>
+
+
+<div class="form-group row">
+    <label for="name" class="col-3 col-form-label text-right">姓名</label>
+    <div class="col-5 overflow-hidden">
+        <input type="text" class="outline-none" id="name">
+    </div>
+    <div class="col-4 padding-none">
+    </div>
+</div>
+
+<div class="form-group row">
+    <label for="mobile" class="col-3 col-form-label text-right">手机</label>
+    <div class="col-5 overflow-hidden">
+        <input type="text" class="outline-none" id="mobile">
+    </div>
+    <div class="col-4 padding-none">
+    </div>
+</div>
+
+
+<div class="form-group row">
+    <label for="upload-btn" class="col-3 col-form-label text-right">照片</label>
+    <div class="col-5 overflow-hidden">
+        <input type="file" class="outline-none" id="upload-btn">
+    </div>
+    <div class="col-4 padding-none">
+        <span>*</span>
+    </div>
+</div>
+
+
+<div class="form-group row">
+    <div class="col-4 ">
+        <button id="btnUpload" type="button" class="btn btn-primary">提交</button>
+    </div>
+</div>
+
+
+<div class="form-group row">
+    <div class="col-4 ">
+        <span id="uploadResult">-</span>
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+
+    <script>
+
+
+        $(document).ready(function () {
+
+
+            // 提交按钮点击.
+            $("#btnUpload").click(function () {
+
+                var inputName = $("#name").val();
+                var inputMobile = $("#mobile").val();
+
+                if (inputName === "") {
+                    alert("请输入姓名！");
+                    return;
+                }
+                if (inputMobile === "") {
+                    alert("请输入手机号！");
+                    return;
+                }
+
+
+                if ($("#upload-btn")[0].files.length == 0) {
+                    alert("尚未选择需要上传的照片！");
+                    return;
+                }
+
+                var uploadFile = $("#upload-btn")[0].files[0];
+               
+                var formData = new FormData();
+                formData.append("name", inputName);
+                formData.append("mobile", inputMobile);
+                formData.append("File", uploadFile);
+
+
+                $.ajax({
+                    method: "POST",
+                    url: "/TestUpload/DoUploaFileAndText",
+                    data: formData,
+                    dataType: "json",
+                    contentType: false, //传文件必须！
+                    processData: false, //传文件必须！
+                    success: function (resp) {
+
+                        console.log("POST /TestUpload/DoUploaFileAndText Result:", resp);
+
+                        if (resp.IsSuccess === false) {
+                            alert(resp.ResultMessage);
+                            return;
+                        }
+
+                        $("#uploadResult").html("提交完成！");;
+                    },
+                });
+
+
+            });
+
+        });
+
+    </script>
+
+}

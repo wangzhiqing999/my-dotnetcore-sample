@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewData["Title"] = "UploadTwoFile";
+}
+
+<h1>测试上传两个文件</h1>
+<p>
+    这个例子，是用于完成那种，一个表单，需要提交 不同种类的 照片的情况。
+    预期结果，是上传后， 正门照，存储在 正门照的目录下， 侧面照 存储在 侧面照的目录下。
+</p>
+
+<div class="form-group row">
+    <label for="upload-a-btn" class="col-3 col-form-label text-right">上传正面照</label>
+    <div class="col-5 overflow-hidden">
+        <input type="file" class="outline-none" id="upload-a-btn">
+    </div>
+    <div class="col-4 padding-none">
+        <span>*</span>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="upload-b-btn" class="col-3 col-form-label text-right">上传侧面照</label>
+    <div class="col-5 overflow-hidden">
+        <input type="file" class="outline-none" id="upload-b-btn">
+    </div>
+    <div class="col-4 padding-none">
+        <span>*</span>
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-4 ">
+        <button id="btnUpload" type="button" class="btn btn-primary">上传</button>
+    </div>
+</div>
+
+
+<div class="form-group row">
+    <div class="col-4 ">
+        <span id="uploadResult">-</span>
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+
+    <script>
+
+
+    $(document).ready(function () {
+
+
+        // 上传按钮点击.
+        $("#btnUpload").click(function () {
+
+
+            if ($("#upload-a-btn")[0].files.length == 0) {
+                alert("尚未选择需要上传的正面照！");
+                return;
+            }
+            if ($("#upload-b-btn")[0].files.length == 0) {
+                alert("尚未选择需要上传的测面照！");
+                return;
+            }
+
+            var uploadFileA = $("#upload-a-btn")[0].files[0];
+            var uploadFileB = $("#upload-b-btn")[0].files[0];
+
+            var formData = new FormData();
+            formData.append("FileA", uploadFileA);
+            formData.append("FileB", uploadFileB);
+
+            $.ajax({
+                method: "POST",
+                url: "/TestUpload/DoUploadTwoFile",
+                data: formData,
+                dataType: "json",
+                contentType: false, //传文件必须！
+                processData: false, //传文件必须！
+                success: function (resp) {
+
+                    console.log("POST /TestUpload/DoUploadTwoFile Result:", resp);
+
+                    if (resp.IsSuccess === false) {
+                        alert(resp.ResultMessage);
+                        return;
+                    }
+
+                    $("#uploadResult").html("上传两个文件完成！");;
+                },
+            });
+
+
+        });
+
+    });
+
+    </script>
+
+}

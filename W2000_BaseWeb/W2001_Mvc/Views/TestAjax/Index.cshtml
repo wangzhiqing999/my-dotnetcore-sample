@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>测试调用 Ajax 的处理.</h2>
+
+
+
+<ul>
+    <li>
+        <a href="/TestAjax/TestStep123"> 测试按顺序依次调用 TestStep1 --&gt; TestStep2 --&gt; TestStep3 </a>
+    </li>
+
+
+    <li>
+        <a href="/TestAjax/TestStepABC"> 测试同时调用 TestStepA --&gt; TestStepB --&gt; TestStepC </a>
+    </li>
+
+
+    <li>
+        <a href="/TestAjax/TestAbort"> 测试发起 Ajax 请求之后，取消后续操作. </a>
+    </li>
+
+</ul>
+
+<p>
+    rx.jquery.js 引用存在一定问题. 暂时不确定，需要引用哪一个 rx 的客户端库。
+</p>

@@ -128,5 +128,9 @@ Ajax 数据翻页的例子.
 [2021-02-01 更新 使用 Visual Studio 2019， 框架升级为  .NET 5.0]
 
 
+### W2000_BaseWeb
+一些 Web 项目，常用的例子代码。
+
+
 ### W3001_OrchardCore
 使用 OrchardCore 开发 Web 项目的例子  (.NET Core 3.0 版本)
