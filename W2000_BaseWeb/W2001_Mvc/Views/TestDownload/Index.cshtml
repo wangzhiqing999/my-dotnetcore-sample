@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>测试下载文件的处理</h1>
+
+
+<ul>
+    <li>
+        <a href="/TestDownload/CsvFileInBytes">
+            服务器不产生 物理的文件，数据是以一个 byte数组的方式， 向客户端返回。
+        </a>
+    </li>
+
+
+    <li>
+        <a href="/TestDownload/CsvFileInStream">
+            服务器不产生 物理的文件，数据是以一个 数据流的方式， 向客户端返回。
+        </a>
+    </li>
+
+    <li>
+        <a href="/TestDownload/CsvFileInOutput">
+            服务器产生一个 临时文件， 返回给客户端。
+        </a>
+    </li>
+
+
+
+
+</ul>
