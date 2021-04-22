@@ -111,6 +111,15 @@ ASP.Net Code，中间件的例子代码 (DotNet Core 3.0)
 然后，在 Ubuntu 下面，创建 Docker 镜像，并运行的处理步骤。
 
 
+
+### D0002_Docker_Compose_HelloWorld
+使用 Visual Studio 2019， 创建两个 Web 项目（一个 Web 一个 Api） （net5.0）
+然后，在 Ubuntu 下面
+创建 Docker 镜像，单独运行的处理步骤。
+以及在 Docker Compose 下，一起运行的处理步骤。
+
+
+
 ### W1000_ABP_HelloWorld
 使用 ABP 创建的 HelloWorld 项目.
 

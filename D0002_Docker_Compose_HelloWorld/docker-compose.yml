@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  testwebsite:
+    image: ${DOCKER_REGISTRY-}testwebsite
+    build:
+      context: .
+      dockerfile: TestWebSite/Dockerfile
+    ports: 
+      - 9092:8082
+
+  testwebapi:
+    image: ${DOCKER_REGISTRY-}testwebapi
+    build:
+      context: .
+      dockerfile: TestWebApi/Dockerfile
+    ports: 
+      - 9091:8081
