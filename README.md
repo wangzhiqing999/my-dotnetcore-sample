@@ -96,6 +96,11 @@ ASP.Net Code，中间件的例子代码 (DotNet Core 3.0)
 
 
 
+### B0250_Quartz
+使用 Visual Studio 2019， 创建一个 控制台 项目 （net5.0）
+用于测试使用 Quartz 的例子.
+
+
 
 ### C0001_MyWork
 使用 Visual Studio 2017， 创建 Web Api . (DotNet Core 2.0)
