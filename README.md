@@ -125,6 +125,18 @@ ASP.Net Code，中间件的例子代码 (DotNet Core 3.0)
 
 
 
+
+### D0003_Docker_Console
+使用 Visual Studio 2019，创建一个控制台项目 （测试功能：读取配置文件，输出到屏幕，输出到文件）
+然后，在 Ubuntu 下面
+创建 Docker 镜像
+运行的时候，测试 volume 使用的两种方式。
+（一种是作为配置文件目录，主机填写配置文件，容器运行。  一种是作为数据输出目录，容器的中输出的文件，输出到主机的指定目录下）
+
+
+
+
+
 ### W1000_ABP_HelloWorld
 使用 ABP 创建的 HelloWorld 项目.
 
