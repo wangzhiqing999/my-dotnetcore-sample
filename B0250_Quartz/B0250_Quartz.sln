@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B0250_Quartz", "B0250_Quartz\B0250_Quartz.csproj", "{21E8E571-05F5-45C0-8A95-60E834E2D9C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "B0250_Quartz", "B0250_Quartz\B0250_Quartz.csproj", "{21E8E571-05F5-45C0-8A95-60E834E2D9C3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "B0251_QuartzConfig", "B0251_QuartzConfig\B0251_QuartzConfig.csproj", "{D10008C6-1130-4CE3-B94F-DEB3B564CC06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B0253_QuartzAdoJobStore", "B0253_QuartzAdoJobStore\B0253_QuartzAdoJobStore.csproj", "{A873FD96-4C40-4F73-9D88-1D3A3273573C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{21E8E571-05F5-45C0-8A95-60E834E2D9C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21E8E571-05F5-45C0-8A95-60E834E2D9C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21E8E571-05F5-45C0-8A95-60E834E2D9C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D10008C6-1130-4CE3-B94F-DEB3B564CC06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D10008C6-1130-4CE3-B94F-DEB3B564CC06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D10008C6-1130-4CE3-B94F-DEB3B564CC06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D10008C6-1130-4CE3-B94F-DEB3B564CC06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A873FD96-4C40-4F73-9D88-1D3A3273573C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A873FD96-4C40-4F73-9D88-1D3A3273573C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A873FD96-4C40-4F73-9D88-1D3A3273573C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A873FD96-4C40-4F73-9D88-1D3A3273573C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
