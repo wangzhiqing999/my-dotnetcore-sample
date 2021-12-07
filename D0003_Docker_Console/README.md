@@ -12,6 +12,18 @@ https://docs.microsoft.com/zh-cn/dotnet/core/docker/build-container?tabs=windows
 
 
 
+2021-12-07
+开发计算机， Win 11,  Visual Studio 2022下，创建 .Net 6.0 的 控制台 项目。
+
+后续操作，与 .Net 5.0 的，基本一致。
+
+目的： 观察 .Net 5.0 与 .Net 6.0 上的差异。
+
+
+
+
+
+
 ### C# 方面的操作
 
 创建 .net Core 控制台项目， 版本选择 net5.0
@@ -50,6 +62,10 @@ https://docs.microsoft.com/zh-cn/dotnet/core/docker/build-container?tabs=windows
 sudo docker build -t counter-image -f ./D0003_Docker_Console/Dockerfile .
 
 
+.Net 6.0 的代码：
+sudo docker build -t counter-image-v6 -f ./D0003_Docker_Console_V6/Dockerfile .
+
+
 
 [
 注意：
@@ -72,6 +88,18 @@ counter-image                      latest            a425663cc9d3   48 seconds a
 
 
 
+.Net 6.0 代码执行后的查询结果：
+~/D0003_Docker_Console$ sudo docker image ls
+REPOSITORY                         TAG               IMAGE ID       CREATED              SIZE
+counter-image-v6                   latest            1c56c1a7f304   57 seconds ago       187MB
+mcr.microsoft.com/dotnet/sdk       6.0               c8231459539b   4 days ago      715MB
+mcr.microsoft.com/dotnet/runtime   6.0               94a4f0160227   4 days ago      187MB
+mcr.microsoft.com/dotnet/sdk       5.0               3d9edf094595   7 weeks ago     631MB
+mcr.microsoft.com/dotnet/runtime   5.0               cb8ec4f45a39   7 weeks ago     186MB
+
+
+
+
 通过
 sudo docker image prune
 命令进行清除名称为 <none> 的镜像.
@@ -85,6 +113,11 @@ sudo docker image prune
 
 ### 创建容器
 sudo docker create --name core-counter counter-image
+
+.Net 6.0 的代码： (前提是之前创建的容器，已经被删除， 因为这里没有变更 容器的名字，还是使用  core-counter )
+sudo docker create --name core-counter counter-image-v6
+
+
 
 
 ### 启动容器

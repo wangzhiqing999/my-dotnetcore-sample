@@ -3,6 +3,7 @@
 
 ### A0001_HelloWorld
 最简单的 HelloWorld 程序.
+[2021-12-07 更新 使用 Visual Studio 2022， 框架升级为  .NET 6.0]
 
 
 ### A0002_HelloWorldMvc
@@ -133,7 +134,7 @@ ASP.Net Code，中间件的例子代码 (DotNet Core 3.0)
 运行的时候，测试 volume 使用的两种方式。
 （一种是作为配置文件目录，主机填写配置文件，容器运行。  一种是作为数据输出目录，容器的中输出的文件，输出到主机的指定目录下）
 
-
+[2021-12-07 使用 Visual Studio 2022， 创建一个  D0003_Docker_Console_V6， 框架为  .NET 6.0， 对比一下与之前的差异]
 
 
 
