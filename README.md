@@ -19,12 +19,14 @@
 .NetCode 2.0 环境下， 读取配置文件的例子。（读取 ini / json / xml 文件）
 
 
+
 ### A0005_EF_Mysql
 使用 Visual Studio 2017， 开发 EntityFramework Code First 的例子.  (使用 Mysql 数据库)
-
+[2021-12-09 增加 使用 Visual Studio 2022， 框架升级为  .NET 6.0]
 
 ### A0006_EF_Sqlite
 使用 Visual Studio 2017， 开发 EntityFramework Code First 的例子.  (使用 Sqlite 数据库)
+[2021-12-09 增加 使用 Visual Studio 2022， 框架升级为  .NET 6.0]
 
 
 ### A0007_EF_QueryFilter
@@ -38,6 +40,7 @@ EntityFramework Code 中， 使用 QueryFilter， 实现 逻辑删除的例子. 
 ### A0010_TestWebApi
 使用 Visual Studio 2017， 创建一个 Web Api 项目的例子. (DotNet Core 2.0)
 [2021-02-01 更新 使用 Visual Studio 2019， 框架升级为  .NET 5.0]
+[2021-12-09 更新 使用 Visual Studio 2022， 框架升级为  .NET 6.0]
 
 
 ### A0020_Fundamentals

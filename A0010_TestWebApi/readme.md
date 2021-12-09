@@ -113,7 +113,7 @@ Controllers/TodoController.cs
 
 修改 Startup.cs
 
-测试允许
+测试运行
 
 
 
@@ -123,6 +123,69 @@ Controllers/TodoController.cs
 Microsoft.AspNetCore.Authentication.JwtBearer
 
 后续操作，与之前的版本，差别不大。
+
+
+
+
+
+
+
+
+
+
+
+
+## 2021-12-09 更新 使用 Visual Studio 2022， 框架升级为  .NET 6.0
+
+
+创建一个新的 Web Api 项目  A0010_TestWebApiV6
+
+
+### 创建 Web Api 的操作
+https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-6.0&tabs=visual-studio
+
+
+和之前的 .NET 5.0 版本的一样。
+创建完 Web API 项目后，啥事情不干，直接运行。
+应该能看到一个默认的 swagger 页面。
+
+
+
+
+
+### 数据库相关
+
+NuGet 引用
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.InMemory
+
+从 A0010_TestWebApi 项目
+复制 
+DataAccess/TodoContext.cs
+Models/TodoItem.cs
+Controllers/TodoController.cs
+
+修改 Program.cs
+
+测试运行
+
+
+
+
+
+### JWT 相关
+
+安装nuget包
+Microsoft.AspNetCore.Authentication.JwtBearer
+
+后续操作，与之前的版本，差别不大。
+就是以前是修改 Startup.cs
+现在是修改 Program.cs
+
+
+
+测试客户端 TestWebApiClient 项目， 升级到 .NET 6.0
+
 
 
 
