@@ -79,3 +79,42 @@ Done.
 ...\A0006_EF_Sqlite>dotnet ef database update
 
 观察数据库是否正确生成了相关的表.
+
+
+
+
+
+
+
+
+# 2021-12-09
+创建一个 .Net 6 的项目.
+
+
+NuGet 引用
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.Design
+Microsoft.EntityFrameworkCore.Tools
+Microsoft.EntityFrameworkCore.Sqlite
+
+
+
+
+复制之前 项目的代码， 编译通过。
+
+
+执行
+Add-Migration MyFirstMigration
+完成.
+生成代码位于 Migrations 目录下.
+
+
+Script-Migration
+生成创建表的 SQL 语句.
+
+Update-Database
+执行生成的代码，更新数据库表结构.
+
+
+
+测试运行.

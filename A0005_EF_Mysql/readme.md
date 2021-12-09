@@ -75,3 +75,64 @@ Add-Migration AddOneToOneCode
 Update-Database
 
 
+
+
+
+
+
+
+# 2021-12-09
+创建一个新的项目， 使用 .Net 6.0
+
+NuGet 添加下列包：
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.Design
+Microsoft.EntityFrameworkCore.Tools
+MySql.EntityFrameworkCore
+
+
+复制之前 项目的代码， 编译通过。
+
+
+执行
+Add-Migration MyFirstMigration
+
+报错：
+Method 'AppendIdentityWhereCondition' in type 'MySql.EntityFrameworkCore.MySQLUpdateSqlGenerator' from assembly 'MySql.EntityFrameworkCore, Version=5.0.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d' does not have an implementation.
+
+
+管理 NuGet 程序包
+
+移除 
+MySql.EntityFrameworkCore
+
+添加
+Pomelo.EntityFrameworkCore.MySql
+
+
+编译出错。
+
+将
+UseMySql(connectionString);
+修改为
+UseMySql(connectionString, serverVersion);
+
+
+
+重新执行
+Add-Migration MyFirstMigration
+完成.
+
+Script-Migration
+生成创建表的 SQL 语句.
+
+Update-Database
+执行生成的代码，更新数据库表结构.
+
+
+测试运行
+
+
+
+
+
