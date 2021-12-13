@@ -141,6 +141,22 @@ ASP.Net Code，中间件的例子代码 (DotNet Core 3.0)
 
 
 
+
+### D0010_MyTodo
+使用 Visual Studio 2022, 创建的 Web Api 项目。
+使用 EntityFramework Core
+使用 Sqlite 数据库
+
+分别测试
+在 Windows 的命令行下运行.
+发布到 IIS 下.
+在 Ubuntu 的命令行下运行.
+发布到 Docker 上运行.
+
+
+
+
+
 ### W1000_ABP_HelloWorld
 使用 ABP 创建的 HelloWorld 项目.
 
