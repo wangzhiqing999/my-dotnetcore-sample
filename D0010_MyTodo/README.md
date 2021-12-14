@@ -230,3 +230,72 @@ http://192.168.1.140:5000/api/Todo/GetTodoList?showIsDone=false
 
 
 
+
+
+
+### 2021-12-14 优化  Docker 下的执行.
+
+预期：
+1. 打包之后，能够直接执行，不需要额外的参数。
+2. 如果用户希望，数据能够存储在外部，那么，运行的时候，才额外增加 -v 的参数。
+
+
+编译打包
+wang@wang001:~/D0010_MyTodo$ sudo docker build -t my-todo -f ./D0010_MyTodo/Dockerfile .
+
+
+检查镜像.
+wang@wang001:~/D0010_MyTodo$ sudo docker images
+REPOSITORY                        TAG          IMAGE ID       CREATED          SIZE
+my-todo                           latest       eb2bee89c455   3 minutes ago    235MB
+
+运行
+wang@wang001:~/D0010_MyTodo$ sudo docker run --name my-todo -d -p 8081:80 my-todo
+323b4f5ab5f4efb03785ceeebc8d64e1831afcc1ef84296b2df9a3c6323460b3
+
+浏览器测试访问
+http://192.168.1.153:8081/swagger/index.html
+
+都能正常访问.
+
+停止.
+wang@wang001:~/D0010_MyTodo$ sudo docker stop my-todo
+my-todo
+
+删除容器.
+wang@wang001:~/D0010_MyTodo$ sudo docker rm my-todo
+my-todo
+
+
+本地创建个目录，用于实现 “用户希望，数据能够存储在外部” 的功能。
+wang@wang001:~/D0010_MyTodo$ mkdir todo_data
+wang@wang001:~/D0010_MyTodo$ pwd
+/home/wang/D0010_MyTodo
+
+
+运行
+wang@wang001:~/D0010_MyTodo$ sudo docker run --name my-todo -d -p 8081:80 -v /home/wang/D0010_MyTodo/todo_data:/app/App_Data my-todo
+3290a3f87ef23076d635f36ee16ab2fa808bc6be5d9eace7da2ee8d0335d2749
+
+
+浏览器测试访问
+http://192.168.1.153:8081/swagger/index.html
+
+
+查看本地指定的目录下，是否有数据库文件
+wang@wang001:~/D0010_MyTodo$ cd todo_data/
+wang@wang001:~/D0010_MyTodo/todo_data$ ls
+todo.db  todo.db-shm  todo.db-wal
+
+过一段时候后.
+wang@wang001:~/D0010_MyTodo/todo_data$ ls
+todo.db
+
+
+
+注意事项：
+开发机器上，打开 Sqlite 文件后，最后的时候，要做一个 关闭数据库 的操作，使得当前目录下，只有一个 .db 文件，没有 .db-shm 和 .db-wal 文件。
+否则，某些修改， 可能并没有存储到 db 文件中。
+而发布到 Docker 里面的时候，因为代码只复制一个 .db文件， 很可能是一个只有  4K 大小的 光板 Sqlite 文件。
+执行查询处理的结果， 就是提示 表不存在了。
+
