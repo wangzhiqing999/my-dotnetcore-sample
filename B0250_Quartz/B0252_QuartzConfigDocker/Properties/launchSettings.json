@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "B0252_QuartzConfigDocker": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
