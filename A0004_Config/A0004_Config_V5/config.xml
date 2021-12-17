@@ -1,0 +1,7 @@
+﻿<settings>
+  <data>
+    <con>123456</con>
+  </data>
+  <inventory value="test" />
+  <host>http://192.168.1.123:8080/</host>
+</settings>

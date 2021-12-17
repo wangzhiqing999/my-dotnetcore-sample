@@ -1,0 +1,11 @@
+﻿{
+  "url": "localhost",
+  "port": {
+    "one": 1234,
+    "two": 456
+  },
+  "Data": {
+    "Code": "Demo",
+    "Pwd": "123456"
+  }
+}
