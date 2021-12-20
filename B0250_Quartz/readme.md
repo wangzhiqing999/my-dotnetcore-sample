@@ -83,6 +83,26 @@ sudo docker rmi quartz-sample
 
 
 
+## 注意事项：
+与时间相关的处理，需要考虑好 时区的问题。
+例如，你预期 早上9点跑个报表的， 结果，由于时区问题， 变成 17:00 才发了。
+
+
+解决办法：
+
+### 在生成镜像的时候设置
+Dockerfile 的地方，增加一行
+ENV TZ=Asia/Shanghai
+
+
+
+### 在生成容器的时候设置.
+增加一个  -e TZ="Asia/Shanghai"  参数。
+例如：
+sudo docker run --name quartz-sample  -d   -e TZ="Asia/Shanghai"  quartz-sample
+
+
+
 
 
 

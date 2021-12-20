@@ -18,3 +18,5 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "B0252_QuartzConfigDocker.dll"]
+# 这里需要额外设置一下时区.
+ENV TZ=Asia/Shanghai

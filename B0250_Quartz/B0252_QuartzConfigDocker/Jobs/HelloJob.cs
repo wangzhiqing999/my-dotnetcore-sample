@@ -15,7 +15,8 @@ namespace B0251_QuartzConfig.Jobs
 
         public Task Execute(IJobExecutionContext context)
         {
-            Console.Out.WriteLine("HelloJob Start!");
+            // 为了测试 Docker 里面的时区问题, 在这里额外输出一下 DateTime.Now.
+            Console.Out.WriteLine($"HelloJob Start at {DateTime.Now:yyyy-MM-dd HH:mm:ss}!");
 
             return Task.CompletedTask;
         }
