@@ -37,6 +37,14 @@ EntityFramework Code 中， 使用 QueryFilter， 实现 逻辑删除的例子. 
 使用 以前 .Net Framework 4.5 + EF 6 生成的数据库表结构， 编写新的 .Net Core + EF Core 的代码.
 
 
+### A0009_EF_Postgres
+EntityFramework Code First 的例子.  (使用 Postgres 数据库)
+包含下面的版本：
+使用 Visual Studio 2019， 框架为 .NET 5.0
+使用 Visual Studio 2022， 框架为 .NET 6.0
+
+
+
 ### A0010_TestWebApi
 使用 Visual Studio 2017， 创建一个 Web Api 项目的例子. (DotNet Core 2.0)
 [2021-02-01 更新 使用 Visual Studio 2019， 框架升级为  .NET 5.0]
@@ -155,6 +163,11 @@ ASP.Net Code，中间件的例子代码 (DotNet Core 3.0)
 
 
 
+
+### MyWebCrawler
+一个 netstandard2.0 的类库的项目.
+用于测试发布到 自己搭建的私有的 NuGet 服务器上.
+然后，自己的项目，进行调用.
 
 
 ### W1000_ABP_HelloWorld
