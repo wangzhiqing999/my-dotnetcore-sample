@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32002.261
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebCrawler.Service", "MyWebCrawler.Service\MyWebCrawler.Service.csproj", "{CEE69395-B28D-4047-BF6D-BE227C24661E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebCrawler.Test", "MyWebCrawler.Test\MyWebCrawler.Test.csproj", "{1B1A719D-BA80-488E-94DE-5C6DB776C937}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEE69395-B28D-4047-BF6D-BE227C24661E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEE69395-B28D-4047-BF6D-BE227C24661E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEE69395-B28D-4047-BF6D-BE227C24661E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEE69395-B28D-4047-BF6D-BE227C24661E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B1A719D-BA80-488E-94DE-5C6DB776C937}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B1A719D-BA80-488E-94DE-5C6DB776C937}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B1A719D-BA80-488E-94DE-5C6DB776C937}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B1A719D-BA80-488E-94DE-5C6DB776C937}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E67459D1-7784-4076-BE03-21B3878FF8F6}
+	EndGlobalSection
+EndGlobal
