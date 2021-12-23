@@ -240,3 +240,82 @@ C# 代码中，使用 相对路径的写法，例如 "./conf"  "./data"  这种�
 
 
 
+
+
+
+
+
+
+
+
+## 测试 Ubuntu 中， 使用 crontab 定时执行 Docker 中的容器.
+
+修改 Program.cs ， 输出时， 额外输出当前时间信息.
+
+sudo docker build -t counter-image-v6 -f ./D0003_Docker_Console_V6/Dockerfile .
+
+sudo docker run -it --name core-counter -v /home/wang/D0003_Docker_Console:/app/data counter-image-v6 1
+
+
+sudo -s
+root@wang001:/home/wang/D0003_Docker_Console#
+
+
+单次运行：
+root@wang001:/home/wang/D0003_Docker_Console# docker start core-counter
+core-counter
+root@wang001:/home/wang/D0003_Docker_Console# more output.txt
+CounterV6: 1 @ 2021-12-23 13:36:25
+
+
+
+运行 crontab 配置作业.
+root@wang001:/home/wang/D0003_Docker_Console# crontab -e
+no crontab for root - using an empty one
+
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.basic
+  3. /usr/bin/vim.tiny
+  4. /bin/ed
+
+Choose 1-4 [1]:
+
+
+在 nano 编辑器中，输入：
+
+* * * * * docker start core-counter
+
+Ctrl+X 退出
+提示是否保存时，选择 Y
+然后是输入保存的文件名是，简单的直接按回车。
+
+观察输出文件，查看 容器是否执行了。
+
+root@wang001:/home/wang/D0003_Docker_Console# more output.txt
+CounterV6: 1 @ 2021-12-23 13:46:02
+root@wang001:/home/wang/D0003_Docker_Console# more output.txt
+CounterV6: 1 @ 2021-12-23 13:47:02
+root@wang001:/home/wang/D0003_Docker_Console# more output.txt
+CounterV6: 1 @ 2021-12-23 13:48:03
+
+
+
+再次运行 crontab 配置作业.
+root@wang001:/home/wang/D0003_Docker_Console# crontab -e
+
+在 nano 编辑器中，注释掉：
+
+# * * * * * docker start core-counter
+
+Ctrl+X 退出
+提示是否保存时，选择 Y
+然后是输入保存的文件名是，简单的直接按回车。
+
+
+再次观察，容器已经不是每分钟执行的了。
+
+root@wang001:/home/wang/D0003_Docker_Console# date
+Thu 23 Dec 2021 09:51:43 PM CST
+root@wang001:/home/wang/D0003_Docker_Console# more output.txt
+CounterV6: 1 @ 2021-12-23 13:48:03

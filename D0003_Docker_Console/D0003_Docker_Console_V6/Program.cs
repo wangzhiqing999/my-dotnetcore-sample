@@ -24,7 +24,7 @@ namespace D0003_Docker_Console_V6
 
             while (max == -1 || counter < max)
             {
-                WriteCount($"{title}: {++counter}");
+                WriteCount($"{title}: {++counter} @ {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
                 await Task.Delay(1000);
             }
         }
