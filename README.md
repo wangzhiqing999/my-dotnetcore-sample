@@ -109,7 +109,7 @@ ASP.Net Code，中间件的例子代码 (DotNet Core 3.0)
 
 
 ### B0250_Quartz
-使用 Visual Studio 2019， 创建一个 控制台 项目 （net5.0）
+使用 Visual Studio 2019， 创建一个 控制台 项目 （.NET 5.0）
 用于测试使用 Quartz 的例子.
 
 
@@ -130,7 +130,7 @@ ASP.Net Code，中间件的例子代码 (DotNet Core 3.0)
 
 
 ### D0002_Docker_Compose_HelloWorld
-使用 Visual Studio 2019， 创建两个 Web 项目（一个 Web 一个 Api） （net5.0）
+使用 Visual Studio 2019， 创建两个 Web 项目（一个 Web 一个 Api） （.NET 5.0）
 然后，在 Ubuntu 下面
 创建 Docker 镜像，单独运行的处理步骤。
 以及在 Docker Compose 下，一起运行的处理步骤。
@@ -168,6 +168,17 @@ ASP.Net Code，中间件的例子代码 (DotNet Core 3.0)
 一个 netstandard2.0 的类库的项目.
 用于测试发布到 自己搭建的私有的 NuGet 服务器上.
 然后，自己的项目，进行调用.
+
+
+
+### P0001_MyMiniTradingSystem
+练习，尝试将 .NET Framework 的项目， 迁移到 DotNet Core 2.0
+
+
+### P0002_MyEtf
+使用 Visual Studio 2019， 创建一组练习的项目 （.NET 5.0）
+使用 EntityFramework Code First
+使用 Postgres 数据库
 
 
 ### W1000_ABP_HelloWorld

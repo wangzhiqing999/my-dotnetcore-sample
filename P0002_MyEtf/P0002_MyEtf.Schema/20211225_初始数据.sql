@@ -1,0 +1,8 @@
+
+INSERT INTO my_etf.etf_master(
+	etf_code, etf_name
+)
+SELECT 'SH510050','上证50ETF' UNION ALL
+SELECT 'SH510180','上证180ETF' UNION ALL
+SELECT 'SH510300','沪深300ETF'
+;
