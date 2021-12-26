@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.32002.261
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P0002_MyEtf", "P0002_MyEtf\P0002_MyEtf.csproj", "{6C33AFA2-E0BE-4F01-A3D2-8896CFDBEA3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P0002_MyEtf.SinaReader", "P0002_MyEtf.SinaReader\P0002_MyEtf.SinaReader.csproj", "{C5A805C4-2A34-4329-92BD-18624BE831C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P0002_MyEtf.SinaReader", "P0002_MyEtf.SinaReader\P0002_MyEtf.SinaReader.csproj", "{C5A805C4-2A34-4329-92BD-18624BE831C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P0002_MyEtf.TdxDataImport", "P0002_MyEtf.TdxDataImport\P0002_MyEtf.TdxDataImport.csproj", "{66D01214-B5EF-49A4-A301-1988DCBCA453}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{C5A805C4-2A34-4329-92BD-18624BE831C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5A805C4-2A34-4329-92BD-18624BE831C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5A805C4-2A34-4329-92BD-18624BE831C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66D01214-B5EF-49A4-A301-1988DCBCA453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66D01214-B5EF-49A4-A301-1988DCBCA453}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66D01214-B5EF-49A4-A301-1988DCBCA453}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66D01214-B5EF-49A4-A301-1988DCBCA453}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
