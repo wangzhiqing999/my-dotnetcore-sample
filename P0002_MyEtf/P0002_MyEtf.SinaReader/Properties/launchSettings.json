@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "P0002_MyEtf.SinaReader": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

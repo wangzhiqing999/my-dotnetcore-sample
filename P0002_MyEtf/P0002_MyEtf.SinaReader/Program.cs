@@ -38,7 +38,8 @@ namespace P0002_MyEtf.SinaReader
             IEtfMasterService etfMasterService = serviceProvider.GetService<IEtfMasterService>();
             // ETF日线数据服务.
             IEtfDayService etfDayService = serviceProvider.GetService<IEtfDayService>();
-
+            // ETF周线数据服务.
+            IEtfWeekService etfWeekService = serviceProvider.GetService<IEtfWeekService>();
 
 
             // 获取ETF主数据
@@ -52,6 +53,9 @@ namespace P0002_MyEtf.SinaReader
             {
                 // 插入 ETF日线数据.
                 etfDayService.InsertEtfDayLine(etfDayLine);
+
+                // 计算  ETF周线数据
+                etfWeekService.CalculateEtfWeekLine(etfDayLine.EtfCode, etfDayLine.TradingDate);
             }
 
 

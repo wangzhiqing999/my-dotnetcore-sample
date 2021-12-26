@@ -124,7 +124,53 @@ Program.cs
 
 测试运行.
 
+测试发布到本地的文件夹中.
+
+将本机的 P0002_MyEtf\P0002_MyEtf.SinaReader\bin\Release\net5.0\publish  目录下的，发布好的内容，
+复制到测试的 Ubuntu 服务器的 /home/wang/MyETF/SinaReader 目录下.
 
 
+### 给测试的 Ubuntu 服务器安装 dotnet-runtime-5.0
+
+参考页面：
+https://docs.microsoft.com/zh-cn/dotnet/core/install/linux-ubuntu
+
+执行：
+wget https://packages.microsoft.com/config/ubuntu/21.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
+
+
+由于开发时，选择的版本时 .NET 5.0.   下面的安装 运行时的脚本， 最终是 dotnet-runtime-5.0
+sudo apt-get update
+sudo apt-get install -y apt-transport-https
+sudo apt-get update
+sudo apt-get install -y dotnet-runtime-5.0
+
+测试运行
+dotnet P0002_MyEtf.SinaReader.dll
+
+
+### 给测试的 Ubuntu 服务器配置定时作业.
+
+在当前目录下，创建一个
+start_SinaReader.sh
+
+内容为：
+cd /home/wang/MyETF/SinaReader
+dotnet P0002_MyEtf.SinaReader.dll
+
+增加可执行权限.
+chmod 777 start_SinaReader.sh
+
+配置作业.
+运行
+crontab -e
+
+在编辑器中，输入：
+
+0 18 * * 1-5 /home/wang/MyETF/SinaReader/start_SinaReader.sh
+
+保存退出
 
 
