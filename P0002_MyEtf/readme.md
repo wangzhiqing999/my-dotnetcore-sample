@@ -15,9 +15,29 @@
 某些简单的技术指标，发出 买入的信号时，发送邮件通知自己。
 
 
-
 2.实际买入操作后，记录下开仓的相关信息。
 某些简单的技术指标，发出 卖出的信号，需要做止盈、止损的操作时，发送邮件通知自己。
+
+
+
+
+预期的开发步骤.
+
+1.将其它软件导出的日线数据，导入到本地。
+
+2.交易日，抓取数据，写入本地。
+
+3.日线数据生成周线数据。
+
+4.根据周线，计算周 MACD.
+
+5.MACD周线金叉，发邮件通知。
+
+6.记录交易。
+
+7.对于有持仓的，MACD周线死叉，发邮件通知。
+
+
 
 
 
@@ -41,6 +61,8 @@ Npgsql.EntityFrameworkCore.PostgreSQL
 添加 Model / DataAccess
 编译通过.
 
+
+#### 2021-12-24
 Add-Migration MyEtfInit
 用来生成命令，生成数据库和表的C#代码
 
@@ -49,6 +71,20 @@ Script-Migration
 将内容保存到本地的 sql 文件中.
 
 到目标数据库去执行一下这个 sql 脚本。
+
+
+
+#### 2021-12-27
+Add-Migration MyEtfMacd
+Script-Migration -From MyEtfInit -To MyEtfMacd
+
+Add-Migration MyEtfEma
+Script-Migration -From MyEtfMacd -To MyEtfEma
+
+注意事项：
+如果只是简单 Script-Migration， 不加任何参数的话，将会生成从零开始的，全部的 sql 语句。
+
+
 
 
 ### 服务部分.

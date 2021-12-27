@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using P0002_MyEtf.DataAccess;
@@ -9,9 +10,10 @@ using P0002_MyEtf.DataAccess;
 namespace P0002_MyEtf.Migrations
 {
     [DbContext(typeof(MyEtfContext))]
-    partial class MyEtfContextModelSnapshot : ModelSnapshot
+    [Migration("20211227114905_MyEtfEma")]
+    partial class MyEtfEma
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

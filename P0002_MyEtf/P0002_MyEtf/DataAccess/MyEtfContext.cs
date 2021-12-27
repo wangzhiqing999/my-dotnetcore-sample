@@ -42,6 +42,17 @@ namespace P0002_MyEtf.DataAccess
         /// </summary>
         public DbSet<EtfDayTr> EtfDayTrs { get; set; }
 
+        /// <summary>
+        /// ETF 日 EMA.
+        /// </summary>
+        public DbSet<EtfDayEma> EtfDayEmas { get; set; }
+
+        /// <summary>
+        /// ETF 日 MACD.
+        /// </summary>
+        public DbSet<EtfDayMacd> EtfDayMacds { get; set; }
+
+
 
 
 
@@ -51,7 +62,15 @@ namespace P0002_MyEtf.DataAccess
         /// </summary>
         public DbSet<EtfWeekLine> EtfWeekLines { get; set; }
 
+        /// <summary>
+        /// ETF 周 EMA.
+        /// </summary>
+        public DbSet<EtfWeekEma> EtfWeekEmas { get; set; }
 
+        /// <summary>
+        /// ETF 周 MACD.
+        /// </summary>
+        public DbSet<EtfWeekMacd> EtfWeekMacds { get; set; }
 
 
 
@@ -95,7 +114,6 @@ namespace P0002_MyEtf.DataAccess
                         .HasKey(t => new { t.EtfCode, t.TradingDate });
 
 
-
             // ETF主数据 -- ETF日波幅 一对多
             // 对于一个 ETF日波幅
             modelBuilder.Entity<EtfDayTr>()
@@ -109,6 +127,40 @@ namespace P0002_MyEtf.DataAccess
             // ETF日波幅 是 复合主键.
             modelBuilder.Entity<EtfDayTr>()
                         .HasKey(t => new { t.EtfCode, t.TradingDate });
+
+
+            // ETF主数据 -- ETF日EMA 一对多
+            // 对于一个 ETF日EMA
+            modelBuilder.Entity<EtfDayEma>()
+                        // 有一个 ETF主数据.
+                        .HasOne(s => s.EtfMasterData)
+                        // 一个 ETF主数据，有多个 ETF日EMA
+                        .WithMany(m => m.EtfDayEmaList)
+                        // 外键.
+                        .HasForeignKey(f => f.EtfCode);
+
+            // ETF日EMA 是 复合主键.
+            modelBuilder.Entity<EtfDayEma>()
+                        .HasKey(t => new { t.EtfCode, t.TradingDate });
+
+
+            // ETF主数据 -- ETF日MACD 一对多
+            // 对于一个 ETF日MACD
+            modelBuilder.Entity<EtfDayMacd>()
+                        // 有一个 ETF主数据.
+                        .HasOne(s => s.EtfMasterData)
+                        // 一个 ETF主数据，有多个 ETF日MACD
+                        .WithMany(m => m.EtfDayMacdList)
+                        // 外键.
+                        .HasForeignKey(f => f.EtfCode);
+
+            // ETF日MACD 是 复合主键.
+            modelBuilder.Entity<EtfDayMacd>()
+                        .HasKey(t => new { t.EtfCode, t.TradingDate });
+
+
+
+
 
 
 
@@ -129,6 +181,37 @@ namespace P0002_MyEtf.DataAccess
                         .HasKey(t => new { t.EtfCode, t.TradingDate });
 
 
+
+
+            // ETF主数据 -- ETF周EMA 一对多
+            // 对于一个 ETF周EMA
+            modelBuilder.Entity<EtfWeekEma>()
+                        // 有一个 ETF主数据.
+                        .HasOne(s => s.EtfMasterData)
+                        // 一个 ETF主数据，有多个 ETF周EMA
+                        .WithMany(m => m.EtfWeekEmaList)
+                        // 外键.
+                        .HasForeignKey(f => f.EtfCode);
+
+            // ETF周EMA 是 复合主键.
+            modelBuilder.Entity<EtfWeekEma>()
+                        .HasKey(t => new { t.EtfCode, t.TradingDate });
+
+
+
+            // ETF主数据 -- ETF周MACD 一对多
+            // 对于一个 ETF周MACD
+            modelBuilder.Entity<EtfWeekMacd>()
+                        // 有一个 ETF主数据.
+                        .HasOne(s => s.EtfMasterData)
+                        // 一个 ETF主数据，有多个 ETF周MACD
+                        .WithMany(m => m.EtfWeekMacdList)
+                        // 外键.
+                        .HasForeignKey(f => f.EtfCode);
+
+            // ETF日MACD 是 复合主键.
+            modelBuilder.Entity<EtfWeekMacd>()
+                        .HasKey(t => new { t.EtfCode, t.TradingDate });
 
 
         }

@@ -15,7 +15,7 @@ using P0002_MyEtf.ServiceModel;
 
 namespace P0002_MyEtf.ServiceImpl
 {
-    public class DefaultEtfDayService : IEtfDayService
+    public partial class DefaultEtfDayService : IEtfDayService
     {
 
 

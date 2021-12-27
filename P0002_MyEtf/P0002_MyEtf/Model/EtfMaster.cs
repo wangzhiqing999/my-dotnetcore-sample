@@ -53,16 +53,24 @@ namespace P0002_MyEtf.Model
         /// </summary>
         public List<EtfDayLine> EtfDayLineList { set; get; }
 
-
         /// <summary>
         /// ETF日波幅列表.
         /// </summary>
         public List<EtfDayTr> EtfDayTrList { set; get; }
 
+        /// <summary>
+        /// ETF 日 EMA.
+        /// </summary>
+        public List<EtfDayEma> EtfDayEmaList { get; set; }
+
+        /// <summary>
+        /// ETF 日 MACD.
+        /// </summary>
+        public List<EtfDayMacd> EtfDayMacdList { get; set; }
 
 
 
-    
+
 
 
         /// <summary>
@@ -71,6 +79,15 @@ namespace P0002_MyEtf.Model
         public List<EtfWeekLine> EtfWeekLineList { set; get; }
 
 
+        /// <summary>
+        /// ETF 周 EMA.
+        /// </summary>
+        public List<EtfWeekEma> EtfWeekEmaList { get; set; }
+
+        /// <summary>
+        /// ETF 周 MACD.
+        /// </summary>
+        public List<EtfWeekMacd> EtfWeekMacdList { get; set; }
 
         #endregion
 

@@ -35,5 +35,26 @@ namespace P0002_MyEtf.Service
         /// <returns></returns>
         ServiceResult CalculateEtfDayTr(string etfCode, DateTime tradingDate);
 
+
+
+        /// <summary>
+        /// 计算 ETF 日 EMA.
+        /// </summary>
+        /// <param name="etfCode"></param>
+        /// <param name="tradingDate"></param>
+        /// <returns></returns>
+        ServiceResult CalculateEtfDayEma(string etfCode, DateTime tradingDate);
+
+
+
+        /// <summary>
+        /// 计算 ETF日 MACD.
+        /// </summary>
+        /// <param name="etfCode"></param>
+        /// <param name="tradingDate"></param>
+        /// <returns></returns>
+        ServiceResult CalculateEtfDayMacd(string etfCode, DateTime tradingDate);
+
+
     }
 }

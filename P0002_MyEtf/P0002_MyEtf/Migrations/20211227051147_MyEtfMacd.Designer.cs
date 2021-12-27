@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using P0002_MyEtf.DataAccess;
@@ -9,39 +10,16 @@ using P0002_MyEtf.DataAccess;
 namespace P0002_MyEtf.Migrations
 {
     [DbContext(typeof(MyEtfContext))]
-    partial class MyEtfContextModelSnapshot : ModelSnapshot
+    [Migration("20211227051147_MyEtfMacd")]
+    partial class MyEtfMacd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-            modelBuilder.Entity("P0002_MyEtf.Model.EtfDayEma", b =>
-                {
-                    b.Property<string>("EtfCode")
-                        .HasMaxLength(16)
-                        .HasColumnType("character varying(16)")
-                        .HasColumnName("etf_code");
-
-                    b.Property<DateTime>("TradingDate")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("trading_date");
-
-                    b.Property<decimal>("Ema12")
-                        .HasColumnType("numeric")
-                        .HasColumnName("ema12");
-
-                    b.Property<decimal>("Ema26")
-                        .HasColumnType("numeric")
-                        .HasColumnName("ema26");
-
-                    b.HasKey("EtfCode", "TradingDate");
-
-                    b.ToTable("etf_day_ema", "my_etf");
-                });
 
             modelBuilder.Entity("P0002_MyEtf.Model.EtfDayLine", b =>
                 {
@@ -148,30 +126,6 @@ namespace P0002_MyEtf.Migrations
                     b.ToTable("etf_master", "my_etf");
                 });
 
-            modelBuilder.Entity("P0002_MyEtf.Model.EtfWeekEma", b =>
-                {
-                    b.Property<string>("EtfCode")
-                        .HasMaxLength(16)
-                        .HasColumnType("character varying(16)")
-                        .HasColumnName("etf_code");
-
-                    b.Property<DateTime>("TradingDate")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("trading_date");
-
-                    b.Property<decimal>("Ema12")
-                        .HasColumnType("numeric")
-                        .HasColumnName("ema12");
-
-                    b.Property<decimal>("Ema26")
-                        .HasColumnType("numeric")
-                        .HasColumnName("ema26");
-
-                    b.HasKey("EtfCode", "TradingDate");
-
-                    b.ToTable("etf_week_ema", "my_etf");
-                });
-
             modelBuilder.Entity("P0002_MyEtf.Model.EtfWeekLine", b =>
                 {
                     b.Property<string>("EtfCode")
@@ -236,17 +190,6 @@ namespace P0002_MyEtf.Migrations
                     b.ToTable("etf_week_macd", "my_etf");
                 });
 
-            modelBuilder.Entity("P0002_MyEtf.Model.EtfDayEma", b =>
-                {
-                    b.HasOne("P0002_MyEtf.Model.EtfMaster", "EtfMasterData")
-                        .WithMany("EtfDayEmaList")
-                        .HasForeignKey("EtfCode")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("EtfMasterData");
-                });
-
             modelBuilder.Entity("P0002_MyEtf.Model.EtfDayLine", b =>
                 {
                     b.HasOne("P0002_MyEtf.Model.EtfMaster", "EtfMasterData")
@@ -280,17 +223,6 @@ namespace P0002_MyEtf.Migrations
                     b.Navigation("EtfMasterData");
                 });
 
-            modelBuilder.Entity("P0002_MyEtf.Model.EtfWeekEma", b =>
-                {
-                    b.HasOne("P0002_MyEtf.Model.EtfMaster", "EtfMasterData")
-                        .WithMany("EtfWeekEmaList")
-                        .HasForeignKey("EtfCode")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("EtfMasterData");
-                });
-
             modelBuilder.Entity("P0002_MyEtf.Model.EtfWeekLine", b =>
                 {
                     b.HasOne("P0002_MyEtf.Model.EtfMaster", "EtfMasterData")
@@ -315,15 +247,11 @@ namespace P0002_MyEtf.Migrations
 
             modelBuilder.Entity("P0002_MyEtf.Model.EtfMaster", b =>
                 {
-                    b.Navigation("EtfDayEmaList");
-
                     b.Navigation("EtfDayLineList");
 
                     b.Navigation("EtfDayMacdList");
 
                     b.Navigation("EtfDayTrList");
-
-                    b.Navigation("EtfWeekEmaList");
 
                     b.Navigation("EtfWeekLineList");
 

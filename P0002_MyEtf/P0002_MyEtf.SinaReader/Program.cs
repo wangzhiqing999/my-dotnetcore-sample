@@ -54,6 +54,15 @@ namespace P0002_MyEtf.SinaReader
                 // 插入 ETF日线数据.
                 etfDayService.InsertEtfDayLine(etfDayLine);
 
+                // 计算 EMA日线数据.
+                etfDayService.CalculateEtfDayEma(etfDayLine.EtfCode, etfDayLine.TradingDate);
+
+                // 计算 MACD日线数据.
+                etfDayService.CalculateEtfDayMacd(etfDayLine.EtfCode, etfDayLine.TradingDate);
+
+
+
+
                 // 计算  ETF周线数据
                 etfWeekService.CalculateEtfWeekLine(etfDayLine.EtfCode, etfDayLine.TradingDate);
             }

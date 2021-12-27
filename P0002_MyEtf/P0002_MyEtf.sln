@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P0002_MyEtf", "P0002_MyEtf\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P0002_MyEtf.SinaReader", "P0002_MyEtf.SinaReader\P0002_MyEtf.SinaReader.csproj", "{C5A805C4-2A34-4329-92BD-18624BE831C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P0002_MyEtf.TdxDataImport", "P0002_MyEtf.TdxDataImport\P0002_MyEtf.TdxDataImport.csproj", "{66D01214-B5EF-49A4-A301-1988DCBCA453}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P0002_MyEtf.TdxDataImport", "P0002_MyEtf.TdxDataImport\P0002_MyEtf.TdxDataImport.csproj", "{66D01214-B5EF-49A4-A301-1988DCBCA453}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P0002_MyEtf.Test", "P0002_MyEtf.Test\P0002_MyEtf.Test.csproj", "{797C1EA2-35E7-46EA-9F92-EF895E3DC65F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{66D01214-B5EF-49A4-A301-1988DCBCA453}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66D01214-B5EF-49A4-A301-1988DCBCA453}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66D01214-B5EF-49A4-A301-1988DCBCA453}.Release|Any CPU.Build.0 = Release|Any CPU
+		{797C1EA2-35E7-46EA-9F92-EF895E3DC65F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{797C1EA2-35E7-46EA-9F92-EF895E3DC65F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{797C1EA2-35E7-46EA-9F92-EF895E3DC65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{797C1EA2-35E7-46EA-9F92-EF895E3DC65F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
