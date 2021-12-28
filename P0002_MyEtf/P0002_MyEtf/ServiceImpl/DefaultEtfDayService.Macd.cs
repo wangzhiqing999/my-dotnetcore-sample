@@ -133,7 +133,7 @@ namespace P0002_MyEtf.ServiceImpl
                     EtfCode = etfCode,
                     TradingDate = data.TradingDate,
                     // DIFF = EMA(12) - EMA(26)
-                    Diff = data.EmaFast - data.EmaSlow,                    
+                    Diff = data.EmaFast - data.EmaSlow,
                 };
 
                 // DEA = 2/(9+1) * 今日DIFF + 8/(9+1) * 昨日DEA
