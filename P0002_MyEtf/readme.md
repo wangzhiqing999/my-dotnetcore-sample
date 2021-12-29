@@ -124,7 +124,7 @@ P0002_MyEtf
 
 最初
 File.ReadAllLines(fileName, Encoding.GetEncoding("GB2312"));
-会报错：Unhandled exception. System.ArgumentException: 'GB2312' is not a supported encoding name. 
+会报错：Unhandled exception. System.ArgumentException: 'GB2312' is not a supported encoding name.
 
 需要 NuGet 引用 System.Text.Encoding.CodePages
 并在读取文件前面，添加下面的代码：
@@ -208,5 +208,23 @@ crontab -e
 0 18 * * 1-5 /home/wang/MyETF/SinaReader/start_SinaReader.sh
 
 保存退出
+
+
+
+
+
+
+
+
+
+
+## P0002_MyEtf.Postgrest
+本项目的数据库， 使用的 postgres.
+这个是尝试使用 Postgrest， 来搭建一个 Web Api 的环境.
+
+## P0002_MyEtf.Html
+这个是用于测试 P0002_MyEtf.Postgrest
+搭建的一个测试页面。
+
 
 

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>P0002_MyEtf.Html</title>
+	<script src="./js/jquery-1.10.2.js"></script>
+	<script src="./js/echarts.min.js"></script>
+
+</head>
+
+<body>
+
+
+	<div>
+		<select id="cboEtf">
+
+        </select>
+	</div>
+
+
+
+
+	<div id="main" style="width: 1024px;height:768px;"></div>
+
+
+
+
+
+
+	<script>
+
+
+		var chartDom = document.getElementById('main');
+		var myChart = echarts.init(chartDom);
+		var option;
+
+
+		const upColor = '#ec0000';
+		const upBorderColor = '#8A0000';
+		const downColor = '#00da3c';
+		const downBorderColor = '#008F28';
+
+
+		// Each item: open，close，lowest，highest
+		let data0;
+
+
+		function calculateMA(dayCount) {
+		  var result = [];
+		  for (var i = 0, len = data0.values.length; i < len; i++) {
+			if (i < dayCount) {
+			  result.push('-');
+			  continue;
+			}
+			var sum = 0;
+			for (var j = 0; j < dayCount; j++) {
+			  sum += +data0.values[i - j][1];
+			}
+			result.push(sum / dayCount);
+		  }
+		  return result;
+		}
+
+
+	</script>
+
+
+
+
+
+
+
+	<script>
+
+		$(document).ready(function () {
+
+			initCboEtf();
+
+
+			$("#cboEtf").change(function () {
+                // 选择的 ETF Code.
+                var vSelectEtfCode = $(this).val();
+
+                loadEtfData(vSelectEtfCode);
+            });
+
+		});
+
+
+
+
+		function loadEtfData(etfCode) {
+
+			console.log("Load " + etfCode);
+
+
+			$.ajax({
+                    url: "http://192.168.1.140:3000/etf_day_line?etf_code=eq." +  etfCode + "&order=trading_date.desc&limit=100",
+                    type: "get",
+                    success: function (data) {
+
+						data.reverse();
+
+						let categoryData = [];
+						let values = [];
+
+						for (var i = 0; i < data.length; i++) {
+						
+							// console.log(data[i]);
+						
+
+							categoryData.push(data[i].trading_date.substr(0, 10));
+
+							let oneDayValues = [data[i].open_price, data[i].close_price, data[i].lowest_price, data[i].highest_price];
+
+							values.push(oneDayValues);
+						}
+
+						data0 = {
+							categoryData: categoryData,
+							values: values
+						};
+
+
+
+
+
+option = {
+  title: {
+    text: etfCode,
+    left: 0
+  },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'cross'
+    }
+  },
+  legend: {
+    data: ['日K', 'MA5', 'MA10', 'MA20', 'MA30']
+  },
+  grid: {
+    left: '10%',
+    right: '10%',
+    bottom: '15%'
+  },
+  xAxis: {
+    type: 'category',
+    data: data0.categoryData,
+    scale: true,
+    boundaryGap: false,
+    axisLine: { onZero: false },
+    splitLine: { show: false },
+    min: 'dataMin',
+    max: 'dataMax'
+  },
+  yAxis: {
+    scale: true,
+    splitArea: {
+      show: true
+    }
+  },
+  dataZoom: [
+    {
+      type: 'inside',
+      start: 50,
+      end: 100
+    },
+    {
+      show: true,
+      type: 'slider',
+      top: '90%',
+      start: 50,
+      end: 100
+    }
+  ],
+  series: [
+    {
+      name: '日K',
+      type: 'candlestick',
+      data: data0.values,
+      itemStyle: {
+        color: upColor,
+        color0: downColor,
+        borderColor: upBorderColor,
+        borderColor0: downBorderColor
+      },
+
+      markLine: {
+        symbol: ['none', 'none'],
+        data: [
+          [
+            {
+              name: 'from lowest to highest',
+              type: 'min',
+              valueDim: 'lowest',
+              symbol: 'circle',
+              symbolSize: 10,
+              label: {
+                show: false
+              },
+              emphasis: {
+                label: {
+                  show: false
+                }
+              }
+            },
+            {
+              type: 'max',
+              valueDim: 'highest',
+              symbol: 'circle',
+              symbolSize: 10,
+              label: {
+                show: false
+              },
+              emphasis: {
+                label: {
+                  show: false
+                }
+              }
+            }
+          ],
+          {
+            name: 'min line on close',
+            type: 'min',
+            valueDim: 'close'
+          },
+          {
+            name: 'max line on close',
+            type: 'max',
+            valueDim: 'close'
+          }
+        ]
+      }
+    },
+    {
+      name: 'MA5',
+      type: 'line',
+      data: calculateMA(5),
+      smooth: true,
+      lineStyle: {
+        opacity: 0.5
+      }
+    },
+    {
+      name: 'MA10',
+      type: 'line',
+      data: calculateMA(10),
+      smooth: true,
+      lineStyle: {
+        opacity: 0.5
+      }
+    },
+    {
+      name: 'MA20',
+      type: 'line',
+      data: calculateMA(20),
+      smooth: true,
+      lineStyle: {
+        opacity: 0.5
+      }
+    },
+    {
+      name: 'MA30',
+      type: 'line',
+      data: calculateMA(30),
+      smooth: true,
+      lineStyle: {
+        opacity: 0.5
+      }
+    }
+  ]
+};
+
+
+
+						option && myChart.setOption(option);
+
+                    },
+                    error: function (msg) {
+                        console.log("Error:" + msg);
+                    }
+                });
+		}
+
+
+
+
+
+		function initCboEtf() {
+			$.ajax({
+                    url: "http://192.168.1.140:3000/etf_master",
+                    type: "get",
+                    success: function (data) {
+						let etfCount = data.length;
+						
+						for(let i = 0; i < etfCount; i ++) {
+							$("#cboEtf").append('<option value="' +  data[i].etf_code +  '" >' + data[i].etf_name  +  '</option>');
+						}
+						
+						loadEtfData(data[0].etf_code);
+						
+                    },
+                    error: function (msg) {
+                        console.log("Error:" + msg);
+                    }
+                });
+		}
+
+	</script>
+
+</body>
+</html>
