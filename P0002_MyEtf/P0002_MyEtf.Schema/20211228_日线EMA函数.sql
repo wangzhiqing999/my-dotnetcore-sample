@@ -2,7 +2,7 @@
 CREATE OR REPLACE FUNCTION my_etf.get_day_ema(
 	IN p_etf_code	VARCHAR,
 	IN p_ema_num	INT,
-	OUT trading_date TIMESTAMP WITHOUT TIME ZONE,
+	OUT trading_date date,
 	OUT ema NUMERIC
 )
 RETURNS SETOF RECORD AS
@@ -12,7 +12,7 @@ DECLARE
 	v_etf_data 	RECORD;
 BEGIN
 
-	FOR v_etf_data IN 
+	FOR v_etf_data IN
 		SELECT
 		  ROW_NUMBER() OVER(ORDER BY edl.trading_date) AS NO,
 		  edl.trading_date,
@@ -26,16 +26,16 @@ BEGIN
 	LOOP
 
 		trading_date := v_etf_data.trading_date;
-		
+
 		IF v_etf_data.NO = 1 THEN
 			ema := v_etf_data.close_price;
 		ELSE
-			ema := v_etf_data.close_price * 2 / (p_ema_num + 1); 
+			ema := v_etf_data.close_price * 2 / (p_ema_num + 1);
 			ema := ema + v_prev_ema *  (p_ema_num - 1) / (p_ema_num + 1) ;
 		END IF;
-		
+
 		v_prev_ema := ema;
-		
+
 		RETURN NEXT;
 
 	END LOOP;
@@ -68,7 +68,7 @@ WHERE
 
 
 -- 与 C# 计算的数据，进行对比.
-select * from my_etf.etf_day_ema ede WHERE  ede.etf_code = 'SH513030' order by 2 
+select * from my_etf.etf_day_ema ede WHERE  ede.etf_code = 'SH513030' order by 2
 
 
 

@@ -47,7 +47,7 @@ FROM
             // 注意：
             // 这个 FromSqlRaw 方法， 程序集: Microsoft.EntityFrameworkCore.Relational.dll
             // 需要可执行程序的项目， 再 NuGet 添加一个引用 Microsoft.EntityFrameworkCore.Relational v5.0.x
-            List<EtfWeekMacd> resultList = this._MyEtfContext.EtfWeekMacds.FromSqlRaw(GetEtfWeekMacdSql, etfCodeParam).ToList();
+            List<EtfWeekMacd> resultList = this._MyEtfContext.EtfWeekMacds.FromSqlRaw(GetEtfWeekMacdSql, etfCodeParam).AsNoTracking().ToList();
 
             return resultList;
         }

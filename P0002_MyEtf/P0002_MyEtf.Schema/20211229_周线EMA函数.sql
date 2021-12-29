@@ -2,7 +2,7 @@
 CREATE OR REPLACE FUNCTION my_etf.get_week_ema(
 	IN p_etf_code	VARCHAR,
 	IN p_ema_num	INT,
-	OUT trading_date TIMESTAMP WITHOUT TIME ZONE,
+	OUT trading_date date,
 	OUT ema NUMERIC
 )
 RETURNS SETOF RECORD AS

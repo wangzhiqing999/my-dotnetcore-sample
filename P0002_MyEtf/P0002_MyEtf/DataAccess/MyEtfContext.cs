@@ -75,6 +75,20 @@ namespace P0002_MyEtf.DataAccess
 
 
 
+
+
+
+        /// <summary>
+        /// ETF MA 计算值.(绑定视图)
+        /// </summary>
+        public DbSet<EtfMaData> EtfMaDatas { get; set; }
+
+
+
+
+
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             {
@@ -212,6 +226,21 @@ namespace P0002_MyEtf.DataAccess
             // ETF日MACD 是 复合主键.
             modelBuilder.Entity<EtfWeekMacd>()
                         .HasKey(t => new { t.EtfCode, t.TradingDate });
+
+
+
+
+
+
+
+            // EtfMaData 是 视图.
+            modelBuilder.Entity<EtfMaData>(
+                eb =>
+                {
+                    eb.HasNoKey();
+                    eb.ToView("my_etf.v_ma");
+                });
+
 
 
         }

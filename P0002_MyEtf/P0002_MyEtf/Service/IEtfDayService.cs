@@ -26,6 +26,14 @@ namespace P0002_MyEtf.Service
         ServiceResult InsertEtfDayLine(EtfDayLine etfDayLine);
 
 
+        /// <summary>
+        /// 获取 ETF 日线数据.
+        /// </summary>
+        /// <param name="etfCode"></param>
+        /// <returns></returns>
+        List<EtfDayLine> GetEtfDayLines(string etfCode);
+
+
 
         /// <summary>
         /// 计算 ETF日波幅数据.
@@ -54,6 +62,20 @@ namespace P0002_MyEtf.Service
         /// <param name="tradingDate"></param>
         /// <returns></returns>
         ServiceResult CalculateEtfDayMacd(string etfCode, DateTime tradingDate);
+
+
+
+
+
+        /// <summary>
+        /// 获取日线的 MA.
+        /// <br/>
+        /// 这个是通过调用 Postgres 下面写的函数来实现的.
+        /// </summary>
+        /// <param name="etfCode"></param>
+        /// <param name="maNum"></param>
+        /// <returns></returns>
+        List<EtfMaData> GetEtfDayMa(string etfCode, int maNum);
 
 
     }

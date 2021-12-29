@@ -128,5 +128,34 @@ namespace P0002_MyEtf.ServiceImpl
             }
             
         }
+
+
+
+
+
+
+        /// <summary>
+        /// 获取 ETF 周线数据.
+        /// </summary>
+        /// <param name="etfCode"></param>
+        /// <returns></returns>
+        public List<EtfWeekLine> GetEtfWeekLines(string etfCode)
+        {
+            var query =
+                from data in this._MyEtfContext.EtfWeekLines
+                where
+                    data.EtfCode == etfCode
+                orderby
+                    data.TradingDate
+                select
+                    data;
+
+            List<EtfWeekLine> resultList = query.ToList();
+
+            return resultList;
+        }
+
+
+
     }
 }

@@ -70,6 +70,36 @@ namespace P0002_MyEtf.ServiceImpl
 
 
         /// <summary>
+        /// 获取 ETF 日线数据.
+        /// </summary>
+        /// <param name="etfCode"></param>
+        /// <returns></returns>
+        public List<EtfDayLine> GetEtfDayLines(string etfCode)
+        {
+            var query =
+                from data in this._MyEtfContext.EtfDayLines
+                where
+                    data.EtfCode == etfCode
+                orderby
+                    data.TradingDate
+                select
+                    data;
+
+            List<EtfDayLine> resultList = query.ToList();
+
+            return resultList;
+        }
+
+
+
+
+
+
+
+
+
+
+        /// <summary>
         /// 计算 ATR 的参数.
         /// </summary>
         private const int ATR_PARAM = 14;

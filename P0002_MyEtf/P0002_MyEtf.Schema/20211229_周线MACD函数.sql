@@ -4,7 +4,7 @@ CREATE OR REPLACE FUNCTION my_etf.get_week_macd(
 	IN p_fast		INT,
 	IN p_slow		INT,
 	IN p_dif		INT,
-	OUT trading_date TIMESTAMP WITHOUT TIME ZONE,
+	OUT trading_date date,
 	OUT diff 		NUMERIC,
 	OUT dea			NUMERIC,
 	OUT macd		NUMERIC
@@ -48,6 +48,11 @@ BEGIN
 
 		v_prev_dea := dea;
 	
+	
+		diff := ROUND(diff, 3);
+		dea := ROUND(dea, 3);
+		macd := ROUND(macd, 3);
+	
 		RETURN NEXT;
 	
 	END LOOP;
@@ -62,7 +67,7 @@ $$ LANGUAGE plpgsql;
 -- 获取 周线的 MACD (使用 默认的参数).
 CREATE OR REPLACE FUNCTION my_etf.get_week_macd(
 	IN p_etf_code	VARCHAR,
-	OUT trading_date TIMESTAMP WITHOUT TIME ZONE,
+	OUT trading_date date,
 	OUT diff 		NUMERIC,
 	OUT dea			NUMERIC,
 	OUT macd		NUMERIC
