@@ -34,12 +34,28 @@ namespace P0002_MyEtf.Test
             // ETF日线数据服务.
             IEtfDayService etfDayService = serviceProvider.GetService<IEtfDayService>();
 
-
             // 测试生成 日 EMA.
             // etfDayService.CalculateEtfDayEma("SH516920", DateTime.Today);
 
             // 测试生成 日 MACD.
             // etfDayService.CalculateEtfDayMacd("SH516920", DateTime.Today);
+
+
+
+
+
+
+
+
+            IEtfWeekService etfWeekService = serviceProvider.GetService<IEtfWeekService>();
+
+            // 测试 调用数据库的函数，来获取 周 MACD.
+            List<EtfWeekMacd> etfWeekMacds = etfWeekService.GetEtfWeekMacd("SH510050");
+            foreach(var item in etfWeekMacds)
+            {
+                Console.WriteLine(item);
+            }
+
 
 
             Console.WriteLine("##### Finish！#####");

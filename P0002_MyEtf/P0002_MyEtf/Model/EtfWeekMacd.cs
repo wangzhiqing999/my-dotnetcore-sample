@@ -88,5 +88,13 @@ namespace P0002_MyEtf.Model
         public decimal Macd { set; get; }
 
 
+
+
+        public override string ToString()
+        {
+            return $"{this.EtfCode} - {this.TradingDate:yyyy-MM-dd} : Diff={Math.Round(Diff, 2)}; Dea={Math.Round(Dea, 2)}; Macd={Math.Round(Macd, 2)}";
+        }
+
+
     }
 }
