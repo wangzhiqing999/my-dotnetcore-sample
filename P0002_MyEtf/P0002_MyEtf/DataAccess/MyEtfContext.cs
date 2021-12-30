@@ -234,6 +234,9 @@ namespace P0002_MyEtf.DataAccess
 
 
             // EtfMaData 是 视图.
+            // 由于加了下面这行.
+            // 导致所有的 可执行程序，都需要 NuGet 引用 Microsoft.EntityFrameworkCore.Relational
+            // 否则执行到下面这一行的时候，就会报错.
             modelBuilder.Entity<EtfMaData>(
                 eb =>
                 {

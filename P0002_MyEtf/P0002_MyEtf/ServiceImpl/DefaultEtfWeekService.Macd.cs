@@ -26,6 +26,10 @@ namespace P0002_MyEtf.ServiceImpl
         /// <br/>
         /// 注意：
         /// EntityFrameworkCore 与 EntityFramework 的写法不一样.
+        /// 
+        /// 在 数据库中， EtfWeekMacd 这个类， 对应了一张空表 etf_week_macd 。
+        /// 这里查询的字段，是对应着 etf_week_macd 这个表所对应的 列名.
+        /// 
         /// </summary>
         private const string GetEtfWeekMacdSql = @"
 SELECT 

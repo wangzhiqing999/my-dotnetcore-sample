@@ -97,6 +97,9 @@ Script-Migration -From MyEtfMacd -To MyEtfEma
 
 
 
+
+
+
 ## P0002_MyEtf.TdxDataImport 项目
 功能：将 通达信 导出的日线数据，导入到本地。
 使用频率：项目初始化的时候，执行一次；  新增一个自选的 ETF 代码的时候，执行一次.
@@ -104,6 +107,7 @@ Script-Migration -From MyEtfMacd -To MyEtfEma
 添加 NuGet 引用
 
 Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.Relational
 版本 5.0.13
 
 Npgsql.EntityFrameworkCore.PostgreSQL
@@ -134,6 +138,9 @@ Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
 
 
+
+
+
 ## P0002_MyEtf.SinaReader 项目
 功能：从新浪读取今天的收盘数据.
 使用频率：交易日每天执行一次.
@@ -141,6 +148,7 @@ Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 添加 NuGet 引用
 
 Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.Relational
 版本 5.0.13
 
 Npgsql.EntityFrameworkCore.PostgreSQL
@@ -149,7 +157,7 @@ Npgsql.EntityFrameworkCore.PostgreSQL
 Microsoft.Extensions.Configuration.Json
 Microsoft.Extensions.Logging.Console
 Microsoft.Extensions.Logging.Debug
-
+Microsoft.Extensions.Logging.Log4Net.AspNetCore
 
 添加项目引用
 P0002_MyEtf
@@ -208,6 +216,14 @@ crontab -e
 0 18 * * 1-5 /home/wang/MyETF/SinaReader/start_SinaReader.sh
 
 保存退出
+
+
+
+额外增加的处理：
+增加判断，数据已存在，并且相同，则忽略的处理。 准备 1天多执行1-2次。
+避免误操作，于收盘前， 先执行了一次，导致收盘后再执行，没有效果。
+避免短时网络连接异常。然后当天的数据，进不去，导致缺一天的数据。
+以及避免 遇到 周一 不是交易日（2022-01-03）这种， 还要强行更新数据的情况。
 
 
 

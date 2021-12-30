@@ -21,6 +21,11 @@ namespace P0002_MyEtf.SinaReader
 {
     class Program
     {
+
+
+        private static ILogger<Program> _Logger;
+
+
         static void Main(string[] args)
         {
 
@@ -30,7 +35,7 @@ namespace P0002_MyEtf.SinaReader
             // 构建容器
             IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
 
-
+            _Logger = serviceProvider.GetService<ILogger<Program>>();
 
 
 
@@ -45,12 +50,45 @@ namespace P0002_MyEtf.SinaReader
             // 获取ETF主数据
             List<EtfMaster> etfMasters = etfMasterService.GetEtfMasterList();
 
+
+
+
             // 获取 ETF 日线数据.
             List<EtfDayLine> etfDayLines = ReadEtfDayLine(etfMasters);
+
+
+            if(etfDayLines == null || etfDayLines.Count == 0)
+            {
+                _Logger.LogWarning("未能获取到数据！");
+                return;
+            }
+
+
+            if(etfDayLines[0].TradingDate > DateTime.Today)
+            {
+                _Logger.LogInformation($"获取到了 {etfDayLines[0].TradingDate:yyyy-MM-dd} 的数据数据， 今天 {DateTime.Today:yyyy-MM-dd} 可能不是交易日！");
+                return;
+            }
+
 
             // 遍历结果.
             foreach(EtfDayLine etfDayLine in etfDayLines)
             {
+
+                _Logger.LogInformation($"{etfDayLine}");
+
+
+                var dbData = etfDayService.GetEtfDayLine(etfDayLine.EtfCode, etfDayLine.TradingDate);
+                if(dbData != null)
+                {
+                    // 数据已存在.
+                    if (dbData.Equals(etfDayLine))
+                    {
+                        // 数据相同.
+                        continue;
+                    }
+                }
+
                 // 插入 ETF日线数据.
                 etfDayService.InsertEtfDayLine(etfDayLine);
 
@@ -62,14 +100,13 @@ namespace P0002_MyEtf.SinaReader
 
 
 
-
                 // 计算  ETF周线数据
                 etfWeekService.CalculateEtfWeekLine(etfDayLine.EtfCode, etfDayLine.TradingDate);
             }
 
 
 
-            Console.WriteLine("##### Finish！#####");
+            _Logger.LogInformation("##### Finish！#####");
 
         }
 
@@ -87,6 +124,7 @@ namespace P0002_MyEtf.SinaReader
                 loggingBuilder.AddConfiguration(configuration.GetSection("Logging"));
                 loggingBuilder.AddConsole();
                 loggingBuilder.AddDebug();
+                loggingBuilder.AddLog4Net();
             });
 
             // Add access to generic IConfigurationRoot

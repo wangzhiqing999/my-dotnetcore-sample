@@ -49,12 +49,23 @@ namespace P0002_MyEtf.ServiceImpl
             try
             {
                 var dbData = this._MyEtfContext.EtfDayLines.Find(etfDayLine.EtfCode, etfDayLine.TradingDate);
-                if(dbData != null)
+                
+                if(dbData == null)
                 {
-                    return ServiceResult.DataHadExistsResult;
+                    // 插入.
+                    this._MyEtfContext.EtfDayLines.Add(etfDayLine);
+                } 
+                else
+                {
+                    // 更新.
+                    dbData.OpenPrice = etfDayLine.OpenPrice;
+                    dbData.ClosePrice = etfDayLine.ClosePrice;
+                    dbData.HighestPrice = etfDayLine.HighestPrice;
+                    dbData.LowestPrice = etfDayLine.LowestPrice;
+                    dbData.Volume = etfDayLine.Volume;
                 }
 
-                this._MyEtfContext.EtfDayLines.Add(etfDayLine);
+                
                 this._MyEtfContext.SaveChanges();
                 return ServiceResult.DefaultSuccessResult;
             }
@@ -67,6 +78,17 @@ namespace P0002_MyEtf.ServiceImpl
 
 
 
+        /// <summary>
+        /// 获取  ETF 日线数据.
+        /// </summary>
+        /// <param name="etfCode"></param>
+        /// <param name="tradingDate"></param>
+        /// <returns></returns>
+        public EtfDayLine GetEtfDayLine(string etfCode, DateTime tradingDate)
+        {
+            var result = this._MyEtfContext.EtfDayLines.Find(etfCode, tradingDate);
+            return result;
+        }
 
 
         /// <summary>

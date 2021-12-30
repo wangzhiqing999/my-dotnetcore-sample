@@ -109,5 +109,61 @@ namespace P0002_MyEtf.Model
 
 
 
+
+
+
+        public override string ToString()
+        {
+            return $"{EtfCode} {TradingDate:yyyy-MM-dd} : {this.OpenPrice}, {this.ClosePrice}, {this.HighestPrice}, {this.LowestPrice}";
+        }
+
+
+        public override bool Equals(object obj)
+        {
+            if(!(obj is EtfDayLine))
+            {
+                return false;
+            }
+
+            EtfDayLine otherData = obj as EtfDayLine;
+
+            if(otherData.EtfCode != this.EtfCode)
+            {
+                return false;
+            }
+            if (otherData.TradingDate != this.TradingDate)
+            {
+                return false;
+            }
+            if (otherData.OpenPrice != this.OpenPrice)
+            {
+                return false;
+            }
+            if (otherData.ClosePrice != this.ClosePrice)
+            {
+                return false;
+            }
+            if (otherData.HighestPrice != this.HighestPrice)
+            {
+                return false;
+            }
+            if (otherData.LowestPrice != this.LowestPrice)
+            {
+                return false;
+            }
+            if (otherData.Volume != this.Volume)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+
+        public override int GetHashCode()
+        {
+            return this.ToString().GetHashCode();
+        }
+
     }
 }

@@ -25,6 +25,14 @@ namespace P0002_MyEtf.Service
         /// <returns></returns>
         ServiceResult InsertEtfDayLine(EtfDayLine etfDayLine);
 
+        /// <summary>
+        /// 获取  ETF 日线数据.
+        /// </summary>
+        /// <param name="etfCode"></param>
+        /// <param name="tradingDate"></param>
+        /// <returns></returns>
+        EtfDayLine GetEtfDayLine(string etfCode, DateTime tradingDate);
+
 
         /// <summary>
         /// 获取 ETF 日线数据.
