@@ -35,6 +35,15 @@ namespace P0002_MyEtf.Service
 
 
 
+        /// <summary>
+        /// 获取最后一条 ETF 周线数据.
+        /// </summary>
+        /// <param name="etfCode"></param>
+        /// <returns></returns>
+        EtfWeekLine GetLastEtfWeekLines(string etfCode);
+
+
+
 
 
         /// <summary>

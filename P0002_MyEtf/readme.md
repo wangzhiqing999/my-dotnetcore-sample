@@ -234,6 +234,50 @@ crontab -e
 
 
 
+### 测试将项目发布到 Docker 当中.
+
+
+复制 P0002_MyEtf 与 P0002_MyEtf.SinaReader 这两个目录， 到 /home/wang/MyETF 目录下.
+在/home/wang/MyETF 目录下运行
+
+docker build -t etf-sina-reader -f ./P0002_MyEtf.SinaReader/Dockerfile .
+
+
+docker images
+REPOSITORY                         TAG          IMAGE ID       CREATED         SIZE
+etf-sina-reader                    latest       571f9c6133bb   3 minutes ago   193MB
+
+
+创建容器.
+docker create --name etf-sina-reader \
+  -v /home/wang/MyETF/P0002_MyEtf.SinaReader/config:/app/config \
+  etf-sina-reader
+
+
+测试运行
+docker start etf-sina-reader
+
+
+
+配置作业.
+运行
+crontab -e
+
+
+在编辑器中，输入：
+
+0 16-18 * * 1-5 docker start etf-sina-reader
+
+保存退出
+
+
+
+
+
+
+
+
+
 ## P0002_MyEtf.Postgrest
 本项目的数据库， 使用的 postgres.
 这个是尝试使用 Postgrest， 来搭建一个 Web Api 的环境.
@@ -242,5 +286,117 @@ crontab -e
 这个是用于测试 P0002_MyEtf.Postgrest
 搭建的一个测试页面。
 
+
+
+
+
+
+
+
+## P0002_MyTrading 项目
+类型：类库.
+添加 NuGet 引用
+
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.Design
+Microsoft.EntityFrameworkCore.Tools
+版本 5.0.13
+
+Npgsql.EntityFrameworkCore.PostgreSQL
+版本 5.0.10
+
+
+### 数据访问部分.
+
+添加 Model / DataAccess
+编译通过.
+
+
+#### 2022-01-10
+Add-Migration MyTradingInit
+用来生成命令，生成数据库和表的C#代码
+
+Script-Migration
+生成创建表的 SQL 语句.
+将内容保存到本地的 sql 文件中.
+
+到目标数据库去执行一下这个 sql 脚本。
+
+
+
+
+
+
+## P0002_MyTrading.Notice 项目
+功能：MACD周线金叉，发邮件通知；对于有持仓的，MACD周线死叉，发邮件通知。
+使用频率：每个周末执行一次.
+类型：控制台.
+添加 NuGet 引用
+
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.Relational
+版本 5.0.13
+
+Npgsql.EntityFrameworkCore.PostgreSQL
+版本 5.0.10
+
+Microsoft.Extensions.Configuration.Json
+Microsoft.Extensions.Logging.Console
+Microsoft.Extensions.Logging.Debug
+Microsoft.Extensions.Logging.Log4Net.AspNetCore
+
+添加项目引用
+P0002_MyEtf
+P0002_MyTrading
+
+
+
+
+编写
+Program.cs
+编译通过.
+
+测试运行.
+
+
+
+
+### 测试将项目发布到 Docker 当中.
+
+
+复制 P0002_MyEtf、P0002_MyTrading 与 P0002_MyTrading.Notice 这三个目录， 到 /home/wang/MyETF 目录下.
+在/home/wang/MyETF 目录下运行
+
+docker build -t etf-trading-notice -f ./P0002_MyTrading.Notice/Dockerfile .
+
+
+docker images
+REPOSITORY                         TAG          IMAGE ID       CREATED         SIZE
+etf-trading-notice                 latest       6c80f6e55bca   4 minutes ago   193MB
+
+
+创建容器.
+docker create --name etf-trading-notice \
+  -v /home/wang/MyETF/P0002_MyTrading.Notice/config:/app/config \
+  etf-trading-notice
+
+
+测试运行
+docker start etf-trading-notice
+
+
+
+
+
+配置作业.
+运行
+crontab -e
+
+
+在编辑器中，输入：
+
+15 18 * * 5 docker start etf-trading-notice
+
+保存退出
 
 

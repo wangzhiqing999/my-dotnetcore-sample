@@ -17,6 +17,12 @@ using P0002_MyEtf.ServiceImpl;
 using P0002_MyEtf.Model;
 using P0002_MyEtf.ServiceModel;
 
+
+using P0002_MyTrading.DataAccess;
+using P0002_MyTrading.Service;
+using P0002_MyTrading.ServiceImpl;
+using P0002_MyTrading.ServiceModel;
+
 namespace P0002_MyEtf.Test
 {
     class Program
@@ -73,7 +79,7 @@ namespace P0002_MyEtf.Test
             // #####  一个接口，多个实现的情况. #####
             IEnumerable<ITradingStrategyService> tradingStrategyServices = serviceProvider.GetServices<ITradingStrategyService>();
 
-
+            /*
 
             Console.WriteLine("========== TWO MA ==========");
 
@@ -96,10 +102,14 @@ namespace P0002_MyEtf.Test
 
 
 
+
+
+
             Console.WriteLine("========== MACD WEEK ==========");
 
             // 获取 MACD 周线的交易策略.
             ITradingStrategyService weekMacdTradingStrategyService = tradingStrategyServices.FirstOrDefault(h => h.GetType() == typeof(WeekMacdTradingStrategyService));
+
 
             // 获取周线数据.
             List<EtfWeekLine> weekLineList = etfWeekService.GetEtfWeekLines(testEtfCode);
@@ -113,10 +123,138 @@ namespace P0002_MyEtf.Test
                 }
             }
 
+            */
+
+
+
+            TestTrading(serviceProvider);
 
             Console.WriteLine("##### Finish！#####");
             Console.ReadLine();
         }
+
+
+
+
+
+
+
+
+        private static void TestTrading(IServiceProvider serviceProvider)
+        {
+
+            Console.WriteLine("##### TestTrading！#####");
+
+            IEnumerable<ITradingStrategyService> tradingStrategyServices = serviceProvider.GetServices<ITradingStrategyService>();
+
+            // 获取 MACD 周线的交易策略.
+            ITradingStrategyService weekMacdTradingStrategyService = tradingStrategyServices.FirstOrDefault(h => h.GetType() == typeof(WeekMacdTradingStrategyService));
+
+            // ETF主数据服务.
+            IEtfMasterService etfMasterService = serviceProvider.GetService<IEtfMasterService>();
+
+            // ETF 周线数据服务.
+            IEtfWeekService etfWeekService = serviceProvider.GetService<IEtfWeekService>();
+
+            // 简单交易服务.
+            ISimpleTradingService simpleTradingService = serviceProvider.GetService<ISimpleTradingService>();
+
+
+            // 获取ETF主数据
+            List<EtfMaster> etfMasters = etfMasterService.GetEtfMasterList();
+
+
+            DateTime startDate = new DateTime(2020, 1, 1);
+
+            int testTradingQuantity = 1000;
+
+
+            foreach(var etfMaster in etfMasters)
+            {
+                string testEtfCode = etfMaster.EtfCode;
+
+                // 获取周线数据.
+                List<EtfWeekLine> weekLineList = etfWeekService.GetEtfWeekLines(testEtfCode);
+
+                weekLineList = weekLineList.Where(p => p.TradingDate > startDate).ToList();
+
+                for (int i = 0; i < weekLineList.Count; i ++)
+                {
+                    var weekItem = weekLineList[i];
+
+                    TradingSignal tradingSignal = weekMacdTradingStrategyService.GetTradingSignal(testEtfCode, weekItem.TradingDate);
+
+
+
+                    if (i == weekLineList.Count - 1)
+                    {
+                        // 最后一周，强行平仓（如果有的话）
+
+                        TradingRequest tradingRequest = new TradingRequest()
+                        {
+                            TradingItemCode = testEtfCode,
+                            TradingQuantity = testTradingQuantity,
+
+                            TradingDate = weekLineList[i].TradingDate,
+                            TradingPrice = weekLineList[i].ClosePrice,
+                        };
+
+                        simpleTradingService.DoClose(tradingRequest);
+
+                        continue;
+                    }
+
+
+                    if (tradingSignal == TradingSignal.Buy)
+                    {
+
+                        TradingRequest tradingRequest = new TradingRequest()
+                        {
+                            TradingItemCode = testEtfCode,
+                            TradingQuantity = testTradingQuantity,
+
+                            TradingDate = weekLineList[i+1].TradingDate,
+                            TradingPrice = weekLineList[i + 1].OpenPrice,
+                        };
+
+                        simpleTradingService.DoOpen(tradingRequest);
+                    } 
+                    else if (tradingSignal == TradingSignal.Sell)
+                    {
+                        TradingRequest tradingRequest = new TradingRequest()
+                        {
+                            TradingItemCode = testEtfCode,
+                            TradingQuantity = testTradingQuantity,
+
+                            TradingDate = weekLineList[i + 1].TradingDate,
+                            TradingPrice = weekLineList[i + 1].OpenPrice,
+                        };
+
+                        simpleTradingService.DoClose(tradingRequest);
+                    }
+
+
+                }
+
+            }
+
+            
+
+            
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -142,11 +280,17 @@ namespace P0002_MyEtf.Test
             services.AddDbContext<MyEtfContext>(opt => opt.UseNpgsql(configuration.GetSection("MyEtfContext").Value,
                 x => x.MigrationsHistoryTable(HistoryRepository.DefaultTableName, "my_etf")));
 
+            services.AddDbContext<MyTradingContext>(opt => opt.UseNpgsql(configuration.GetSection("MyEtfContext").Value,
+                x => x.MigrationsHistoryTable(HistoryRepository.DefaultTableName, "my_trading")));
+
 
             // 服务注入.
             services.AddTransient<IEtfMasterService, DefaultEtfMasterService>();
             services.AddTransient<IEtfDayService, DefaultEtfDayService>();
             services.AddTransient<IEtfWeekService, DefaultEtfWeekService>();
+
+
+            services.AddTransient<ISimpleTradingService, DefaultSimpleTradingService>();
 
 
 

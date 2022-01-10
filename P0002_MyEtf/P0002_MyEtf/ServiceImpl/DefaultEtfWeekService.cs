@@ -157,5 +157,29 @@ namespace P0002_MyEtf.ServiceImpl
 
 
 
+
+        /// <summary>
+        /// 获取最后一条 ETF 周线数据.
+        /// </summary>
+        /// <param name="etfCode"></param>
+        /// <returns></returns>
+        public EtfWeekLine GetLastEtfWeekLines(string etfCode)
+        {
+            var query =
+                from data in this._MyEtfContext.EtfWeekLines
+                where
+                    data.EtfCode == etfCode
+                orderby
+                    data.TradingDate descending
+                select
+                    data;
+
+            EtfWeekLine result = query.FirstOrDefault();
+
+            return result;
+        }
+
+
+
     }
 }

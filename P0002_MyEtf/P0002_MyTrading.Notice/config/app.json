@@ -1,0 +1,26 @@
+{
+
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "System": "Warning",
+      "Microsoft": "Warning"
+    },
+    "Console": {
+      "IncludeScopes": true
+    }
+  },
+
+  "MyEtfContext": "Server=192.168.1.153;Port=5432;User ID=postgres;Password=123456;Database=postgres;",
+
+
+  "MailReceiveUser": "收件人邮箱地址",
+  "MailReceiveName": "收件人",
+  "MailSendUser": "发件人邮箱地址",
+  "MailSendName": "发件人",
+  "MailSendUserName": "腾讯邮箱的用户名",
+  "MailUserPassword": "腾讯邮箱的密码"
+
+
+
+}

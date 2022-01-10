@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P0002_MyEtf.SinaReader", "P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P0002_MyEtf.TdxDataImport", "P0002_MyEtf.TdxDataImport\P0002_MyEtf.TdxDataImport.csproj", "{66D01214-B5EF-49A4-A301-1988DCBCA453}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P0002_MyEtf.Test", "P0002_MyEtf.Test\P0002_MyEtf.Test.csproj", "{797C1EA2-35E7-46EA-9F92-EF895E3DC65F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P0002_MyEtf.Test", "P0002_MyEtf.Test\P0002_MyEtf.Test.csproj", "{797C1EA2-35E7-46EA-9F92-EF895E3DC65F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P0002_MyTrading", "P0002_MyTrading\P0002_MyTrading.csproj", "{4B66B62A-DA6E-419D-BD7E-32DE75C828BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P0002_MyTrading.Notice", "P0002_MyTrading.Notice\P0002_MyTrading.Notice.csproj", "{30F35963-2961-441B-979A-A9BFD2AD507E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{797C1EA2-35E7-46EA-9F92-EF895E3DC65F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{797C1EA2-35E7-46EA-9F92-EF895E3DC65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{797C1EA2-35E7-46EA-9F92-EF895E3DC65F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B66B62A-DA6E-419D-BD7E-32DE75C828BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B66B62A-DA6E-419D-BD7E-32DE75C828BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B66B62A-DA6E-419D-BD7E-32DE75C828BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B66B62A-DA6E-419D-BD7E-32DE75C828BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30F35963-2961-441B-979A-A9BFD2AD507E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30F35963-2961-441B-979A-A9BFD2AD507E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30F35963-2961-441B-979A-A9BFD2AD507E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30F35963-2961-441B-979A-A9BFD2AD507E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
