@@ -73,6 +73,14 @@ grant select on my_etf.etf_week_line to my_etf_anon;
 
 
 
+-- 内网自己使用的话，可以加下面的权限.
+grant insert on my_etf.etf_day_line to my_etf_anon;
+grant insert on my_etf.etf_week_line to my_etf_anon;
+grant update on my_etf.etf_week_line to my_etf_anon;
+
+
+
+
 create role my_etf_user noinherit login password 'my_etf_password';
 grant my_etf_anon to my_etf_user;
 
