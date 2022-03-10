@@ -400,3 +400,19 @@ crontab -e
 保存退出
 
 
+
+
+
+
+
+
+### TestPostgrest 测试使用 postgrest-csharp 包的项目.
+
+项目使用的数据库，为 PostgreSQL.
+额外运行一个 postgrest，复杂度不大.
+尝试 NuGet 引用 postgrest-csharp 包， 测试做一些基本的数据处理。
+
+
+
+
+
