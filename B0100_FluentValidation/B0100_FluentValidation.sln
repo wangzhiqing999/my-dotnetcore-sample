@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32526.322
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "B0100_FluentValidation", "B0100_FluentValidation\B0100_FluentValidation.csproj", "{CBF633E3-6C56-416C-A1A7-BC48EF318667}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B0100_FluentValidation.WebApi", "B0100_FluentValidation.WebApi\B0100_FluentValidation.WebApi.csproj", "{9DFB4A0B-931B-4678-A2EA-05AC1C17CF8F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CBF633E3-6C56-416C-A1A7-BC48EF318667}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBF633E3-6C56-416C-A1A7-BC48EF318667}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBF633E3-6C56-416C-A1A7-BC48EF318667}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBF633E3-6C56-416C-A1A7-BC48EF318667}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DFB4A0B-931B-4678-A2EA-05AC1C17CF8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DFB4A0B-931B-4678-A2EA-05AC1C17CF8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DFB4A0B-931B-4678-A2EA-05AC1C17CF8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DFB4A0B-931B-4678-A2EA-05AC1C17CF8F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {753C89AB-9564-4216-B654-683D830A5861}
+	EndGlobalSection
+EndGlobal

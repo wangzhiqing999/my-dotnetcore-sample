@@ -108,6 +108,18 @@ ASP.Net Code，中间件的例子代码 (DotNet Core 3.0)
 
 
 
+
+
+
+### B0100_FluentValidation
+
+使用 FluentValidation，来校验数据的例子。（.NET 6.0）
+
+
+
+
+
+
 ### B0250_Quartz
 使用 Visual Studio 2019， 创建一个 控制台 项目 （.NET 5.0）
 用于测试使用 Quartz 的例子.
