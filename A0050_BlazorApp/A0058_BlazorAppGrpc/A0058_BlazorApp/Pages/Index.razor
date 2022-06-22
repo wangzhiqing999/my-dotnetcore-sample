@@ -1,0 +1,25 @@
+﻿@page "/"
+@inject A0058_GrpcService.Greeter.GreeterClient GreeterClient
+
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+
+
+<div>grpc web response @Message</div>
+
+
+
+
+@code {
+    public string Message { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        var reply = await GreeterClient.SayHelloAsync(new A0058_GrpcService.HelloRequest { Name = "test" });
+        Message = reply.Message;
+    }
+}

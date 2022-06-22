@@ -63,6 +63,14 @@ EntityFramework Code First 的例子.  (使用 Postgres 数据库)
 使用 Visual Studio 2017， 创建一个 Web 项目，测试 React 的使用。(DotNet Core 2.0)
 
 
+
+### A0050_BlazorApp
+使用 Visual Studio 2022， 创建 BlazorApp 项目的例子。（ .NET 6.0）
+
+
+
+
+
 ### A0100_Database
 基本的访问数据库的例子代码.
 
