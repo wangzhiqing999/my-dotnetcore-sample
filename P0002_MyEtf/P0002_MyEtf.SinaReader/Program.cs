@@ -15,7 +15,7 @@ using P0002_MyEtf.DataAccess;
 using P0002_MyEtf.Service;
 using P0002_MyEtf.ServiceImpl;
 using P0002_MyEtf.Model;
-
+using System.Net.Http;
 
 namespace P0002_MyEtf.SinaReader
 {
@@ -100,8 +100,12 @@ namespace P0002_MyEtf.SinaReader
 
 
 
+
+                // 周线通过存储过程计算，不在导入数据时候计算了.
                 // 计算  ETF周线数据
-                etfWeekService.CalculateEtfWeekLine(etfDayLine.EtfCode, etfDayLine.TradingDate);
+                // etfWeekService.CalculateEtfWeekLine(etfDayLine.EtfCode, etfDayLine.TradingDate);
+
+
             }
 
 
@@ -114,6 +118,16 @@ namespace P0002_MyEtf.SinaReader
 
         private static void ConfigureServices(IServiceCollection services)
         {
+
+            // ############################################################
+            // 注意：
+            // 之前使用 .NET 5.0 正常运行的程序，  在升级到 .NET 6.0 之后，运行会报错。
+            // 错误信息是： Cannot write DateTime with Kind=Unspecified to PostgreSQL type 'timestamp with time zone', only UTC is supported......
+            // 解决办法是在初始化的时候，先调用下面这一行代码.
+            // ############################################################
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("./config/app.json", false)
@@ -219,15 +233,50 @@ namespace P0002_MyEtf.SinaReader
 
             string codeString = string.Join(',', etfMasters.Select(p => p.EtfCode.ToLower()).ToArray());
 
-            string url = $"http://hq.sinajs.cn/list={codeString}";
+            string url = $"https://hq.sinajs.cn/list={codeString}";
 
 
             //访问该链接
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Referrer = new Uri("https://finance.sina.com.cn");
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            response.EnsureSuccessStatusCode();
+            
+            using (StreamReader sr = new StreamReader(response.Content.ReadAsStream(), Encoding.UTF8))
+            {
+                int lineIndex = 0;
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    lineIndex++;
+
+                    if (String.IsNullOrWhiteSpace(line))
+                    {
+                        // 只有空白， 结束.
+                        break;
+                    }
+
+                    // 读取一行.
+                    EtfDayLine oneResult = GetOneEtfDayLine(line);
+
+                    // 加入列表.
+                    resultList.Add(oneResult);
+                }
+            }
+
+
+
+
+            /*
             WebRequest request = WebRequest.Create(url);
+            
+            request.Headers.Add("referer", "https://finance.sina.com.cn");
+
             //获得返回值
             WebResponse response = request.GetResponse();
             // 从 Internet 资源返回数据流。
             Stream s = response.GetResponseStream();
+            
 
             using (StreamReader sr = new StreamReader(s, Encoding.UTF8))
             {
@@ -250,7 +299,7 @@ namespace P0002_MyEtf.SinaReader
                     resultList.Add(oneResult);
                 }
             }
-
+            */
 
 
             return resultList;

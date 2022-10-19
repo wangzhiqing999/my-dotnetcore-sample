@@ -1,8 +1,12 @@
 echo 开发机器测试初始化脚本.
 
+
+
 P0002_MyEtf.TdxDataImport.exe D:\data\SH#510050.txt
 P0002_MyEtf.TdxDataImport.exe D:\data\SH#510180.txt
 P0002_MyEtf.TdxDataImport.exe D:\data\SH#510300.txt
+P0002_MyEtf.TdxDataImport.exe D:\data\SH#510500.txt
+
 P0002_MyEtf.TdxDataImport.exe D:\data\SH#510880.txt
 P0002_MyEtf.TdxDataImport.exe D:\data\SH#510900.txt
 P0002_MyEtf.TdxDataImport.exe D:\data\SH#512070.txt
@@ -18,7 +22,11 @@ P0002_MyEtf.TdxDataImport.exe D:\data\SH#515650.txt
 P0002_MyEtf.TdxDataImport.exe D:\data\SH#516920.txt
 P0002_MyEtf.TdxDataImport.exe D:\data\SH#518880.txt
 P0002_MyEtf.TdxDataImport.exe D:\data\SH#588000.txt
+
+
 P0002_MyEtf.TdxDataImport.exe D:\data\SZ#159920.txt
+P0002_MyEtf.TdxDataImport.exe D:\data\SZ#159938.txt
+P0002_MyEtf.TdxDataImport.exe D:\data\SZ#159939.txt
 P0002_MyEtf.TdxDataImport.exe D:\data\SZ#159949.txt
 
 

@@ -260,6 +260,16 @@ namespace P0002_MyEtf.Test
 
         private static void ConfigureServices(IServiceCollection services)
         {
+
+            // ############################################################
+            // 注意：
+            // 之前使用 .NET 5.0 正常运行的程序，  在升级到 .NET 6.0 之后，运行会报错。
+            // 错误信息是： Cannot write DateTime with Kind=Unspecified to PostgreSQL type 'timestamp with time zone', only UTC is supported......
+            // 解决办法是在初始化的时候，先调用下面这一行代码.
+            // ############################################################
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("./config/app.json", false)

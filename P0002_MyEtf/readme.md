@@ -249,8 +249,10 @@ etf-sina-reader                    latest       571f9c6133bb   3 minutes ago   1
 
 
 创建容器.
+（注意：这里使用 --net host 的原因，是因为配置文件里面， 数据库Server 填写的是 机器名。 ）
 docker create --name etf-sina-reader \
   -v /home/wang/MyETF/P0002_MyEtf.SinaReader/config:/app/config \
+  --net host \
   etf-sina-reader
 
 
@@ -266,11 +268,20 @@ crontab -e
 
 在编辑器中，输入：
 
-0 16-18 * * 1-5 docker start etf-sina-reader
+0 17-18 * * 1-5 docker start etf-sina-reader
 
 保存退出
 
 
+
+
+注意：
+需要先在 服务器上， 执行 
+sudo usermod -a --groups docker wang
+将用户 wang 加入 docker 组。
+
+这样， docker 相关命令前， 不需要加 sudo.
+否则，其他的命令，可以手动加 sudo,  但是配置的作业，就没法 sudo 了。
 
 
 
@@ -376,8 +387,10 @@ etf-trading-notice                 latest       6c80f6e55bca   4 minutes ago   1
 
 
 创建容器.
+（注意：这里使用 --net host 的原因，是因为配置文件里面， 数据库Server 填写的是 机器名。 ）
 docker create --name etf-trading-notice \
   -v /home/wang/MyETF/P0002_MyTrading.Notice/config:/app/config \
+  --net host \
   etf-trading-notice
 
 
@@ -411,6 +424,28 @@ crontab -e
 项目使用的数据库，为 PostgreSQL.
 额外运行一个 postgrest，复杂度不大.
 尝试 NuGet 引用 postgrest-csharp 包， 测试做一些基本的数据处理。
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 2022年10月修改
+
+将各个项目的 .NET 版本， 由 .NET 5.0 变更为 .NET 6.0
+管理 NuGet 程序包， 更新引用。
+
+其中，P0002_MyEtf.SinaReader 与  P0002_MyTrading.Notice 项目，移除掉之前的 Dockerfile， 重新添加 Docker 支持。
+
+
+
 
 
 

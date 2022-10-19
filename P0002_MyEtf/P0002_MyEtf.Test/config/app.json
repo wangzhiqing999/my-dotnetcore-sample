@@ -11,5 +11,5 @@
     }
   },
 
-  "MyEtfContext": "Server=192.168.1.153;Port=5432;User ID=postgres;Password=123456;Database=postgres;"
+  "MyEtfContext": "Server=pve001;Port=5432;User ID=postgres;Password=123456;Database=postgres;"
 }

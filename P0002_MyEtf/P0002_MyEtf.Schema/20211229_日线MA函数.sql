@@ -72,6 +72,7 @@ WHERE
 
 -- EF Core 原生 SQL 查询，需要一个 VIEW
 -- 参考：https://docs.microsoft.com/zh-cn/ef/core/modeling/keyless-entity-types?tabs=data-annotations
+-- 仅仅是需要这样 视图的列名 与 存储过程返回的列名 一致。
 CREATE VIEW my_etf.v_ma AS
 SELECT
   edl.etf_code,
