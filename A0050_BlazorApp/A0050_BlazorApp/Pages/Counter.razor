@@ -1,4 +1,5 @@
 ﻿@page "/counter"
+@inject NavigationManager NavManager
 
 <PageTitle>Counter</PageTitle>
 
@@ -8,11 +9,39 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
+
+
+<!--  尝试给组件添加按钮与事件.  -->
+<button class="btn btn-primary" @onclick="ResetToZero">重置</button>
+
+
+
 @code {
+
+
     private int currentCount = 0;
+
+
+
+    protected override void OnInitialized()
+    {
+        Console.WriteLine($"NavManager.BaseUri = {NavManager.BaseUri}");
+        Console.WriteLine($"NavManager.Uri = {NavManager.Uri}");
+    }
+
+
 
     private void IncrementCount()
     {
         currentCount++;
     }
+
+    /// <summary>
+    /// 重置处理.
+    /// </summary>
+    private void ResetToZero()
+    {
+        currentCount = 0;
+    }
+
 }

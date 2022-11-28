@@ -8,10 +8,29 @@ using Microsoft.EntityFrameworkCore;
 
 using A0005_EF_Mysql_V6.Model;
 using A0005_EF_Mysql_V6.DataAccess;
-
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.DependencyInjection;
+using MySql.EntityFrameworkCore.Extensions;
 
 namespace A0005_EF_Mysql_V6
 {
+
+
+    /// <summary>
+    /// 这个类是为了处理  Add-Migration MyFirstMigration 出错的 Bug。
+    /// 加上这个类，就能正常的完成 Add-Migration 的相关处理。
+    /// </summary>
+    public class MysqlEntityFrameworkDesignTimeServices : IDesignTimeServices
+    {
+        public void ConfigureDesignTimeServices(IServiceCollection serviceCollection)
+        {
+            serviceCollection.AddEntityFrameworkMySQL();
+            new EntityFrameworkRelationalDesignServicesBuilder(serviceCollection)
+                .TryAddCoreServices();
+        }
+    }
+
+
     class Program
     {
         static void Main(string[] args)
@@ -24,7 +43,7 @@ namespace A0005_EF_Mysql_V6
 
 
             var optionsBuilder = new DbContextOptionsBuilder<TestContext>();
-            optionsBuilder.UseMySql(connectionString: @"Server=192.168.1.88;Database=test2;Uid=root;Pwd=123456;CharSet=utf8", serverVersion: ServerVersion.Parse("5.7.34"));
+            optionsBuilder.UseMySQL(connectionString: @"Server=pve002;Database=test2;Uid=root;Pwd=123456;CharSet=utf8");
 
             using (TestContext context = new TestContext(optionsBuilder.Options))
             {

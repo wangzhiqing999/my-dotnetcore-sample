@@ -1,0 +1,26 @@
+﻿@* TextDisplay component *@
+
+<p>Enter text:</p>
+<input @onkeypress="HandleKeyPress" value="@data" @onkeypress:preventDefault />
+
+@code {
+
+    /// <summary>
+    /// 使用 EventCallback 处理跨组件的事件.
+    /// </summary>
+    [Parameter]
+    public EventCallback<KeyTransformation> OnKeyPressCallback { get; set; }
+
+
+
+    private string? data;
+
+
+
+    private async Task HandleKeyPress(KeyboardEventArgs e)
+    {
+        KeyTransformation t = new KeyTransformation() { Key = e.Key };
+        await OnKeyPressCallback.InvokeAsync(t);
+        data += t.TransformedKey;
+    }
+}

@@ -15,7 +15,7 @@ namespace A0005_EF_Mysql_V6.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("ProductVersion", "6.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("A0005_EF_Mysql_V6.Model.Document", b =>

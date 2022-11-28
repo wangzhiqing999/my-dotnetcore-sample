@@ -1,0 +1,32 @@
+﻿@page "/testpreventdefault"
+@inject IJSRuntime JS
+
+
+<h3>替代事件的默认 DOM 操作</h3>
+
+
+
+
+<input value=@data @onkeypress="ProcessKeyPress" @onkeypress:preventDefault />
+
+
+<p>
+    尝试在输入框里面，输入 @@,  预期是提示错误，且 @@ 不会出现在输入框中.
+</p>
+
+
+@code {
+    private string data;
+
+    private async Task ProcessKeyPress(KeyboardEventArgs e)
+    {
+        if (e.Key == "@")
+        {
+            await JS.InvokeVoidAsync("alert", "你按下了 @");
+        }
+        else
+        {
+            data += e.Key.ToUpper();
+        }
+    }
+}

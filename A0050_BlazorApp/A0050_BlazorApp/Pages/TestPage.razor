@@ -1,0 +1,73 @@
+﻿@page "/testpage"
+@using A0050_BlazorApp.Model
+
+<h3>通过创建模板重用组件</h3>
+
+<p>
+    参考页面：
+    https://learn.microsoft.com/zh-cn/training/modules/blazor-build-rich-interactive-components/6-reuse-components-creating-templates
+</p>
+
+
+
+
+<HeadingComponent>
+    <p>This text will be rendered by the template.</p>
+    <p>So will this list:
+    <ol>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ol>
+    </p> 
+</HeadingComponent>
+
+
+<hr/>
+
+
+<Heading2Component>
+   <HeaderContent>
+        This is the test page heading
+    </HeaderContent>
+    <BodyContent>
+        <p>This text will be rendered by the template.</p>
+        <p>So will this list:
+        <ol>
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+        </ol>
+        </p> 
+    </BodyContent>
+</Heading2Component>
+
+
+<hr />
+
+
+<ObjectDataList Data=@todos>
+    <h4>Todo: @context.Title</h4>
+    <p>Minutes: @context.Minutes</p>    
+</ObjectDataList>
+
+
+
+@code {
+    
+    private TodoData[] todos;
+
+    protected override void OnInitialized()
+    {
+        todos = new TodoData[]
+        {
+                new TodoData() { Title = "Analysis", Minutes = 40 },
+                new TodoData() { Title = "Design", Minutes = 30 },
+                new TodoData() { Title = "Implementation", Minutes = 75 },
+                new TodoData() { Title = "Testing", Minutes = 40 }
+        };
+    }
+
+
+
+}

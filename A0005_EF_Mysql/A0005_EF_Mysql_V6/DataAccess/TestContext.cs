@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 
 using A0005_EF_Mysql_V6.Model;
-
+using MySql.EntityFrameworkCore.Extensions;
 
 namespace A0005_EF_Mysql_V6.DataAccess
 {
@@ -99,7 +99,7 @@ namespace A0005_EF_Mysql_V6.DataAccess
             {
                 if (optionsBuilder.IsConfigured == false)
                 {
-                    optionsBuilder.UseMySql(connectionString: @"Server=192.168.1.88;Database=test2;Uid=root;Pwd=123456;CharSet=utf8", serverVersion: ServerVersion.Parse("5.7.34"));
+                    optionsBuilder.UseMySQL(connectionString: @"Server=pve002;Database=test2;Uid=root;Pwd=123456;CharSet=utf8");
                 }
                 base.OnConfiguring(optionsBuilder);
             }
@@ -147,6 +147,17 @@ namespace A0005_EF_Mysql_V6.DataAccess
                         .WithMany(m => m.UserRoles)
                         // 外键.
                         .HasForeignKey(f => f.RoleCode);
+
+
+
+            // 尝试设置字符串的字符集，失败了。
+            // Add-Migration 之后，生成的代码，编译不过。
+            /*
+            modelBuilder.Entity<MrUser>(e =>
+            {
+                e.Property(p => p.UserName).ForMySQLHasCharset("utf8mb4"); // defining charset in a property
+            });
+            */
 
         }
 

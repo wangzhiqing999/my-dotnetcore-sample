@@ -1,0 +1,14 @@
+﻿<h1>Contoso Ltd</h1>
+<h3>@HeaderContent</h3>
+
+@BodyContent
+<p></p>
+<p style="font-style:italic; color:red;">(c) 2021</p>
+
+@code {
+    [Parameter]
+    public RenderFragment HeaderContent { get; set; }
+
+    [Parameter]
+    public RenderFragment BodyContent { get; set; }
+}

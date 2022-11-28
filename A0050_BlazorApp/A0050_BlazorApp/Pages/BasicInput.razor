@@ -1,0 +1,136 @@
+﻿@page "/basicinput"
+@using A0050_BlazorApp.Data;
+@inject IJSRuntime JS
+
+<PageTitle>基本输入</PageTitle>
+
+<h1>基本输入</h1>
+
+
+<table @onclick="TableHadClick" border="1">
+    <tr>
+        <td>姓名</td>
+        <td><input @ref=InputFieldName @onfocus="NameHandleFocus" @bind="dataName" @onkeypress="ProcessKeyPress" /></td>
+    </tr>
+    <tr>
+        <td>年龄</td>
+        <td><input @ref=InputFieldAge @onfocus="AgeHandleFocus" @bind="dataAge" /></td>
+    </tr>
+
+    <tr>
+        <td>
+            <button @onclick="CheckData">检查数据</button>
+        </td>
+
+        <td>
+            <button @onclick="SaveData" @onclick:stopPropagation>存储数据</button>
+        </td>
+    </tr>
+</table>
+
+
+
+<h3>测试点.</h3>
+<ul>
+    <li>
+        点击【检查数据】按钮，如果存在有数据没有输入的话，光标会跳到未输入的那个 输入框.
+    </li>
+
+    <li>
+        点击【存储数据】按钮，如果都输入了，那么会调用 javascript 的 alert 来弹出确认消息.
+    </li>
+
+    <li>
+        【检查数据】按钮与【存储数据】按钮，都在 table 里面。
+        <br/>
+        点击按钮，触发事件，会向上传播，导致触发 table 的onclick 事件.
+        <br />
+        【存储数据】按钮 增加了额外的设置，避免向上传播.
+    </li>
+
+    <li>
+        姓名的地方，输入一个 @@，来测试 替代事件的默认 DOM 操作
+    </li>
+</ul>
+
+
+@code {
+
+    private ElementReference InputFieldName;
+    private ElementReference InputFieldAge;
+
+    private string? dataName;
+    private string? dataAge;
+
+
+
+    private async Task CheckData()
+    {
+        if (string.IsNullOrEmpty(dataName))
+        {
+            await InputFieldName.FocusAsync();
+            return;
+        }
+        if (string.IsNullOrEmpty(dataAge))
+        {
+            await InputFieldAge.FocusAsync();
+            return;
+        }
+    }
+
+
+    private async Task SaveData()
+    {
+        if (string.IsNullOrEmpty(dataName))
+        {
+            await InputFieldName.FocusAsync();
+            return;
+        }
+        if (string.IsNullOrEmpty(dataAge))
+        {
+            await InputFieldAge.FocusAsync();
+            return;
+        }
+
+        string msg = "姓名与年龄都输入了！";
+
+        // 这里的 Console.WriteLine， 可以在浏览器的 控制台看到输出.
+        Console.WriteLine(msg);
+
+        // 这里是调用 js 的 alert 语句，来进行处理.
+        await JS.InvokeVoidAsync("alert", msg);
+    }
+
+    private void NameHandleFocus()
+    {
+        Console.WriteLine("姓名输入框获得了焦点！");
+    }
+
+    private void AgeHandleFocus()
+    {
+        Console.WriteLine("年龄输入框获得了焦点！");
+    }
+
+
+
+    // 测试：替代事件的默认 DOM 操作
+    private async Task ProcessKeyPress(KeyboardEventArgs e)
+    {
+        if (e.Key == "@")
+        {
+            await JS.InvokeVoidAsync("alert", "你在姓名这里，输入了 @.");
+        }        
+    }
+
+
+
+    private void TableHadClick()
+    {
+        Console.WriteLine("Table 被点击了！");
+    }
+
+
+
+
+
+}

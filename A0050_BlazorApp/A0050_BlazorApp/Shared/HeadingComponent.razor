@@ -1,0 +1,23 @@
+﻿<h1>Contoso Ltd</h1>
+<h3>Heading</h3>
+
+@ChildContent
+
+<p></p>
+<p style="font-style:italic; color:red;">(c) 2021</p>
+
+
+@code {
+
+
+    /// <summary>
+    /// RenderFragment 类型
+    /// 模板组件为一个或多个 HTML 标记片段提供布局和逻辑。 
+    /// 此 HTML 使用模板组件提供的上下文呈现。 
+    /// 模板组件使用 RenderFragement 对象作为占位符，在运行时将标记插入其中。
+    /// 
+    /// 下面是例子.
+    /// </summary>
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

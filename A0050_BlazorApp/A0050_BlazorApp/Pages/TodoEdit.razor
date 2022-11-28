@@ -1,0 +1,75 @@
+﻿@page "/todoedit"
+@using A0050_BlazorApp.Model;
+
+<div class="row">
+    <div class="col"><h3>To Do List (@ToDos.Count(todo => !todo.IsDone))</h3></div>
+    <div class="col"><h5 class="float-right">Total Minutes: @TotalCount</h5></div>
+</div>
+
+<input type="number" width="2" min="0" max="@upperIndex" @onchange="ChangeTodo" value="@index" />
+
+<EditForm Model=@currentTodo>
+    <InputCheckbox @bind-Value=currentTodo.IsDone></InputCheckbox>
+    <InputText @bind-Value=currentTodo.Title></InputText>
+    <InputNumber @bind-Value=currentTodo.Minutes></InputNumber>
+</EditForm>
+
+
+<hr/>
+<p>
+    本画面为测试 EditForm 的使用。
+    <br/>
+    EditForm 组件实现双向数据绑定。 表单显示从模型中检索到的值，但用户可以在表单中更新这些值，并将其推送回该模型。
+    <br/>
+    参考页面：
+    https://learn.microsoft.com/zh-cn/training/modules/blazor-improve-how-forms-work/4-take-advantage-power-blazor-forms
+</p>
+
+
+@code {
+
+
+    public List<TodoData> ToDos { get; set; }
+    public int TotalCount { get; set; }
+
+
+    private TodoData currentTodo;
+    private int index = 0;
+    private int upperIndex = 0;
+
+    protected override void OnInitialized()
+    {
+        ToDos = new List<TodoData>()
+        {
+                new TodoData() { Title = "Analysis", Minutes = 40 },
+                new TodoData() { Title = "Design", Minutes = 30 },
+                new TodoData() { Title = "Implementation", Minutes = 75 },
+                new TodoData() { Title = "Testing", Minutes = 40 }
+        };
+
+
+        upperIndex = ToDos.Count - 1;
+
+        currentTodo = ToDos[0];
+
+        UpdateTotalMinutes();
+    }
+
+    public void UpdateTotalMinutes()
+    {
+        TotalCount = ToDos.Sum(x => x.Minutes);
+    }
+
+
+
+    private async Task ChangeTodo(ChangeEventArgs e)
+    {
+        index = int.Parse(e.Value as string);
+        if (index <= upperIndex && index >= 0)
+        {
+            currentTodo = ToDos[index];
+
+            UpdateTotalMinutes();
+        }
+    }
+}

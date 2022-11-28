@@ -1,0 +1,26 @@
+﻿@using A0050_BlazorApp.Model
+
+<tr>
+    <td>@Item.Title</td>
+    <td>@Item.Minutes</td>
+    <td>
+        <button type="button" class="btn btn-success btn-sm float-right" @onclick="AddMinute">
+            + Add Minutes
+        </button>
+    </td>
+</tr>
+
+@code {
+
+    [Parameter]
+    public TodoData Item { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnMinutesAdded { get; set; }
+
+    public async Task AddMinute(MouseEventArgs e)
+    {
+        Item.Minutes += 1;
+        await OnMinutesAdded.InvokeAsync(e);
+    }
+}

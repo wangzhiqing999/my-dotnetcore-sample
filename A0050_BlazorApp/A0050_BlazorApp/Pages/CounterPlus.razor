@@ -1,0 +1,62 @@
+﻿@page "/counterplus/{currentCount:int}"
+
+
+<PageTitle>Counter Plus</PageTitle>
+
+<h1>Counter Plus</h1>
+
+
+<p role="status">Current count: @CurrentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+
+
+<h3>知识点</h3>
+<ul>
+    <li>
+        page 的地方，定义好路径的格式，来接收特定 url 传递进来的参数.
+    </li>
+    
+    <li>
+        事件传递有关用户单击了哪个按钮或是否在 MouseEventArgs 参数中单击按钮的同时按住了 Ctrl 或 Alt 等按钮的信息。
+    </li>
+
+</ul>
+
+
+@code {
+
+
+    /// <summary>
+    /// 外部传递进来的参数.
+    /// </summary>
+    [Parameter]
+    public int CurrentCount { set; get; }
+
+
+    private void IncrementCount(MouseEventArgs e)
+    {
+        if(e.AltKey && e.CtrlKey)
+        {
+            Console.WriteLine("点击按钮的时候，按住了 Ctrl + Alt 键！");
+            CurrentCount += 15;
+        }
+        else if (e.CtrlKey) 
+        {
+            Console.WriteLine("点击按钮的时候，按住了 Ctrl 键！");
+            CurrentCount += 10;
+        }
+        else if(e.AltKey)
+        {
+            Console.WriteLine("点击按钮的时候，按住了 Alt 键！");
+            CurrentCount += 5;
+        }
+        else
+        {
+            Console.WriteLine("点击按钮的时候，没有按住 Ctrl 或者 Alt 键！");
+            CurrentCount++;
+        }
+    }
+
+}

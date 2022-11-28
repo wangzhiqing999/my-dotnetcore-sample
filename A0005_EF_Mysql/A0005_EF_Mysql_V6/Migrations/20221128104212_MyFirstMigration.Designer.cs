@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace A0005_EF_Mysql_V6.Migrations
 {
     [DbContext(typeof(TestContext))]
-    [Migration("20211209054621_MyFirstMigration")]
+    [Migration("20221128104212_MyFirstMigration")]
     partial class MyFirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("ProductVersion", "6.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("A0005_EF_Mysql_V6.Model.Document", b =>

@@ -136,3 +136,42 @@ Update-Database
 
 
 
+
+
+
+# 2022-11-28
+
+移除 Migrations 目录。
+移除 
+Pomelo.EntityFrameworkCore.MySql
+
+添加
+MySql.EntityFrameworkCore 6.0.7
+
+
+增加 
+MysqlEntityFrameworkDesignTimeServices
+的代码。
+
+
+将
+UseMySql(connectionString, serverVersion);
+修改为
+UseMySQL(connectionString);
+
+
+
+重新执行
+Add-Migration MyFirstMigration
+完成.
+
+
+Script-Migration
+生成创建表的 SQL 语句.
+
+Update-Database
+执行生成的代码，更新数据库表结构.
+
+
+测试运行
+

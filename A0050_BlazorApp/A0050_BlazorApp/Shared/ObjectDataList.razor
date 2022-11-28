@@ -1,0 +1,14 @@
+﻿@typeparam TItem
+@foreach (TItem item in Data ?? Array.Empty<TItem>())
+{
+        <p>@ChildContent(item)</p>
+}
+
+
+@code {
+    [Parameter]
+    public IEnumerable<TItem> Data { get; set; }
+
+    [Parameter]
+    public RenderFragment<TItem> ChildContent { get; set; }
+}

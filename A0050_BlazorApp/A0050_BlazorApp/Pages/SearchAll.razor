@@ -1,0 +1,24 @@
+﻿@page "/SearchAll/{*keyword}"
+
+<h3>查询</h3>
+
+
+<p>查询的关键字是: @Keyword</p>
+
+
+<p>
+    本页面测试的是： 将星号 (*) 作为路由参数名称前缀，使路由参数捕获全部：
+</p>
+
+
+@code {
+
+
+    /// <summary>
+    /// 外部传入的参数.
+    /// </summary>
+    [Parameter]
+    public string? Keyword { get; set; }
+
+
+}

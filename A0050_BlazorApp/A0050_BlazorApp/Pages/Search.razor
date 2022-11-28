@@ -1,0 +1,20 @@
+﻿@page "/Search/{keyword}"
+
+<h3>查询</h3>
+
+
+<p>查询的关键字是: @Keyword</p>
+
+
+
+
+
+@code {
+
+    /// <summary>
+    /// 外部传入的参数.
+    /// </summary>
+    [Parameter]
+    public string? Keyword { get; set; }
+
+}

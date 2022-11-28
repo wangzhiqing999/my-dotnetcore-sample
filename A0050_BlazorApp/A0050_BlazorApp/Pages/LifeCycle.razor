@@ -1,0 +1,114 @@
+﻿@page "/lifecycle/{currentCount:int}"
+
+<h3>生命周期</h3>
+
+
+<img src="/component-lifecycle.png" style="max-width:640px;"/>
+
+
+
+
+
+<p>
+    参考文档：
+    https://learn.microsoft.com/zh-cn/training/modules/blazor-build-rich-interactive-components/4-improve-app-interactivity-lifecycle-events
+
+    <br/>
+
+    控制台看输出.
+</p>
+
+
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @CurrentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+
+
+<!--  尝试给组件添加按钮与事件.  -->
+<button class="btn btn-primary" @onclick="ResetToZero">重置</button>
+
+
+
+
+
+
+@code {
+
+
+    /// <summary>
+    /// 外部传递进来的参数.
+    /// </summary>
+    [Parameter]
+    public int CurrentCount { set; get; } = 0;
+
+
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        // 当创建组件时，即使该组件没有任何参数，SetParametersAsync 方法也始终会运行。
+
+        Console.WriteLine("##### SetParametersAsync #####");
+
+        Console.WriteLine($"CurrentCount = {CurrentCount}");
+
+
+        await base.SetParametersAsync(parameters);
+    }
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("##### OnInitializedAsync #####");
+
+        await base.OnInitializedAsync();
+    }
+
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        Console.WriteLine($"##### OnAfterRenderAsync({firstRender}) #####");
+
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+
+
+
+
+    protected override Task OnParametersSetAsync()
+    {
+
+        Console.WriteLine("##### OnParametersSetAsync #####");
+
+        Console.WriteLine($"CurrentCount = {CurrentCount}");
+
+        return base.OnParametersSetAsync();
+    }
+
+
+
+
+
+    private void IncrementCount()
+    {
+        CurrentCount++;
+    }
+
+    /// <summary>
+    /// 重置处理.
+    /// </summary>
+    private void ResetToZero()
+    {
+        CurrentCount = 0;
+    }
+
+
+
+
+}

@@ -1,0 +1,55 @@
+﻿@page "/todo"
+@using A0050_BlazorApp.Model;
+
+<h3>待办事项 (@todos.Count(todo => !todo.IsDone))</h3>
+
+
+
+<ul>
+    @foreach (var todo in todos)
+    {
+        <li>
+            <input type="checkbox" @bind="todo.IsDone" />
+            <input @bind="todo.Title" />
+        </li>
+    }
+</ul>
+
+<input placeholder="需要待办的事项" @bind="newTodo" />
+
+<button @onclick="AddTodo">添加</button>
+
+
+@code {
+
+    // 这个页面主要用来学习，如何使用 数据绑定与事件。
+    // https://learn.microsoft.com/zh-cn/training/modules/build-blazor-webassembly-visual-studio-code/7-exercise-razor-binding?pivots=vstudio
+
+    /// <summary>
+    /// 画面绑定需要的数据列表.
+    /// </summary>
+    private List<TodoData> todos = new();
+
+
+    /// <summary>
+    /// 画面绑定需要的输入框.
+    /// </summary>
+    private string? newTodo;
+
+
+
+    /// <summary>
+    /// 新增待办事项.
+    /// </summary>
+    private void AddTodo()
+    {
+        Console.WriteLine("### 测试一下，看看这个是输出在哪里。###");
+
+        if (!string.IsNullOrWhiteSpace(newTodo))
+        {
+            todos.Add(new TodoData { Title = newTodo });
+            newTodo = string.Empty;
+        }
+    }
+
+}
