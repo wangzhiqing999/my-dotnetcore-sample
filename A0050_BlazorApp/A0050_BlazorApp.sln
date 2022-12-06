@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "A0058_GrpcService", "A0058_
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "A0058_BlazorApp", "A0058_BlazorAppGrpc\A0058_BlazorApp\A0058_BlazorApp.csproj", "{2A2CEDD0-835A-4BE1-91B9-8EFBC9FDB550}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A0055_RazorClassLibrary", "A0055_RazorClassLibrary\A0055_RazorClassLibrary.csproj", "{87C03DC2-89B9-4136-8097-64767F218F57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "A0055_RazorClassLibrary", "A0055_RazorClassLibrary\A0055_RazorClassLibrary.csproj", "{87C03DC2-89B9-4136-8097-64767F218F57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A0052_BlazorApp", "A0052_BlazorApp\A0052_BlazorApp.csproj", "{77857CE0-C87A-4BDD-AEBE-C18FA31DBDAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{87C03DC2-89B9-4136-8097-64767F218F57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87C03DC2-89B9-4136-8097-64767F218F57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87C03DC2-89B9-4136-8097-64767F218F57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77857CE0-C87A-4BDD-AEBE-C18FA31DBDAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77857CE0-C87A-4BDD-AEBE-C18FA31DBDAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77857CE0-C87A-4BDD-AEBE-C18FA31DBDAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77857CE0-C87A-4BDD-AEBE-C18FA31DBDAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

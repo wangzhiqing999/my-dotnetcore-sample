@@ -16,12 +16,24 @@ Do not use top-level statement 打勾
 创建结果：
 一个项目
 
+
+依赖项
+包：
+Microsoft.AspNetCore.Components.WebAssembly
+Microsoft.AspNetCore.Components.WebAssembly.DevServer
+框架：
+Microsoft.NETCore.App
+
+
+
 默认生成的例子代码中。
 前端，向后端发起请求的时候，实际访问的， 是 \wwwroot\sample-data\weather.json 文件。
 并不是什么 Web Api 接口.
 
 
 也就是，如果单纯的写 前端的代码，  Web Api 是其他人写的话， 可以尝试用这种操作。
+
+
 
 
 
@@ -51,6 +63,59 @@ Client项目的前端，向Server 项目的后端发起请求的时候，也能�
 
 
 如果前端/后端的代码， 都是自己写的话，使用这种方式，比较好划分。
+
+
+
+
+
+
+### A0052_BlazorApp
+创建 Blazor Server 项目.
+
+框架： .NET 6.0
+身份验证类型： 无
+
+配置 HTTPS 不打勾
+启用 Docker 不打勾
+不使用顶级语句 打勾
+
+
+
+
+创建结果：
+一个项目
+
+
+依赖项
+框架：
+Microsoft.AspNetCore.App
+Microsoft.NETCore.App
+
+
+
+
+
+
+
+### 注意事项
+
+
+创建 Blazor WebAssembly 项目、还是创建 Blazor Server 项目.
+参考 
+https://learn.microsoft.com/zh-cn/training/modules/blazor-introduction/3-when-to-use-blazor
+
+
+
+有下面几点，是需要考虑的
+
+.NET 熟悉程度
+集成需求
+现有服务器配置
+应用程序的复杂性
+网络要求
+代码安全要求
+
+
 
 
 
