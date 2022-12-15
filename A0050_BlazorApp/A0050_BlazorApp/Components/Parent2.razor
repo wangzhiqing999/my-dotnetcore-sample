@@ -1,0 +1,36 @@
+﻿<div class="bg-primary jumbotron  text-white">
+    
+    <h3>我是 父组件2</h3>
+
+    <input placeholder="需要传递给子组件的数据" @bind="myInputValue" />
+
+    <Self2 Value="@myInputValue"
+           ValueChanged="@OnValueChanged" />
+
+    <br/>
+
+    <Self2 @bind-Value="myInputValue" />
+
+</div>
+
+
+@code {
+
+
+    /// <summary>
+    /// 当前组件输入的数据.
+    /// </summary>
+    private string? myInputValue;
+
+
+
+    /// <summary>
+    /// 用于处理 子组件 数据发生变化的事件
+    /// </summary>
+    /// <param name="val"></param>
+    private void OnValueChanged(string val)
+    {
+        myInputValue = val;
+    }
+
+}

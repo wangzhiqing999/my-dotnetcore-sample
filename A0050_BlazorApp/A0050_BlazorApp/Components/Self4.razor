@@ -1,0 +1,26 @@
+﻿
+<div class="bg-white p-3" style="color: #000;">
+    <h3>我是 子组件4</h3>
+
+    <p>爷组件传入给我的数值: @CascadingModel.Value</p>
+
+    <button @onclick="ChangGrandValue">尝试在子组件中修改爷爷组件的数据</button>
+</div>
+
+@code {
+
+
+    /// <summary>
+    /// Name参数必须与Name带有CascadingValue组件的属性匹配，如果我们没有注明Name，则会通过类型匹配一个最相似的属性
+    /// </summary>
+    [CascadingParameter(Name = "GrandValue")]
+    CascadingModel<string> CascadingModel { get; set; }
+
+
+    void ChangGrandValue()
+    {
+        CascadingModel.Value = "I'm Form self:"
+            + DateTime.Now.ToString("HH:mm:ss");
+    }
+
+}

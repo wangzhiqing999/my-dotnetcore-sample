@@ -1,0 +1,18 @@
+﻿
+
+<div class="bg-white p-3" style="color: #000;">
+    <h3>我是 子组件1</h3>
+
+    <p>父组件传入给我的数值: @Value</p>
+</div>
+
+@code {
+
+    /// <summary>
+    /// 组件的参数.
+    /// </summary>
+    [Parameter]
+    public string? Value { get; set; }
+
+
+}

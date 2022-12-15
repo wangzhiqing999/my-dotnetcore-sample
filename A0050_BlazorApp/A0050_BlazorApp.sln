@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "A0058_BlazorApp", "A0058_Bl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "A0055_RazorClassLibrary", "A0055_RazorClassLibrary\A0055_RazorClassLibrary.csproj", "{87C03DC2-89B9-4136-8097-64767F218F57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A0052_BlazorApp", "A0052_BlazorApp\A0052_BlazorApp.csproj", "{77857CE0-C87A-4BDD-AEBE-C18FA31DBDAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "A0052_BlazorApp", "A0052_BlazorApp\A0052_BlazorApp.csproj", "{77857CE0-C87A-4BDD-AEBE-C18FA31DBDAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,30 @@
+﻿<div class="bg-primary jumbotron  text-white">
+
+    <h3>我是 爷爷组件4 </h3>
+
+    <input placeholder="需要传递给孙子组件的数据" @bind="_cascadingModel.Value" />
+
+    <CascadingValue Value="@_cascadingModel" Name="GrandValue">
+        <Parent4 />
+    </CascadingValue>
+
+</div>
+
+
+@code {
+
+
+    private CascadingModel<string> _cascadingModel = new CascadingModel<string>("GrandValue");
+
+
+
+    protected override void OnInitialized()
+    {
+        _cascadingModel.StateHasChanged += StateHasChanged;
+        base.OnInitialized();
+    }
+
+ 
+
+
+}
