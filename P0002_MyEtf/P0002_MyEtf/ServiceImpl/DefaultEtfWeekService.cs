@@ -76,44 +76,44 @@ namespace P0002_MyEtf.ServiceImpl
                 }
 
 
-                EtfWeekLine etfWeekLine = this._MyEtfContext.EtfWeekLines.Find(etfCode, startDate);
-                if(etfWeekLine == null)
+
+                // 主键是 代码 与 最后交易日.
+                // 只能先删除，后插入.
+                var removeQuery =
+                    from data in _MyEtfContext.EtfWeekLines
+                    where
+                        data.EtfCode == etfCode
+                        && data.TradingDate >= startDate
+                        && data.TradingDate <= tradingDate
+                    select data;
+                List<EtfWeekLine> removeDataList = removeQuery.ToList();
+
+                foreach(var removeItem in removeDataList)
                 {
-                    // 新增.
-                    etfWeekLine = new EtfWeekLine()
-                    {
-                        EtfCode = etfCode,
-                        TradingDate = startDate
-                    };
-
-                    // 开盘.
-                    etfWeekLine.OpenPrice = etfDayLineList.First().OpenPrice;
-                    // 收盘.
-                    etfWeekLine.ClosePrice = etfDayLineList.Last().ClosePrice;
-                    // 最高.
-                    etfWeekLine.HighestPrice = etfDayLineList.Select(p => p.HighestPrice).Max();
-                    // 最低.
-                    etfWeekLine.LowestPrice = etfDayLineList.Select(p => p.LowestPrice).Min();
-                    // 成交.
-                    etfWeekLine.Volume = etfDayLineList.Select(p => p.Volume).Sum();
-
-                    this._MyEtfContext.EtfWeekLines.Add(etfWeekLine);
-                } 
-                else
-                {
-                    // 更新.
-
-                    // 收盘.
-                    etfWeekLine.ClosePrice = etfDayLineList.Last().ClosePrice;
-                    // 最高.
-                    etfWeekLine.HighestPrice = etfDayLineList.Select(p => p.HighestPrice).Max();
-                    // 最低.
-                    etfWeekLine.LowestPrice = etfDayLineList.Select(p => p.LowestPrice).Min();
-                    // 成交.
-                    etfWeekLine.Volume = etfDayLineList.Select(p => p.Volume).Sum();
-
-
+                    _MyEtfContext.EtfWeekLines.Remove(removeItem);
                 }
+
+
+                // 新增.
+                EtfWeekLine etfWeekLine = new EtfWeekLine()
+                {
+                    EtfCode = etfCode,
+                    TradingDate = etfDayLineList.Last().TradingDate
+                };
+
+                // 开盘.
+                etfWeekLine.OpenPrice = etfDayLineList.First().OpenPrice;
+                // 收盘.
+                etfWeekLine.ClosePrice = etfDayLineList.Last().ClosePrice;
+                // 最高.
+                etfWeekLine.HighestPrice = etfDayLineList.Select(p => p.HighestPrice).Max();
+                // 最低.
+                etfWeekLine.LowestPrice = etfDayLineList.Select(p => p.LowestPrice).Min();
+                // 成交.
+                etfWeekLine.Volume = etfDayLineList.Select(p => p.Volume).Sum();
+
+                this._MyEtfContext.EtfWeekLines.Add(etfWeekLine);
+                
 
 
 

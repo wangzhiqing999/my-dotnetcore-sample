@@ -99,11 +99,8 @@ namespace P0002_MyEtf.SinaReader
                 etfDayService.CalculateEtfDayMacd(etfDayLine.EtfCode, etfDayLine.TradingDate);
 
 
-
-
-                // 周线通过存储过程计算，不在导入数据时候计算了.
                 // 计算  ETF周线数据
-                // etfWeekService.CalculateEtfWeekLine(etfDayLine.EtfCode, etfDayLine.TradingDate);
+                etfWeekService.CalculateEtfWeekLine(etfDayLine.EtfCode, etfDayLine.TradingDate);
 
 
             }
