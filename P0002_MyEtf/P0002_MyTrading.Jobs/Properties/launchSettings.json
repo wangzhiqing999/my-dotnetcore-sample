@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "P0002_MyTrading.Jobs": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

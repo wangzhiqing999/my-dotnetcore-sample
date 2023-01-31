@@ -1,0 +1,17 @@
+{
+
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "System": "Warning",
+      "Microsoft": "Warning"
+    },
+    "Console": {
+      "IncludeScopes": true
+    }
+  },
+
+  "MyEtfContext": "Server=pve001;Port=5432;User ID=postgres;Password=123456;Database=postgres;",
+
+
+}

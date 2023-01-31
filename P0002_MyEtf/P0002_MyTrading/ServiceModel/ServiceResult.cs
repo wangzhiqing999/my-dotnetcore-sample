@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace P0002_MyTrading.ServiceModel
 {
@@ -31,6 +32,14 @@ namespace P0002_MyTrading.ServiceModel
         public string ResultMessage { set; get; }
 
 
+
+        /// <summary>
+        /// 结果数据.
+        /// </summary>
+        public dynamic ResultData { set; get; }
+
+
+
         /// <summary>
         /// 是否执行成功.
         /// </summary>
@@ -45,7 +54,16 @@ namespace P0002_MyTrading.ServiceModel
 
         public override string ToString()
         {
-            return $"ResultCode={ResultCode}; ResultMessage={ResultMessage}";
+            StringBuilder buff = new StringBuilder();
+
+            buff.Append($"ResultCode={ResultCode}; ResultMessage={ResultMessage}");
+
+            if(ResultData != null)
+            {
+                buff.Append($"; ResultData={ResultData}");
+            }
+
+            return buff.ToString();
         }
 
 

@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using P0002_MyTrading.DataAccess;
 
+#nullable disable
+
 namespace P0002_MyTrading.Migrations
 {
     [DbContext(typeof(MyTradingContext))]
@@ -15,20 +17,83 @@ namespace P0002_MyTrading.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "5.0.13")
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                .HasAnnotation("ProductVersion", "6.0.10")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("P0002_MyTrading.Model.Holding", b =>
+                {
+                    b.Property<string>("ItemCode")
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("item_code");
+
+                    b.Property<string>("ItemName")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("item_name");
+
+                    b.Property<string>("ReaderName")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
+                        .HasColumnName("reader_name");
+
+                    b.Property<string>("SourceName")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("source_name");
+
+                    b.HasKey("ItemCode");
+
+                    b.ToTable("holding", "my_trading");
+                });
+
+            modelBuilder.Entity("P0002_MyTrading.Model.HoldingLog", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ID"));
+
+                    b.Property<string>("ItemCode")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("item_code");
+
+                    b.Property<DateTime>("LogDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("log_date");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric")
+                        .HasColumnName("price");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer")
+                        .HasColumnName("quantity");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ItemCode");
+
+                    b.ToTable("holding_log", "my_trading");
+                });
 
             modelBuilder.Entity("P0002_MyTrading.Model.SimpleTrading", b =>
                 {
                     b.Property<long>("TradingID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("trading_id")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnName("trading_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("TradingID"));
 
                     b.Property<DateTime?>("CloseDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("close_date");
 
                     b.Property<decimal?>("ClosePrice")
@@ -36,7 +101,7 @@ namespace P0002_MyTrading.Migrations
                         .HasColumnName("close_price");
 
                     b.Property<DateTime>("OpenDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("open_date");
 
                     b.Property<decimal>("OpenPrice")
@@ -56,6 +121,22 @@ namespace P0002_MyTrading.Migrations
                     b.HasKey("TradingID");
 
                     b.ToTable("simple_trading", "my_trading");
+                });
+
+            modelBuilder.Entity("P0002_MyTrading.Model.HoldingLog", b =>
+                {
+                    b.HasOne("P0002_MyTrading.Model.Holding", "HoldingData")
+                        .WithMany("HoldingLogList")
+                        .HasForeignKey("ItemCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("HoldingData");
+                });
+
+            modelBuilder.Entity("P0002_MyTrading.Model.Holding", b =>
+                {
+                    b.Navigation("HoldingLogList");
                 });
 #pragma warning restore 612, 618
         }

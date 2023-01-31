@@ -44,6 +44,16 @@ namespace P0002_MyEtf.Service
 
 
         /// <summary>
+        /// 获取最近一天的 ETF 日线数据.
+        /// </summary>
+        /// <param name="etfCode"></param>
+        /// <returns></returns>
+        EtfDayLine GetLastEtfDayLines(string etfCode);
+
+
+
+
+        /// <summary>
         /// 计算 ETF日波幅数据.
         /// </summary>
         /// <param name="etfCode"></param>

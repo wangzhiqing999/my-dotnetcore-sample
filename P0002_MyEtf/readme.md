@@ -411,6 +411,7 @@ crontab -e
 15 18 * * 5 docker start etf-trading-notice
 
 保存退出
+(预期是每周五的 18:15运行)
 
 
 
@@ -450,4 +451,52 @@ crontab -e
 
 
 
+
+
+
+
+## 2023年1月追加.
+
+P0002_MyGrid 追加网格。
+P0002_MyTrading 追加基金的持仓。
+
+
+
+
+抓取基金净值的作业.
+
+发布到 Docker 上.
+docker build -t etf-trading-jobs -f ./P0002_MyTrading.Jobs/Dockerfile .
+
+
+docker images
+REPOSITORY                         TAG          IMAGE ID       CREATED         SIZE
+etf-trading-jobs                   latest    359e846ae977   4 minutes ago   194MB
+
+
+创建容器.
+（注意：这里使用 --net host 的原因，是因为配置文件里面， 数据库Server 填写的是 机器名。 ）
+docker create --name etf-trading-jobs \
+  -v /home/wang/MyETF/P0002_MyTrading.Jobs/config:/app/config \
+  --net host \
+  etf-trading-jobs
+
+
+
+测试运行
+docker start etf-trading-jobs
+
+
+
+配置作业.
+运行
+crontab -e
+
+
+在编辑器中，输入：
+
+30 18 * * 6 docker start etf-trading-jobs
+
+保存退出
+(预期是每周六的 18:30运行)
 

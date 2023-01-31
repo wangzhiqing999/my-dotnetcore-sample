@@ -1,0 +1,62 @@
+﻿@page "/gridinfo/{itemCode}"
+
+
+<h3>@ItemCode</h3>
+
+<ul>
+    <li>日期：@_LastEtfDayLine.TradingDate </li>
+    <li>收盘价: @_LastEtfDayLine.ClosePrice </li>
+</ul>
+
+<hr />
+
+<Table TItem="P0002_MyGrid.Model.Grid" Items="@_Grids" @ref="_MainTable"
+       SetRowClassFormatter="@SetRowClassFormatter"
+       IsPagination="false" 
+       IsStriped="false"
+       IsBordered="true" 
+       ShowSkeleton="true"
+       ShowSearch="false"
+       ShowSearchText="false"
+       ShowDefaultButtons="false"
+       ShowExtendButtons="false">
+    
+    <TableColumns>
+
+        <TableColumn @bind-Field="@context.GridNo" />
+        <TableColumn @bind-Field="@context.BuyPrice" />
+
+        <!-- 
+            下面这一列是动态的.
+            仅仅当 “最新的收盘价”>= 买入价， 且 “最新的收盘价”<= 卖出价 的情况下，才显示.
+        -->
+        <TableColumn @bind-Field="@context.ItemCode" Text="">
+            <Template Context="v">
+                @if (_LastEtfDayLine.ClosePrice >= v.Row.BuyPrice && _LastEtfDayLine.ClosePrice <= v.Row.SellPrice)
+                {
+                    <span>
+                        @_LastEtfDayLine.ClosePrice
+                    </span>
+                }
+            </Template>
+        </TableColumn>
+
+        <TableColumn @bind-Field="@context.SellPrice" />
+        <TableColumn @bind-Field="@context.Hold" />
+
+    </TableColumns>
+
+
+</Table>
+
+<hr />
+
+
+<ul>
+    @foreach(var todo in _TodoList)
+    {
+        <li>
+            @todo.ToString()
+        </li>
+    }
+</ul>

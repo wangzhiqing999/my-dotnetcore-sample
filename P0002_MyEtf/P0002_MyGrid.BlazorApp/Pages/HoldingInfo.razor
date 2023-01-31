@@ -1,0 +1,43 @@
+﻿@page "/holdinginfo"
+
+<h3>当前持仓</h3>
+
+
+<Table TItem="P0002_MyTrading.ServiceModel.HoldingReport" Items="@_HoldingReports" @ref="_MainTable"
+       IsPagination="false" 
+       IsStriped="true"
+       IsBordered="true" 
+       ShowSkeleton="true"
+       ShowSearch="false"
+       ShowSearchText="false"
+       ShowDefaultButtons="false"
+       ShowExtendButtons="false"
+       ShowFooter="true">
+
+
+    <TableColumns>
+
+        <TableColumn @bind-Field="@context.ItemCode" />
+
+        <TableColumn @bind-Field="@context.ItemName" />
+
+
+        <TableColumn @bind-Field="@context.LogDate" FormatString="yyyy-MM-dd" />
+
+
+        <TableColumn @bind-Field="@context.Quantity" />
+
+        <TableColumn @bind-Field="@context.Price" />
+
+        <TableColumn @bind-Field="@context.Amount" />
+
+
+    </TableColumns>
+
+    <TableFooter>
+        <TableFooterCell Text="合计" colspan="5" />
+        <TableFooterCell Aggregate="@Aggregate" Field="@nameof(P0002_MyTrading.ServiceModel.HoldingReport.Amount)" />
+    </TableFooter>
+
+
+</Table>

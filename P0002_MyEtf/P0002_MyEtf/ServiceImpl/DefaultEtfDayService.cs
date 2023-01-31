@@ -113,7 +113,27 @@ namespace P0002_MyEtf.ServiceImpl
         }
 
 
+        /// <summary>
+        /// 获取最近一天的 ETF 日线数据.
+        /// </summary>
+        /// <param name="etfCode"></param>
+        /// <returns></returns>
+        public EtfDayLine GetLastEtfDayLines(string etfCode)
+        {
+            var query =
+                from data in this._MyEtfContext.EtfDayLines
+                where
+                    data.EtfCode == etfCode
+                orderby
+                    data.TradingDate descending
+                select
+                    data;
 
+            EtfDayLine result = query.FirstOrDefault();
+
+            return result;
+
+        }
 
 
 

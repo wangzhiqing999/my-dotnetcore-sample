@@ -32,6 +32,19 @@ namespace P0002_MyTrading.DataAccess
 
 
 
+        /// <summary>
+        /// 持仓.
+        /// </summary>
+        public DbSet<Holding> Holdings { get; set; }
+
+
+        /// <summary>
+        /// 持仓日志.
+        /// </summary>
+        public DbSet<HoldingLog> HoldingLogs { get; set; }
+
+
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -45,7 +58,7 @@ namespace P0002_MyTrading.DataAccess
                     // 第二行是指定 "__EFMigrationsHistory" 表使用什么TableName，什么SchemaName.
                     // 第二行如果不写的话，"__EFMigrationsHistory" 表将会创建到“数据库默认的Schema”里面
                     optionsBuilder.UseNpgsql(
-                        @"Server=192.168.1.153;Port=5432;User ID=postgres;Password=123456;Database=postgres;",
+                        @"Server=pve001;Port=5432;User ID=postgres;Password=123456;Database=postgres;",
                         x => x.MigrationsHistoryTable(HistoryRepository.DefaultTableName, "my_trading"));
                 }
                 base.OnConfiguring(optionsBuilder);
@@ -58,8 +71,22 @@ namespace P0002_MyTrading.DataAccess
         {
             base.OnModelCreating(modelBuilder);
 
+
+            // 持仓日志
+            modelBuilder.Entity<HoldingLog>()
+                // 有一个 持仓主数据.
+                .HasOne(s => s.HoldingData)
+                // 一个 持仓主数据，有多个 持仓日志
+                .WithMany(m => m.HoldingLogList)
+                // 外键.
+                .HasForeignKey(f => f.ItemCode);
         }
 
 
+
+
+
+        // Add-Migration MyTradingInit
+        // Script-Migration
     }
 }
