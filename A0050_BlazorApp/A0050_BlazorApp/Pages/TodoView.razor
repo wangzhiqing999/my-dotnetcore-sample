@@ -1,0 +1,57 @@
+﻿@page "/todoview"
+@using A0050_BlazorApp.Components
+@using A0050_BlazorApp.Model;
+
+
+<div class="todo-layout">
+    
+    <TodoContainer Todos="Todos">
+        <A0050_BlazorApp.Components.TodoList ListStatus="TodoStatusEnum.Todo" AllowedStatuses="TodoStatusEnum.Todo"/>
+        <A0050_BlazorApp.Components.TodoList ListStatus="TodoStatusEnum.InProgress" AllowedStatuses="TodoStatusEnum.InProgress" />
+        <A0050_BlazorApp.Components.TodoList ListStatus="TodoStatusEnum.Completed" AllowedStatuses="TodoStatusEnum.Completed" />
+    </TodoContainer>
+</div>
+
+
+
+@code {
+
+    List<TodoData> Todos = new List<TodoData>
+    {
+        new TodoData()
+        {
+            Id = 1,
+            Title = "开发大创项目右侧状态栏",
+   
+            ClosingDate = DateTime.Now
+        },
+        new TodoData()
+        {
+            Id = 12,
+            Title = "每日背单词",
+
+            ClosingDate = DateTime.Now
+        },
+        new TodoData()
+        {
+            Id = 11,
+            Title = "AAAAAAAAAA",
+
+            ClosingDate = DateTime.Now
+        },
+        new TodoData()
+        {
+            Id = 111,
+            Title = "BBBBBBBBBBBB",
+
+            ClosingDate = DateTime.Now
+        },
+        new TodoData()
+        {
+            Id = 2,
+            Title = "CCCCCCCCCCCCCCCC",
+
+            ClosingDate = DateTime.Now
+        }
+    };
+}

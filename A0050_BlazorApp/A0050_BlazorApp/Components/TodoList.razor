@@ -1,0 +1,27 @@
+﻿
+<div class="todo-view-content-item-layout @_dropClass" style="border:dashed;width: 300px;height: 600px;">
+
+    <div class="todo-view-content-item">
+        
+        @* 展示第一行，标题和任务数等（代码省略） *@
+        <p>-测试拖动-</p>
+        
+        @* 展示第二行，添加栏（代码省略）*@
+        <p>+</p>
+
+        @* 第三行展示任务列表 *@
+        <div class="todo-view-content-list"
+             style="border:dashed; height:500px; background-color:aquamarine;"
+             ondragover="event.preventDefault();" 
+             ondragstart="event.dataTransfer.setData('', event.target.id);"
+             @ondrop="HandleDrop"
+             @ondragenter="HandleDragEnter"
+             @ondragleave="HandleDragLeave">
+
+            @foreach (var todo in Todos)
+            {
+                <TodoDisplay TodoItemData="todo"/>
+            }
+        </div>
+    </div>
+</div>

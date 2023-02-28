@@ -1,0 +1,6 @@
+﻿<div class="todo-view-content-layout" style="display: flex;">
+    @* 将自己作为级联参数传递给子组件（TodoList) *@
+    <CascadingValue Value="this">
+        @ChildContent
+    </CascadingValue>
+</div>

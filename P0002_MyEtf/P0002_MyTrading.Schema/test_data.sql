@@ -37,3 +37,18 @@ FROM
 
 
 
+
+-- 用于测试的  交易.
+INSERT INTO simple_trading (
+	trading_item_code, trading_quantity, open_date, open_price, close_date, close_price
+) VALUES
+	('SH510900', 100, '2023-01-01', 1, null, null),
+	('SH512070', 100, '2023-01-01', 1, null, null),
+	('SH512980', 100, '2023-01-01', 1, null, null),
+	('SH513030', 100, '2023-01-01', 1, null, null),
+	('SH513050', 100, '2023-01-01', 1, null, null),
+	('SH515260', 100, '2023-01-01', 1, null, null),
+	('SZ159938', 100, '2023-01-01', 1, null, null),
+	('SZ159939', 100, '2023-01-01', 1, null, null);
+
+
