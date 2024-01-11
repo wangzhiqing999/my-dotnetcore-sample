@@ -63,6 +63,8 @@ namespace A3001_Json.Sample
             // 忽略只读属性.
             options.IgnoreReadOnlyProperties = true;
 
+            // 生成换行. (用于输出日志的时候， 看起来更直观一些)
+            options.WriteIndented = true;
 
 
             TestData testData = new TestData()
