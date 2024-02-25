@@ -73,6 +73,7 @@ EntityFramework Code First 的例子.  (使用 Postgres 数据库)
 
 ### A0100_Database
 基本的访问数据库的例子代码.
+（包含使用 Dapper 来访问的例子）
 
 
 ### A0110_Excel
