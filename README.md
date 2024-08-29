@@ -142,6 +142,10 @@ ASP.Net Code，中间件的例子代码 (DotNet Core 3.0)
 用于测试使用 Quartz 的例子.
 
 
+### B0260_Masuit
+使用 Masuit.Tools 的一些例子（.NET 8.0）
+
+
 
 ### C0001_MyWork
 使用 Visual Studio 2017， 创建 Web Api . (DotNet Core 2.0)
