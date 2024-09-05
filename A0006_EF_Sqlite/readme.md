@@ -118,3 +118,40 @@ Update-Database
 
 
 测试运行.
+
+
+
+
+
+
+
+# 2024-09-05
+创建一个 .Net 8.0 的项目.
+
+NuGet 引用
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.Design
+Microsoft.EntityFrameworkCore.Tools
+Microsoft.EntityFrameworkCore.Sqlite
+
+
+从 A0006_EF_Sqlite_V6 项目， 复制 TestData 过来。
+增加两个属性，数据类型为 JsonDocument 与 DateTime
+
+增加两个类型转换器.
+用于将 JsonDocument 与 DateTime 存储在 TEXT 类型的列里面。
+
+
+执行
+Add-Migration MyFirstMigration
+完成.
+生成代码位于 Migrations 目录下.
+
+执行
+Update-Database
+执行生成的代码，更新数据库表结构.
+
+
+
+测试运行.
+
