@@ -144,6 +144,15 @@ ASP.Net Code，中间件的例子代码 (DotNet Core 3.0)
 
 ### B0260_Masuit
 使用 Masuit.Tools 的一些例子（.NET 8.0）
+很多小类的工具包，可以视情况来使用。
+
+
+### B0270_HtmlSanitizer
+使用 HtmlSanitizer 的例子 （.NET 8.0）
+主要用于防止 Html跨站脚本攻击（XSS）
+也就是前端页面的留言功能，提交的是 html 的情况下。
+后端接收到输入的 html 后，需要做处理， 移除掉 不安全的 标签与属性， 比如 script 以及 onclick 之类的。
+
 
 
 
