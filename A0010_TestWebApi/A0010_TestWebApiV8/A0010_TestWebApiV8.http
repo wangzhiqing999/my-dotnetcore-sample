@@ -1,0 +1,6 @@
+@A0010_TestWebApiV8_HostAddress = http://localhost:5287
+
+GET {{A0010_TestWebApiV8_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

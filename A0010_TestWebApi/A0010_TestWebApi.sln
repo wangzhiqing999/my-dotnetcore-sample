@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWebApiClient", "TestWeb
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "A0010_TestWebApiV5", "A0010_TestWebApiV5\A0010_TestWebApiV5.csproj", "{B98FCAC6-E9AB-4340-A3FF-964E24812A61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A0010_TestWebApiV6", "A0010_TestWebApiV6\A0010_TestWebApiV6.csproj", "{8FE92C94-186A-404F-9C90-FB856424F335}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "A0010_TestWebApiV6", "A0010_TestWebApiV6\A0010_TestWebApiV6.csproj", "{8FE92C94-186A-404F-9C90-FB856424F335}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A0010_TestWebApiV8", "A0010_TestWebApiV8\A0010_TestWebApiV8.csproj", "{0437AE85-112A-4CA6-96A2-D89B02B1C177}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{8FE92C94-186A-404F-9C90-FB856424F335}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FE92C94-186A-404F-9C90-FB856424F335}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FE92C94-186A-404F-9C90-FB856424F335}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0437AE85-112A-4CA6-96A2-D89B02B1C177}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0437AE85-112A-4CA6-96A2-D89B02B1C177}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0437AE85-112A-4CA6-96A2-D89B02B1C177}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0437AE85-112A-4CA6-96A2-D89B02B1C177}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

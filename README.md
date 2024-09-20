@@ -49,6 +49,7 @@ EntityFramework Code First 的例子.  (使用 Postgres 数据库)
 使用 Visual Studio 2017， 创建一个 Web Api 项目的例子. (DotNet Core 2.0)
 [2021-02-01 更新 使用 Visual Studio 2019， 框架升级为  .NET 5.0]
 [2021-12-09 更新 使用 Visual Studio 2022， 框架升级为  .NET 6.0]
+[2024-09-20 更新 使用 Visual Studio 2022， 框架升级为  .NET 8.0]
 
 
 ### A0020_Fundamentals
@@ -69,6 +70,11 @@ EntityFramework Code First 的例子.  (使用 Postgres 数据库)
 
 
 
+### A0060_Debug
+System.Diagnostics.Debug 的一些简单的用法。（ .NET 8.0）
+
+### A0062_StackTrace
+System.Diagnostics.StackTrace 的一些简单的用法。（ .NET 8.0）
 
 
 ### A0100_Database

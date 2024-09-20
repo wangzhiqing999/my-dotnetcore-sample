@@ -189,3 +189,82 @@ Microsoft.AspNetCore.Authentication.JwtBearer
 
 
 
+
+
+
+
+
+
+
+## 2024-09-20 更新 使用 Visual Studio 2022， 框架升级为  .NET 8.0
+
+
+创建一个新的 Web Api 项目  A0010_TestWebApiV8
+
+
+创建完 Web API 项目后，啥事情不干，直接运行。
+应该能看到一个默认的 swagger 页面。
+
+
+
+### 数据库相关
+
+NuGet 引用
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.InMemory
+
+从 A0010_TestWebApi 项目
+复制 
+DataAccess/TodoContext.cs
+Models/TodoItem.cs
+Controllers/TodoController.cs
+
+修改 Program.cs
+
+测试运行
+
+
+
+### JWT 相关
+
+安装nuget包
+Microsoft.AspNetCore.Authentication.JwtBearer
+
+后续操作，与之前的版本，差别不大。
+简单从 A0010_TestWebApiV6 项目那里， 把相关的代码，复制过来。
+
+
+
+测试客户端 TestWebApiClient 项目， 升级到 .NET 8.0
+
+
+
+### 配置全局异常处理.
+
+添加 GlobalExceptionHanlder 类，用于处理全局异常.
+
+Program.cs 中，添加
+
+// 配置全局异常处理.
+builder.Services.AddExceptionHandler<GlobalExceptionHanlder>();
+builder.Services.AddProblemDetails();
+与
+// 配置使用全局异常处理.
+app.UseExceptionHandler();
+
+
+添加一个 TestExceptionController 的控制器，测试方法中，简单 抛出异常。
+
+控制台运行项目.
+
+浏览器访问
+http://localhost:5000/api/TestException
+
+得到反馈：
+{
+    "title": "Internal Server Error",
+    "status": 500,
+    "detail": "API Error 测试异常",
+    "instance": "API"
+}
+
