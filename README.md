@@ -177,6 +177,13 @@ ASP.Net Code，中间件的例子代码 (DotNet Core 3.0)
 
 
 
+### D0001_Docker_HelloWorld_Net8
+使用 Visual Studio 2022，创建一个 Web 项目（.NET 8.0） （本例子仅仅为了测试在 Windows 的 Docker Desktop 下运行， 以及 Ubuntu 的 Docker 下发布，因此，啥代码也没有写）。
+测试在 Windows 下面，Docker Desktop 的整合使用。
+然后，在 Ubuntu 下面，创建 Docker 镜像，并运行的处理步骤。
+
+
+
 ### D0002_Docker_Compose_HelloWorld
 使用 Visual Studio 2019， 创建两个 Web 项目（一个 Web 一个 Api） （.NET 5.0）
 然后，在 Ubuntu 下面
