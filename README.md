@@ -42,6 +42,7 @@ EntityFramework Code First 的例子.  (使用 Postgres 数据库)
 包含下面的版本：
 使用 Visual Studio 2019， 框架为 .NET 5.0
 使用 Visual Studio 2022， 框架为 .NET 6.0
+使用 Visual Studio 2022， 框架为 .NET 8.0
 
 
 
@@ -201,6 +202,7 @@ ASP.Net Code，中间件的例子代码 (DotNet Core 3.0)
 （一种是作为配置文件目录，主机填写配置文件，容器运行。  一种是作为数据输出目录，容器的中输出的文件，输出到主机的指定目录下）
 
 [2021-12-07 使用 Visual Studio 2022， 创建一个  D0003_Docker_Console_V6， 框架为  .NET 6.0， 对比一下与之前的差异]
+[2024-10-12 使用 Visual Studio 2022， 创建一个  D0003_Docker_Console_V8， 框架为  .NET 8.0， 对比一下与之前的差异]
 
 
 

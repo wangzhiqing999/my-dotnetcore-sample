@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D0003_Docker_Console", "D0003_Docker_Console\D0003_Docker_Console.csproj", "{EFF7B86E-99C6-452C-808B-88DD62EED1F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D0003_Docker_Console_V6", "D0003_Docker_Console_V6\D0003_Docker_Console_V6.csproj", "{B689824F-B769-4E30-9516-3B553535DEF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D0003_Docker_Console_V6", "D0003_Docker_Console_V6\D0003_Docker_Console_V6.csproj", "{B689824F-B769-4E30-9516-3B553535DEF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D0003_Docker_Console_V8", "D0003_Docker_Console_V8\D0003_Docker_Console_V8.csproj", "{4C1D4DFA-A049-4E72-82C7-47CD395400C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B689824F-B769-4E30-9516-3B553535DEF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B689824F-B769-4E30-9516-3B553535DEF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B689824F-B769-4E30-9516-3B553535DEF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C1D4DFA-A049-4E72-82C7-47CD395400C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C1D4DFA-A049-4E72-82C7-47CD395400C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C1D4DFA-A049-4E72-82C7-47CD395400C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C1D4DFA-A049-4E72-82C7-47CD395400C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

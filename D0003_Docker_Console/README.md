@@ -14,10 +14,18 @@ https://docs.microsoft.com/zh-cn/dotnet/core/docker/build-container?tabs=windows
 
 2021-12-07
 开发计算机， Win 11,  Visual Studio 2022下，创建 .Net 6.0 的 控制台 项目。
-
 后续操作，与 .Net 5.0 的，基本一致。
-
 目的： 观察 .Net 5.0 与 .Net 6.0 上的差异。
+
+
+
+
+2024-10-12
+开发计算机， Win 11,  Visual Studio 2022下，创建 .Net 8.0 的 控制台 项目。
+后续操作，与 .Net 6.0 的，基本一致。
+目的： 观察 .Net 6.0 与 .Net 8.0 上的差异。
+
+
 
 
 
