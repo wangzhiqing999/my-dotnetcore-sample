@@ -79,7 +79,7 @@ System.Diagnostics.StackTrace 的一些简单的用法。（ .NET 8.0）
 
 
 ### A0100_Database
-基本的访问数据库的例子代码.
+基本的访问数据库的例子代码.  （ .NET 8.0）
 （包含使用 Dapper 来访问的例子）
 
 
@@ -256,7 +256,7 @@ Ajax 数据翻页的例子.
 
 
 ### W2000_BaseWeb
-一些 Web 项目，常用的例子代码。
+一些 Web 项目，常用的例子代码。 （.NET 5.0 / .NET 8.0 ）
 
 
 ### W3001_OrchardCore

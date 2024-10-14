@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "rxjs@7.8.1",
+      "destination": "wwwroot/lib/rxjs/"
+    },
+    {
+      "library": "rxjs-jquery@1.1.6",
+      "destination": "wwwroot/lib/rxjs-jquery/"
+    },
+    {
+      "library": "rxjs-dom@7.0.3",
+      "destination": "wwwroot/lib/rxjs-dom/"
+    }
+  ]
+}

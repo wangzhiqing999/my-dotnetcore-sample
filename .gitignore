@@ -251,3 +251,4 @@ paket-files/
 .idea/
 *.sln.iml
 Logs.txt
+/W2000_BaseWeb/W2001_Mvc_V8/wwwroot/Output
