@@ -261,3 +261,12 @@ Ajax 数据翻页的例子.
 
 ### W3001_OrchardCore
 使用 OrchardCore 开发 Web 项目的例子  (.NET Core 3.0 版本)
+
+
+
+### W4000_BlazorApp
+
+安装 BootstrapBlazor.UITemplate.vsix 插件之后，使用模板，创建的项目。
+
+
+

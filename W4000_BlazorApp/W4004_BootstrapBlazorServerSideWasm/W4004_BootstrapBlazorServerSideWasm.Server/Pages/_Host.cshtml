@@ -1,0 +1,9 @@
+﻿@page "/"
+@namespace W4004_BootstrapBlazorServerSideWasm.Server.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using W4004_BootstrapBlazorServerSideWasm.Shared
+@{
+    Layout = "_Layout";
+}
+
+<component type="typeof(App)" render-mode="ServerPrerendered" />
