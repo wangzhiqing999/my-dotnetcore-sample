@@ -1,0 +1,35 @@
+﻿@page "/counter"
+
+
+
+
+<div class="site-page-header-ghost-wrapper">
+    <PageHeader BackIcon="true" Ghost="false">
+        <PageHeaderTitle>Counter</PageHeaderTitle>
+        <PageHeaderSubtitle>This is a Counter</PageHeaderSubtitle>
+        
+        <PageHeaderExtra>
+            <Button Color="@Color.Red3" @onclick="IncrementCount">增加</Button>
+            <Button Color="@Color.Green1" @onclick="DecrementCount">减少</Button>
+        </PageHeaderExtra>
+
+        <PageHeaderContent>
+            <p>Current count: @currentCount</p>
+        </PageHeaderContent>
+    </PageHeader>
+</div>
+
+
+
+@code {
+    private int currentCount = 10;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+    private void DecrementCount()
+    {
+        currentCount--;
+    }
+}

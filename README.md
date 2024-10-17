@@ -269,7 +269,10 @@ Ajax 数据翻页的例子.
 
 ### W4000_BlazorApp
 
-安装 BootstrapBlazor.UITemplate.vsix 插件之后，使用模板，创建的项目。
+安装 BootstrapBlazor.UITemplate.vsix 插件之后，使用模板，创建的项目。 （.NET 8.0）
 
 
 
+### W4101_AntDesignApp
+
+使用 AntDesign.Templates 来创建项目。 （.NET 8.0）
