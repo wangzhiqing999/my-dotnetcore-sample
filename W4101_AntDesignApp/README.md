@@ -34,3 +34,46 @@ dotnet new antdesign -o W4101_AntDesignApp
 
 
 
+
+
+
+### W4111_AntDesignProWebApp
+
+在 Visual Studio 2022 中， 创建项目时， 选择模板 “Ant Design Pro Blazor App (AntDesign Blazor Team)”
+
+full 上不打勾
+host 选择 webapp
+styles 选择 css
+
+
+结果是创建两个项目， 结果与 W4101_AntDesignApp 的代码， 基本一致.
+
+
+
+
+
+### W4112_AntDesignProWasm
+
+在 Visual Studio 2022 中， 创建项目时， 选择模板 “Ant Design Pro Blazor App (AntDesign Blazor Team)”
+
+full 上打勾
+host 选择 wasm
+styles 选择 css
+
+
+结果是生成一个 项目，Wasm 的。
+
+
+
+
+### W4113_AntDesignProServer
+
+在 Visual Studio 2022 中， 创建项目时， 选择模板 “Ant Design Pro Blazor App (AntDesign Blazor Team)”
+
+full 上打勾
+host 选择 server
+styles 选择 css
+
+
+结果是生成一个 项目，WebApp 的。
+

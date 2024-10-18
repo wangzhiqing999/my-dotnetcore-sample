@@ -276,3 +276,5 @@ Ajax 数据翻页的例子.
 ### W4101_AntDesignApp
 
 使用 AntDesign.Templates 来创建项目。 （.NET 8.0）
+VS2022中，使用模板 “Ant Design Pro Blazor App (AntDesign Blazor Team)” 来创建项目。 （.NET 8.0）
+
