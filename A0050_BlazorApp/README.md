@@ -37,6 +37,45 @@ Microsoft.NETCore.App
 
 
 
+### A0050_BlazorApp_V8
+创建 Blazor WebAssembly 项目.
+
+框架： .NET 8.0
+身份验证类型： 无
+
+配置 HTTPS 不打勾
+渐进式 Web 应用程序 打勾
+Incloude sample pages 打勾
+不使用顶级语句 打勾
+
+
+创建结果：
+一个项目
+
+
+依赖项
+包：
+Microsoft.AspNetCore.Components.WebAssembly
+Microsoft.AspNetCore.Components.WebAssembly.DevServer
+框架：
+Microsoft.NETCore.App
+
+
+
+
+#### A0050_BlazorApp 与 A0050_BlazorApp_V8 的区别在于：
+
+.NET 版本不同。一个是 .NET 6.0 一个是 .NET 8.0
+
+A0050_BlazorApp_V8 在 “渐进式 Web 应用程序” 上面打了勾
+运行的时候，在 Edge 浏览器地址上，会显示一个加号， “应用程序可用。安装A0050_BlazorApp_V8”
+安装后，可以在 【开始】的地方，增加一个链接。
+
+
+
+
+
+
 ### A0051_BlazorApp
 创建 Blazor WebAssembly 项目.
 
@@ -63,6 +102,23 @@ Client项目的前端，向Server 项目的后端发起请求的时候，也能�
 
 
 如果前端/后端的代码， 都是自己写的话，使用这种方式，比较好划分。
+
+
+
+
+
+
+#### 新版本的问题
+
+在 Visual Studio 2022 版本 17.11.5 中。
+创建 Blazor WebAssembly 项目.
+
+没有 “ASP.NET Core 托管” 这样的选项。
+
+
+
+
+
 
 
 
@@ -97,11 +153,11 @@ Microsoft.NETCore.App
 
 
 
-### 注意事项
+#### 注意事项
 
 
 创建 Blazor WebAssembly 项目、还是创建 Blazor Server 项目.
-参考 
+参考
 https://learn.microsoft.com/zh-cn/training/modules/blazor-introduction/3-when-to-use-blazor
 
 
@@ -116,6 +172,14 @@ https://learn.microsoft.com/zh-cn/training/modules/blazor-introduction/3-when-to
 代码安全要求
 
 
+
+
+#### 新版本的问题
+
+在 Visual Studio 2022 版本 17.11.5 中。
+创建 Blazor Server 项目.
+框架的下拉列表中，只有 .NET 6.0 和 .NET 7.0(不可用)
+没有 .NET 8.0 的选项。
 
 
 
@@ -178,7 +242,7 @@ Grpc.Tools
 添加  \A0058_GrpcService\Protos\*.proto  的引用.
 
 
-修改 Program.cs 
+修改 Program.cs
 追加 Grpc 的配置.
 注意：ForAddress("https://localhost:7128"...   如果不使用 https, 而是使用 http://localhost:5128 的话，运行的时候，会得不到结果。
 

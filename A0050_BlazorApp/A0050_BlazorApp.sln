@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "A0055_RazorClassLibrary", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "A0052_BlazorApp", "A0052_BlazorApp\A0052_BlazorApp.csproj", "{77857CE0-C87A-4BDD-AEBE-C18FA31DBDAE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A0050_BlazorApp_V8", "A0050_BlazorApp_V8\A0050_BlazorApp_V8.csproj", "{88FCBD63-7453-48F8-ADED-9518B2EAB3D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{77857CE0-C87A-4BDD-AEBE-C18FA31DBDAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77857CE0-C87A-4BDD-AEBE-C18FA31DBDAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77857CE0-C87A-4BDD-AEBE-C18FA31DBDAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88FCBD63-7453-48F8-ADED-9518B2EAB3D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88FCBD63-7453-48F8-ADED-9518B2EAB3D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88FCBD63-7453-48F8-ADED-9518B2EAB3D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88FCBD63-7453-48F8-ADED-9518B2EAB3D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

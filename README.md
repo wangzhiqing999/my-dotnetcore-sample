@@ -67,7 +67,7 @@ EntityFramework Code First 的例子.  (使用 Postgres 数据库)
 
 
 ### A0050_BlazorApp
-使用 Visual Studio 2022， 创建 BlazorApp 项目的例子。（ .NET 6.0）
+使用 Visual Studio 2022， 创建 BlazorApp 项目的例子。（ .NET 6.0  / .NET 8.0 ）
 
 
 
