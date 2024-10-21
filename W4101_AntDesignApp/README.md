@@ -37,6 +37,30 @@ dotnet new antdesign -o W4101_AntDesignApp
 
 
 
+如果要卸载已安装的模板。
+
+先运行下面的命令，进行查询。
+dotnet new uninstall
+
+
+当前已安装项:
+   AntDesign.Templates
+      版本: 0.20.2.2
+      详细信息:
+         Author: ant-design-blazor
+         Owners: ElderJames
+         Reserved: ✘
+         NuGetSource: https://api.nuget.org/v3/index.json
+      模板:
+         Ant Design Pro Blazor App (antdesign) C#
+      卸载命令:
+         dotnet new uninstall AntDesign.Templates
+
+
+
+
+
+
 ### W4111_AntDesignProWebApp
 
 在 Visual Studio 2022 中， 创建项目时， 选择模板 “Ant Design Pro Blazor App (AntDesign Blazor Team)”

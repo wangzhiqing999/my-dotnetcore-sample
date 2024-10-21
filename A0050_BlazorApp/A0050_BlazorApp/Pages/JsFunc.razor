@@ -1,0 +1,166 @@
+﻿@page "/jsfunc"
+
+<h3>与 js 交互</h3>
+
+
+
+<div class="jumbotron bg-white border border-primary">
+    <h5>C#与JS互操作</h5>
+    
+    <div>
+        <button @onclick="OnClick" class="btn btn-primary">C# 调用 js</button>
+
+        <p role="status">返回结果: @callJsResult</p>
+    </div>
+
+
+
+
+    <div>
+        
+        <button onclick="jsCallDotNetFunc()" class="btn btn-primary">js 调用 C#</button>
+
+        <p role="status"> F12，控制台查看返回结果</p>
+
+    </div>
+
+
+
+    <div>
+        <button @onclick="OnClick2" class="btn btn-primary">交互2</button>
+
+        <p role="status">返回结果: @callJsResult2</p>
+    </div>
+
+
+    <p role="status">F12，控制台查看中间输出的日志.</p>
+
+</div>
+
+
+
+
+
+
+<script>
+
+
+    // 在 C# 和 JavaScript 交互中，window.interop通常是一种自定义的命名约定，用于在 JavaScript 和 C# 之间进行通信。
+    window.interop = {
+                
+        runJs: (name, a, b) => {
+            console.warn("runJs is executing");
+            console.warn("hello " + name);
+            return "OK " + (a + b);
+        },
+
+
+        // 这里是 C# 调用 js,  然后 js 再去调 C# 的非静态方法.
+        // 第一个参数， 是 C# 的实例.
+        runJs2: (objInstance, a, b) => {
+            let invokeResult = objInstance.invokeMethod("Multiply", a, b);
+            console.warn(invokeResult);
+            return "OK:" + invokeResult;
+        }
+    }
+
+
+
+
+
+
+    const runCsharp = (a, b) => {
+        console.warn("runCsharp is executing");
+        //invokeResult是Task序列化的结果
+        let invokeResult = DotNet.invokeMethod("A0050_BlazorApp", "Sum", a, b);
+        if (invokeResult.isCompletedSuccessfully) {
+            return invokeResult.result;
+        }
+        return -1;
+    };
+
+
+    function jsCallDotNetFunc() {
+        var result = runCsharp(1200, 34);
+        console.warn("js 调用 dotnet 代码的返回值：", result);
+    }
+
+</script>
+
+
+
+@code {
+
+
+@inject IJSRuntime JsRuntime
+
+
+    /// <summary>
+    /// 调用 js 的返回结果.
+    /// </summary>
+    private string callJsResult = "";
+
+    private string callJsResult2 = "";
+
+
+
+
+    private async Task OnClick(MouseEventArgs e)
+    {
+        Console.WriteLine("OnClick is executing");
+        var name = "world";
+        var a = 11;
+        var b = 22;
+        callJsResult = await JsRuntime.InvokeAsync<string>("interop.runJs", name, a, b);
+        Console.WriteLine($"interop.runJs return：{callJsResult}");
+    }
+
+
+
+
+    private void OnClick2()
+    {
+        IJSInProcessRuntime SyncJsRuntime = JsRuntime as IJSInProcessRuntime;
+        var a = 11;
+        var b = 22;
+        callJsResult2 = SyncJsRuntime.Invoke<string>("interop.runJs2", DotNetObjectReference.Create(this), a, b);
+        Console.WriteLine($"interop.runJs2 return：{callJsResult2}");
+    }
+
+
+
+
+
+    /// <summary>
+    /// 这个是用于测试 js 调用 C# 的方法.
+    /// <br/>
+    /// 这个方法是静态的，不需要类的实例化.
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns></returns>
+    [JSInvokable]
+    public static Task<int> Sum(int a, int b)
+    {
+        Console.WriteLine("Sum is executing");
+        return Task.FromResult(a + b);
+    }
+
+
+
+    /// <summary>
+    /// 这个是用于测试 js 调用 C# 的方法.
+    /// <br/>
+    /// 这个方法不是静态的，需要类的实例化.
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns></returns>
+    [JSInvokable]
+    public int Multiply(int a, int b)
+    {
+        Console.WriteLine("Multiply is executing");
+        return a * b;
+    }
+
+}
