@@ -17,5 +17,14 @@ namespace A0100_MySQL.Sample
         public const string ConnString = @"Server=192.168.1.241;Database=test;Uid=test;Pwd=123456;CharSet=utf8;SslMode=none";
 
 
+
+
+        /// <summary>
+        /// 这里是测试，之前 A0005_EF_Mysql_V6 项目，使用 EntityFrameworkCore 生成的表。
+        /// 然后，用 Dapper 来访问的例子.
+        /// </summary>
+        public const string A0005_EF_Mysql_V6_ConnString = @"Server=pve002;Database=test2;Uid=root;Pwd=123456;CharSet=utf8";
+
+
     }
 }

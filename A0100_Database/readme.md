@@ -6,6 +6,8 @@
 
 使用 Dapper 来访问 MySql 的例子代码.
 
+使用 Dapper 来访问 MySql.EntityFrameworkCore 所生成的表的例子代码. （数据库列名与类的属性名不一样的情况）
+
 
 ### A0100_SQLite
 
