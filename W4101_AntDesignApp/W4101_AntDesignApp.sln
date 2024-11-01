@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "W413", "W413", "{4D4960FE-6
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "W4113_AntDesignProServer", "W4113_AntDesignProServer\W4113_AntDesignProServer.csproj", "{8F9210A7-6D28-4F7C-A570-37AD71CF9EB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "W4112_AntDesignProWasm", "W4112_AntDesignProWasm\W4112_AntDesignProWasm.csproj", "{774DF0DB-63FB-43D6-9715-0C4E2BA0CD89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "W4112_AntDesignProWasm", "W4112_AntDesignProWasm\W4112_AntDesignProWasm.csproj", "{774DF0DB-63FB-43D6-9715-0C4E2BA0CD89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -166,5 +166,18 @@
         "key": "account.settings"
       }
     ]
+  },
+  {
+    "path": "/test",
+    "name": "测试",
+    "key": "test",
+    "icon": "appstore",
+    "children": [
+      {
+        "path": "/test/myselect",
+        "name": "测试 Select",
+        "key": "test.myselect"
+      }
+    ]
   }
 ]
