@@ -175,6 +175,9 @@ namespace W4113_AntDesignProServer.Pages.Test
     /// 下列列表的数据.
     /// <br/>
     /// 这里是测试，实际业务中，可能是数据库中的数据，或者从别的地方获取的。
+    /// <br/>
+    /// 这里的下拉列表的数值，是 string 类型的.
+    /// 有没有选择，可以通过 string.IsNullOrEmpty(value) 来判断。
     /// </summary>
     public class MySelectModelA
     {

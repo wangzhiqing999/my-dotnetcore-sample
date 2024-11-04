@@ -1,0 +1,167 @@
+﻿@namespace W4113_AntDesignProServer.Pages.Test
+
+<Select
+        Style ="@Style"
+        AllowClear="@AllowClear"
+        EnableSearch="@EnableSearch"
+        Mode="@(IsMultiple?"multiple":"default")"
+        DefaultActiveFirstOption="@DefaultActiveFirstOption"
+        DataSource="@_dataSource"
+        @bind-Value="@Value"
+        @bind-Values="@Values"
+        TItem="MySelectModelB" TItemValue="int"
+        LabelName="@nameof(MySelectModelB.Name)"
+        ValueName="@nameof(MySelectModelB.ID)"
+        OnSelectedItemChanged="OnSelectedItemChangedHandler"
+        OnSelectedItemsChanged="OnSelectedItemsChangedHandler">
+</Select>
+
+@code {
+
+
+
+    // 组件的代码，分三个部分.
+    // 1. 提供给外部设置的参数.
+    // 2. 数据源，实际业务中，也就是查询数据字典表，或者读取配置文件等操作.
+    // 3. 实现外部的 @bind-Value 与 @bind-Values 的支持.
+
+
+    // 外部使用组件的代码，就主要是设置以下 基本的参数.
+    // 1.样式
+    // 2.是否多选.
+    // 3.绑定的数据. 单选使用 @bind-Value， 多选使用 @bind-Values.
+    // 4.其它的参数，比如：是否允许清除，是否允许搜索等.
+
+
+    #region 提供给外部设置的参数.
+
+    /// <summary>
+    /// 组件的样式.
+    /// </summary>
+    [Parameter]
+    public string Style { get; set; } = "";
+
+
+    /// <summary>
+    /// 是否允许做“清除”的操作.
+    /// </summary>
+    [Parameter]
+    public bool AllowClear { get; set; } = false;
+
+
+    /// <summary>
+    /// 是否允许搜索.
+    /// </summary>
+    [Parameter]
+    public bool EnableSearch { get; set; } = false;
+
+
+    /// <summary>
+    /// 是否多选.
+    /// </summary>
+    [Parameter]
+    public bool IsMultiple { get; set; } = false;
+
+
+    /// <summary>
+    /// 是否默认选中第一个.
+    /// </summary>
+    [Parameter]
+    public bool DefaultActiveFirstOption { get; set; } = false;
+
+
+    #endregion
+
+
+
+
+    #region 数据源的部分.
+
+    List<MySelectModelB> _dataSource = [];
+
+    protected override void OnInitialized()
+    {
+        _dataSource = MySelectModelB.GetTestDataList();
+    }
+
+    #endregion
+
+
+
+
+
+    #region 数据选择的部分.
+
+
+    #region 单选.
+
+    /// <summary>
+    /// 选择的数据.
+    /// </summary>
+    [Parameter]
+    public int Value { get; set; }
+
+
+    [Parameter]
+    public EventCallback<int> ValueChanged { get; set; }
+
+
+
+    private async Task OnSelectedItemChangedHandler(MySelectModelB value)
+    {
+        if (ValueChanged.HasDelegate)
+        {
+            if (value != null)
+            {
+                await ValueChanged.InvokeAsync(value.ID);
+            }
+            else
+            {
+                await ValueChanged.InvokeAsync(0);
+            }
+        }
+    }
+
+
+    #endregion
+
+
+
+    #region 多选.
+
+    /// <summary>
+    /// 选择的数据.
+    /// </summary>
+    [Parameter]
+    public IEnumerable<int> Values { get; set; } = new List<int>();
+
+
+    [Parameter]
+    public EventCallback<IEnumerable<int>> ValuesChanged { get; set; }
+
+
+    private async Task OnSelectedItemsChangedHandler(IEnumerable<MySelectModelB> values)
+    {
+        if (ValuesChanged.HasDelegate)
+        {
+            if (values != null)
+            {
+                await ValuesChanged.InvokeAsync(values.Select(x => x.ID));
+            }
+            else
+            {
+                await ValuesChanged.InvokeAsync(null);
+            }
+        }
+    }
+
+    #endregion
+
+    #endregion
+
+
+
+    
+
+
+}

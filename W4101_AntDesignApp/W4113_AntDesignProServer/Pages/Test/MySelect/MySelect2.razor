@@ -1,0 +1,97 @@
+﻿@namespace W4113_AntDesignProServer.Pages.Test
+
+@page "/test/myselect2"
+
+
+<h3>简单绑定的使用</h3>
+<h4>单选</h4>
+
+
+<Select Style="width:240px;"
+        TItem="MySelectModelB" TItemValue="int"
+        LabelName="@nameof(MySelectModelB.Name)"
+        ValueName="@nameof(MySelectModelB.ID)"
+        DataSource="@_dataSourceB"
+        @bind-Value="_selectedIDB">
+</Select>
+<br />
+<div>选择的数值: @_selectedIDB</div>
+
+
+
+<h4>多选</h4>
+
+<Select Style="width:480px;" Mode="multiple"
+        TItem="MySelectModelB" TItemValue="int"
+        LabelName="@nameof(MySelectModelB.Name)"
+        ValueName="@nameof(MySelectModelB.ID)"
+        DataSource="@_dataSourceB"
+        @bind-Values="@_selectedIDBs">
+</Select>
+<br />
+
+<div>选择的数值: @string.Join(',', _selectedIDBs.Select(prop=>prop.ToString()))</div>
+
+
+
+
+<hr />
+
+
+<h3>允许清除</h3>
+<Select Style="width:360px;"
+        AllowClear
+        TItem="MySelectModelB" TItemValue="int?"
+        LabelName="@nameof(MySelectModelB.Name)"
+        ValueName="@nameof(MySelectModelB.ID)"
+        DataSource="@_dataSourceB"
+        @bind-Value="_selectedIDBWithAllowClear">
+</Select>
+<br />
+<div>选择的数值: @_selectedIDBWithAllowClear</div>
+
+
+
+
+
+
+
+
+<hr />
+
+<h3>自定义的组件</h3>
+
+<h4>单选 （必须输入数据的画面）</h4>
+<ModelBSelect Style="width:240px;"
+              @bind-Value="_myTestSelectValue">
+</ModelBSelect>
+<br />
+<div>选择的数值: @_myTestSelectValue</div>
+
+<br />
+
+
+<h4>单选-可清除 （查询条件的画面：通过 !=0 来判断是不是需要增加查询条件.）</h4>
+<ModelBSelect Style="width:240px;" AllowClear="true"
+              @bind-Value="_myTestSelectValue2">
+</ModelBSelect>
+<br />
+<div>选择的数值: @_myTestSelectValue2</div>
+
+<br />
+
+
+
+<h4>多选</h4>
+<ModelBSelect Style="width:480px;" IsMultiple="true"
+              @bind-Values="_myTestSelectValues">
+</ModelBSelect>
+<br />
+<div>选择的数值: @string.Join(',', _myTestSelectValues.Select(prop => prop.ToString()))</div>
+
+
+
+
+@code {
+
+}

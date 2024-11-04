@@ -175,8 +175,13 @@
     "children": [
       {
         "path": "/test/myselect",
-        "name": "测试 Select",
+        "name": "测试Select(字符串值)",
         "key": "test.myselect"
+      },
+      {
+        "path": "/test/myselect2",
+        "name": "测试Select(数字值)",
+        "key": "test.myselect2"
       }
     ]
   }
