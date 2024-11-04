@@ -10,6 +10,7 @@ namespace W4113_AntDesignProServer.Pages.Test
         #region 直接把选项写在页面上的处理
 
         string _selectedCityCode;
+        string _selectedCityCode2;
 
 
         List<string> _selectedCityCodes = new List<string>();
@@ -47,6 +48,7 @@ namespace W4113_AntDesignProServer.Pages.Test
 
 
         string _selectedCodeA;
+        string _selectedCodeA2;
 
         List<string> _selectedCodeAs = new List<string>();
 
@@ -162,6 +164,10 @@ namespace W4113_AntDesignProServer.Pages.Test
         #region 自定义的组件
 
         string _myTestSelectValue;
+
+        string _myTestSelectValue2;
+
+        string _myTestSelectValue4 = "SZ159949";
 
 
         IEnumerable<string> _myTestSelectValues = new List<string>();

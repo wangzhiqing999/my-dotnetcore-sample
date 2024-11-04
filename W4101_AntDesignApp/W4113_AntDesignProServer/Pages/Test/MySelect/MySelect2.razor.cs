@@ -15,6 +15,7 @@ namespace W4113_AntDesignProServer.Pages.Test
 
 
         int _selectedIDB;
+        int _selectedIDB2;
 
 
         IEnumerable<int> _selectedIDBs = new List<int>();
@@ -47,7 +48,9 @@ namespace W4113_AntDesignProServer.Pages.Test
 
         int _myTestSelectValue2;
 
+        int _myTestSelectValue3;
 
+        int _myTestSelectValue4 = 4;
 
 
         IEnumerable<int> _myTestSelectValues = new List<int>();

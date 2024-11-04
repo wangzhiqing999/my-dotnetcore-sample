@@ -16,6 +16,23 @@
 </Select>
 <br />
 <div>选择的数值: @_selectedIDB</div>
+<br />
+
+
+
+<h4>单选-默认选择第一个可用的数据</h4>
+<Select Style="width:240px;"
+        TItem="MySelectModelB" TItemValue="int"
+        LabelName="@nameof(MySelectModelB.Name)"
+        ValueName="@nameof(MySelectModelB.ID)"
+        DataSource="@_dataSourceB"
+        @bind-Value="_selectedIDB2"
+        DefaultActiveFirstOption="true">
+</Select>
+<br />
+<div>选择的数值: @_selectedIDB2</div>
+
+<br />
 
 
 
@@ -79,6 +96,33 @@
 <div>选择的数值: @_myTestSelectValue2</div>
 
 <br />
+
+
+
+<h4>单选-默认选择第一个可用的数据</h4>
+<ModelBSelect Style="width:240px;"
+              @bind-Value="_myTestSelectValue3"
+              DefaultActiveFirstOption="true">
+</ModelBSelect>
+<br />
+<div>选择的数值: @_myTestSelectValue3</div>
+
+<br />
+
+
+
+<h4>单选-默认选择第一个可用的数据-但是又设定了初始的数值</h4>
+<ModelBSelect Style="width:240px;"
+              @bind-Value="_myTestSelectValue4"
+              DefaultActiveFirstOption="true">
+</ModelBSelect>
+<br />
+<div>选择的数值: @_myTestSelectValue4</div>
+
+<br />
+
+
+
 
 
 

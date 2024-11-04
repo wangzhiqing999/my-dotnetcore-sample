@@ -77,11 +77,24 @@
 
     #region 数据源的部分.
 
-    List<MySelectModelB> _dataSource = [];
+    IEnumerable<MySelectModelB> _dataSource = [];
 
     protected override void OnInitialized()
     {
         _dataSource = MySelectModelB.GetTestDataList();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender 
+                && DefaultActiveFirstOption 
+                && Value == 0
+                && _dataSource.Count() > 0)
+        {
+            // 首次渲染，并且需要默认选中第一个，并且没有初始数值，就主动触发一次选择事件.
+            await OnSelectedItemChangedHandler(_dataSource.First());
+        }        
     }
 
     #endregion

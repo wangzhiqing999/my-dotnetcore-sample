@@ -18,6 +18,26 @@
 </SimpleSelect>
 <br />
 <div>选择的数值: @_selectedCityCode</div>
+<br />
+
+
+
+<h4>单选-默认选择第一个可用的数据</h4>
+
+<SimpleSelect Style="width:120px;" @bind-Value="_selectedCityCode2" DefaultActiveFirstOption="true">
+    <SelectOptions>
+        <SimpleSelectOption Value="0001" Label="北京"></SimpleSelectOption>
+        <SimpleSelectOption Value="0002" Label="上海"></SimpleSelectOption>
+        <SimpleSelectOption Value="0003" Label="广州"></SimpleSelectOption>
+        <SimpleSelectOption Value="0004" Label="深圳"></SimpleSelectOption>
+    </SelectOptions>
+</SimpleSelect>
+<br />
+<div>选择的数值: @_selectedCityCode2</div>
+<br />
+
+
+
 
 
 <h4>多选</h4>
@@ -84,6 +104,23 @@
 </Select>
 <br/>
 <div>选择的数值: @_selectedCodeA</div>
+<br />
+
+
+<h4>单选-默认选择第一个可用的数据</h4>
+
+<Select Style="width:240px;"
+        TItem="MySelectModelA" TItemValue="string"
+        LabelName="@nameof(MySelectModelA.Name)"
+        ValueName="@nameof(MySelectModelA.Code)"
+        DataSource="@_dataSourceA"
+        @bind-Value="_selectedCodeA2"
+        DefaultActiveFirstOption="true">
+</Select>
+<br />
+<div>选择的数值: @_selectedCodeA2</div>
+<br />
+
 
 
 <h4>多选</h4>
@@ -227,12 +264,38 @@
 
 <h3>自定义的组件</h3>
 
+
+
 <h4>单选</h4>
 <ModelASelect Style="width:240px;"
               @bind-Value="_myTestSelectValue">
 </ModelASelect>
 <br/>
 <div>选择的数值: @_myTestSelectValue</div>
+<br />
+
+
+<h4>单选-默认选择第一个可用的数据</h4>
+<ModelASelect Style="width:240px;"
+              @bind-Value="_myTestSelectValue2"
+              DefaultActiveFirstOption="true">
+</ModelASelect>
+<br />
+<div>选择的数值: @_myTestSelectValue2</div>
+<br />
+
+
+<h4>单选-默认选择第一个可用的数据-但是又设定了初始的数值</h4>
+<ModelASelect Style="width:240px;"
+              @bind-Value="_myTestSelectValue4"
+              DefaultActiveFirstOption="true">
+</ModelASelect>
+<br />
+<div>选择的数值: @_myTestSelectValue4</div>
+<br />
+
+
+
 
 
 <h4>多选</h4>

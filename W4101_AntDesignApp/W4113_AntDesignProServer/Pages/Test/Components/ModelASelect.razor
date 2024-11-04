@@ -84,6 +84,19 @@
         _dataSource = MySelectModelA.GetTestDataList();
     }
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+        if (firstRender 
+                && DefaultActiveFirstOption 
+                && string.IsNullOrWhiteSpace(Value)
+                && _dataSource.Count > 0)
+        {
+            // 首次渲染，并且需要默认选中第一个，就主动触发一次选择事件.
+            await OnSelectedItemChangedHandler(_dataSource[0]);
+        }
+    }
+
     #endregion
 
 
