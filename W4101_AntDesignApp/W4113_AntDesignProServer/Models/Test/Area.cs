@@ -46,6 +46,10 @@
 
 
 
+        /// <summary>
+        /// 子区域.
+        /// </summary>
+        public List<Area> Children { set; get; }
 
         
 
@@ -119,7 +123,59 @@
 
 
 
-        public static IEnumerable<CascaderNode> GetTestAreaCascaderNodes()
+
+		public static List<Area> GetTestAreasTreeList()
+        {
+        
+            List<Area> areaList = GetTestAreaDataList();
+
+
+            List<Area> resultList = new List<Area>();
+            // 先初始化 "省" 的节点.
+            foreach (var area in areaList.Where(p => string.IsNullOrEmpty(p.ParentCode)))
+            {
+                resultList.Add(area);
+            }
+
+
+            // 遍历 "省" 的节点，为每个节点添加子节点
+            foreach (var rootNode in resultList)
+            {
+                List<Area> childAreas = new List<Area>();
+
+                var subAreas = areaList.Where(p => p.ParentCode == rootNode.AreaCode);
+
+                foreach (var subArea in subAreas)
+                {
+					// 这里是 “省” 下面的每一个 “市”
+					childAreas.Add(subArea);
+
+					List<Area> subChildAreas = new List<Area>();
+
+					// 遍历 “市” 下面的每一个 “县”
+					var subsubAreas = areaList.Where(p => p.ParentCode == subArea.AreaCode);
+
+					foreach (var subsubArea in subsubAreas)
+					{
+						// 这里是 “市” 下面的每一个 “县”						
+						subChildAreas.Add(subsubArea);
+					}
+
+                    // 设置“市”的 子节点.
+					subArea.Children = subChildAreas;
+				}
+
+				// 设置“省”节点的  子节点.
+				rootNode.Children = childAreas;
+            }
+            
+
+            return resultList;
+        }
+
+
+
+		public static IEnumerable<CascaderNode> GetTestAreaCascaderNodes()
         {
 
             List<CascaderNode> resultList = new List<CascaderNode>();

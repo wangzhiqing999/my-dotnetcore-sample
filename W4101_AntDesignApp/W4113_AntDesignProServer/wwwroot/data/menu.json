@@ -192,6 +192,11 @@
         "path": "/test/myselect2",
         "name": "测试Select(数字值)",
         "key": "test.myselect2"
+      },
+      {
+        "path": "/test/mytreeselect",
+        "name": "测试TreeSelect",
+        "key": "test.mytreeselect"
       }
     ]
   }
