@@ -1,0 +1,48 @@
+﻿@using W4113_AntDesignProServer.Models.Test
+@namespace W4113_AntDesignProServer.Pages.Test
+
+@page "/test/mycascader"
+
+
+
+<h3>简单选择</h3>
+
+<div>
+    <Cascader Style="width:360px;"
+        Options="@_Options"
+        @bind-Value="_Value"></Cascader>
+    <br />
+    <span>选择的数值: @_Value</span>
+</div>
+
+
+<hr/>
+
+
+<h3>选择即改变</h3>
+<div>
+    <Cascader Style="width:360px;"
+        Options="@_Options"
+        @bind-Value="_CascaderValue"
+        ChangeOnSelect="true"
+        SelectedNodesChanged="OnChange">
+    </Cascader>
+
+    <br/>
+    <div>选择的数值: @_CascaderValue</div>
+    <br />
+    <div>选择的路径: @_CascaderPath</div>
+</div>
+
+<p>
+    注意：这里是启用了“选择即改变”的选项，这种交互允许只选中父级选项。
+    也就是，假如只允许选择最底层的叶子节点的情况下，那就不要使用“选择即改变”
+</p>
+
+
+
+
+
+@code {
+
+}

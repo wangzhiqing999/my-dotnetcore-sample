@@ -1,0 +1,32 @@
+﻿@namespace W4113_AntDesignProServer.Pages.Test
+
+@page "/test/myautocomplete"
+
+
+
+
+<h3>简单使用的例子</h3>
+<p>
+    AutoComplete 不是 Select.
+    <br/>
+    Select 是只能选择，不能自己输入一个全新的选项。
+    <br />
+    AutoComplete 是，你可以输入一个全新的数值。
+    也可以从 AutoComplete 列表中选择。
+    还可以从列表中选择后，再做点修改。
+</p>
+
+<AutoComplete @bind-Value="@_autoCompleteValue"
+              Options="@_autoCompleteOptions"
+              Placeholder="input here" />
+
+<br/>
+<span>bind-Value:@_autoCompleteValue</span>
+
+
+
+
+
+@code {
+
+}
