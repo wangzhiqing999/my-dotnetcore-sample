@@ -1,0 +1,111 @@
+﻿@namespace W4113_AntDesignProServer.Pages.Test
+
+@page "/test/mycheckbox"
+
+
+
+<h3>单个的测试</h3>
+<div>
+    <Checkbox @bind-Checked="_isChecked">
+        简单的 Checkbox
+    </Checkbox>
+    <br />
+    <div>是否选择了: @_isChecked</div>
+    <br />
+</div>
+<div>
+    用于对比的 Switch <Switch @bind-Checked="_switchValue" />
+    <br />
+    <div>是否选择了: @_switchValue</div>
+    <br />
+</div>
+
+
+
+
+<hr/>
+<h3>多个绑定的测试</h3>
+
+<h4>string 数组</h4>
+<div>
+
+    <CheckboxGroup 
+        Options="@_allValues" 
+        @bind-Value="@_checkedValues" 
+        TValue="string" />
+    <br/>
+
+    <div>选择的数值:  @string.Join(',', _checkedValues)</div>    
+    <br />
+</div>
+
+
+<h4>CheckboxOption 数组</h4>
+<div>
+
+    <CheckboxGroup 
+        Options="@_allOptions" 
+        @bind-Value="@_checkedOptions" 
+        TValue="string" />
+
+    <div>选择的数值:  @string.Join(',', _checkedOptions)</div>
+    <br />
+</div>
+
+
+
+
+@code {
+
+
+    #region 单个的测试.
+
+    bool _isChecked = true;
+    bool _switchValue = true;
+
+    #endregion
+
+
+
+
+
+    #region 绑定的测试.
+
+
+
+    /// <summary>
+    /// 全部的数值.
+    /// </summary>
+    string[] _allValues = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" };
+
+    /// <summary>
+    /// 已选择的数值.
+    /// </summary>
+    string [] _checkedValues = new string [] { "1","2","3" };
+    
+
+
+
+
+    CheckboxOption<string>[] _allOptions = new CheckboxOption<string>[]
+    {
+        new() {Label = "地铁一号线", Value = "1"},
+        new() {Label = "地铁二号线", Value = "2"},
+        new() {Label = "地铁三号线", Value = "3"},
+        new() {Label = "地铁四号线", Value = "4"},
+        new() {Label = "地铁五号线", Value = "5"},
+        new() {Label = "地铁六号线", Value = "6"},
+        new() {Label = "地铁七号线", Value = "7"},
+        new() {Label = "地铁八号线", Value = "8"},
+        new() {Label = "地铁九号线", Value = "9"},
+        new() {Label = "地铁十号线", Value = "10"}
+    };
+
+    string[] _checkedOptions = new string[] { "2", "4" };
+
+
+    #endregion
+
+
+
+}
