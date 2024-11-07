@@ -193,7 +193,16 @@
         "name": "测试DatePicker",
         "key": "test.mydatepicker"
       },
-
+      {
+        "path": "/test/myinput",
+        "name": "测试Input",
+        "key": "test.myinput"
+      },
+      {
+        "path": "/test/myinputnumber",
+        "name": "测试InputNumber",
+        "key": "test.myinputnumber"
+      },
       {
         "path": "/test/myselect",
         "name": "测试Select(字符串值)",

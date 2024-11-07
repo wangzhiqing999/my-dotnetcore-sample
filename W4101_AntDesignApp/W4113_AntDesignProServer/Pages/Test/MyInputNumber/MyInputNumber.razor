@@ -1,0 +1,100 @@
+﻿@using System.Text.RegularExpressions
+
+@namespace W4113_AntDesignProServer.Pages.Test
+
+@page "/test/myinputnumber"
+
+
+
+<h3>小数精度</h3>
+<p>精度由 Step 的位数来控制</p>
+<div>
+    <span>精度 0.1</span>
+    <AntDesign.InputNumber Step="0.1" Min="-1" Max="5" @bind-Value="myStepValue" />
+</div>
+<div>
+    <span>精度 0.01</span>
+    <AntDesign.InputNumber Step="0.01" Min="-1" Max="5" @bind-Value="myStepValue2" />
+</div>
+
+
+
+<hr/>
+
+<h3>格式化</h3>
+<p>
+    格式化与解析函数
+    <br />
+    格式化函数用于格式化输入框的值，返回一个字符串
+    <br />
+    解析函数用于将输入框的值转换为数值，返回一个数值
+</p>
+<div>
+    <AntDesign.InputNumber 
+        Formatter="Format1" Parser="Parse1"
+        @bind-Value="_myFormatValue1" />
+    <br />
+    <Text>@_myFormatValue1</Text>
+</div>
+<div>
+
+    <AntDesign.InputNumber 
+        Formatter="Format2" Parser="Parse2" 
+        Min="0" Max="100"
+        @bind-Value="_myFormatValue2" />
+    <br />
+    <Text>@_myFormatValue2</Text>
+</div>
+
+
+
+
+
+@code {
+
+
+    #region 小数精度.
+
+    private double myStepValue { get; set; }
+    private double myStepValue2 { get; set; }
+
+    #endregion
+
+
+
+
+
+
+    #region 格式化.
+
+
+    private double _myFormatValue1 { get; set; } = 1234;
+    private int _myFormatValue2 { get; set; } = 90;
+
+
+
+    private string Format1(double value)
+    {
+        return "$ " + value.ToString("n0");
+    }
+
+    private string Parse1(string value)
+    {
+        return Regex.Replace(value, @"\$\s?|(,*)", "");
+    }
+
+
+
+    private string Format2(int value)
+    {
+        return value.ToString() + "%";
+    }
+
+    private string Parse2(string value)
+    {
+        return value.Replace("%", "");
+    }
+
+
+    #endregion
+}
