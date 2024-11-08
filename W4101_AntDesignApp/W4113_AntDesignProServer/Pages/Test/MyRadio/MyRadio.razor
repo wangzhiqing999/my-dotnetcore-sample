@@ -1,0 +1,110 @@
+﻿@using W4113_AntDesignProServer.Models.Test
+
+@namespace W4113_AntDesignProServer.Pages.Test
+
+@page "/test/myradio"
+
+
+
+<h3>选项写在页面上的处理</h3>
+<div>
+    <RadioGroup @bind-Value="@_RadioValue">
+        <Radio Value="1">A</Radio>
+        <Radio Value="2">B</Radio>
+        <Radio Value="3">C</Radio>
+        <Radio Value="4">D</Radio>
+    </RadioGroup>
+
+    <br />
+    <div>选择的数值: @_RadioValue</div>
+    <br />
+</div>
+
+
+
+<hr />
+
+
+<h3>选项写在页面上的处理-竖着排列</h3>
+<div>
+    <RadioGroup @bind-Value="@_RadioValue2">
+        <Radio Style="@style" Value="@("A")">A</Radio>
+        <Radio Style="@style" Value="@("B")">B</Radio>
+        <Radio Style="@style" Value="@("C")">C</Radio>
+        <Radio Style="@style" Value="@("D")">D</Radio>
+        <Radio Style="@style" Value="@("M")">
+            其它...
+            @if (_RadioValue2 == "M")
+            {
+                <AntDesign.Input type="text" TValue="string" @bind-Value="@_OtherText" />
+            }
+        </Radio>
+    </RadioGroup>
+
+    <br />
+    <div>选择的数值: @_RadioValue2</div>
+    <div>输入的其它：@_OtherText</div>
+    <br />
+</div>
+
+
+
+<hr />
+<h3>选项写在页面上的处理-按钮的样式</h3>
+<div>
+    <RadioGroup @bind-Value="_RadioValue3">
+        <Radio RadioButton Value="@("A")">Hangzhou</Radio>
+        <Radio RadioButton Value="@("B")">Shanghai</Radio>
+        <Radio RadioButton Value="@("C")">Beijing</Radio>
+        <Radio RadioButton Value="@("D")">Chengdu</Radio>
+    </RadioGroup>
+
+    <br />
+    <div>选择的数值: @_RadioValue3</div>
+    <br />
+</div>
+
+
+<hr />
+<h3>枚举的方式</h3>
+
+<div>
+
+    <EnumRadioGroup 
+        TEnum="ExportFormatType" 
+        @bind-Value="_radioValue" 
+        Name="group1"></EnumRadioGroup>
+    <br />
+    
+    <div>选择的数值: @_radioValue</div>
+    <br />
+</div>
+
+
+
+
+
+@code {
+
+
+
+    int _RadioValue = 1;
+
+
+
+
+    string _RadioValue2 = "A";
+    string _OtherText = "";
+    string style = "display: block;height:30px;line-height:30px";
+
+
+
+
+    string _RadioValue3 = "A";
+
+
+
+
+    ExportFormatType _radioValue = ExportFormatType.NoFormat;
+
+}

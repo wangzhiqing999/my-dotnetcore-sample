@@ -1,0 +1,87 @@
+﻿@namespace W4113_AntDesignProServer.Pages.Test
+
+@page "/test/myswitch"
+
+
+<h3>简单使用</h3>
+
+<div>
+    <Switch @bind-Checked="_SwitchValue" />
+    <br />
+    <div>选择的数值: @_SwitchValue</div>
+    <br />
+</div>
+
+
+<hr/>
+
+
+
+<h3>文字与图标</h3>
+<div>
+    <Switch CheckedChildren="开" UnCheckedChildren="关" @bind-Checked="_SwitchValue2" />
+    <br />
+    <div>选择的数值: @_SwitchValue2</div>
+    <br />
+
+    <Switch CheckedChildren="开" UnCheckedChildren="关" @bind-Checked="_SwitchValue3" />
+    <br />
+    <div>选择的数值: @_SwitchValue3</div>
+    <br />
+
+    <Switch @bind-Checked="_SwitchValue4">
+        <CheckedChildrenTemplate>
+            <Icon Type="check"></Icon>
+        </CheckedChildrenTemplate>
+        <UnCheckedChildrenTemplate>
+            <Icon Type="close"></Icon>
+        </UnCheckedChildrenTemplate>
+    </Switch>
+    <br />
+    <div>选择的数值: @_SwitchValue4</div>
+    <br />
+</div>
+
+
+
+<hr/>
+<h3>点击了就执行操作的处理</h3>
+<div>
+    <Switch Checked="@_switchValue" Loading="@_isLoading" Control OnClick="Click" />
+</div>
+
+
+
+@code {
+
+
+    bool _SwitchValue { get; set; }
+
+
+
+
+    bool _SwitchValue2 { get; set; } = true;
+
+    bool _SwitchValue3 { get; set; }
+
+    bool _SwitchValue4 { get; set; }
+
+
+
+
+
+    bool _switchValue;
+    bool _isLoading = false;
+
+    async Task Click()
+    {
+        if (!_isLoading)
+        {
+            _isLoading = true;
+            await Task.Delay(3000);
+            _switchValue = !_switchValue;
+            _isLoading = false;
+        }
+    }
+
+}

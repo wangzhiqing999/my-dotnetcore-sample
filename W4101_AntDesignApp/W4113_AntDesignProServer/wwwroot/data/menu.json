@@ -204,6 +204,16 @@
         "key": "test.myinputnumber"
       },
       {
+        "path": "/test/myradio",
+        "name": "测试Radio",
+        "key": "test.myradio"
+      },
+      {
+        "path": "/test/myrate",
+        "name": "测试Rate",
+        "key": "test.myrate"
+      },
+      {
         "path": "/test/myselect",
         "name": "测试Select(字符串值)",
         "key": "test.myselect"
@@ -212,6 +222,16 @@
         "path": "/test/myselect2",
         "name": "测试Select(数字值)",
         "key": "test.myselect2"
+      },
+      {
+        "path": "/test/myswitch",
+        "name": "测试Switch",
+        "key": "test.myswitch"
+      },
+      {
+        "path": "/test/mytimepicker",
+        "name": "测试TimePicker",
+        "key": "test.mytimepicker"
       },
       {
         "path": "/test/mytreeselect",

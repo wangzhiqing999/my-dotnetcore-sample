@@ -1,0 +1,57 @@
+﻿@namespace W4113_AntDesignProServer.Pages.Test
+
+@page "/test/mytimepicker"
+
+
+
+<h3>简单使用</h3>
+<div>
+    <TimePicker @bind-Value="_InputTime" />
+    <br />
+    <div>选择的数值: @_InputTime</div>
+    <br />
+
+</div>
+
+
+<hr/>
+
+<h3>区分上午/下午</h3>
+<div>
+    <TimePicker @bind-Value="_InputTime2" Use12Hours />
+    <br />
+    <div>选择的数值: @_InputTime2</div>
+    <br />
+
+</div>
+
+
+<hr />
+
+
+<h3>只输入小时和分钟</h3>
+<div>
+    <TimePicker @bind-Value="_InputTime3" Format='@("HH:mm")' />
+    <br />
+    <div>选择的数值: @_InputTime3</div>
+    <br />
+
+</div>
+
+
+
+
+@code {
+
+
+    private TimeOnly? _InputTime;
+
+
+
+    private TimeOnly? _InputTime2;
+
+
+
+    private TimeOnly? _InputTime3;
+
+}
