@@ -37,6 +37,39 @@
 
 
 
+<h4>单选-自己写事件来获取数据</h4>
+
+<Select Style="width:240px;"
+        TItem="MySelectModelB" TItemValue="int"
+        LabelName="@nameof(MySelectModelB.Name)"
+        ValueName="@nameof(MySelectModelB.ID)"
+        DataSource="@_dataSourceB"
+        OnSelectedItemChanged="OnSelectedItemChangedHandler3">
+</Select>
+<br />
+<div>选择的数值: @_selectedIDB3</div>
+<br />
+
+
+<h4>单选-既绑定了数值，又自己写事件来获取数据</h4>
+
+<Select Style="width:240px;"
+        TItem="MySelectModelB" TItemValue="int"
+        LabelName="@nameof(MySelectModelB.Name)"
+        ValueName="@nameof(MySelectModelB.ID)"
+        DataSource="@_dataSourceB"
+        @bind-Value="_selectedIDB4"
+        OnSelectedItemChanged="OnSelectedItemChangedHandler4">
+</Select>
+<br />
+<div>绑定的数值: @_selectedIDB4</div>
+<div>自己写事件获取的数值: @_selectedIDB4ByHand</div>
+<br />
+
+
+
+
+
 <h4>多选</h4>
 
 <Select Style="width:480px;" Mode="multiple"
@@ -121,6 +154,29 @@
 <div>选择的数值: @_myTestSelectValue4</div>
 
 <br />
+
+
+
+<h4>单选 （通过事件绑定来获取选择的数据）</h4>
+<ModelBSelect Style="width:240px;" OnSelectedItemChanged="OnSelectedItemChangedHandler5">
+</ModelBSelect>
+<br />
+<div>选择的数值: @_myTestSelectValue5</div>
+
+<br />
+
+
+<h4>单选 （既绑定了数值，又自己写事件来获取数据）</h4>
+<ModelBSelect Style="width:240px;"
+              @bind-Value="_myTestSelectValue6"
+              OnSelectedItemChanged="OnSelectedItemChangedHandler6">
+</ModelBSelect>
+<br />
+<div>绑定的数值: @_myTestSelectValue6</div>
+<div>自己写事件获取的数值: @_myTestSelectValue6ByHand</div>
+
+<br />
+
 
 
 

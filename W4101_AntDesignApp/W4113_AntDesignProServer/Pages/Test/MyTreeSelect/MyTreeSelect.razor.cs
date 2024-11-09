@@ -64,6 +64,13 @@ namespace W4113_AntDesignProServer.Pages.Test
 
 
 
+		/// <summary>
+		/// 单选：有初始值.
+		/// </summary>
+		string _selectedAreaCode = "72";
+
+
+
 		private IEnumerable<string> _selectedAreaCodes = new List<string>();
 
 		private IEnumerable<string> _selectedAreaCodes2 = new List<string>();

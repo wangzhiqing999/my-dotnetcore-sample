@@ -109,6 +109,7 @@
 
     #region 单选.
 
+
     /// <summary>
     /// 选择的数据.
     /// </summary>
@@ -116,13 +117,26 @@
     public int Value { get; set; }
 
 
+    /// <summary>
+    /// 用于双向绑定的事件.
+    /// </summary>
     [Parameter]
     public EventCallback<int> ValueChanged { get; set; }
+
+
+    /// <summary>
+    /// 用于触发选择的事件.
+    /// </summary>
+    [Parameter] 
+    public EventCallback<MySelectModelB> OnSelectedItemChanged { get; set; }
+
+
 
 
 
     private async Task OnSelectedItemChangedHandler(MySelectModelB value)
     {
+        // 如果调用这个组件的，设置了双向绑定的参数，那么就要触发一下。
         if (ValueChanged.HasDelegate)
         {
             if (value != null)
@@ -134,6 +148,12 @@
                 await ValueChanged.InvokeAsync(0);
             }
         }
+
+        // 如果调用这个组件的，设置了触发选择的事件，那么就触发一下.
+        if (OnSelectedItemChanged.HasDelegate)
+        {
+            await OnSelectedItemChanged.InvokeAsync(value);
+        }
     }
 
 
@@ -143,6 +163,7 @@
 
     #region 多选.
 
+
     /// <summary>
     /// 选择的数据.
     /// </summary>
@@ -150,12 +171,24 @@
     public IEnumerable<int> Values { get; set; } = new List<int>();
 
 
+    /// <summary>
+    /// 用于双向绑定的事件.
+    /// </summary>
     [Parameter]
     public EventCallback<IEnumerable<int>> ValuesChanged { get; set; }
 
 
+    /// <summary>
+    /// 用于触发选择的事件.
+    /// </summary>
+    [Parameter] 
+    public EventCallback<IEnumerable<MySelectModelB>> OnSelectedItemsChanged { get; set; }
+
+
+
     private async Task OnSelectedItemsChangedHandler(IEnumerable<MySelectModelB> values)
     {
+        // 如果调用这个组件的，设置了双向绑定的参数，那么就要触发一下。
         if (ValuesChanged.HasDelegate)
         {
             if (values != null)
@@ -167,6 +200,13 @@
                 await ValuesChanged.InvokeAsync(null);
             }
         }
+
+        // 如果调用这个组件的，设置了触发选择的事件，那么就触发一下.
+        if (OnSelectedItemsChanged.HasDelegate)
+        {
+            await OnSelectedItemsChanged.InvokeAsync(values);
+        }
+
     }
 
     #endregion

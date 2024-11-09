@@ -220,6 +220,30 @@
 
 <h3>简单绑定的使用</h3>
 
+
+<h4>单选-有初始值</h4>
+<TreeSelect Style="width:100%;"
+			DataSource="_dataSource"
+			@bind-Value="@_selectedAreaCode"
+			Placeholder="Please select"
+			ItemValue="item=>item.AreaCode"
+			ItemLabel="item=>item.AreaName"
+			TreeDefaultExpandAll
+			MatchedStyle="font-weight: bold"
+			ChildrenExpression="node=>node.DataItem.Children"
+			TitleExpression="node=>node.DataItem.AreaName"
+			TitleTemplate="node=>node.DataItem.AreaName.ToRenderFragment()"
+			KeyExpression="node=>node.DataItem.AreaCode"
+			IsLeafExpression="node=>node.DataItem.Children==null">
+</TreeSelect>
+<br />
+<div>选择的数值:  @_selectedAreaCode</div>
+<br />
+
+
+
+
+
 <h4>多选</h4>
 <TreeSelect Style="width:100%;"
 			DataSource="_dataSource"
@@ -408,6 +432,128 @@
 
 
 
+
+
+
+
+
+
+
+<hr />
+
+<h3>自定义的组件</h3>
+
+<h4>单选</h4>
+<AreaTreeSelect @bind-Value="@_AreaTreeSelectValue">
+</AreaTreeSelect>
+<br />
+<div>选择的数值:  @_AreaTreeSelectValue</div>
+<br />
+
+
+<h4>单选-有一个初始值</h4>
+<AreaTreeSelect
+	@bind-Value="@_AreaTreeSelectValue2">
+</AreaTreeSelect>
+<br />
+<div>选择的数值:  @_AreaTreeSelectValue2</div>
+<br />
+
+
+<p style="color:red;">
+	注意：存在这样的情况，自定义 TreeSelect 组件， 设置了初始的数值。
+	但是画面显示的时候，不能正常的显示。
+	实在不行的话，可以采取， 最后再设置一次 Value 的方式来处理。
+</p>
+
+
+
+<h4>单选-外部设置选择的数值</h4>
+<AreaTreeSelect @bind-Value="@_AreaTreeSelectValue3">
+</AreaTreeSelect>
+<br />
+<Button OnClick="OuterSetAreaTreeSelectValue">手动设置一个值</Button>
+<br />
+<div>选择的数值:  @_AreaTreeSelectValue3</div>
+<br />
+
+
+
+
+
+
+<h4>多选</h4>
+<AreaTreeSelect 
+	IsMultiple="true"
+	@bind-Values="@_AreaTreeSelectValues">
+</AreaTreeSelect>
+<br />
+<div>选择的数值:  @string.Join(',', _AreaTreeSelectValues)</div>
+<br />
+
+
+
+<h4>多选-可勾选</h4>
+<AreaTreeSelect IsMultiple="true"
+				TreeCheckable="true"
+				TreeCheckStrictly="true"
+				CheckOnClickNode="true"
+				@bind-Values="@_AreaTreeSelectValues2">
+</AreaTreeSelect>
+<br />
+<div>选择的数值:  @string.Join(',', _AreaTreeSelectValues2)</div>
+<br />
+
+
+
+
+
+<h4>多选-可勾选-有一个初始值</h4>
+<AreaTreeSelect IsMultiple="true"
+				TreeCheckable="true"
+				TreeCheckStrictly="true"
+				CheckOnClickNode="true"
+				@bind-Values="@_AreaTreeSelectValues3">
+</AreaTreeSelect>
+<br />
+<div>选择的数值:  @string.Join(',', _AreaTreeSelectValues3)</div>
+<br />
+
+
+
 @code {
+
+
+	/// <summary>
+	/// 自定义组件绑定的数值-单选.
+	/// </summary>
+	string _AreaTreeSelectValue;
+
+
+
+	string _AreaTreeSelectValue2 = "72";
+
+
+
+	string _AreaTreeSelectValue3;
+
+	private void OuterSetAreaTreeSelectValue()
+	{
+		_AreaTreeSelectValue3 = "72";
+	}
+
+
+
+
+	/// <summary>
+	/// 自定义组件绑定的数值-多选.
+	/// </summary>
+	IEnumerable<string> _AreaTreeSelectValues = new List<string>();
+
+
+	IEnumerable<string> _AreaTreeSelectValues2 = new List<string>();
+
+
+	IEnumerable<string> _AreaTreeSelectValues3 = new List<string>() { "72", "2800" };
 
 }
