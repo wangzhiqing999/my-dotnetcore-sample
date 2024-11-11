@@ -169,7 +169,7 @@
   },
   {
     "path": "/test",
-    "name": "测试",
+    "name": "测试-输入",
     "key": "test",
     "icon": "appstore",
     "children": [
@@ -239,5 +239,48 @@
         "key": "test.mytreeselect"
       }
     ]
+  },
+  {
+    "path": "/test2",
+    "name": "测试-展示",
+    "key": "test2",
+    "icon": "appstore",
+    "children": [
+      {
+        "path": "/test/mytable01",
+        "name": "测试Table1-自动生成",
+        "key": "test.mytable01"
+      },
+      {
+        "path": "/test/mytable02",
+        "name": "测试Table2-手动指定",
+        "key": "test.mytable02"
+      },
+      {
+        "path": "/test/mytable03",
+        "name": "测试Table3-固定表头",
+        "key": "test.mytable03"
+      },
+      {
+        "path": "/test/mytable04",
+        "name": "测试Table4-固定列",
+        "key": "test.mytable04"
+      },
+      {
+        "path": "/test/mytable05",
+        "name": "测试Table5-固定头和列",
+        "key": "test.mytable05"
+      },
+      {
+        "path": "/test/mytable06",
+        "name": "测试Table6-修改每行样式",
+        "key": "test.mytable06"
+      },
+      {
+        "path": "/test/mytable07",
+        "name": "测试Table7-自动省略",
+        "key": "test.mytable07"
+      }
+    ]
   }
-]
+    ]
