@@ -280,6 +280,16 @@
         "path": "/test/mytable07",
         "name": "测试Table7-自动省略",
         "key": "test.mytable07"
+      },
+      {
+        "path": "/test/mytable08",
+        "name": "测试Table8-可伸缩",
+        "key": "test.mytable08"
+      },
+      {
+        "path": "/test/mytable10",
+        "name": "测试Table10-嵌套",
+        "key": "test.mytable10"
       }
     ]
   }

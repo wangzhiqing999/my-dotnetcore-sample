@@ -1,0 +1,124 @@
+﻿@using System.Text.Json
+@using AntDesign.TableModels
+@using System.ComponentModel.DataAnnotations
+@using W4113_AntDesignProServer.Models.Test
+
+@namespace W4113_AntDesignProServer.Pages.Test
+
+@page "/test/mytable10"
+
+
+
+<Table @ref="_table"
+       TItem="MyModule"
+       PageSize="5" Total="_total"
+       DataSource="_dataSource"
+       OnChange="OnChange"
+       OnExpand="OnRowExpand">
+
+
+    <ColumnDefinitions Context="row">
+
+        <PropertyColumn Property="c=>c.ModuleCode" Sortable>
+        </PropertyColumn>
+        <PropertyColumn Property="c=>c.ModuleName" Sortable>
+        </PropertyColumn>
+
+        <ActionColumn Title="Action"> <a>模块的相关操作</a> </ActionColumn>
+    </ColumnDefinitions>
+
+
+    <ExpandTemplate Context="rowData">
+        <Table DataSource="rowData.Data.Actions" Loading="rowData.Data.Actions==null" HidePagination>
+            <PropertyColumn Property="c=>c.ActionCode" />
+            <PropertyColumn Property="c=>c.ActionName" />
+            <ActionColumn Title="Action">
+                <Space Size="@("middle")">
+                    <SpaceItem><a>动作的相关操作</a></SpaceItem>
+                </Space>
+            </ActionColumn>
+        </Table>    
+    </ExpandTemplate>
+
+</Table>
+
+
+<hr/>
+<p>
+    测试 Table 组件.
+    <br/>
+    这里是测试嵌套的表格。
+</p>
+
+
+
+
+@code {
+
+
+
+    /// <summary>
+    /// Table 组件.
+    /// </summary>
+    private ITable _table;
+
+
+    List<MyModule> mockDb = [];
+
+    /// <summary>
+    /// 数据源.
+    /// </summary>
+    private List<MyModule> _dataSource;
+
+    /// <summary>
+    /// 总行数.
+    /// </summary>
+    private int _total;
+
+
+
+
+
+
+
+
+    protected override void OnInitialized()
+    {
+        // 初始化数据源.
+        mockDb = MyModule.GetTestDataList();
+
+        _dataSource = mockDb;
+
+        _total = mockDb.Count;
+    }
+
+    void OnChange(QueryModel<MyModule> query)
+    {
+        _total = mockDb.AsQueryable().ExecuteTableQuery(query).Count();
+        _dataSource = mockDb.AsQueryable().ExecuteTableQuery(query).CurrentPagedRecords(query).ToList();
+
+    }
+
+
+    /// <summary>
+    /// 展开模块下动作的处理.
+    /// </summary>
+    /// <param name="rowData"></param>
+    /// <returns></returns>
+    async Task OnRowExpand(RowData<MyModule> rowData)
+    {
+        if (rowData.Data.Actions != null)
+        {
+            return;
+        }
+
+        await Task.Delay(1000);
+
+
+        rowData.Data.Actions = MyAction.GetTestDataList(rowData.Data);
+
+        StateHasChanged();
+    }
+
+
+}
