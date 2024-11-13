@@ -182,6 +182,340 @@ https://learn.microsoft.com/zh-cn/training/modules/blazor-introduction/3-when-to
 没有 .NET 8.0 的选项。
 
 
+也就是创建这样的项目，需要去选择 “创建 Blazor Web App 项目”。
+在那里， 去选择 交互式呈现模式 为 "Server"。
+来实现这样的功能。
+
+
+
+
+
+
+
+
+
+
+
+### A0053_BlazorApp_None
+
+创建 Blazor Web App 项目.
+
+框架： .NET 8.0
+身份验证类型： 无
+配置 HTTPS 不打勾
+
+交互式呈现模式 选择 "None"
+注：如果将交互性设置为 None，则生成的应用不具有交互性。 应用仅配置用于静态服务器端呈现。
+
+包含示例页 打勾
+不使用顶级语句 打勾
+
+
+创建结果：
+一个项目
+
+依赖项
+框架：
+Microsoft.AspNetCore.App
+Microsoft.NETCore.App
+
+
+
+
+
+### A0053_BlazorApp_Server
+
+创建 Blazor Web App 项目.
+
+框架： .NET 8.0
+身份验证类型： 无
+配置 HTTPS 不打勾
+
+交互式呈现模式 选择 "Server"
+交互位置 选择 "Per page/component"
+
+包含示例页 打勾
+不使用顶级语句 打勾
+
+创建结果：
+一个项目
+
+依赖项
+框架：
+Microsoft.AspNetCore.App
+Microsoft.NETCore.App
+
+### A0053_BlazorApp_Server_Global
+
+创建 Blazor Web App 项目.
+
+框架： .NET 8.0
+身份验证类型： 无
+配置 HTTPS 不打勾
+
+交互式呈现模式 选择 "Server"
+交互位置 选择 "Global"
+
+包含示例页 打勾
+不使用顶级语句 打勾
+
+创建结果：
+一个项目
+
+依赖项
+框架：
+Microsoft.AspNetCore.App
+Microsoft.NETCore.App
+
+
+### A0053_BlazorApp_WebAssembly
+
+创建 Blazor Web App 项目.
+
+框架： .NET 8.0
+身份验证类型： 无
+配置 HTTPS 不打勾
+
+交互式呈现模式 选择 "WebAssembly"
+交互位置 选择 "Per page/component"
+
+包含示例页 打勾
+不使用顶级语句 打勾
+
+
+创建结果：
+两个项目
+
+一个 A0053_BlazorApp_WebAssembly
+依赖项
+框架：
+  Microsoft.AspNetCore.App
+  Microsoft.NETCore.App
+项目：
+  A0053_BlazorApp_WebAssembly.Client
+
+
+一个 A0053_BlazorApp_WebAssembly.Client
+依赖项
+框架：
+  Microsoft.NETCore.App
+
+
+
+
+
+### A0053_BlazorApp_Auto
+
+创建 Blazor Web App 项目.
+
+框架： .NET 8.0
+身份验证类型： 无
+配置 HTTPS 打勾
+
+交互式呈现模式 选择 "Auto(Server and WebAssembly)"
+交互位置 选择 "Per page/component"
+
+包含示例页 打勾
+不使用顶级语句 打勾
+
+创建结果：
+两个项目
+
+
+一个 A0053_BlazorApp_Auto
+依赖项
+框架：
+  Microsoft.AspNetCore.App
+  Microsoft.NETCore.App
+项目：
+  A0053_BlazorApp_Auto.Client
+
+
+一个 A0053_BlazorApp_Auto.Client
+依赖项
+框架：
+  Microsoft.NETCore.App
+
+
+
+
+### A0053_BlazorApp_Auto_Global
+
+
+创建 Blazor Web App 项目.
+
+框架： .NET 8.0
+身份验证类型： 无
+配置 HTTPS 不打勾
+
+交互式呈现模式 选择 "Auto(Server and WebAssembly)"
+交互位置 选择 "Global"
+
+包含示例页 打勾
+不使用顶级语句 打勾
+
+创建结果：
+两个项目
+
+
+一个 A0053_BlazorApp_Auto_Global
+依赖项
+框架：
+  Microsoft.AspNetCore.App
+  Microsoft.NETCore.App
+项目：
+  A0053_BlazorApp_Auto_Global.Client
+
+
+一个 A0053_BlazorApp_Auto_Global.Client
+依赖项
+框架：
+  Microsoft.NETCore.App
+
+
+
+
+
+### Blazor Web App 项目 的区别
+
+
+关于“交互式呈现模式”的说明文档：
+https://learn.microsoft.com/zh-cn/aspnet/core/blazor/components/render-modes?view=aspnetcore-9.0
+
+
+
+#### 交互式呈现模式=None
+
+Program.cs
+
+```
+// Add services to the container.
+builder.Services.AddRazorComponents();
+
+……
+
+app.MapRazorComponents<App>();
+
+```
+
+
+#### 交互式呈现模式=Server
+
+Program.cs
+
+```
+// Add services to the container.
+builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents();
+
+……
+
+app.MapRazorComponents<App>()
+    .AddInteractiveServerRenderMode();
+
+```
+
+
+##### 交互位置 选择 "Global"
+
+App.razor
+
+```
+<HeadOutlet @rendermode="InteractiveServer" />
+……
+<Routes @rendermode="InteractiveServer" />
+```
+
+##### 交互位置 选择 "Per page/component"
+
+Counter.razor
+
+```
+@rendermode InteractiveServer
+```
+
+
+
+#### 交互式呈现模式=WebAssembly
+
+Program.cs
+
+```
+// Add services to the container.
+builder.Services.AddRazorComponents()
+    .AddInteractiveWebAssemblyComponents();
+
+……
+
+app.MapRazorComponents<App>()
+    .AddInteractiveWebAssemblyRenderMode()
+    .AddAdditionalAssemblies(typeof(Client._Imports).Assembly);
+
+```
+
+
+Counter.razor
+
+```
+@rendermode InteractiveWebAssembly
+```
+
+
+
+
+#### 交互式呈现模式=Auto
+
+
+Program.cs
+
+```
+// Add services to the container.
+builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents()
+    .AddInteractiveWebAssemblyComponents();
+
+……
+
+app.MapRazorComponents<App>()
+    .AddInteractiveServerRenderMode()
+    .AddInteractiveWebAssemblyRenderMode()
+    .AddAdditionalAssemblies(typeof(Client._Imports).Assembly);
+
+```
+
+
+##### 交互位置 选择 "Global"
+
+App.razor
+
+```
+<HeadOutlet @rendermode="InteractiveAuto" />
+……
+<Routes @rendermode="InteractiveAuto" />
+```
+
+##### 交互位置 选择 "Per page/component"
+
+Counter.razor
+
+```
+@rendermode InteractiveAuto
+```
+
+
+
+
+#### 交互位置选项  "Global" 与 "Per page/component" 的区别
+
+项目运行的时候，按 F12，查看网络。
+每点击一次菜单的不同选项。
+"Global" 的，不会有新的网络请求。
+"Per page/component" 的，会有新的网络请求。
+
+
+
+
+
 
 
 
