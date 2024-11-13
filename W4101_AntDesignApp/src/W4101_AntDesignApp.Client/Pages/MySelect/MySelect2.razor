@@ -1,0 +1,174 @@
+﻿@using W4101_AntDesignApp.Models
+@using AntDesign.TableModels
+@namespace W4101_AntDesignApp.Pages
+
+@page "/myselect2"
+
+<h3>测试输入-Select</h3>
+
+
+
+<h3>简单绑定的使用</h3>
+<h4>单选</h4>
+
+
+<Select Style="width:240px;"
+        TItem="MySelectModelB" TItemValue="int"
+        LabelName="@nameof(MySelectModelB.Name)"
+        ValueName="@nameof(MySelectModelB.ID)"
+        DataSource="@_dataSourceB"
+        @bind-Value="_selectedIDB">
+</Select>
+<br />
+<div>选择的数值: @_selectedIDB</div>
+<br />
+
+
+
+<h4>单选-默认选择第一个可用的数据</h4>
+<Select Style="width:240px;"
+        TItem="MySelectModelB" TItemValue="int"
+        LabelName="@nameof(MySelectModelB.Name)"
+        ValueName="@nameof(MySelectModelB.ID)"
+        DataSource="@_dataSourceB"
+        @bind-Value="_selectedIDB2"
+        DefaultActiveFirstOption="true">
+</Select>
+<br />
+<div>选择的数值: @_selectedIDB2</div>
+
+<br />
+
+
+
+<h4>单选-自己写事件来获取数据</h4>
+
+<Select Style="width:240px;"
+        TItem="MySelectModelB" TItemValue="int"
+        LabelName="@nameof(MySelectModelB.Name)"
+        ValueName="@nameof(MySelectModelB.ID)"
+        DataSource="@_dataSourceB"
+        OnSelectedItemChanged="OnSelectedItemChangedHandler3">
+</Select>
+<br />
+<div>选择的数值: @_selectedIDB3</div>
+<br />
+
+
+<h4>单选-既绑定了数值，又自己写事件来获取数据</h4>
+
+<Select Style="width:240px;"
+        TItem="MySelectModelB" TItemValue="int"
+        LabelName="@nameof(MySelectModelB.Name)"
+        ValueName="@nameof(MySelectModelB.ID)"
+        DataSource="@_dataSourceB"
+        @bind-Value="_selectedIDB4"
+        OnSelectedItemChanged="OnSelectedItemChangedHandler4">
+</Select>
+<br />
+<div>绑定的数值: @_selectedIDB4</div>
+<div>自己写事件获取的数值: @_selectedIDB4ByHand</div>
+<br />
+
+
+
+
+
+<h4>多选</h4>
+
+<Select Style="width:480px;" Mode="multiple"
+        TItem="MySelectModelB" TItemValue="int"
+        LabelName="@nameof(MySelectModelB.Name)"
+        ValueName="@nameof(MySelectModelB.ID)"
+        DataSource="@_dataSourceB"
+        @bind-Values="@_selectedIDBs">
+</Select>
+<br />
+
+<div>选择的数值: @string.Join(',', _selectedIDBs.Select(prop => prop.ToString()))</div>
+
+
+
+
+<hr />
+
+
+<h3>允许清除</h3>
+<Select Style="width:360px;"
+        AllowClear
+        TItem="MySelectModelB" TItemValue="int?"
+        LabelName="@nameof(MySelectModelB.Name)"
+        ValueName="@nameof(MySelectModelB.ID)"
+        DataSource="@_dataSourceB"
+        @bind-Value="_selectedIDBWithAllowClear">
+</Select>
+<br />
+<div>选择的数值: @_selectedIDBWithAllowClear</div>
+
+
+
+
+
+
+
+@code {
+
+
+
+
+    #region 简单绑定的使用
+
+
+    List<MySelectModelB> _dataSourceB = MySelectModelB.GetTestDataList();
+
+
+    int _selectedIDB;
+    int _selectedIDB2;
+
+
+
+
+    int _selectedIDB3;
+    private void OnSelectedItemChangedHandler3(MySelectModelB value)
+    {
+        _selectedIDB3 = value.ID;
+    }
+
+
+    int _selectedIDB4;
+    int _selectedIDB4ByHand;
+    private void OnSelectedItemChangedHandler4(MySelectModelB value)
+    {
+        _selectedIDB4ByHand = value.ID;
+    }
+
+
+
+    IEnumerable<int> _selectedIDBs = new List<int>();
+
+
+
+
+
+
+    #endregion
+
+
+
+
+    #region 允许清除.
+
+
+
+    int? _selectedIDBWithAllowClear;
+
+
+
+    #endregion
+
+
+
+
+
+
+}

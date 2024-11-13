@@ -1,0 +1,430 @@
+﻿@using W4101_AntDesignApp.Models
+@using AntDesign.TableModels
+@namespace W4101_AntDesignApp.Pages
+
+@page "/myselect"
+
+<h3>测试输入-Select</h3>
+
+
+
+
+
+
+<h3>选项写在页面上的处理</h3>
+
+<h4>单选</h4>
+
+<SimpleSelect Style="width:120px;" @bind-Value="_selectedCityCode">
+    <SelectOptions>
+        <SimpleSelectOption Value="0001" Label="北京"></SimpleSelectOption>
+        <SimpleSelectOption Value="0002" Label="上海"></SimpleSelectOption>
+        <SimpleSelectOption Value="0003" Label="广州"></SimpleSelectOption>
+        <SimpleSelectOption Value="0004" Label="深圳"></SimpleSelectOption>
+    </SelectOptions>
+</SimpleSelect>
+<br />
+<div>选择的数值: @_selectedCityCode</div>
+<br />
+
+
+
+<h4>单选-默认选择第一个可用的数据</h4>
+
+<SimpleSelect Style="width:120px;" @bind-Value="_selectedCityCode2" DefaultActiveFirstOption="true">
+    <SelectOptions>
+        <SimpleSelectOption Value="0001" Label="北京"></SimpleSelectOption>
+        <SimpleSelectOption Value="0002" Label="上海"></SimpleSelectOption>
+        <SimpleSelectOption Value="0003" Label="广州"></SimpleSelectOption>
+        <SimpleSelectOption Value="0004" Label="深圳"></SimpleSelectOption>
+    </SelectOptions>
+</SimpleSelect>
+<br />
+<div>选择的数值: @_selectedCityCode2</div>
+<br />
+
+
+
+
+
+<h4>多选</h4>
+<SimpleSelect Style="width:480px;" Mode="multiple"
+              OnSelectedItemsChanged="handleItemsChange">
+    <SelectOptions>
+        <SimpleSelectOption Value="0001" Label="北京"></SimpleSelectOption>
+        <SimpleSelectOption Value="0002" Label="上海"></SimpleSelectOption>
+        <SimpleSelectOption Value="0003" Label="广州"></SimpleSelectOption>
+        <SimpleSelectOption Value="0004" Label="深圳"></SimpleSelectOption>
+    </SelectOptions>
+</SimpleSelect>
+<br />
+<div>选择的数值: @string.Join(',', _selectedCityCodes)</div>
+<br />
+
+
+<h4>多选-隐藏已选择</h4>
+<SimpleSelect Style="width:480px;" Mode="multiple" HideSelected
+              OnSelectedItemsChanged="handleItemsChange2">
+    <SelectOptions>
+        <SimpleSelectOption Value="0001" Label="北京"></SimpleSelectOption>
+        <SimpleSelectOption Value="0002" Label="上海"></SimpleSelectOption>
+        <SimpleSelectOption Value="0003" Label="广州"></SimpleSelectOption>
+        <SimpleSelectOption Value="0004" Label="深圳"></SimpleSelectOption>
+    </SelectOptions>
+</SimpleSelect>
+<br />
+<div>选择的数值: @string.Join(',', _selectedCityCodes2)</div>
+<br />
+
+
+
+<h4>多选-使用 bind-Values </h4>
+<SimpleSelect Style="width:480px;" Mode="multiple"
+              @bind-Values="@_selectedCityCodes3">
+    <SelectOptions>
+        <SimpleSelectOption Value="0001" Label="北京"></SimpleSelectOption>
+        <SimpleSelectOption Value="0002" Label="上海"></SimpleSelectOption>
+        <SimpleSelectOption Value="0003" Label="广州"></SimpleSelectOption>
+        <SimpleSelectOption Value="0004" Label="深圳"></SimpleSelectOption>
+    </SelectOptions>
+</SimpleSelect>
+<br />
+<div>选择的数值: @string.Join(',', _selectedCityCodes3)</div>
+
+
+
+
+<hr />
+
+
+
+
+<h3>简单绑定的使用</h3>
+<h4>单选</h4>
+
+<Select Style="width:240px;"
+        TItem="MySelectModelA" TItemValue="string"
+        LabelName="@nameof(MySelectModelA.Name)"
+        ValueName="@nameof(MySelectModelA.Code)"
+        DataSource="@_dataSourceA"
+        @bind-Value="_selectedCodeA">
+</Select>
+<br />
+<div>选择的数值: @_selectedCodeA</div>
+<br />
+
+
+<h4>单选-默认选择第一个可用的数据</h4>
+
+<Select Style="width:240px;"
+        TItem="MySelectModelA" TItemValue="string"
+        LabelName="@nameof(MySelectModelA.Name)"
+        ValueName="@nameof(MySelectModelA.Code)"
+        DataSource="@_dataSourceA"
+        @bind-Value="_selectedCodeA2"
+        DefaultActiveFirstOption="true">
+</Select>
+<br />
+<div>选择的数值: @_selectedCodeA2</div>
+<br />
+
+
+
+<h4>多选</h4>
+
+<Select Style="width:480px;" Mode="multiple"
+        TItem="MySelectModelA" TItemValue="string"
+        LabelName="@nameof(MySelectModelA.Name)"
+        ValueName="@nameof(MySelectModelA.Code)"
+        DataSource="@_dataSourceA"
+        OnSelectedItemsChanged="handleMySelectModelAChange">
+</Select>
+<br />
+<div>选择的数值: @string.Join(',', _selectedCodeAs)</div>
+
+
+
+
+
+<hr />
+
+
+<h3>搜索功能</h3>
+
+
+<Select Style="width:360px;"
+        EnableSearch
+        TItem="MySelectModelA" TItemValue="string"
+        LabelName="@nameof(MySelectModelA.NameAndCode)"
+        ValueName="@nameof(MySelectModelA.Code)"
+        DataSource="@_dataSourceA"
+        @bind-Value="_selectedCodeAWithSearch">
+</Select>
+<br />
+<div>选择的数值: @_selectedCodeAWithSearch</div>
+
+
+
+
+<hr />
+
+
+<h3>允许清除</h3>
+<Select Style="width:360px;"
+        AllowClear
+        TItem="MySelectModelA" TItemValue="string"
+        LabelName="@nameof(MySelectModelA.NameAndCode)"
+        ValueName="@nameof(MySelectModelA.Code)"
+        DataSource="@_dataSourceA"
+        @bind-Value="_selectedCodeAWithAllowClear">
+</Select>
+<br />
+<div>选择的数值: @_selectedCodeAWithAllowClear</div>
+
+
+
+<hr />
+
+
+<h3>列表选择</h3>
+
+多选: <Switch @bind-Value="_multiple"></Switch>
+
+<Select Style="width:360px;"
+        ItemValue="c=>c"
+        ItemLabel="c=>c.Name"
+        DataSource="_tableData"
+        @bind-Open="_selectOpen"
+        @bind-Values="@_selectedRows"
+        Mode="@(_multiple?"multiple":"default")"
+        DropdownMatchSelectWidth="false"
+        EnableSearch
+        OnSearch="OnSearch">
+    <DropdownRender>
+        <Table @ref="_selectTable"
+               TItem="MySelectModelA" DataSource="@_tableData"
+               @bind-SelectedRows="_selectedRows"
+               RowKey="x=>x.Name" OnRowClick="OnRowClick" Size="TableSize.Small">
+            <ColumnDefinitions Context="ctx">
+                <Selection Hidden="@(!_multiple)" />
+                <PropertyColumn Property="c=>c.Code">
+                    <a>@ctx.Code</a>
+                </PropertyColumn>
+                <PropertyColumn Property="c=>c.Name" />
+            </ColumnDefinitions>
+        </Table>
+    </DropdownRender>
+</Select>
+<br />
+<div>
+    选择的数值:
+    <ul>
+        @foreach (var item in _selectedRows)
+        {
+            <li>@item.Code</li>
+        }
+    </ul>
+</div>
+
+
+
+<hr />
+
+
+
+<h3>枚举</h3>
+<EnumSelect Style="width:240px;"
+            EnableSearch
+            TEnum="ExportFormatType"
+            @bind-Value="@_selectedExportFormatType" />
+<br />
+<div>选择的数值: @_selectedExportFormatType</div>
+
+
+
+
+
+
+<hr />
+
+<h3>分组</h3>
+
+<Select Style="width:360px;"
+        AllowClear
+        TItem="MySelectModelA" TItemValue="string"
+        LabelName="@nameof(MySelectModelA.NameAndCode)"
+        ValueName="@nameof(MySelectModelA.Code)"
+        GroupName="@nameof(MySelectModelA.Area)"
+        SortByLabel="@SortDirection.Ascending"
+        SortByGroup="@SortDirection.Ascending"
+        DataSource="@_dataSourceA"
+        DefaultActiveFirstOption="true"
+        @bind-Value="_selectedCodeAWithGroup">
+</Select>
+<br />
+<div>选择的数值: @_selectedCodeAWithGroup</div>
+
+
+
+
+
+
+
+@code {
+
+
+
+    #region 直接把选项写在页面上的处理
+
+    string _selectedCityCode;
+    string _selectedCityCode2;
+
+
+    List<string> _selectedCityCodes = new List<string>();
+
+    void handleItemsChange(IEnumerable<string> value)
+    {
+        _selectedCityCodes.Clear();
+        _selectedCityCodes.AddRange(value);
+    }
+
+
+    List<string> _selectedCityCodes2 = new List<string>();
+
+    void handleItemsChange2(IEnumerable<string> value)
+    {
+        _selectedCityCodes2.Clear();
+        _selectedCityCodes2.AddRange(value);
+    }
+
+
+
+
+    IEnumerable<string> _selectedCityCodes3 = new List<string>();
+
+
+    #endregion
+
+
+
+
+
+    #region 简单绑定的使用
+
+    List<MySelectModelA> _dataSourceA = MySelectModelA.GetTestDataList();
+
+
+    string _selectedCodeA;
+    string _selectedCodeA2;
+
+    List<string> _selectedCodeAs = new List<string>();
+
+
+
+    void handleMySelectModelAChange(IEnumerable<MySelectModelA> value)
+    {
+        _selectedCodeAs.Clear();
+        _selectedCodeAs.AddRange(value.Select(p => p.Code));
+    }
+
+
+
+    #endregion
+
+
+
+
+
+
+    #region 搜索.
+
+
+
+    string _selectedCodeAWithSearch;
+
+
+
+    #endregion
+
+
+
+
+    #region 允许清除.
+
+
+
+    string _selectedCodeAWithAllowClear;
+
+
+
+    #endregion
+
+
+
+
+
+
+    #region 列表选择.
+
+
+    ITable _selectTable;
+
+
+    IEnumerable<MySelectModelA> _selectedRows = [];
+
+    List<MySelectModelA> _tableData = MySelectModelA.GetTestDataList();
+
+    bool _selectOpen = false;
+
+    bool _multiple;
+
+    void OnSearch(string searchValue)
+    {
+        _tableData = _dataSourceA.Where(x => x.NameAndCode.Contains(searchValue, StringComparison.InvariantCultureIgnoreCase)).ToList();
+    }
+
+    string _selectedCodeAWithTable;
+
+
+    void OnRowClick(RowData<MySelectModelA> rowData)
+    {
+        if (_multiple)
+        {
+            _selectedRows = _selectedRows.Contains(rowData.Data) ? _selectedRows.Except([rowData.Data]) : _selectedRows.Concat([rowData.Data]);
+        }
+        else
+        {
+            _selectedRows = [rowData.Data];
+            _selectOpen = false;
+        }
+    }
+
+
+    #endregion
+
+
+
+
+    #region 枚举.
+
+
+
+    ExportFormatType _selectedExportFormatType;
+
+
+
+
+
+    #endregion
+
+
+
+    #region 分组.
+
+    string _selectedCodeAWithGroup;
+
+    #endregion
+
+
+
+}

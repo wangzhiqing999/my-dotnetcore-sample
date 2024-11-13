@@ -1,0 +1,280 @@
+﻿@using System.Text.Json
+@namespace W4101_AntDesignApp.Pages
+
+@page "/mydatepicker"
+
+
+
+<h3>测试输入-DatePicker</h3>
+
+
+<h3>基本的使用</h3>
+
+
+<h4>显示日期与时间</h4>
+<DatePicker TValue="DateTime?" Picker="@DatePickerType.Date" ShowTime="true" @bind-Value="_basicInputDateTime" />
+<br />
+<div>选择的数值: @_basicInputDateTime</div>
+<br />
+
+
+<h4>显示日期</h4>
+<DatePicker TValue="DateOnly?" Picker="@DatePickerType.Date" @bind-Value="_basicInputDate" />
+<br />
+<div>选择的数值: @_basicInputDate</div>
+<br />
+
+
+<h4>显示年的第几周</h4>
+<DatePicker TValue="DateOnly?" Picker="@DatePickerType.Week" ShowToday="false" @bind-Value="_basicInputWeek" />
+<br />
+<div>选择的数值: @_basicInputWeek</div>
+<br />
+显示年的第几周，建议是把 ShowToday 设置为 false。
+点其它的日期，最终的绑定的数值，是周一。
+但是如果 ShowToday 为 true，那么，点了今天，就是今天了，不会设置为本周一的。
+<br />
+
+<h4>显示年和月</h4>
+<DatePicker TValue="DateOnly?" Picker="@DatePickerType.Month" @bind-Value="_basicInputMonth" />
+<br />
+<div>选择的数值: @_basicInputMonth</div>
+<br />
+选择后，绑定的值，是 YYYY-MM-01。
+<br />
+
+<h4>显示年和季度</h4>
+<DatePicker TValue="DateOnly?" Picker="@DatePickerType.Quarter" @bind-Value="_basicInputQuarter" />
+<br />
+<div>选择的数值: @_basicInputQuarter</div>
+<br />
+选择后，绑定的值，是 YYYY-MM-01。  （MM 为 01、04、07、10 中的一个）
+<br />
+
+<h4>显示年</h4>
+<DatePicker TValue="DateOnly?" Picker="@DatePickerType.Year" @bind-Value="_basicInputYear" />
+<br />
+<div>选择的数值: @_basicInputYear</div>
+<br />
+选择后，绑定的值，是 YYYY-01-01。
+<br />
+
+
+<hr />
+
+<h3>范围的使用</h3>
+
+<h4>显示日期与时间</h4>
+<RangePicker TValue="DateTime?[]"
+             ShowTime="@("HH:mm")"
+             @bind-Value="_basicInputDateTimes"
+             OnChange="OnTimeRangeChange" />
+<br />
+<div>
+    选择的数值:
+    @if (_basicInputDateTimes == null || _basicInputDateTimes.Length == 0)
+    {
+        <span>未选择</span>
+    }
+    else
+    {
+        <ul>
+            @for (int i = 0; i < _basicInputDateTimes.Length; i++)
+            {
+                <li>@(i) :  @(_basicInputDateTimes[i])</li>
+            }
+        </ul>
+    }
+</div>
+<br />
+
+
+
+<h4>显示日期</h4>
+<RangePicker TValue="DateOnly?[]"
+             @bind-Value="_basicInputDates"
+             OnChange="OnDateRangeChange" />
+<br />
+<div>
+    选择的数值:
+    @if (_basicInputDates == null || _basicInputDates.Length == 0)
+    {
+        <span>未选择</span>
+    }
+    else
+    {
+        <ul>
+            @for (int i = 0; i < _basicInputDates.Length; i++)
+            {
+                <li>@(i) :  @(_basicInputDates[i])</li>
+            }
+        </ul>
+    }
+</div>
+<br />
+
+
+
+<h4>显示周</h4>
+<RangePicker TValue="DateOnly?[]"
+             @bind-Value="_basicInputWeeks"
+             Picker="@DatePickerType.Week"
+             OnChange="OnDateRangeChange" />
+<br />
+<div>
+    选择的数值:
+    @if (_basicInputWeeks == null || _basicInputWeeks.Length == 0)
+    {
+        <span>未选择</span>
+    }
+    else
+    {
+        <ul>
+            @for (int i = 0; i < _basicInputWeeks.Length; i++)
+            {
+                <li>@(i) :  @(_basicInputWeeks[i])</li>
+            }
+        </ul>
+    }
+</div>
+<br />
+
+
+<h4>显示月</h4>
+<RangePicker TValue="DateOnly?[]"
+             @bind-Value="_basicInputMonths"
+             Picker="@DatePickerType.Month"
+             OnChange="OnDateRangeChange" />
+<br />
+<div>
+    选择的数值:
+    @if (_basicInputMonths == null || _basicInputMonths.Length == 0)
+    {
+        <span>未选择</span>
+    }
+    else
+    {
+        <ul>
+            @for (int i = 0; i < _basicInputMonths.Length; i++)
+            {
+                <li>@(i) :  @(_basicInputMonths[i])</li>
+            }
+        </ul>
+    }
+</div>
+<br />
+
+
+
+
+<hr />
+
+<h3>DisabledDate的使用</h3>
+
+<h4>日期 - 只能输入将来的日期</h4>
+<DatePicker TValue="DateOnly?"
+            Picker="@DatePickerType.Date"
+            DisabledDate="date => date <= DateTime.Today"
+            @bind-Value="_limitInputDate" />
+<br />
+<div>选择的数值: @_limitInputDate</div>
+<br />
+
+
+
+<h4>日期 - 只能输入过去的日期</h4>
+<DatePicker TValue="DateOnly?"
+            Picker="@DatePickerType.Date"
+            DisabledDate="date => date >= DateTime.Today"
+            @bind-Value="_limitInputDate2" />
+<br />
+<div>选择的数值: @_limitInputDate2</div>
+<br />
+
+
+<h4>日期 - 不能选择周六周日</h4>
+<DatePicker TValue="DateOnly?"
+            Picker="@DatePickerType.Date"
+            RenderExtraFooter="extraFooter"
+            DisabledDate="date => date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday"
+            @bind-Value="_limitInputDate3" />
+<br />
+<div>选择的数值: @_limitInputDate3</div>
+<br />
+
+
+@code {
+
+
+    #region 基本的使用.
+
+
+    private DateTime? _basicInputDateTime;
+
+    private DateOnly? _basicInputDate;
+
+    private DateOnly? _basicInputWeek;
+
+    private DateOnly? _basicInputMonth;
+
+    private DateOnly? _basicInputQuarter;
+
+    private DateOnly? _basicInputYear;
+
+
+    #endregion
+
+
+
+
+
+    #region 范围的使用.
+
+
+    private DateTime?[] _basicInputDateTimes;
+
+    private DateOnly?[] _basicInputDates;
+
+    private DateOnly?[] _basicInputWeeks;
+
+    private DateOnly?[] _basicInputMonths;
+
+    // private DateOnly?[] _basicInputQuarters;
+
+    // private DateOnly?[] _basicInputYears;
+
+
+
+    private void OnTimeRangeChange(DateRangeChangedEventArgs<DateTime?[]> args)
+    {
+        Console.WriteLine($"Selected Time: {JsonSerializer.Serialize(args.Dates)}");
+        Console.WriteLine($"Formatted Selected Time: {JsonSerializer.Serialize(args.DateStrings)}");
+    }
+    private void OnDateRangeChange(DateRangeChangedEventArgs<DateOnly?[]> args)
+    {
+        Console.WriteLine($"Selected Time: {JsonSerializer.Serialize(args.Dates)}");
+        Console.WriteLine($"Formatted Selected Time: {JsonSerializer.Serialize(args.DateStrings)}");
+    }
+
+    #endregion
+
+
+
+
+    #region DisabledDate的使用
+
+
+    private DateOnly? _limitInputDate;
+
+    private DateOnly? _limitInputDate2;
+
+    private DateOnly? _limitInputDate3;
+
+    /// <summary>
+    /// 额外的页脚.
+    /// </summary>
+    private RenderFragment extraFooter =@<span>选择工作日期</span>;
+
+    #endregion
+
+}

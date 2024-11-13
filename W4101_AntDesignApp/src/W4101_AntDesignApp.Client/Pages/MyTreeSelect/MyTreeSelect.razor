@@ -1,0 +1,523 @@
+﻿@using W4101_AntDesignApp.Models
+@namespace W4101_AntDesignApp.Pages
+
+@page "/mytreeselect"
+
+<h3>测试输入-TreeSelect</h3>
+
+
+
+
+<h3>选项写在页面上的处理</h3>
+
+<h4>单选</h4>
+
+<TreeSelect TItem="string"
+			TItemValue="string"
+			Style="width:100%;"
+			@bind-Value="_selectedDeptCode"
+			Placeholder="Please select"
+			AllowClear
+			TreeDefaultExpandAll>
+
+	<TreeNode TItem="string" Key="root" Title="总公司">
+		<TreeNode TItem="string" Key="sub_sh" Title="上海分公司">
+			<TreeNode TItem="string" Key="sub_sh_01" Title="嘉定营业点" />
+			<TreeNode TItem="string" Key="sub_sh_02" Title="浦东营业点" />
+		</TreeNode>
+		<TreeNode TItem="string" Key="sub_sz" Title="深圳分公司">
+			<TreeNode TItem="string" Key="sub_sz_01" Title="南山营业点" />
+			<TreeNode TItem="string" Key="sub_sz_02" Title="罗湖营业点" />
+		</TreeNode>
+	</TreeNode>
+
+</TreeSelect>
+<br />
+<div>选择的数值: @_selectedDeptCode</div>
+<br />
+
+
+
+
+<h4>多选</h4>
+
+<TreeSelect TItem="string"
+			TItemValue="string"
+			Style="width:100%;"
+			@bind-Values="_selectedDeptCodes"
+			Placeholder="Please select"
+			Multiple
+			TreeDefaultExpandAll>
+
+	<TreeNode TItem="string" Key="root" Title="总公司">
+		<TreeNode TItem="string" Key="sub_sh" Title="上海分公司">
+			<TreeNode TItem="string" Key="sub_sh_01" Title="嘉定营业点" />
+			<TreeNode TItem="string" Key="sub_sh_02" Title="浦东营业点" />
+		</TreeNode>
+		<TreeNode TItem="string" Key="sub_sz" Title="深圳分公司">
+			<TreeNode TItem="string" Key="sub_sz_01" Title="南山营业点" />
+			<TreeNode TItem="string" Key="sub_sz_02" Title="罗湖营业点" />
+		</TreeNode>
+	</TreeNode>
+
+</TreeSelect>
+<br />
+<div>选择的数值:  @string.Join(',', _selectedDeptCodes)</div>
+<br />
+
+
+
+<h4>多选-可勾选-数值只包含子节点</h4>
+<p>
+	默认情况下，勾选了 父 节点，将自动勾选父节点下面的所有子节点。
+	<br />
+	但是，“勾选了哪些节点”， 这里绑定的数值，将不会包含父节点。
+</p>
+<TreeSelect TItem="string"
+			TItemValue="string"
+			Style="width:100%;"
+			@bind-Values="_selectedDeptCodes2"
+			Placeholder="Please select"
+			Multiple
+			TreeCheckable
+			TreeCheckStrictly="false"
+			ShowCheckedStrategy="TreeCheckedStrategy.ShowChild"
+			CheckOnClickNode
+			TreeDefaultExpandAll>
+
+	<TreeNode TItem="string" Key="root" Title="总公司">
+		<TreeNode TItem="string" Key="sub_sh" Title="上海分公司">
+			<TreeNode TItem="string" Key="sub_sh_01" Title="嘉定营业点" />
+			<TreeNode TItem="string" Key="sub_sh_02" Title="浦东营业点" />
+		</TreeNode>
+		<TreeNode TItem="string" Key="sub_sz" Title="深圳分公司">
+			<TreeNode TItem="string" Key="sub_sz_01" Title="南山营业点" />
+			<TreeNode TItem="string" Key="sub_sz_02" Title="罗湖营业点" />
+		</TreeNode>
+	</TreeNode>
+
+</TreeSelect>
+<br />
+<div>选择的数值:  @string.Join(',', _selectedDeptCodes2)</div>
+<br />
+
+
+
+
+<h4>多选-可勾选-如果子节点全选了，那么只返回父节点，不返回子节点.</h4>
+<p>
+	默认情况下，勾选了 父 节点，将自动勾选父节点下面的所有子节点。
+	<br />
+	但是，“bind-Values”这里绑定的数值，将不会包含子节点。
+</p>
+<TreeSelect TItem="string"
+			TItemValue="string"
+			Style="width:100%;"
+			@bind-Values="_selectedDeptCodes2p"
+			Placeholder="Please select"
+			Multiple
+			TreeCheckable
+			TreeCheckStrictly="false"
+			ShowCheckedStrategy="TreeCheckedStrategy.ShowParent"
+			CheckOnClickNode
+			TreeDefaultExpandAll>
+
+	<TreeNode TItem="string" Key="root" Title="总公司">
+		<TreeNode TItem="string" Key="sub_sh" Title="上海分公司">
+			<TreeNode TItem="string" Key="sub_sh_01" Title="嘉定营业点" />
+			<TreeNode TItem="string" Key="sub_sh_02" Title="浦东营业点" />
+		</TreeNode>
+		<TreeNode TItem="string" Key="sub_sz" Title="深圳分公司">
+			<TreeNode TItem="string" Key="sub_sz_01" Title="南山营业点" />
+			<TreeNode TItem="string" Key="sub_sz_02" Title="罗湖营业点" />
+		</TreeNode>
+	</TreeNode>
+
+</TreeSelect>
+<br />
+<div>选择的数值:  @string.Join(',', _selectedDeptCodes2p)</div>
+<br />
+
+
+
+
+
+<h4>多选-可勾选-数值包含全部节点</h4>
+<p>
+	默认情况下，勾选了 父 节点，将自动勾选父节点下面的所有子节点。
+	<br />
+	“bind-Values”这里绑定的数值，将包含父节点与所有的子节点。
+</p>
+<TreeSelect TItem="string"
+			TItemValue="string"
+			Style="width:100%;"
+			@bind-Values="_selectedDeptCodes2a"
+			Placeholder="Please select"
+			Multiple
+			TreeCheckable
+			TreeCheckStrictly="false"
+			ShowCheckedStrategy="TreeCheckedStrategy.ShowAll"
+			CheckOnClickNode
+			TreeDefaultExpandAll>
+
+	<TreeNode TItem="string" Key="root" Title="总公司">
+		<TreeNode TItem="string" Key="sub_sh" Title="上海分公司">
+			<TreeNode TItem="string" Key="sub_sh_01" Title="嘉定营业点" />
+			<TreeNode TItem="string" Key="sub_sh_02" Title="浦东营业点" />
+		</TreeNode>
+		<TreeNode TItem="string" Key="sub_sz" Title="深圳分公司">
+			<TreeNode TItem="string" Key="sub_sz_01" Title="南山营业点" />
+			<TreeNode TItem="string" Key="sub_sz_02" Title="罗湖营业点" />
+		</TreeNode>
+	</TreeNode>
+
+</TreeSelect>
+<br />
+<div>选择的数值:  @string.Join(',', _selectedDeptCodes2a)</div>
+<br />
+
+
+
+
+
+
+
+
+
+<h4>多选-可勾选-只能选择叶子节点</h4>
+<TreeSelect TItem="string"
+			TItemValue="string"
+			Style="width:100%;"
+			@bind-Values="_selectedDeptCodes3"
+			Placeholder="Please select"
+			Multiple
+			TreeCheckable
+			CheckOnClickNode
+			TreeDefaultExpandAll>
+
+	<TreeNode TItem="string" Key="root" Title="总公司" Checkable="false">
+		<TreeNode TItem="string" Key="sub_sh" Title="上海分公司" Checkable="false">
+			<TreeNode TItem="string" Key="sub_sh_01" Title="嘉定营业点" Checkable="true" />
+			<TreeNode TItem="string" Key="sub_sh_02" Title="浦东营业点" Checkable="true" />
+		</TreeNode>
+		<TreeNode TItem="string" Key="sub_sz" Title="深圳分公司" Checkable="false">
+			<TreeNode TItem="string" Key="sub_sz_01" Title="南山营业点" Checkable="true" />
+			<TreeNode TItem="string" Key="sub_sz_02" Title="罗湖营业点" Checkable="true" />
+		</TreeNode>
+	</TreeNode>
+
+</TreeSelect>
+<br />
+<div>选择的数值:  @string.Join(',', _selectedDeptCodes3)</div>
+<br />
+
+
+
+<hr />
+
+
+
+
+
+<h3>简单绑定的使用</h3>
+
+
+<h4>单选-有初始值</h4>
+<TreeSelect Style="width:100%;"
+			DataSource="_dataSource"
+			@bind-Value="@_selectedAreaCode"
+			Placeholder="Please select"
+			ItemValue="item=>item.AreaCode"
+			ItemLabel="item=>item.AreaName"
+			TreeDefaultExpandAll
+			MatchedStyle="font-weight: bold"
+			ChildrenExpression="node=>node.DataItem.Children"
+			TitleExpression="node=>node.DataItem.AreaName"
+			TitleTemplate="node=>node.DataItem.AreaName.ToRenderFragment()"
+			KeyExpression="node=>node.DataItem.AreaCode"
+			IsLeafExpression="node=>node.DataItem.Children==null">
+</TreeSelect>
+<br />
+<div>选择的数值:  @_selectedAreaCode</div>
+<br />
+
+
+
+
+
+<h4>多选</h4>
+<TreeSelect Style="width:100%;"
+			DataSource="_dataSource"
+			@bind-Values="@_selectedAreaCodes"
+			Placeholder="Please select"
+			ItemValue="item=>item.AreaCode"
+			ItemLabel="item=>item.AreaName"
+			Multiple
+			TreeDefaultExpandAll
+			MatchedStyle="font-weight: bold"
+			ChildrenExpression="node=>node.DataItem.Children"
+			TitleExpression="node=>node.DataItem.AreaName"
+			TitleTemplate="node=>node.DataItem.AreaName.ToRenderFragment()"
+			KeyExpression="node=>node.DataItem.AreaCode"
+			IsLeafExpression="node=>node.DataItem.Children==null">
+</TreeSelect>
+<br />
+<div>选择的数值:  @string.Join(',', _selectedAreaCodes)</div>
+<br />
+
+
+
+<h4>多选-可勾选</h4>
+<p>
+	TreeCheckStrictly="true"
+	点击父节点，将不会自动勾选子节点。
+	字节点全选了， 也不会自动勾选父节点。
+</p>
+<TreeSelect Style="width:100%;"
+			DataSource="_dataSource"
+			@bind-Values="@_selectedAreaCodes2"
+			Placeholder="Please select"
+			ItemValue="item=>item.AreaCode"
+			ItemLabel="item=>item.AreaName"
+			Multiple
+			TreeCheckable
+			TreeCheckStrictly="true"
+			CheckOnClickNode
+			TreeDefaultExpandAll
+			MatchedStyle="font-weight: bold"
+			ChildrenExpression="node=>node.DataItem.Children"
+			TitleExpression="node=>node.DataItem.AreaName"
+			TitleTemplate="node=>node.DataItem.AreaName.ToRenderFragment()"
+			KeyExpression="node=>node.DataItem.AreaCode"
+			IsLeafExpression="node=>node.DataItem.Children==null">
+</TreeSelect>
+<br />
+<div>选择的数值:  @string.Join(',', _selectedAreaCodes2)</div>
+<br />
+
+
+
+
+
+<h4>多选-可勾选</h4>
+<p>
+	TreeCheckStrictly="false"
+	点击父节点，将自动勾选子节点。
+	字节点全选了，也会自动勾选父节点。
+	<br />
+	ShowCheckedStrategy="TreeCheckedStrategy.ShowChild"
+</p>
+
+<TreeSelect Style="width:100%;"
+			DataSource="_dataSource"
+			@bind-Values="@_selectedAreaCodes2c"
+			Placeholder="Please select"
+			ItemValue="item=>item.AreaCode"
+			ItemLabel="item=>item.AreaName"
+			Multiple
+			TreeCheckable
+			TreeCheckStrictly="false"
+			ShowCheckedStrategy="TreeCheckedStrategy.ShowChild"
+			CheckOnClickNode
+			TreeDefaultExpandAll
+			MatchedStyle="font-weight: bold"
+			ChildrenExpression="node=>node.DataItem.Children"
+			TitleExpression="node=>node.DataItem.AreaName"
+			TitleTemplate="node=>node.DataItem.AreaName.ToRenderFragment()"
+			KeyExpression="node=>node.DataItem.AreaCode"
+			IsLeafExpression="node=>node.DataItem.Children==null">
+</TreeSelect>
+<br />
+<div>选择的数值:  @string.Join(',', _selectedAreaCodes2c)</div>
+<br />
+
+
+<h4>多选-可勾选</h4>
+<p>
+	TreeCheckStrictly="false"
+	点击父节点，将自动勾选子节点。
+	字节点全选了，也会自动勾选父节点。
+	<br />
+	ShowCheckedStrategy="TreeCheckedStrategy.ShowParent"
+</p>
+
+<TreeSelect Style="width:100%;"
+			DataSource="_dataSource"
+			@bind-Values="@_selectedAreaCodes2p"
+			Placeholder="Please select"
+			ItemValue="item=>item.AreaCode"
+			ItemLabel="item=>item.AreaName"
+			Multiple
+			TreeCheckable
+			TreeCheckStrictly="false"
+			ShowCheckedStrategy="TreeCheckedStrategy.ShowParent"
+			CheckOnClickNode
+			TreeDefaultExpandAll
+			MatchedStyle="font-weight: bold"
+			ChildrenExpression="node=>node.DataItem.Children"
+			TitleExpression="node=>node.DataItem.AreaName"
+			TitleTemplate="node=>node.DataItem.AreaName.ToRenderFragment()"
+			KeyExpression="node=>node.DataItem.AreaCode"
+			IsLeafExpression="node=>node.DataItem.Children==null">
+</TreeSelect>
+<br />
+<div>选择的数值:  @string.Join(',', _selectedAreaCodes2p)</div>
+<br />
+
+
+
+
+
+<h4>多选-可勾选</h4>
+<p>
+	TreeCheckStrictly="false"
+	点击父节点，将自动勾选子节点。
+	字节点全选了，也会自动勾选父节点。
+	<br />
+	ShowCheckedStrategy="TreeCheckedStrategy.ShowAll"
+</p>
+
+<TreeSelect Style="width:100%;"
+			DataSource="_dataSource"
+			@bind-Values="@_selectedAreaCodes2a"
+			Placeholder="Please select"
+			ItemValue="item=>item.AreaCode"
+			ItemLabel="item=>item.AreaName"
+			Multiple
+			TreeCheckable
+			TreeCheckStrictly="false"
+			ShowCheckedStrategy="TreeCheckedStrategy.ShowAll"
+			CheckOnClickNode
+			TreeDefaultExpandAll
+			MatchedStyle="font-weight: bold"
+			ChildrenExpression="node=>node.DataItem.Children"
+			TitleExpression="node=>node.DataItem.AreaName"
+			TitleTemplate="node=>node.DataItem.AreaName.ToRenderFragment()"
+			KeyExpression="node=>node.DataItem.AreaCode"
+			IsLeafExpression="node=>node.DataItem.Children==null">
+</TreeSelect>
+<br />
+<div>选择的数值:  @string.Join(',', _selectedAreaCodes2a)</div>
+<br />
+
+
+
+
+
+
+
+
+
+<h4>多选-可勾选-只能选择叶子节点</h4>
+<TreeSelect Style="width:100%;"
+			DataSource="_dataSource"
+			@bind-Values="@_selectedAreaCodes3"
+			Placeholder="Please select"
+			ItemValue="item=>item.AreaCode"
+			ItemLabel="item=>item.AreaName"
+			Multiple
+			TreeCheckable
+			CheckOnClickNode
+			TreeDefaultExpandAll
+			MatchedStyle="font-weight: bold"
+			ChildrenExpression="node=>node.DataItem.Children"
+			TitleExpression="node=>node.DataItem.AreaName"
+			TitleTemplate="node=>node.DataItem.AreaName.ToRenderFragment()"
+			KeyExpression="node=>node.DataItem.AreaCode"
+			IsLeafExpression="node=>node.DataItem.Children==null"
+			CheckableExpression="node=>node.DataItem.Children==null">
+</TreeSelect>
+<br />
+<div>选择的数值:  @string.Join(',', _selectedAreaCodes3)</div>
+<br />
+
+
+
+
+
+
+
+
+
+@code {
+
+
+	#region 直接把选项写在页面上的处理
+
+
+	string _selectedDeptCode;
+
+
+
+	/// <summary>
+	/// 多选的数值.
+	/// <br/>
+	/// 注意：单选的，可以不设置初始的数值。
+	/// 多选的，需要初始化 List， 如果是 null 的话，会报错。
+	/// </summary>
+	private IEnumerable<string> _selectedDeptCodes = new List<string>();
+
+
+
+	/// <summary>
+	/// 只返回子节点，不返回父节点.
+	/// </summary>
+	private IEnumerable<string> _selectedDeptCodes2 = new List<string>();
+
+
+	/// <summary>
+	/// 如果子节点全选了，那么只返回父节点，不返回子节点.
+	/// </summary>
+	private IEnumerable<string> _selectedDeptCodes2p = new List<string>();
+
+
+	/// <summary>
+	/// 返回全部选择的节点:父节点与子节点都返回
+	/// </summary>
+	private IEnumerable<string> _selectedDeptCodes2a = new List<string>();
+
+
+
+
+	private IEnumerable<string> _selectedDeptCodes3 = new List<string>();
+
+
+	#endregion
+
+
+
+
+
+	#region 简单绑定的使用
+
+
+
+	List<TestArea> _dataSource = TestArea.GetTestAreasTreeList();
+
+
+
+	/// <summary>
+	/// 单选：有初始值.
+	/// </summary>
+	string _selectedAreaCode = "72";
+
+
+
+	private IEnumerable<string> _selectedAreaCodes = new List<string>();
+
+	private IEnumerable<string> _selectedAreaCodes2 = new List<string>();
+
+
+
+	private IEnumerable<string> _selectedAreaCodes2c = new List<string>();
+	private IEnumerable<string> _selectedAreaCodes2p = new List<string>();
+	private IEnumerable<string> _selectedAreaCodes2a = new List<string>();
+
+
+
+	private IEnumerable<string> _selectedAreaCodes3 = new List<string>();
+
+	#endregion
+
+
+}

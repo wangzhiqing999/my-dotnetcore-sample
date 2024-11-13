@@ -1,0 +1,47 @@
+﻿@namespace W4101_AntDesignApp.Pages
+
+@page "/myrate"
+
+<h3>测试输入-Rate</h3>
+
+
+
+
+<h3>简单使用</h3>
+
+<div>
+    <Rate @bind-Value="_RateValue" />
+    <br />
+    <div>选择的数值: @_RateValue</div>
+    <br />
+</div>
+
+
+
+<hr />
+
+
+<h3>追加文案</h3>
+
+<div>
+    <Rate @bind-Value="_RateValue2" Tooltips="@_RateTexts" />
+    <span class="ant-rate-text">@(_RateTexts[(int)_RateValue2 - 1])</span>
+    <br />
+    <div>选择的数值: @_RateValue2</div>
+    <br />
+</div>
+
+
+
+
+@code {
+
+    private decimal _RateValue = 3;
+
+
+
+
+    private string[] _RateTexts = new string[] { "极差", "失望", "一般", "满意", "惊喜" };
+
+    private decimal _RateValue2 = 3;
+}

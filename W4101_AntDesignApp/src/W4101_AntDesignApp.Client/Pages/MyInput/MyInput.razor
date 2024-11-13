@@ -1,0 +1,233 @@
+﻿@namespace W4101_AntDesignApp.Pages
+
+@page "/myinput"
+
+
+<h3>测试输入-Input</h3>
+
+
+<h3>基本使用</h3>
+<div>
+    <Input Placeholder="基本使用的例子" @bind-Value="@_basicTxtValue" />
+    <br />
+    <Text>@_basicTxtValue</Text>
+</div>
+
+
+
+<hr />
+
+
+<h3>前置/后置标签</h3>
+
+<div>
+    <AntDesign.Input DefaultValue="@("mysite")" @bind-Value="@_webSite">
+        <AddOnBefore>https://</AddOnBefore>
+        <AddOnAfter>.com</AddOnAfter>
+    </AntDesign.Input>
+    <br />
+    <Text>@_webSite</Text>
+
+
+    <br />
+    <AntDesign.Input TValue="string" @bind-Value=@_coreAddress>
+        <AddOnBefore>
+            <SimpleSelect @bind-Value=@_prefix Style="width: auto;">
+                <SelectOptions>
+                    <SimpleSelectOption Value="http://" Label="http://"></SimpleSelectOption>
+                    <SimpleSelectOption Value="https://" Label="https://"></SimpleSelectOption>
+                </SelectOptions>
+            </SimpleSelect>
+        </AddOnBefore>
+        <AddOnAfter>
+            <SimpleSelect @bind-Value=@_suffix Style="width: auto;">
+                <SelectOptions>
+                    <SimpleSelectOption Value=".com" Label=".com"></SimpleSelectOption>
+                    <SimpleSelectOption Value=".jp" Label=".jp"></SimpleSelectOption>
+                    <SimpleSelectOption Value=".cn" Label=".cn"></SimpleSelectOption>
+                    <SimpleSelectOption Value=".org" Label=".org"></SimpleSelectOption>
+                </SelectOptions>
+            </SimpleSelect>
+        </AddOnAfter>
+    </AntDesign.Input>
+    <br />
+    <Text>@_fullAddress</Text>
+
+</div>
+
+
+<hr />
+
+<h3>前缀和后缀</h3>
+<div>
+    <Input Placeholder="Prefix and Suffix" @bind-Value="@_inputUserName">
+    <Prefix>
+        <Icon Type="user" />
+    </Prefix>
+    </Input>
+    <br />
+    <Input Placeholder="default size" @bind-Value="@_inputMoney">
+    <Prefix> ￥ </Prefix>
+    <Suffix>RMB </Suffix>
+    </Input>
+    <br />
+</div>
+
+
+
+<hr />
+
+<h3>输入框组合</h3>
+<div class="site-input-group-wrapper">
+
+    <InputGroup Compact>
+        <SimpleSelect DefaultValue="@("Home")" Style="" @bind-Value=@_inputAddressType>
+            <SelectOptions>
+                <SimpleSelectOption Value="Home" Label="家"></SimpleSelectOption>
+                <SimpleSelectOption Value="Company" Label="公司"></SimpleSelectOption>
+            </SelectOptions>
+        </SimpleSelect>
+        <Input Placeholder="基本使用的例子" @bind-Value="@_inputAddress" Style="width: 70%" />
+    </InputGroup>
+
+    <br />
+    <Text>@_fullAddress2</Text>
+</div>
+
+
+
+
+<hr />
+
+<h3>多行文本</h3>
+
+<TextArea Rows="4" @bind-Value="@_textAreaValue" />
+<br />
+<Text>@_textAreaValue</Text>
+
+
+<hr />
+
+
+<h3>多行文本-带字数提示</h3>
+
+<TextArea ShowCount MaxLength=100 @bind-Value="@_textAreaValue2" />
+<br />
+<Text>@_textAreaValue2</Text>
+
+
+
+
+
+
+<hr />
+
+<h3>密码框</h3>
+
+<InputPassword @ref=@_inputPassword
+               @bind-Value="@_password"
+               Placeholder="large Password"
+               Size="@InputSize.Large"
+               IconRender="@actionSetting(() => OnClick(), attributes)"
+               ShowPassword="@_passwordVisible" />
+
+
+@code {
+
+
+    string _basicTxtValue { get; set; }
+
+
+    string _webSite { get; set; }
+
+
+
+
+    #region 前置/后置标签
+
+
+    string _prefix = "http://";
+    string _suffix = ".com";
+    string _coreAddress = "mysite";
+    string _fullAddress => $"{_prefix}{_coreAddress}{_suffix}";
+
+    #endregion
+
+
+
+
+    #region 前缀和后缀
+
+    string _inputUserName;
+
+    int _inputMoney;
+
+    #endregion
+
+
+
+
+    #region 输入框组合
+
+    string _inputAddressType;
+    string _inputAddress;
+    string _fullAddress2 => $"{_inputAddressType}:{_inputAddress}";
+
+    #endregion
+
+
+
+
+    #region 多行文本
+
+    string _textAreaValue = "The cat was playing in the garden.";
+    string _textAreaValue2 = "The cat was playing in the garden.";
+
+    #endregion
+
+
+
+    #region 密码相关.
+
+
+    Dictionary<string, object> hideAttributes = new()
+            {
+                ["Type"] = "eye-invisible",
+                ["Style"] = ""
+            };
+
+    Dictionary<string, object> showAttributes = new()
+            {
+                ["Type"] = "eye",
+                ["Style"] = "color: #1890ff"
+            };
+
+    Dictionary<string, object> attributes = new()
+            {
+                ["Class"] = "custom-password-icon",
+                ["Type"] = "eye-invisible",
+                ["Theme"] = "outline"
+            };
+
+    RenderFragment actionSetting(Func<Task> clickActionAsync, Dictionary<string, object> iconAttributes) =>
+        @<Icon @attributes="@iconAttributes" OnClick="@clickActionAsync" />;
+    string _password = "";
+    private bool _passwordVisible = false;
+    private InputPassword _inputPassword;
+
+    private async Task OnClick()
+    {
+        Console.WriteLine("Custom icon clicked");
+        _passwordVisible = !_passwordVisible;
+        if (_passwordVisible)
+            attributes = showAttributes;
+        else
+            attributes = hideAttributes;
+        await _inputPassword.Focus();
+    }
+
+
+    #endregion
+
+
+}
