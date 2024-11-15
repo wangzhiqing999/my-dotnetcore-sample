@@ -107,6 +107,7 @@ System.Text.Json 使用的例子 (DotNet Core 3.0)
 Microsoft.Extensions.Logging.ILogger 使用的例子 (DotNet Core 3.0)
 包含默认的，独立的使用
 以及与 Log4Net 进行整合的使用。
+[2024-11-15 更新 使用 Visual Studio 2022， 框架升级为  .NET 8.0]
 
 
 

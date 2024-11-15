@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29326.143
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35431.28
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A3002_Logger", "A3002_Logger\A3002_Logger.csproj", "{B389E81A-8277-47B5-BD98-F5BE5583A68D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "A3002_Logger", "A3002_Logger\A3002_Logger.csproj", "{B389E81A-8277-47B5-BD98-F5BE5583A68D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A3002_Logger_Log4Net", "A3002_Logger_Log4Net\A3002_Logger_Log4Net.csproj", "{6EE42386-BD58-453C-82EC-CD2DC0B8A5B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "A3002_Logger_Log4Net", "A3002_Logger_Log4Net\A3002_Logger_Log4Net.csproj", "{6EE42386-BD58-453C-82EC-CD2DC0B8A5B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A3002_Logger_V8", "A3002_Logger_V8\A3002_Logger_V8.csproj", "{15040876-D566-4C2B-98C0-6A0D79736796}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A3002_Logger_Log4Net_V8", "A3002_Logger_Log4Net_V8\A3002_Logger_Log4Net_V8.csproj", "{75A702B7-D678-4427-B0E7-6DEE0A29E1D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{6EE42386-BD58-453C-82EC-CD2DC0B8A5B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EE42386-BD58-453C-82EC-CD2DC0B8A5B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EE42386-BD58-453C-82EC-CD2DC0B8A5B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15040876-D566-4C2B-98C0-6A0D79736796}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15040876-D566-4C2B-98C0-6A0D79736796}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15040876-D566-4C2B-98C0-6A0D79736796}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15040876-D566-4C2B-98C0-6A0D79736796}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75A702B7-D678-4427-B0E7-6DEE0A29E1D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75A702B7-D678-4427-B0E7-6DEE0A29E1D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75A702B7-D678-4427-B0E7-6DEE0A29E1D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75A702B7-D678-4427-B0E7-6DEE0A29E1D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
