@@ -5,3 +5,15 @@
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+
+
+@inject ILogger<Home> _Logger
+@code{
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _Logger.LogDebug("OnInitialized");
+    }
+    
+}

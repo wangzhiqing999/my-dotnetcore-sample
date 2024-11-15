@@ -36,6 +36,8 @@ else
     </table>
 }
 
+
+@inject ILogger<Weather> _Logger
 @code {
     private WeatherForecast[]? forecasts;
 
@@ -52,6 +54,8 @@ else
             TemperatureC = Random.Shared.Next(-20, 55),
             Summary = summaries[Random.Shared.Next(summaries.Length)]
         }).ToArray();
+
+        _Logger.LogDebug("OnInitializedAsync");
     }
 
     private class WeatherForecast

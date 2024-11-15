@@ -1,5 +1,4 @@
 ﻿@page "/counter"
-@rendermode InteractiveWebAssembly
 
 <PageTitle>Counter</PageTitle>
 
@@ -17,13 +16,13 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        _Logger.LogDebug("OnInitialized");
+        _Logger.LogInformation("OnInitialized");
     }
 
     private void IncrementCount()
     {
         currentCount++;
 
-        _Logger.LogDebug($"Counter Value = {currentCount}");
+        _Logger.LogInformation($"Counter Value = {currentCount}");
     }
 }

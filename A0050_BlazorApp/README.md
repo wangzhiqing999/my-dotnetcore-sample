@@ -1,6 +1,9 @@
 
 
 
+## Blazor WebAssembly 项目
+
+
 ### A0050_BlazorApp
 创建 Blazor WebAssembly 项目.
 
@@ -121,6 +124,8 @@ Client项目的前端，向Server 项目的后端发起请求的时候，也能�
 
 
 
+## Blazor Server 项目
+
 
 
 
@@ -192,7 +197,7 @@ https://learn.microsoft.com/zh-cn/training/modules/blazor-introduction/3-when-to
 
 
 
-
+## Blazor Web App 项目
 
 
 
@@ -299,6 +304,43 @@ Microsoft.NETCore.App
 依赖项
 框架：
   Microsoft.NETCore.App
+
+
+
+
+### A0053_BlazorApp_WebAssembly_Global
+
+创建 Blazor Web App 项目.
+
+框架： .NET 8.0
+身份验证类型： 无
+配置 HTTPS 不打勾
+
+交互式呈现模式 选择 "WebAssembly"
+交互位置 选择 "Global"
+
+包含示例页 打勾
+不使用顶级语句 打勾
+
+
+创建结果：
+两个项目
+
+一个 A0053_BlazorApp_WebAssembly_Global
+依赖项
+框架：
+  Microsoft.AspNetCore.App
+  Microsoft.NETCore.App
+项目：
+  A0053_BlazorApp_WebAssembly_Global.Client
+
+
+一个 A0053_BlazorApp_WebAssembly_Global.Client
+依赖项
+框架：
+  Microsoft.NETCore.App
+
+
 
 
 
@@ -519,6 +561,102 @@ Counter.razor
 
 
 
+
+### 配置日志的处理.
+
+修改 appsettings.Development.json
+"Default": "Debug"
+
+
+以 Home.razor 为例，追加下面的代码。
+
+```
+@inject ILogger<Home> _Logger
+@code {
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _Logger.LogDebug("OnInitialized");
+    }
+}
+```
+
+给 Weather.razor 与 Counter.razor 都加上日志代码.
+其中，Counter.razor 的代码为：
+````
+@inject ILogger<Counter> _Logger
+@code {
+    private int currentCount = 0;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _Logger.LogDebug("OnInitialized");
+    }
+
+    private void IncrementCount()
+    {
+        currentCount++;
+
+        _Logger.LogDebug($"Counter Value = {currentCount}");
+    }
+}
+````
+
+
+
+A0053_BlazorApp_WebAssembly_Global.Client 项目.
+Program.cs 追加下面的代码.
+
+
+````
+// await builder.Build().RunAsync();
+
+var host = builder.Build();
+
+var logger = host.Services.GetRequiredService<ILoggerFactory>()
+    .CreateLogger<Program>();
+
+logger.LogInformation("Logged after the app is built in the Program file.");
+
+await host.RunAsync();
+
+````
+
+
+
+
+
+测试运行，查看输出的日志。
+
+
+
+#### A0053_BlazorApp_Server_Global 
+后台每个 OnInitialized 的日志都输出了。
+Counter页面，点击按钮，都能在后台看到日志输出。
+
+
+#### A0053_BlazorApp_WebAssembly
+后台每个 OnInitialized 的日志都输出了。
+Counter页面，点击按钮，在后台没有输出。
+
+
+
+#### A0053_BlazorApp_WebAssembly_Global
+只有第一次的首页，在后台有日志输出。
+后续点其它的页面，以及 Counter页面，点击按钮，在后台都没有日志输出。
+
+浏览器上，F12，在控制台的地方，可以看到 info 的日志输出。
+
+A0053_BlazorApp_WebAssembly_Global.Client 上面配置的日志输出，是浏览器的控制台上能看到，VS2022的【输出】的Tab能看到。
+
+
+
+
+
+
+
+## 使用 gRPC
 
 
 ### A0058_BlazorAppGrpc

@@ -8,11 +8,20 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
+@inject ILogger<Counter> _Logger
 @code {
     private int currentCount = 0;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _Logger.LogDebug("OnInitialized");
+    }
 
     private void IncrementCount()
     {
         currentCount++;
+
+        _Logger.LogDebug($"Counter Value = {currentCount}");
     }
 }
