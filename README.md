@@ -74,8 +74,15 @@ EntityFramework Code First 的例子.  (使用 Postgres 数据库)
 ### A0060_Debug
 System.Diagnostics.Debug 的一些简单的用法。（ .NET 8.0）
 
+
 ### A0062_StackTrace
 System.Diagnostics.StackTrace 的一些简单的用法。（ .NET 8.0）
+
+
+### A0065_Record
+record 使用的例子。（ .NET 8.0）
+
+
 
 
 ### A0100_Database
