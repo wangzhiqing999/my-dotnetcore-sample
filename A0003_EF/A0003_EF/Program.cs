@@ -3,7 +3,7 @@ using System.Linq;
 
 using System.Text;
 
-
+using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 using A0003_EF.Model;
@@ -24,8 +24,24 @@ namespace A0003_EF
             Console.WriteLine("Hello World!");
 
 
+
+            
+            // 这里，数据库连接字符串，是从“用户机密”的 secrets.json 中读取。
+            IConfigurationRoot config = new ConfigurationBuilder()
+                .AddUserSecrets<Program>()
+                .Build();
+            string connString = config["TestConnectionString"];
+
+            if (string.IsNullOrEmpty(connString))
+            {
+                Console.WriteLine("未找到数据库连接字符串，请检查用户机密是否配置正确。");
+                return;
+            }
+
+
+
             var optionsBuilder = new DbContextOptionsBuilder<TestContext>();
-            optionsBuilder.UseSqlServer(@"Data Source=localhost\SQLEXPRESS;Initial Catalog=Test;User Id=sa;Password=123456;");
+            optionsBuilder.UseSqlServer(connString);
             
             using (TestContext context = new TestContext(optionsBuilder.Options))
             {

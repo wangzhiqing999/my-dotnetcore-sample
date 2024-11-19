@@ -1,30 +1,64 @@
 # .Net Core Entity Framework 
 
 
-×¢Òâ£º¹ÜÀí NuGet ³ÌĞò°üµÄÊ±ºò£¬²»ÄÜÏñÔÚ .NET ÀïÃæ£¬¼òµ¥È¥Ìí¼Ó EntityFramework Õâ¸öÁË¡£
+æ³¨æ„ï¼šç®¡ç† NuGet ç¨‹åºåŒ…çš„æ—¶å€™ï¼Œä¸èƒ½åƒåœ¨ .NET é‡Œé¢ï¼Œç®€å•å»æ·»åŠ  EntityFramework è¿™ä¸ªäº†ã€‚
 
-ÒòÎª»á±¨
+å› ä¸ºä¼šæŠ¥
 
-°ü EntityFramework 6.1.3 Óë netcoreapp1.1 (.NETCoreApp,Version=v1.1) ²»¼æÈİ¡£ °ü EntityFramework 6.1.3 Ö§³Ö:
+åŒ… EntityFramework 6.1.3 ä¸ netcoreapp1.1 (.NETCoreApp,Version=v1.1) ä¸å…¼å®¹ã€‚ åŒ… EntityFramework 6.1.3 æ”¯æŒ:
   - net40 (.NETFramework,Version=v4.0)
   - net45 (.NETFramework,Version=v4.5)
-Ò»¸ö»ò¶à¸ö°üÓë .NETCoreApp,Version=v1.1 ²»¼æÈİ¡£
+ä¸€ä¸ªæˆ–å¤šä¸ªåŒ…ä¸ .NETCoreApp,Version=v1.1 ä¸å…¼å®¹ã€‚
 
-.Net Core, ĞèÒªÌí¼Ó Microsoft.EntityFrameworkCore.SqlServer Õâ¸ö°ü.
+.Net Core, éœ€è¦æ·»åŠ  Microsoft.EntityFrameworkCore.SqlServer è¿™ä¸ªåŒ….
 
-ÎªÁËÊ¹ÓÃ Code First£¬ »¹ĞèÒªÌí¼Ó Microsoft.EntityFrameworkCore.Tools Õâ¸ö°ü.
-·ñÔòÔÚ³ÌĞò°ü¿ØÖÆÌ¨ÖĞ£¬ Add-Migration Ö®ÀàµÄÏà¹ØÃüÁîÎŞ·¨Ö´ĞĞ¡£
+ä¸ºäº†ä½¿ç”¨ Code Firstï¼Œ è¿˜éœ€è¦æ·»åŠ  Microsoft.EntityFrameworkCore.Tools è¿™ä¸ªåŒ….
+å¦åˆ™åœ¨ç¨‹åºåŒ…æ§åˆ¶å°ä¸­ï¼Œ Add-Migration ä¹‹ç±»çš„ç›¸å…³å‘½ä»¤æ— æ³•æ‰§è¡Œã€‚
 
-ÔÚ±ğµÄÎÄµµÖĞÌáÊ¾£¬ »¹ĞèÒªÌí¼Ó  Microsoft.EntityFrameworkCore.Design Õâ¸ö°ü.
+åœ¨åˆ«çš„æ–‡æ¡£ä¸­æç¤ºï¼Œ è¿˜éœ€è¦æ·»åŠ   Microsoft.EntityFrameworkCore.Design è¿™ä¸ªåŒ….
 
 
-³¢ÊÔÊ¹ÓÃ Enable-Migrations -EnableAutomaticMigrations£¬ ½á¹û±»¾Ü¾øÁË¡£
+å°è¯•ä½¿ç”¨ Enable-Migrations -EnableAutomaticMigrationsï¼Œ ç»“æœè¢«æ‹’ç»äº†ã€‚
 PM> Enable-Migrations -EnableAutomaticMigrations
 Enable-Migrations is obsolete. Use Add-Migration to start using Migrations.
 
 
 Add-Migration MyFirstMigration
-ÓÃÀ´Éú³ÉÃüÁî£¬Éú³ÉÊı¾İ¿âºÍ±íµÄC#´úÂë
+ç”¨æ¥ç”Ÿæˆå‘½ä»¤ï¼Œç”Ÿæˆæ•°æ®åº“å’Œè¡¨çš„C#ä»£ç 
 
 Update-Database
-Ö´ĞĞÉú³ÉµÄ´úÂë£¬¸üĞÂÊı¾İ¿â±í½á¹¹.
+æ‰§è¡Œç”Ÿæˆçš„ä»£ç ï¼Œæ›´æ–°æ•°æ®åº“è¡¨ç»“æ„.
+
+
+
+
+
+## æœºå¯†ç®¡ç†.
+
+å‚è€ƒæ–‡æ¡£ï¼š
+https://learn.microsoft.com/zh-cn/aspnet/core/security/app-secrets?view=aspnetcore-9.0&tabs=windows
+
+é¿å…æŠŠ æ•°æ®åº“IPã€ç”¨æˆ·åã€å¯†ç  è¿™äº›ä¿¡æ¯ï¼Œå†™åœ¨æºä»£ç æˆ–è€…æ˜¯é…ç½®æ–‡ä»¶ä¸­ï¼Œç„¶åå‘å¸ƒåˆ°ä»£ç ç®¡ç†å™¨ä¸Šã€‚
+
+
+NuGet å¼•ç”¨
+Microsoft.Extensions.Configuration
+Microsoft.Extensions.Configuration.UserSecrets
+
+
+åœ¨ VS2022 ä¸­ï¼Œé¡¹ç›®ï¼Œå³é”®ï¼Œé€‰æ‹©ã€ç®¡ç†ç”¨æˆ·æœºå¯†ã€‘
+å¼¹å‡º secrets.json ã€‚
+è¾“å…¥
+{
+  "TestConnectionString": "Data Source=localhost\SQLEXPRESS;Initial Catalog=Test;User Id=sa;Password=123456;"
+}
+
+æ–‡ä»¶å®é™…å­˜å‚¨åœ¨å½“å‰æœºå™¨çš„
+C:\Users\å½“å‰ç”¨æˆ·\AppData\Roaming\Microsoft\UserSecrets\b712394a-b9fa-49a6-9acc-e33bcc4221ab
+ç›®å½•ä¸‹ã€‚
+
+ä»£ç æäº¤åˆ° git çš„æ—¶å€™ï¼Œæ˜¯ä¸ä¼šæŠŠè¿™ä¸ªæ–‡ä»¶æäº¤ä¸Šå»çš„ã€‚
+
+
+
+

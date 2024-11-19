@@ -13,6 +13,7 @@
 ### A0003_EF
 使用 Visual Studio 2017， 开发 EntityFramework Code First 的例子.  (使用 SQL Server 数据库)
 [2021-02-01 更新 使用 Visual Studio 2019， 框架升级为  .NET 5.0]
+[2024-11-19 更新 使用 Visual Studio 2022， 框架升级为  .NET 8.0]
 
 
 ### A0004_Config
