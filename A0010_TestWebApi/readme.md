@@ -268,3 +268,40 @@ http://localhost:5000/api/TestException
     "instance": "API"
 }
 
+
+
+
+
+
+
+
+## 2024-11-21 更新 使用 Visual Studio 2022， 框架升级为  .NET 9.0
+Visual Studio 2022 版本：17.21.1
+
+创建一个新的 Web Api 项目  A0010_TestWebApiV9
+
+框架：.NET 9.0
+身份验证类型：无
+不配置 HTTPS
+不启用容器支持
+不启用 OpenAPI 支持
+不使用顶级语句
+使用控制器
+不在 .NET Aspire 业务流程中登记。
+
+
+创建完 Web API 项目后，啥事情不干，直接运行。
+因为 Microsoft 已从 .NET 9 中删除内置的 Swagger 支持 （Swashbuckle）。
+本次又没有启用 OpenAPI 支持.
+所以，是没有一个浏览的页面的。
+
+输出窗口显示：
+Microsoft.Hosting.Lifetime: Information: Now listening on: http://localhost:5164
+Microsoft.Hosting.Lifetime: Information: Application started. Press Ctrl+C to shut down.
+Microsoft.Hosting.Lifetime: Information: Hosting environment: Development
+
+打开浏览器，测试访问：
+http://localhost:5164/WeatherForecast
+
+
+
