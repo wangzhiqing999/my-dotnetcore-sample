@@ -52,6 +52,7 @@ EntityFramework Code First 的例子.  (使用 Postgres 数据库)
 [2021-02-01 更新 使用 Visual Studio 2019， 框架升级为  .NET 5.0]
 [2021-12-09 更新 使用 Visual Studio 2022， 框架升级为  .NET 6.0]
 [2024-09-20 更新 使用 Visual Studio 2022， 框架升级为  .NET 8.0]
+[2024-11-21 更新 使用 Visual Studio 2022， 框架升级为  .NET 9.0]
 
 
 ### A0020_Fundamentals

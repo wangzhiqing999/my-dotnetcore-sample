@@ -305,3 +305,96 @@ http://localhost:5164/WeatherForecast
 
 
 
+### Swagger 的替代方案：Scalar.AspNetCore
+
+1、安装 nuget 包
+Scalar.AspNetCore
+
+2、修改 Program.cs
+
+添加：
+builder.Services.AddOpenApi();
+
+与 
+if (app.Environment.IsDevelopment())
+{
+    app.MapScalarApiReference(); // scalar/v1
+    app.MapOpenApi();
+}
+
+运行
+
+打开浏览器，测试访问：
+http://localhost:5164/scalar/v1
+
+
+
+
+### 数据库相关
+
+NuGet 引用
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.InMemory
+
+从 A0010_TestWebApi 项目
+复制 
+DataAccess/TodoContext.cs
+Models/TodoItem.cs
+Controllers/TodoController.cs
+
+修改命名空间
+
+修改 Program.cs
+
+测试运行
+
+打开浏览器，测试访问：
+http://localhost:5164/scalar/v1
+
+
+
+
+
+
+### JWT 相关
+
+安装nuget包
+Microsoft.AspNetCore.Authentication.JwtBearer
+
+后续操作，与之前的版本，差别不大。
+简单从 A0010_TestWebApiV8 项目那里， 把相关的代码，复制过来。
+
+复制的代码包含：
+/Controllers/AuthorizeController.cs
+/Controllers/ValuesController.cs
+/Models/LoginViewModel.cs
+/JwtSettings.cs
+
+复制后，修改命名空间。
+控制器修改一下顶部的标签。
+
+修改 appsettings.json
+
+修改 Program.cs
+
+
+测试运行
+
+打开浏览器，测试访问：
+http://localhost:5164/scalar/v1
+
+
+
+先直接测试 /Values  返回没有权限的错误。
+然后再调用 /Authorize 获取 token
+
+再次调用 /Values 
+在 Http Headers 的地方，添加 
+Key = Authorization
+Value = Bearer 调用/Authorize 获得的 token
+
+
+
+
+
+
