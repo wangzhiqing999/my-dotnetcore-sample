@@ -1,0 +1,85 @@
+﻿@page "/uploadfile"
+
+@using System
+@using System.IO
+@using Microsoft.AspNetCore.Hosting
+
+@inject ILogger<UploadFile> Logger
+@inject IWebHostEnvironment Environment
+
+
+<h3>上传文件</h3>
+
+<p>
+    <label>
+        <InputFile OnChange="LoadFile" />
+    </label>
+
+    @if (isLoading){
+        <span>
+            正在上传...
+        </span>
+    } else {
+        <span>@(uploadResult)</span>
+    }
+    
+</p>
+
+@code {
+
+    private bool isLoading;
+
+    private string uploadResult = "";
+
+
+    private async Task LoadFile(InputFileChangeEventArgs e)
+    {
+        isLoading = true;
+
+        var file = e.File;
+
+        
+        try
+        {
+            string wwwPath = Environment.WebRootPath;
+
+            // 存储文件的物理路径.
+            string saveFilePath = $"{wwwPath}/Upload";
+            string saveFileName = $"{wwwPath}/Upload/{file.Name}";
+
+
+            // 目录不存在，则创建.
+            if (!System.IO.Directory.Exists(saveFilePath))
+            {
+                System.IO.Directory.CreateDirectory(saveFilePath);
+            }
+
+            // 文件已存在，则删除.
+            if (System.IO.File.Exists(saveFileName))
+            {
+                System.IO.File.Delete(saveFileName);
+            }
+
+            using (var stream = System.IO.File.Create(saveFileName))
+            {
+                await file.OpenReadStream().CopyToAsync(stream);
+            }
+
+            Logger.LogInformation(
+                "Unsafe Filename: {UnsafeFilename} File saved: {Filename}",
+                file.Name, saveFileName);
+
+            uploadResult = "上传成功！";
+        }
+        catch (Exception ex)
+        {
+            uploadResult = "上传失败！";
+
+            Logger.LogError("File: {Filename} Error: {Error}",
+                file.Name, ex.Message);
+        }
+        
+
+        isLoading = false;
+    }
+}
