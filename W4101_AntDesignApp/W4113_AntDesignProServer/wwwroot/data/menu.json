@@ -237,6 +237,11 @@
         "path": "/test/mytreeselect",
         "name": "测试TreeSelect",
         "key": "test.mytreeselect"
+      },
+      {
+        "path": "/test/myupload",
+        "name": "测试Upload",
+        "key": "test.myupload"
       }
     ]
   },
