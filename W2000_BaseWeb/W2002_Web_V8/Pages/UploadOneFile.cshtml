@@ -1,0 +1,84 @@
+﻿@page
+@model UploadOneFileModel
+@{
+    ViewData["Title"] = "上传单个文件";
+}
+
+@Html.AntiForgeryToken()
+
+<h1>测试上传单个文件</h1>
+
+<div class="form-group row">
+    <label for="upload-btn" class="col-3 col-form-label text-right">上传文件</label>
+    <div class="col-5 overflow-hidden">
+        <input type="file" class="outline-none" id="upload-btn">
+    </div>
+    <div class="col-4 padding-none">
+        <span>*</span>
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-4 ">
+        <button id="btnUpload" type="button" class="btn btn-primary">上传</button>
+    </div>
+</div>
+
+
+<div class="form-group row">
+    <div class="col-4 ">
+        <span id="uploadResult">-</span>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+
+
+        $(document).ready(function () {
+
+            // 上传按钮点击.
+            $("#btnUpload").click(function () {
+
+
+                if ($("#upload-btn")[0].files.length == 0) {
+                    alert("尚未选择需要上传的文件！");
+                    return;
+                }
+                var uploadFile = $("#upload-btn")[0].files[0];
+
+                var formData = new FormData();
+                formData.append("file", uploadFile);
+
+                $.ajax({
+                    method: "POST",
+                    url: "/UploadOneFile",
+                    // headers: {
+                    //    "XSRF-TOKEN":$('input:hidden[name="__RequestVerificationToken"]').val()
+                    // },
+                    data: formData,
+                    dataType: "json",
+                    contentType: false, //传文件必须！
+                    processData: false, //传文件必须！
+                    success: function (resp) {
+
+                        console.log("POST /UploadOneFile Result:", resp);
+
+                        if (resp.IsSuccess === false) {
+                            alert(resp.ResultMessage);
+                            return;
+                        }
+
+                        $("#uploadResult").html("上传单个文件完成！");;
+                    },
+                });
+
+
+            });
+
+        });
+
+    </script>
+}
