@@ -1,0 +1,103 @@
+﻿@page "/downloadfile"
+@using System.IO
+@using Microsoft.AspNetCore.Hosting
+@inject IJSRuntime JS
+@inject IWebHostEnvironment Environment
+
+<h3>下载文件</h3>
+
+<button @onclick="DownloadFileFromStream">
+    Download File From Stream
+</button>
+
+<hr/>
+
+
+<div>
+    <ul>
+        @foreach (var file in uploadedFiles)
+        {
+            <li>
+                <button @onclick="()=>DownloadFileInUploadPath(file)">
+                    下载 @file
+                </button>
+            </li>        
+        }
+    </ul>
+</div>
+
+
+
+@code {
+
+
+    /// <summary>
+    /// 上传的文件列表.
+    /// </summary>
+    private List<string> uploadedFiles = new List<string>();
+
+
+    protected override void OnInitialized()
+    {
+        string wwwPath = Environment.WebRootPath;
+        // 存储文件的物理路径.
+        string uploadFilePath = $"{wwwPath}/Upload";
+
+        foreach(string file in Directory.GetFiles(uploadFilePath)) 
+        {
+            var lastFileName = file.Split('\\', '/').Last();
+
+            uploadedFiles.Add(Path.GetFileName(lastFileName));
+        }        
+    }
+
+
+
+
+    #region 下载 50k 的空白文件.
+
+    private Stream GetFileStream()
+    {
+        var randomBinaryData = new byte[50 * 1024];
+        var fileStream = new MemoryStream(randomBinaryData);
+
+        return fileStream;
+    }
+
+    private async Task DownloadFileFromStream()
+    {
+        var fileStream = GetFileStream();
+        var fileName = "log.bin";
+
+        using var streamRef = new DotNetStreamReference(stream: fileStream);
+
+        await JS.InvokeVoidAsync("downloadFileFromStream", fileName, streamRef);
+    }
+
+    #endregion
+
+
+
+
+    #region 下载 “上传目录”下面的文件.
+
+
+    private async Task DownloadFileInUploadPath(string fileName)
+    {
+
+        string wwwPath = Environment.WebRootPath;
+        // 存储文件的物理路径.
+        string uploadFileName = $"{wwwPath}/Upload/{fileName}";
+
+        var fileStream = File.OpenRead(uploadFileName);
+
+        using var streamRef = new DotNetStreamReference(stream: fileStream);
+
+        await JS.InvokeVoidAsync("downloadFileFromStream", fileName, streamRef);
+    }
+
+    #endregion
+
+
+
+}
