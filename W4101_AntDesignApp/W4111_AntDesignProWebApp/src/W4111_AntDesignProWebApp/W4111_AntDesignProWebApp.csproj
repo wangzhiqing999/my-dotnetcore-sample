@@ -9,6 +9,8 @@
   <ItemGroup>
     <ProjectReference Include="..\W4111_AntDesignProWebApp.Client\W4111_AntDesignProWebApp.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.5" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
   </ItemGroup>
 
 </Project>
