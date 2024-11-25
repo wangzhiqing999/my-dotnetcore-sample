@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,10 +39,16 @@ namespace B0260_Masuit.Test
 
     public class TestClass
     {
+
+        [Display(Name = "姓名")]
         public string Name { get; set; }
 
+
+        [Display(Name = "性别")]
         public bool? Sex { get; set; }
 
+
+        [Display(Name = "年龄")]
         public int? Age { get; set; }
 
         public override string ToString()
