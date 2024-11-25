@@ -8,11 +8,11 @@
 @inject IWebHostEnvironment Environment
 
 
-<h3>上传文件</h3>
+<h3>上传文件到 WebRootPath </h3>
 
 <p>
     <label>
-        <InputFile OnChange="LoadFile" />
+        <InputFile OnChange="UploadFileToWebRootPath" />
     </label>
 
     @if (isLoading){
@@ -23,6 +23,35 @@
         <span>@(uploadResult)</span>
     }
     
+    <br/>
+    上传到 WebRootPath 的，需要注意，因为用户浏览器，是可以访问 WebRootPath 目录下的文件的。
+    <br/>
+    用户可以在浏览器上，输入完整的地址，来访问这个上传的文件。
+    <br />
+    也就是，如果不检查的话，上传了存在危险的文件上来，然后再访问的话，就会有安全隐患。
+</p>
+
+<hr/>
+
+<h3>上传文件到 ContentRootPath </h3>
+
+<p>
+    <label>
+        <InputFile OnChange="UploadFileToContentRootPath" />
+    </label>
+
+    @if (isLoading){
+        <span>
+            正在上传...
+        </span>
+    } else {
+        <span>@(uploadResult)</span>
+    }
+    
+
+    <br/>
+    上传文件到 ContentRootPath， 文件是和 exe 在同一个目录下。
+    用户没法通过浏览器，输入个地址，来直接访问的。
 </p>
 
 @code {
@@ -32,7 +61,7 @@
     private string uploadResult = "";
 
 
-    private async Task LoadFile(InputFileChangeEventArgs e)
+    private async Task UploadFileToWebRootPath(InputFileChangeEventArgs e)
     {
         isLoading = true;
 
@@ -82,4 +111,60 @@
 
         isLoading = false;
     }
+
+
+
+
+
+    private async Task UploadFileToContentRootPath(InputFileChangeEventArgs e)
+    {
+        isLoading = true;
+
+        var file = e.File;
+
+
+        try
+        {
+            string contenPath = Environment.ContentRootPath;
+
+            // 存储文件的物理路径.
+            string saveFilePath = $"{contenPath}/Upload";
+            string saveFileName = $"{contenPath}/Upload/{file.Name}";
+
+
+            // 目录不存在，则创建.
+            if (!System.IO.Directory.Exists(saveFilePath))
+            {
+                System.IO.Directory.CreateDirectory(saveFilePath);
+            }
+
+            // 文件已存在，则删除.
+            if (System.IO.File.Exists(saveFileName))
+            {
+                System.IO.File.Delete(saveFileName);
+            }
+
+            using (var stream = System.IO.File.Create(saveFileName))
+            {
+                await file.OpenReadStream().CopyToAsync(stream);
+            }
+
+            Logger.LogInformation(
+                "Unsafe Filename: {UnsafeFilename} File saved: {Filename}",
+                file.Name, saveFileName);
+
+            uploadResult = "上传成功！";
+        }
+        catch (Exception ex)
+        {
+            uploadResult = "上传失败！";
+
+            Logger.LogError("File: {Filename} Error: {Error}",
+                file.Name, ex.Message);
+        }
+
+
+        isLoading = false;
+    }
+
 }
