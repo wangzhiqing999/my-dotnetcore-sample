@@ -131,7 +131,7 @@ ASP.Net Code，基本登录的测试 (DotNet Core 3.0)
 ### A3004_Middleware
 ASP.Net Code，中间件的例子代码 (DotNet Core 3.0)
 [2021-02-01 更新 使用 Visual Studio 2019， 框架升级为  .NET 5.0]
-
+[2024-11-26 更新 使用 Visual Studio 2022， 框架升级为  .NET 8.0]
 
 
 ### A5001_MLNET

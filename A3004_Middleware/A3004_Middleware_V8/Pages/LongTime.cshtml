@@ -1,0 +1,17 @@
+﻿@page
+@model A3004_Middleware_V8.Pages.LongTimeModel
+@{
+    ViewData["Title"] = "测试响应缓存的页面";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    这个页面耗时略长.
+    <br />
+    处理时间：@Model.ProcessingTime
+
+    <br />
+    尝试刷新页面，看看缓存是否产生效果。
+</p>
+

@@ -23,3 +23,18 @@ https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/middleware/write?view=
 放在 app.UseStaticFiles(); 前面， 意味着 所有的 样式，图片，都将执行这个 中间件。
 放在 app.UseEndpoints... 的前面， 意味着，只有走到控制器了，才会执行这个中间件。
 
+
+
+
+
+### A3004_Middleware_V8
+.NET 8.0 版本的。
+创建项目后， 不是 Model-View-Controller 类型的。
+
+参考文档：
+https://learn.microsoft.com/zh-cn/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0
+
+
+
+
+
