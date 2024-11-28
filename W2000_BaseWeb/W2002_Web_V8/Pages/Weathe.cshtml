@@ -1,0 +1,50 @@
+﻿@page
+@model W2002_Web_V8.Pages.WeatheModel
+@{
+    ViewData["Title"] = "使用 HttpClient 获取天气";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+@if (Model._WeatherData != null)
+{
+    <ul>
+        <li>
+            Code: <span>@Model._WeatherData.code</span>
+        </li>
+
+        <li>
+            省: <span>@Model._WeatherData.province</span>
+        </li>
+        <li>
+            市: <span>@Model._WeatherData.city</span>
+        </li>
+
+        <li>
+            温度: <span>@Model._WeatherData.temperature</span>
+        </li>
+        <li>
+            天气: <span>@Model._WeatherData.weather</span>
+        </li>
+
+        <li>
+            风向: <span>@Model._WeatherData.wind_direction</span>
+        </li>
+        <li>
+            风速: <span>@Model._WeatherData.wind_power</span>
+        </li>
+
+        <li>
+            湿度: <span>@Model._WeatherData.humidity</span>
+        </li>
+        <li>
+            数据更新时间: <span>@Model._WeatherData.reporttime</span>
+        </li>
+    </ul>
+}
+
+
+<a href="./Weathe?name=北京市">北京市</a>
+<a href="./Weathe?name=上海市">上海市</a>
+<a href="./Weathe?name=广州市">广州市</a>
+<a href="./Weathe?name=深圳市">深圳市</a>

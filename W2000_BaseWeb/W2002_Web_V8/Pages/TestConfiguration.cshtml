@@ -1,0 +1,17 @@
+﻿@page
+@model W2002_Web_V8.Pages.TestConfigurationModel
+@{
+    ViewData["Title"] = "测试配置";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+
+<p>
+    AllowedHosts = @Model.AllowedHosts
+    <br/>
+    Test:Code = @Model.TestCode
+    <br />
+    Test:Name = @Model.TestName
+</p>

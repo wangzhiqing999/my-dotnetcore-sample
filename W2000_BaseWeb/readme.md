@@ -43,5 +43,10 @@ ASP.NET Core Web 应用
 
 创建完成后，项目只有 RazorPage 的支持，没有 MVC 的支持。
 
-
+例子包含：
+  读取 appsettings.json 配置文件
+  Session
+  上传文件
+  使用 HttpClient 请求外部接口.
+  状况检查
 

@@ -1,0 +1,31 @@
+﻿@page
+@model W2002_Web_V8.Pages.TestSessionModel
+@{
+    ViewData["Title"] = "测试页面的 Session";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+@if (string.IsNullOrEmpty(Model.nameValue))
+{
+    <p>
+        Session 中没有名称与年龄的数据.
+        <br/>
+        <form method="post">
+            <input type="text" name="name" placeholder="请输入姓名" />
+            <input type="text" name="age" placeholder="请输入年龄" />
+            <input type="submit" value="提交" />
+        </form>
+    </p>
+} else {
+    <p>
+        Session 中名称 = @Model.nameValue；年龄 = @Model.ageValue
+        <br />
+        <form method="post">
+            <input type="text" name="name" placeholder="请输入姓名" value="@(Model.nameValue)" />
+            <input type="text" name="age" placeholder="请输入年龄" value="@(Model.ageValue)" />
+            <input type="submit" value="提交" />
+        </form>
+    </p>
+}

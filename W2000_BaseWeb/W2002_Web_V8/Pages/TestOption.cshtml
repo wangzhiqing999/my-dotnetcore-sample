@@ -1,0 +1,14 @@
+﻿@page
+@model W2002_Web_V8.Pages.TestOptionModel
+@{
+    ViewData["Title"] = "测试选项";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<p>
+    CODE = @(Model._TestOptions.Code)
+    <br/>
+    NAME = @(Model._TestOptions.Name)
+</p>
