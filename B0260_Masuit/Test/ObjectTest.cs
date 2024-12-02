@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -40,10 +41,12 @@ namespace B0260_Masuit.Test
     public class TestClass
     {
 
+        [Description("姓名")]
         [Display(Name = "姓名")]
         public string Name { get; set; }
 
 
+        [Description("性别")]
         [Display(Name = "性别")]
         public bool? Sex { get; set; }
 

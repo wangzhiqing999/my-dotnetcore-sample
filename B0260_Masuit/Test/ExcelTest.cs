@@ -49,7 +49,8 @@ namespace B0260_Masuit.Test
 
 
             // 这里使用类来直接生成.
-            // 生成的列名，是类的属性名.
+            // 生成的列名，是优先使用类的属性上的[Description]标签里的内容.
+            // 如果属性上没有[Description] 标签，则是使用 属性的名称.
             // 顺序是属性声明的顺序.
             list.ToDataTable().ToExcel().SaveFile("test1.xlsx");
 
