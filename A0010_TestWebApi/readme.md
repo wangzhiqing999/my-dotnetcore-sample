@@ -276,7 +276,7 @@ http://localhost:5000/api/TestException
 
 
 ## 2024-11-21 更新 使用 Visual Studio 2022， 框架升级为  .NET 9.0
-Visual Studio 2022 版本：17.21.1
+Visual Studio 2022 版本：17.12.1
 
 创建一个新的 Web Api 项目  A0010_TestWebApiV9
 
@@ -395,6 +395,80 @@ Value = Bearer 调用/Authorize 获得的 token
 
 
 
+
+
+
+
+
+
+
+## 2024-12-02 使用 API 密钥身份验证的例子
+Visual Studio 2022 版本：17.12.2
+
+创建一个新的 Web Api 项目  A0010_TestWebApiV9_ApiKey
+
+框架：.NET 9.0
+身份验证类型：无
+不配置 HTTPS
+不启用容器支持
+不启用 OpenAPI 支持
+不使用顶级语句
+使用控制器
+不在 .NET Aspire 业务流程中登记。
+
+
+完成后，测试运行。
+
+打开浏览器，测试访问：
+http://localhost:5103/WeatherForecast
+
+
+
+
+### 添加 API 密钥身份验证中间件.
+
+
+完成后，测试运行。
+
+打开终端，分别运行：
+curl http://localhost:5103/WeatherForecast
+
+这个是 没有设置 API 密钥 的情况， 返回 远程服务器返回错误: (401) 未经授权。
+
+
+$headers = @{
+    "X-API-KEY" = "my-super-secret-api-key"
+}
+curl -H $headers http://localhost:5103/WeatherForecast
+
+这个是 设置了 API 密钥 的情况， 正常返回。
+
+
+$headers = @{
+    "X-API-KEY" = "my-super-secret-api-key"
+}
+curl -H $headers  -Method POST http://localhost:5103/WeatherForecast
+
+这个是 设置了 API 密钥 的， 后端处理还要额外检查 是否满足 角色 条件的例子。
+
+
+
+### 实际预期的处理机制.
+
+使用自己的 API 密钥身份验证中间件.
+来取代 JWT 的中间件。
+
+原因主要是， JWT 没有 “踢掉一个在线的会话” 的操作。
+
+这里，是每次请求，都要去检测 X-API-KEY 的有效性。
+例子代码中，是简单去查询一下 配置文件里面的定义。
+
+实际业务中，是需要在 数据库 或者 Redis 里面，存储 “当前已登录的用户” 这样的信息。
+新的请求发过来的时候，需要去检查， 有没有 “已登录” 的数据。
+有，就认为是 合法的用户登录请求。
+没有，就返回 http 401 的错误。
+
+“踢掉一个在线的会话” 的操作，就是从 数据库 或者 Redis 里面，移除掉指定的 “当前已登录的用户” 的数据。
 
 
 

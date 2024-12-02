@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A0010_TestWebApiV8", "A0010
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A0010_TestWebApiV9", "A0010_TestWebApiV9\A0010_TestWebApiV9.csproj", "{C40410B6-CB6B-4833-A5D2-7E1913D007EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A0010_TestWebApiV9_ApiKey", "A0010_TestWebApiV9_ApiKey\A0010_TestWebApiV9_ApiKey.csproj", "{20F4632E-C7B0-43B1-A3D9-A401EA49F096}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{C40410B6-CB6B-4833-A5D2-7E1913D007EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C40410B6-CB6B-4833-A5D2-7E1913D007EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C40410B6-CB6B-4833-A5D2-7E1913D007EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20F4632E-C7B0-43B1-A3D9-A401EA49F096}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20F4632E-C7B0-43B1-A3D9-A401EA49F096}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20F4632E-C7B0-43B1-A3D9-A401EA49F096}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20F4632E-C7B0-43B1-A3D9-A401EA49F096}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
