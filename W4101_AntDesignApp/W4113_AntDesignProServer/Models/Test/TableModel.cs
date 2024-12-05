@@ -16,6 +16,7 @@ namespace W4113_AntDesignProServer.Models.Test
         /// 报表ID
         /// </summary>
         [Display(Name = "报表ID")]
+        [Description("报表ID")]
         public int Id { set; get; }
 
 
@@ -25,6 +26,7 @@ namespace W4113_AntDesignProServer.Models.Test
         [Required]
         [Display(Name = "报表类型")]
         [DisplayName("报表类型")]
+        [Description("报表类型")]
         public string ReportTypeCode { set; get; }
 
 
@@ -35,6 +37,7 @@ namespace W4113_AntDesignProServer.Models.Test
         [Required]
         [Display(Name = "报表数据源")]
         [DisplayName("报表数据源")]
+        [Description("报表数据源")]
         public string ReportDataSourceCode { set; get; }
 
 
@@ -45,6 +48,7 @@ namespace W4113_AntDesignProServer.Models.Test
         [Required]
         [Display(Name = "报表名")]
         [DisplayName("报表名")]
+        [Description("报表名")]
         public string ReportName { set; get; }
 
 
@@ -53,6 +57,7 @@ namespace W4113_AntDesignProServer.Models.Test
         /// </summary>
         [Display(Name = "报表文件名")]
         [DisplayName("报表文件名")]
+        [Description("报表文件名")]
         public string ReportFileName { set; get; }
 
 
@@ -61,6 +66,7 @@ namespace W4113_AntDesignProServer.Models.Test
         /// 默认可见标志.
         /// </summary>
         [Display(Name = "默认可见标志", Description = "可以访问报表类型的人， 自动可访问该报表")]
+        [Description("默认可见标志")]
         public bool DefaultVisable { set; get; }
 
 
@@ -71,6 +77,7 @@ namespace W4113_AntDesignProServer.Models.Test
         /// </summary>
         [Display(Name = "备注")]
         [DisplayName("备注")]
+        [Description("备注")]
         public string Remark { set; get; }
 
 
@@ -81,6 +88,7 @@ namespace W4113_AntDesignProServer.Models.Test
         /// </summary>
         [Display(Name = "是否处理成功")]
         [DisplayName("是否处理成功")]
+        [Description("是否处理成功")]
         public bool IsProcessSuccess { set; get; }
 
 
