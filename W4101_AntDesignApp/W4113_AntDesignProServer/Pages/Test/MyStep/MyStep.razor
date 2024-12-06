@@ -1,0 +1,264 @@
+﻿@using W4113_AntDesignProServer.Utils
+
+@page "/test/mystep01"
+
+<h3>步骤</h3>
+
+
+<div>
+    <Steps Current="@_currentStep" Class="site-navigation-steps">
+        <Step Title="步骤一" Description="上传文件" />
+        <Step Title="步骤二" Description="读取文件" />
+        <Step Title="步骤三" Description="数据导入" />
+        <Step Title="步骤四" Description="结果报告" />
+    </Steps>
+</div>
+
+<div class="steps-content">
+
+    @if (_currentStep == 0)
+    {
+        <div>
+            <InputFile id="fileInput" OnChange="UploadFile" hidden accept=".xls,.xlsx" />
+
+            <Upload Name="files">
+                <label class="ant-btn" for="fileInput">
+                    <Icon Type="upload" />
+                    上传Excel文件.
+                </label>
+            </Upload>
+        </div>
+    } 
+    else if (_currentStep == 1)
+    {
+        <div>
+            <label>选择要读取的表格:</label>
+            <Select Style="width:240px;"
+            TItem="ExcelSheetInfo" TItemValue="string"
+            LabelName="@nameof(ExcelSheetInfo.Name)"
+            ValueName="@nameof(ExcelSheetInfo.Name)"
+            DataSource="@_excelSheetInfos"
+            @bind-Value="_selectedSheetName">
+            </Select>
+
+
+            <Button Type="Primary" OnClick="GotoImport">导入</Button>
+
+        </div>
+
+    }
+    else if (_currentStep == 2) {
+
+        <div>
+            <AntDesign.Progress Percent="@_importProgress" ShowInfo="false"/>
+            <p>
+                <span>@_importCurrent</span>
+                /
+                <span>@_importRowCount</span>                
+            </p>
+
+            <Button Type="Primary" OnClick="StartImport" Disabled="@_StartImportFlag">开始处理</Button>
+        </div>
+
+    }
+    else if (_currentStep == 3) {
+        <div>
+            <h3>完成！</h3>
+
+        </div>
+    }
+
+</div>
+
+
+
+
+<style>
+
+    .steps-content {
+    margin-top: 16px;
+    border: 1px dashed #e9e9e9;
+    border-radius: 6px;
+    background-color: #fafafa;
+    min-height: 200px;
+    text-align: center;
+    padding-top: 80px;
+    }
+
+</style>
+
+
+@inject IWebHostEnvironment Environment
+@inject IMessageService message
+@code {
+
+
+    /// <summary>
+    /// 当前的步骤.
+    /// </summary>
+    int _currentStep = 0;
+
+
+    /// <summary>
+    /// 保存的文件名.
+    /// </summary>
+    string? _saveFileName;
+
+
+    /// <summary>
+    /// 上传文件的处理.
+    /// </summary>
+    /// <param name="e"></param>
+    /// <returns></returns>
+    private async Task UploadFile(InputFileChangeEventArgs e)
+    {
+
+        string wwwPath = Environment.WebRootPath;
+        // 存储文件的物理路径.
+        string saveFilePath = $"{wwwPath}/Upload";
+
+        // 目录不存在，则创建.
+        if (!System.IO.Directory.Exists(saveFilePath))
+        {
+            System.IO.Directory.CreateDirectory(saveFilePath);
+        }
+
+        var file = e.File;
+        {
+            _saveFileName = $"{wwwPath}/Upload/{file.Name}";
+            // 文件已存在，则删除.
+            if (System.IO.File.Exists(_saveFileName))
+            {
+                System.IO.File.Delete(_saveFileName);
+            }
+
+            using (var stream = System.IO.File.Create(_saveFileName))
+            {
+                await file.OpenReadStream().CopyToAsync(stream);
+            }
+
+            // 上传完成，进入下一步.
+            _currentStep++;
+
+            // 读取表格信息.
+            ReadExcle();
+        }
+    }
+
+
+
+    /// <summary>
+    /// 读取的 Excel 基础信息.
+    /// </summary>
+    List<ExcelSheetInfo> _excelSheetInfos = new();
+
+
+    private void ReadExcle()
+    {
+        if (_saveFileName != null){
+            _excelSheetInfos = ExcelReader.GetSheetInfo(_saveFileName);
+        }
+
+    }
+
+
+    /// <summary>
+    /// 选择的 Sheet 名.
+    /// </summary>
+    string? _selectedSheetName;
+
+
+
+    /// <summary>
+    /// 进入 导入步骤.
+    /// </summary>
+    private void GotoImport() 
+    {
+        if(string.IsNullOrEmpty(_selectedSheetName))
+        {
+            message.Error("请选择要读取的表格.");
+            return;
+        }
+
+        // 选择的表格.
+        var selectSheet = _excelSheetInfos.First(x => x.Name == _selectedSheetName);
+
+        // 总行数.
+        _importRowCount = selectSheet.RowCount;
+
+        _currentStep++;
+    }
+
+
+
+
+
+    /// <summary>
+    /// 导入的总行数.
+    /// </summary>
+    int _importRowCount = 0;
+
+    /// <summary>
+    /// 当前导入的行数.
+    /// </summary>
+    int _importCurrent = 0;
+
+
+    /// <summary>
+    /// 导入的进度.
+    /// </summary>
+    double _importProgress = 0;
+
+
+
+    /// <summary>
+    /// 开始处理标志.
+    /// </summary>
+    bool _StartImportFlag = false;
+
+
+    /// <summary>
+    /// 开始导入处理.
+    /// </summary>
+    /// <returns></returns>
+    private async Task StartImport()
+    {
+        if(_saveFileName == null)
+        {
+            await message.Error("请先上传文件.");
+            return;
+        }
+        if (string.IsNullOrEmpty(_selectedSheetName))
+        {
+            await message.Error("请选择要读取的表格.");
+            return;
+        }
+
+        _StartImportFlag = true;
+
+        foreach(var data in ExcelReader.GetSheetData(_saveFileName,_selectedSheetName)) 
+        {
+            // 模拟导入数据.
+            await Task.Delay(1000);
+
+            // 当前导入的行数.
+            _importCurrent++;
+
+            // 导入进度.
+            _importProgress = (double)_importCurrent / _importRowCount * 100;
+
+
+            // 注意：
+            // 这里是演示的操作。
+            // 实际操作中，不需要 逐行调用一次 StateHasChanged()。
+            // 例如导入1000行数据，每行更新速度是挺快的。
+            // 但是每行都调用一次StateHasChanged()，总时间就长了。
+            this.StateHasChanged();
+        }
+
+        // 数据导入完成后，进入下一步。
+        _currentStep++;
+    }
+
+
+}

@@ -7,12 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\output\**" />
+    <Compile Remove="wwwroot\Upload\**" />
+    <Content Remove="wwwroot\output\**" />
+    <Content Remove="wwwroot\Upload\**" />
+    <EmbeddedResource Remove="wwwroot\output\**" />
+    <EmbeddedResource Remove="wwwroot\Upload\**" />
+    <None Remove="wwwroot\output\**" />
+    <None Remove="wwwroot\Upload\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AntDesign.Charts" Version="0.5.6" />
     <PackageReference Include="AntDesign.Extensions.Localization" Version="1.0.1" />
     <PackageReference Include="AntDesign.ProLayout" Version="1.0.0" />
     <PackageReference Include="Masuit.Tools.Core" Version="2024.6.0" />
     <PackageReference Include="Masuit.Tools.Excel" Version="2024.6.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
+    <PackageReference Include="NPOI" Version="2.7.2" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="System.Net.Http.Json" Version="8.0.0" />
     <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />

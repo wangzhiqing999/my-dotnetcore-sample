@@ -297,5 +297,18 @@
         "key": "test.mytable10"
       }
     ]
-  }
+  },
+  {
+    "path": "/test3",
+    "name": "测试-导航",
+    "key": "test3",
+    "icon": "appstore",
+    "children": [
+      {
+        "path": "/test/mystep01",
+        "name": "测试Step",
+        "key": "test.mystep01"
+      }
     ]
+  }
+]

@@ -10,7 +10,11 @@
 
 <h3>上传文件</h3>
 
-<InputFile id="fileInput" OnChange="UploadFiles" hidden multiple />
+@* 
+multiple 为允许一次上传多个文件.
+accept 为支持上传的文件类型.
+*@
+<InputFile id="fileInput" OnChange="UploadFiles" hidden multiple accept=".xls,.doc,.txt,.pdf" />
 
 <Upload Name="files" FileList="fileList">
     <label class="ant-btn" for="fileInput">
