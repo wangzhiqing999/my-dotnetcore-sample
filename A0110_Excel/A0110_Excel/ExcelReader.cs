@@ -335,6 +335,9 @@ namespace A0110_Excel
                                         case CellType.String:
                                             rowData.Add(titleList[j], cell.StringCellValue);
                                             break;
+                                        case CellType.Boolean:
+                                            rowData.Add(titleList[j], cell.BooleanCellValue);
+                                            break;
                                     }
                                 }
                             }

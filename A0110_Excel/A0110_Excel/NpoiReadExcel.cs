@@ -142,6 +142,9 @@ namespace A0110_Excel
                                                     case CellType.String:
                                                         dataRow[j] = cell.StringCellValue;
                                                         break;
+                                                    case CellType.Boolean:
+                                                        dataRow[j] = cell.BooleanCellValue;
+                                                        break;
                                                 }
                                             }
                                         }

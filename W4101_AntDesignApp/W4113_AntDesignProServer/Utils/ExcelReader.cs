@@ -209,6 +209,9 @@ namespace W4113_AntDesignProServer.Utils
                                         case CellType.String:
                                             rowData.Add(titleList[j], cell.StringCellValue);
                                             break;
+                                        case CellType.Boolean:
+                                            rowData.Add(titleList[j], cell.BooleanCellValue);
+                                            break;
                                     }
                                 }
                             }
