@@ -34,6 +34,7 @@
         <div>
             <label>选择要读取的表格:</label>
             <Select Style="width:240px;"
+            DefaultActiveFirstOption
             TItem="ExcelSheetInfo" TItemValue="string"
             LabelName="@nameof(ExcelSheetInfo.Name)"
             ValueName="@nameof(ExcelSheetInfo.Name)"
@@ -58,12 +59,25 @@
             </p>
 
             <Button Type="Primary" OnClick="StartImport" Disabled="@_StartImportFlag">开始处理</Button>
+            <Button Type="Primary" OnClick="CancelImport" Disabled="@(_StartImportFlag == false)">取消</Button>
         </div>
 
     }
     else if (_currentStep == 3) {
         <div>
-            <h3>完成！</h3>
+            @if (_CancelImportFlag){
+                <h3>取消</h3>
+                <p>
+                    完成度：@_importCurrent / @_importRowCount
+                </p>
+            } else {
+                <h3>完成！</h3>
+                <p>
+                    导入行数：@_importRowCount
+                </p>
+            }
+
+            <Button Type="Primary" OnClick="Restart">重新导入</Button>
 
         </div>
     }
@@ -218,6 +232,20 @@
 
 
     /// <summary>
+    /// 取消处理标志.
+    /// </summary>
+    bool _CancelImportFlag = false;
+
+    /// <summary>
+    /// 取消处理.
+    /// </summary>
+    private void CancelImport()
+    {
+        _CancelImportFlag = true;
+    }
+
+
+    /// <summary>
     /// 开始导入处理.
     /// </summary>
     /// <returns></returns>
@@ -235,6 +263,7 @@
         }
 
         _StartImportFlag = true;
+        _CancelImportFlag = false;
 
         foreach(var data in ExcelReader.GetSheetData(_saveFileName,_selectedSheetName)) 
         {
@@ -254,11 +283,36 @@
             // 例如导入1000行数据，每行更新速度是挺快的。
             // 但是每行都调用一次StateHasChanged()，总时间就长了。
             this.StateHasChanged();
+
+
+            if (_CancelImportFlag)
+            {
+                // 取消处理.
+                break;
+            }
         }
 
         // 数据导入完成后，进入下一步。
         _currentStep++;
     }
 
+
+
+
+    /// <summary>
+    /// 重新导入.
+    /// </summary>
+    private void Restart()
+    {
+        _currentStep = 0;
+        _saveFileName = null;
+        _excelSheetInfos = new();
+        _selectedSheetName = null;
+        _importRowCount = 0;
+        _importCurrent = 0;
+        _importProgress = 0;
+        _StartImportFlag = false;
+        _CancelImportFlag = false;
+    }
 
 }
