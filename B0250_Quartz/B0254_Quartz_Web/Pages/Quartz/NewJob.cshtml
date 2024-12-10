@@ -1,0 +1,61 @@
+﻿@page
+@model B0254_Quartz_Web.Pages.Quartz.NewJobModel
+@{
+    ViewData["Title"] = "新增 Quartz Job";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+
+<form method="post">
+
+    <div asp-validation-summary="All"></div>
+
+    <div>
+        <label asp-for="JobType">JobType</label>
+        <select asp-for="JobType">
+            <option value="HelloJob">HelloJob</option>
+            <option value="TestParamJob">TestParamJob</option>
+        </select>
+        <span asp-validation-for="JobType"></span>
+    </div>
+
+    <div>
+        <label asp-for="JobData">JobData</label>
+        <input asp-for="JobData" />
+        <span asp-validation-for="JobData"></span>
+    </div>
+
+
+    <div>
+        <label asp-for="JobName">JobName</label>
+        <input asp-for="JobName"/>
+        <span asp-validation-for="JobName"></span>
+    </div>
+    <div>
+        <label asp-for="JobDesc">JobDesc</label>
+        <input asp-for="JobDesc" />
+        <span asp-validation-for="JobDesc"></span>
+    </div>
+
+    <div>
+        <label asp-for="TriggerName">TriggerName</label>
+        <input asp-for="TriggerName" />
+        <span asp-validation-for="TriggerName"></span>
+    </div>
+    <div>
+        <label asp-for="TriggerDesc">TriggerDesc</label>
+        <input asp-for="TriggerDesc" />
+        <span asp-validation-for="TriggerDesc"></span>
+    </div>
+    <div>
+        <label asp-for="TriggerCron">TriggerCron</label>
+        <input asp-for="TriggerCron" />
+        <span asp-validation-for="TriggerCron"></span>
+    </div>
+
+
+    <button type="submit">新增</button>
+
+</form>

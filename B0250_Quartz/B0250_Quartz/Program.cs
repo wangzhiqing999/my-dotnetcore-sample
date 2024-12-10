@@ -109,7 +109,7 @@ namespace B0250_Quartz
 
             // https://www.quartz-scheduler.net/documentation/quartz-3.x/tutorial/job-stores.html#ado-net-job-store-adojobstore
             properties["quartz.jobStore.lockHandler.type"] = "Quartz.Impl.AdoJobStore.UpdateLockRowSemaphore, Quartz";
-            properties["quartz.dataSource.default.connectionString"] = "Server=192.168.1.86;Database=quartznet;Uid=root;Pwd=123456;Charset=utf8";
+            properties["quartz.dataSource.default.connectionString"] = "Server=pve002;Database=quartznet;Uid=root;Pwd=123456;Charset=utf8mb4";
             properties["quartz.dataSource.default.provider"] = "MySql";
             properties["quartz.jobStore.useProperties"] = "true";
             properties["quartz.serializer.type"] = "json";

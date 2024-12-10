@@ -2,7 +2,7 @@
 
 
 ## B0250_Quartz
-.NET 5.0
+.NET 8.0
 是从 my-csharp-sample 那里复制过来，稍作修改。
 测试 在 .Net Framework 下面执行的， 迁移到 .Net Core 有没有问题。
 
@@ -10,7 +10,7 @@
 
 
 ## B0251_QuartzConfig
-.NET 5.0
+.NET 8.0
 使用配置文件的.
 
 .Net Framework 版本的， 配置定义在  app.config 里面
@@ -23,7 +23,7 @@
 
 
 ## B0252_QuartzConfigDocker
-.NET 5.0
+.NET 8.0
 使用配置文件的.
 
 是用于 发布在 Docker 上面运行的.
@@ -112,11 +112,19 @@ sudo docker run --name quartz-sample  -d   -e TZ="Asia/Shanghai"  quartz-sample
 
 
 ## B0253_QuartzAdoJobStore
-.NET 5.0
+.NET 8.0
 .Net Framework 那里，数据库使用的是 MySQL 的。
 在这里，尝试使用一下 SQLite
 
 
+
+
+
+
+## B0254_Quartz_Web
+.NET 8.0
+创建一个 Web 项目，来管理作业.
+数据库使用 B0253_QuartzAdoJobStore 一样的配置.
 
 
 

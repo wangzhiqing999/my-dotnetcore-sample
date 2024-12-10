@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31624.102
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "B0250_Quartz", "B0250_Quartz\B0250_Quartz.csproj", "{21E8E571-05F5-45C0-8A95-60E834E2D9C3}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "B0253_QuartzAdoJobStore", "B0253_QuartzAdoJobStore\B0253_QuartzAdoJobStore.csproj", "{A873FD96-4C40-4F73-9D88-1D3A3273573C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B0252_QuartzConfigDocker", "B0252_QuartzConfigDocker\B0252_QuartzConfigDocker.csproj", "{69C264F4-5581-4285-B87A-F44A5EDBAD94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B0254_Quartz_Web", "B0254_Quartz_Web\B0254_Quartz_Web.csproj", "{84149FCD-F35F-48B0-AAF1-8F79421D3A23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{69C264F4-5581-4285-B87A-F44A5EDBAD94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69C264F4-5581-4285-B87A-F44A5EDBAD94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69C264F4-5581-4285-B87A-F44A5EDBAD94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84149FCD-F35F-48B0-AAF1-8F79421D3A23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84149FCD-F35F-48B0-AAF1-8F79421D3A23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84149FCD-F35F-48B0-AAF1-8F79421D3A23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84149FCD-F35F-48B0-AAF1-8F79421D3A23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

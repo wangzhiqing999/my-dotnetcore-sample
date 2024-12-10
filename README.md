@@ -161,6 +161,10 @@ ASP.Net Code，中间件的例子代码 (DotNet Core 3.0)
 使用 Visual Studio 2019， 创建一个 控制台 项目 （.NET 5.0）
 用于测试使用 Quartz 的例子.
 
+[2024-12-09 更新 使用 Visual Studio 2022， 框架升级为  .NET 8.0]
+
+
+
 
 ### B0260_Masuit
 使用 Masuit.Tools 的一些例子（.NET 8.0）

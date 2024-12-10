@@ -1,0 +1,172 @@
+﻿@page
+@model B0254_Quartz_Web.Pages.QuartzInfoModel
+@{
+    ViewData["Title"] = "Quartz 信息";
+}
+
+@Html.AntiForgeryToken()
+
+<h1>@ViewData["Title"]</h1>
+
+
+
+<a class="nav-link" asp-area="" asp-page="/Quartz/JobGroup">Quartz JobGroup</a>
+
+<a class="nav-link" asp-area="" asp-page="/Quartz/TriggerGroup">Quartz TriggerGroup</a>
+
+
+
+
+<h3> Jobs </h3>
+@foreach (string group in Model.jobGroupNames)
+{
+    <div>@group</div>
+    <ul>
+    @foreach (var job in Model.groupJobs[group])
+    {
+        <li> 
+            @job.Key.Name - @job.Description  -- @job.JobType.FullName
+            <a data-name="@job.Key.Name" data-group="@group" class="removeJob">删除</a>
+
+            @* <select data-name="@job.Key.Name" data-group="@group" class="changeJobStatus">
+                <option value="">选择状态</option>
+                <option value="pause">暂停</option>
+                <option value="resume">恢复</option>
+                <option value="delete">删除</option>
+            </select> *@
+
+        </li>
+    }
+    </ul>
+}
+
+<hr/>
+
+<h3> Trigger </h3>
+
+@foreach (string group in Model.triggerGroupNames)
+{
+    <div>@group</div>
+    <ul>
+    @foreach (var trigger in Model.groupTriggers[group])
+    {
+        <li>
+            @trigger.Key.Name - @trigger.Description
+            ( @trigger.JobKey.Group - @trigger.JobKey.Name )
+            <br />前次执行时间：@trigger.GetPreviousFireTimeUtc()
+            <br />下次执行时间：@trigger.GetNextFireTimeUtc()
+            <br />
+            
+
+            @if (@trigger.GetNextFireTimeUtc() > DateTime.Now) {
+                <a data-name="@trigger.JobKey.Name" data-group="@trigger.JobKey.Group" class="pauseJob">暂停</a>    
+            } else {
+                <a data-name="@trigger.JobKey.Name" data-group="@trigger.JobKey.Group" class="resumeJob">恢复</a>
+            }
+            
+        </li>
+    }
+    </ul>
+}
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+
+        $(document).ready(function () {
+
+
+            $(".removeJob").click(function () {
+                let name = $(this).data("name");
+                let group = $(this).data("group");
+                $.ajax({
+                    method: "POST",
+                    url: "/QuartzInfo",
+                    headers: {
+                        "XSRF-TOKEN":$('input:hidden[name="__RequestVerificationToken"]').val()
+                    },
+                    data: {
+                        action: "remove",
+                        jobname: name,
+                        jobgroup: group
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            window.location.reload();
+                        }
+                        else {
+                            alert(data.message);
+                        }
+                    }
+                });
+            });
+
+
+            $(".pauseJob").click(function () {
+
+                let name = $(this).data("name");
+                let group = $(this).data("group");
+
+                $.ajax({
+                    method: "POST",
+                    url: "/QuartzInfo",
+                    headers: {
+                        "XSRF-TOKEN":$('input:hidden[name="__RequestVerificationToken"]').val()
+                    },
+                    data: {
+                        action: "pause",
+                        jobname: name,
+                        jobgroup: group
+                    },
+                    success: function (data) {
+
+                        if (data.success) {
+                            window.location.reload();
+                        }
+                        else {
+                            alert(data.message);
+                        }
+                    }
+
+                });
+            });
+
+
+
+            $(".resumeJob").click(function () {
+
+                let name = $(this).data("name");
+                let group = $(this).data("group");
+
+                $.ajax({
+                    method: "POST",
+                    url: "/QuartzInfo",
+                    headers: {
+                        "XSRF-TOKEN":$('input:hidden[name="__RequestVerificationToken"]').val()
+                    },
+                    data: {
+                        action: "resume",
+                        jobname: name,
+                        jobgroup: group
+                    },
+                    success: function (data) {
+
+                        if (data.success) {
+                            window.location.reload();
+                        }
+                        else {
+                            alert(data.message);
+                        }
+                    }
+
+                });
+            });
+        });
+
+    </script>
+
+}

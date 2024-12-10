@@ -1,0 +1,28 @@
+﻿@page
+@model B0254_Quartz_Web.Pages.Quartz.RemoveJobModel
+@{
+    ViewData["Title"] = "删除 Quartz Job";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<form method="post">
+
+    <div asp-validation-summary="All"></div>
+
+    <div>
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" readonly />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div>
+        <label asp-for="Group">Group</label>
+        <input asp-for="Group" readonly />
+        <span asp-validation-for="Group"></span>
+    </div>
+
+    <button type="submit">删除</button>
+
+</form>

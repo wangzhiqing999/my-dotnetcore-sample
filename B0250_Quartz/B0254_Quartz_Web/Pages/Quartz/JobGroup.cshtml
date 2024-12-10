@@ -1,0 +1,28 @@
+﻿@page
+@model B0254_Quartz_Web.Pages.Quartz.JobGroupModel
+@{
+    ViewData["Title"] = "Quartz Job Group";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<ul>
+    @foreach (string groupName in Model.JobGroupNames)
+    {
+        <li>
+            JobGroupName: @groupName
+            <a class="nav-link" 
+                asp-area="" 
+                asp-page="/Quartz/JobKey"
+                asp-route-groupName="@groupName">JobKeys...</a>
+        </li>
+    }
+</ul>
+
+
+<hr/>
+
+<a class="btn btn-primary" 
+   asp-area=""
+   asp-page="/Quartz/NewJob">新增</a>

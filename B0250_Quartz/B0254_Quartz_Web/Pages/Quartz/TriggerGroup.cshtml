@@ -1,0 +1,21 @@
+﻿@page
+@model B0254_Quartz_Web.Pages.Quartz.TriggerGroupModel
+@{
+    ViewData["Title"] = "Quartz Trigger Group";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<ul>
+    @foreach (string groupName in Model.TriggerGroupNames)
+    {
+        <li>
+            JobGroupName: @groupName
+            <a class="nav-link"
+               asp-area=""
+               asp-page="/Quartz/TriggerKey"
+               asp-route-groupName="@groupName">TriggerKeys...</a>
+        </li>
+    }
+</ul>

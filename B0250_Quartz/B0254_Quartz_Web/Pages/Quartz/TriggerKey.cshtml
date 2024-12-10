@@ -1,0 +1,102 @@
+﻿@page
+@model B0254_Quartz_Web.Pages.Quartz.TriggerKeyModel
+@{
+    ViewData["Title"] = "Quartz Trigger Key";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+
+<ul>
+    @foreach (var triggerKey in Model.TriggerKeys)
+    {
+        var trigger = await Model._Scheduler.GetTrigger(triggerKey);
+        <li>
+            <b>
+                Group: @triggerKey.Group
+                Name: @triggerKey.Name
+            </b>
+            <br />
+            @if (trigger != null)
+            {
+                <table>
+
+                    <tr>
+                        <td>CalendarName</td>
+                        <td>@trigger.CalendarName</td>
+                    </tr>
+
+                    <tr>
+                        <td>Description</td>
+                        <td>@trigger.Description</td>
+                    </tr>
+
+                    <tr>
+                        <td>EndTimeUtc</td>
+                        <td>@trigger.EndTimeUtc</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>FinalFireTimeUtc</td>
+                        <td>@trigger.FinalFireTimeUtc</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>GetMayFireAgain()</td>
+                        <td>@trigger.GetMayFireAgain()</td>
+                    </tr>
+                    <tr>
+                        <td>GetNextFireTimeUtc()</td>
+                        <td>@trigger.GetNextFireTimeUtc()</td>
+                    </tr>
+                    <tr>
+                        <td>GetPreviousFireTimeUtc()</td>
+                        <td>@trigger.GetPreviousFireTimeUtc()</td>
+                    </tr>
+                    
+
+
+                    <tr>
+                        <td>HasMillisecondPrecision</td>
+                        <td>@trigger.HasMillisecondPrecision</td>
+                    </tr>
+
+                    <tr>
+                        <td>JobDataMap</td>
+                        <td>@trigger.JobDataMap</td>
+                    </tr>
+
+                    <tr>
+                        <td>JobKey</td>
+                        <td>@trigger.JobKey</td>
+                    </tr>
+
+                    <tr>
+                        <td>Key</td>
+                        <td>@trigger.Key</td>
+                    </tr>
+
+                    <tr>
+                        <td>MisfireInstruction</td>
+                        <td>@trigger.MisfireInstruction</td>
+                    </tr>
+
+                    <tr>
+                        <td>Priority</td>
+                        <td>@trigger.Priority</td>
+                    </tr>
+
+                    <tr>
+                        <td>StartTimeUtc</td>
+                        <td>@trigger.StartTimeUtc</td>
+                    </tr>
+                </table>
+
+
+            }
+        </li>
+    }
+</ul>

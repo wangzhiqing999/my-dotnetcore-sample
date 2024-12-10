@@ -1,0 +1,81 @@
+﻿@page
+@model B0254_Quartz_Web.Pages.Quartz.JobKeyModel
+@{
+    ViewData["Title"] = "Quartz Job Key";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<ul>
+    @foreach (var jobKey in Model.JobKeys)
+    {
+        var jobDetails = await Model._Scheduler.GetJobDetail(jobKey);
+        <li>
+            <b>
+                Group: @jobKey.Group
+                Name: @jobKey.Name
+            </b>
+            <a class="nav-link"
+               asp-area=""
+               asp-page="/Quartz/RemoveJob"
+               asp-route-name="@jobKey.Name"
+               asp-route-group="@jobKey.Group">删除</a>
+            <br />
+            @if (jobDetails!= null){
+                <table>
+
+                    <tr>
+                        <td>ConcurrentExecutionDisallowed</td>
+                        <td>@jobDetails.ConcurrentExecutionDisallowed</td>
+                    </tr>
+
+                    <tr>
+                        <td>Description</td>
+                        <td>@jobDetails.Description</td>
+                    </tr>
+
+                    <tr>
+                        <td>Durable</td>
+                        <td>@jobDetails.Durable</td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td>JobDataMap</td>
+                        <td>
+                            @foreach(string key in jobDetails.JobDataMap.Keys) {
+                                <p>@key:@jobDetails.JobDataMap[key]</p>
+                            }
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>JobType</td>
+                        <td>@jobDetails.JobType</td>
+                    </tr>
+
+                    <tr>
+                        <td>Key</td>
+                        <td>@jobDetails.Key</td>
+                    </tr>
+
+                    <tr>
+                        <td>PersistJobDataAfterExecution</td>
+                        <td>@jobDetails.PersistJobDataAfterExecution</td>
+                    </tr>
+
+                    <tr>
+                        <td>RequestsRecovery</td>
+                        <td>@jobDetails.RequestsRecovery</td>
+                    </tr>
+
+
+
+                </table>
+				
+
+            }
+        </li>
+    }
+</ul>
