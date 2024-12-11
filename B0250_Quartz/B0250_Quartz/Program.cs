@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Threading.Tasks;
 using B0250_Quartz.Jobs;
 using Quartz;
 using Quartz.Impl;
@@ -27,7 +28,20 @@ namespace B0250_Quartz
             do
             {
 
-                Console.WriteLine("Please Input Cmd: 1/2/3/4/0");
+                Console.WriteLine("0: ShowInfo");
+                Console.WriteLine("1: TestPersistJob");
+                Console.WriteLine("2: TestRecoveryJob");
+                Console.WriteLine("3: TestCron");
+                Console.WriteLine("4: TestDeleteCron");
+
+                Console.WriteLine("5: TestReportWorkJob");
+                Console.WriteLine("6: TestDeleteReportWorkJob");
+
+                Console.WriteLine("7: TestRetryJob");
+                //
+
+                Console.WriteLine("Please Input Cmd: 1/2/3/4/5/6/7/0");
+
                 cmd = Console.ReadLine();
 
                 switch (cmd)
@@ -48,6 +62,17 @@ namespace B0250_Quartz
                         p.TestDeleteCron();
                         break;
 
+                    case "5":
+                        p.TestReportWorkJob();
+                        break;
+
+                    case "6":
+                        p.TestDeleteReportWorkJob();
+                        break;
+
+                    case "7":
+                        p.TestRetryJob();
+                        break;
 
                     case "0":
                         p.ShowInfo();
@@ -226,8 +251,9 @@ namespace B0250_Quartz
         /// 再调用 TestDeleteCron() 删除。
         /// 最后调用 ShowInfo()，观察作业的配置（空白）。
         /// </summary>
-        void TestCron()
+        async void TestCron()
         {
+
             IJobDetail job = JobBuilder.Create<HelloJob>()
                 .WithIdentity("HelloJob", "DemoGroup")
                 .WithDescription("简单的 Hello World 的作业.")
@@ -235,14 +261,25 @@ namespace B0250_Quartz
 
 
             // 使用 Cron 表达式， 时间在 0秒 的时候触发.
-            ITrigger trigger = TriggerBuilder.Create()
-                .WithIdentity("myCronTrigger", "DemoGroup")
+            ITrigger trigger1 = TriggerBuilder.Create()
+                .WithIdentity("myCronTrigger1", "DemoGroup")
                 .WithDescription("使用 Cron 表达式， 时间在 0秒 的时候触发。")
                 .WithCronSchedule("0 * * * * ? *")
                 .Build();
 
+            // 使用 Cron 表达式， 时间在 30秒 的时候触发.
+            ITrigger trigger2 = TriggerBuilder.Create()
+                .WithIdentity("myCronTrigger2", "DemoGroup")
+                .WithDescription("使用 Cron 表达式， 时间在 30秒 的时候触发。")
+                .WithCronSchedule("30 * * * * ? *")
+                .Build();
 
-            scheduler.ScheduleJob(job, trigger);
+
+            // 这里是单纯的为了测试多个 Trigger 的情况.
+            // 0秒 或 30秒触发， 可以简单一个 "0,30 * * * * ? *" 来实现。
+            ITrigger[] triggers = new ITrigger[] { trigger1 , trigger2 };
+
+            await scheduler.ScheduleJob(job, triggers, true);
         }
 
 
@@ -258,6 +295,71 @@ namespace B0250_Quartz
 
 
 
+
+        /// <summary>
+        /// 测试 ReportWorkJob.
+        /// </summary>
+        void TestReportWorkJob()
+        {
+            // 时间的标签.
+            string dtFlag = "0"; // DateTime.Now.ToString("yyyyMMddHHmm");
+
+            JobDataMap jobDataMap = new JobDataMap();
+            jobDataMap.Add("ReportId", "123");
+            jobDataMap.Add("ReportParams", "x=1&y=2&z=3");
+
+            IJobDetail job = JobBuilder.Create<ReportWorkJob>()
+                .WithIdentity($"ReportWorkJob_{dtFlag}")
+                .WithDescription("报表作业.")
+                .UsingJobData(jobDataMap)
+                .Build();
+
+
+            
+            // 使用 Cron 表达式， 时间在 15秒 的时候触发.
+            ITrigger trigger = TriggerBuilder.Create()
+                .WithIdentity($"ReportWorkTrigger_{dtFlag}")
+                .WithDescription("使用 Cron 表达式， 时间在 15秒 的时候触发。")
+                .WithCronSchedule("15 * * * * ? *")
+                .Build();
+
+            // 这里是为了测试，所以是在每分钟的 15秒 的时候，触发一次.
+            // 实际工作的报表，是需要专门设置 Cron 的。
+            // 日报有日报的 Cron。
+            // 周报有周报的 Cron。
+            // 月报有月报的 Cron。
+
+            scheduler.ScheduleJob(job, trigger);
+
+        }
+
+
+        void TestDeleteReportWorkJob()
+        {
+            JobKey jobKey = JobKey.Create("ReportWorkJob_0");
+            scheduler.DeleteJob(jobKey);
+        }
+
+
+
+
+        /// <summary>
+        /// 测试出错重试的作业.
+        /// </summary>
+        async void TestRetryJob()
+        {
+            IJobDetail job = JobBuilder.Create<RetryJob>()
+                .WithIdentity("RetryJob", "DemoGroup")
+                .WithDescription("会返回执行错误的作业.")
+                .Build();
+
+            await scheduler.AddJob(
+                job,
+                replace: true,
+                storeNonDurableWhileAwaitingScheduling: true);
+
+            await scheduler.TriggerJob(job.Key);
+        }
 
 
 
@@ -285,7 +387,7 @@ namespace B0250_Quartz
 
 
 
-
+            Console.WriteLine();
 
 
             var allTriggerGroupNames = scheduler.GetTriggerGroupNames().Result;

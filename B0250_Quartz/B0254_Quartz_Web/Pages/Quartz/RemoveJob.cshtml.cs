@@ -9,9 +9,9 @@ namespace B0254_Quartz_Web.Pages.Quartz
 
         public IScheduler _Scheduler;
 
-        public RemoveJobModel(IScheduler scheduler)
+        public RemoveJobModel(ISchedulerFactory schedulerFactory)
         {
-            _Scheduler = scheduler;
+            _Scheduler = schedulerFactory.GetScheduler().Result;
         }
 
 

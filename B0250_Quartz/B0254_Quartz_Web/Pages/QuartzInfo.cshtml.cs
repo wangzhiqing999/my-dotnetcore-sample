@@ -18,11 +18,14 @@ namespace B0254_Quartz_Web.Pages
 
         private IScheduler _Scheduler;
 
+        
 
-
-        public QuartzInfoModel(IScheduler scheduler, ILogger<QuartzInfoModel> logger)
+        public QuartzInfoModel(ISchedulerFactory schedulerFactory, ILogger<QuartzInfoModel> logger)
         {
-            _Scheduler = scheduler;
+            _Scheduler = schedulerFactory.GetScheduler().Result;
+
+
+
             _logger = logger;
 
         }

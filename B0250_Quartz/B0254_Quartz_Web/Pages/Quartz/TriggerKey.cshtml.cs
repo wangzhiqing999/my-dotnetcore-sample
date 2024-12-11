@@ -10,9 +10,9 @@ namespace B0254_Quartz_Web.Pages.Quartz
 
         public IScheduler _Scheduler;
 
-        public TriggerKeyModel(IScheduler scheduler)
+        public TriggerKeyModel(ISchedulerFactory schedulerFactory)
         {
-            _Scheduler = scheduler;
+            _Scheduler = schedulerFactory.GetScheduler().Result;
         }
 
 

@@ -11,34 +11,31 @@ namespace B0250_Quartz.Jobs
 {
 
 
-    public class RecoveryJob : IJob
+    public class RecoveryJob : ManagerAbleJob
     {
 
 
-        public Task Execute(IJobExecutionContext context)
+        public override ExecuteJobResult ExecuteJob(IJobExecutionContext context)
         {
 
             JobKey key = context.JobDetail.Key;
+            
+            Console.WriteLine($"执行任务开始：{key} executing at {DateTime.Now:F}");
 
-
-            return Task.Factory.StartNew(() =>
+            try
             {
-
-                Console.WriteLine($"执行任务开始：{key} executing at {DateTime.Now:F}");
-
-                try
-                {
-                    Thread.Sleep(5000);
-                } 
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message, ex);
-                }
+                Thread.Sleep(5000);
+            } 
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message, ex);
+            }
 
 
-                Console.WriteLine($"执行任务结束：{key} executing at {DateTime.Now:F}");
+            Console.WriteLine($"执行任务结束：{key} executing at {DateTime.Now:F}");
 
-            });
+
+            return ExecuteJobResult.Success;
         }
 
 

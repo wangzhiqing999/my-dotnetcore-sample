@@ -7,14 +7,20 @@ using Quartz;
 
 namespace B0250_Quartz.Jobs
 {
-    public class HelloJob : IJob
+    public class HelloJob : ManagerAbleJob
     {
 
-        public async Task Execute(IJobExecutionContext context)
-        {
-            await Console.Out.WriteLineAsync("HelloJob is executing.");
-        }
 
+
+
+        public override ExecuteJobResult ExecuteJob(IJobExecutionContext context)
+        {
+
+            Console.WriteLine("HelloJob is executing. Run in .NET 8.0");
+
+            return ExecuteJobResult.Success;
+
+        }
 
     }
 }

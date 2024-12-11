@@ -10,9 +10,9 @@ namespace B0254_Quartz_Web.Pages.Quartz
 
         private IScheduler _Scheduler;
 
-        public TriggerGroupModel(IScheduler scheduler)
+        public TriggerGroupModel(ISchedulerFactory schedulerFactory)
         {
-            _Scheduler = scheduler;
+            _Scheduler = schedulerFactory.GetScheduler().Result;
         }
 
         public List<string> TriggerGroupNames { get; set; } = new List<string>();

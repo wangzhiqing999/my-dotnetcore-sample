@@ -11,21 +11,21 @@ namespace B0254_Quartz_Web.Jobs
     {
 
 
-        /*
+        
         private readonly ILogger<HelloJob> _logger;
 
         public HelloJob(ILogger<HelloJob> logger)
         {
             _logger = logger;
         }
-        */
+      
 
 
         public Task Execute(IJobExecutionContext context)
         {
-            Console.Out.WriteLine("HelloJob Start!");
+            // Console.Out.WriteLine("HelloJob Start!");
 
-            // _logger.LogInformation("HelloJob Start!");
+            _logger.LogInformation("--- HelloJob Start! ---");
 
 
             return Task.CompletedTask;

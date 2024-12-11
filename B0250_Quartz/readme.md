@@ -9,6 +9,44 @@
 
 
 
+将配置变更为使用数据库之后。
+尝试同时运行 .NET 8.0  与  .Net Framework 4.6.2  的程序。
+在 Job 的全路径名一样的情况下。
+
+
+### 两个程序的测试。
+.NET 8.0 的程序，以管理员模式运行，配置一个 HelloJob，一个 ReportWorkJob 以 Cron 方式运行。
+.Net Framework 4.6.2 的程序下面，能够运行 Job 。
+
+
+### 三个程序的测试。
+.NET 8.0 的程序，以管理员模式运行，配置一个 HelloJob，一个 ReportWorkJob 以 Cron 方式运行。
+.NET 8.0 的程序，普通模式运行。能够运行 Job。
+.Net Framework 4.6.2 的程序普通运行。能够运行 Job。
+
+一个作业，只会在一个程序上运行。
+例如 HelloJob， 配置为 "0 * * * * ? *" ， 也就是 0 秒的时候运行。
+
+在 16:00:00 的时候。
+如果.NET 8.0 的程序，那里输出了 HelloJob， 那么 .Net Framework 4.6.2 的程序 就不会输出。
+
+在 16:01:00 的时候。
+如果.Net Framework 4.6.2 的程序，那里输出了 HelloJob， 那么 .NET 8.0 的程序 就不会输出。
+
+
+但是，测试代码中的 TestRecoveryJob() ， 一下子，创建了 5个作业的。
+```
+.RequestRecovery(true)
+```
+这种的， 管理程序，创建任务后，最终
+.NET 8.0 的程序，与 .Net Framework 4.6.2 的程序都执行了。
+
+
+
+
+
+
+
 ## B0251_QuartzConfig
 .NET 8.0
 使用配置文件的.
@@ -125,6 +163,16 @@ sudo docker run --name quartz-sample  -d   -e TZ="Asia/Shanghai"  quartz-sample
 .NET 8.0
 创建一个 Web 项目，来管理作业.
 数据库使用 B0253_QuartzAdoJobStore 一样的配置.
+
+由于是 Asp.Net Core Web 项目，需要额外引用
+Quartz.AspNetCore
+
+依赖注入的关系，需要引用
+Quartz.Extensions.DependencyInjection
+
+
+
+
 
 
 

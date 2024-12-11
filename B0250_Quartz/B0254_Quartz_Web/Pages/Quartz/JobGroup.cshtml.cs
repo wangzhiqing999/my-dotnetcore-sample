@@ -10,9 +10,9 @@ namespace B0254_Quartz_Web.Pages.Quartz
 
         private IScheduler _Scheduler;
 
-        public JobGroupModel(IScheduler scheduler)
+        public JobGroupModel(ISchedulerFactory schedulerFactory)
         {
-            _Scheduler = scheduler;
+            _Scheduler = schedulerFactory.GetScheduler().Result;
         }
 
 

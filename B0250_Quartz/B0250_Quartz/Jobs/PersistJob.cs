@@ -16,7 +16,7 @@ namespace B0250_Quartz.Jobs
     /// PersistJobDataAfterExecution：在执行完成后持久化JobData，该特性是针对Job类型生效的，意味着所有使用该Job的JobDetail都会在执行完成后持久化JobData。
     /// </summary>
     [PersistJobDataAfterExecution]
-    public class PersistJob : IJob
+    public class PersistJob : ManagerAbleJob
     {
 
 
@@ -35,30 +35,33 @@ namespace B0250_Quartz.Jobs
 
 
 
-        public Task Execute(IJobExecutionContext context)
+        public override ExecuteJobResult ExecuteJob(IJobExecutionContext context)
         {
 
-            return Task.Factory.StartNew(() =>
+            
+            if (string.IsNullOrEmpty(PrevRunTime))
             {
-                if (string.IsNullOrEmpty(PrevRunTime))
-                {
-                    ExecCount = "1";
+                ExecCount = "1";
 
-                    Console.WriteLine($"首次执行作业! 执行次数 {ExecCount}");
-                }
-                else
-                {
-                    Console.WriteLine($"上一次执行作业时间： {PrevRunTime}!  执行次数 {ExecCount}");
-                }
+                Console.WriteLine($"首次执行作业! 执行次数 {ExecCount}");
+            }
+            else
+            {
+                Console.WriteLine($"上一次执行作业时间： {PrevRunTime}!  执行次数 {ExecCount}");
+            }
 
-                int execCount = Convert.ToInt32(ExecCount);
-                execCount++;
+            int execCount = Convert.ToInt32(ExecCount);
+            execCount++;
 
-                // 持久化JobData.
-                context.JobDetail.JobDataMap.Put("ExecCount", execCount.ToString());                
-                context.JobDetail.JobDataMap.Put("PrevRunTime", DateTime.Now.ToLongTimeString());
+            // 持久化JobData.
+            context.JobDetail.JobDataMap.Put("ExecCount", execCount.ToString());
+            context.JobDetail.JobDataMap.Put("PrevRunTime", DateTime.Now.ToLongTimeString());
 
-            });
+
+            System.Threading.Thread.Sleep(5000);
+
+            return ExecuteJobResult.Success;
+
         }
 
     }
