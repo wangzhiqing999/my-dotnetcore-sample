@@ -96,6 +96,10 @@ namespace B0254_Quartz_Web.Pages.Quartz
             {
                 jobBuilder = JobBuilder.Create<TestParamJob>();
             }
+            else if (JobType == "WeatherJob")
+            {
+                jobBuilder = JobBuilder.Create<WeatherJob>();
+            }
             else
             {
                 ModelState.AddModelError(string.Empty, "JobType ´íÎó.");

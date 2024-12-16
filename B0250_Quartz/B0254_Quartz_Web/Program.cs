@@ -27,10 +27,21 @@ namespace B0254_Quartz_Web
             builder.Services.AddRazorPages();
 
 
+            // 调用 AddHttpClient 来注册 IHttpClientFactory 
+            // https://learn.microsoft.com/zh-cn/aspnet/core/fundamentals/http-requests?view=aspnetcore-9.0
+
+            builder.Services.AddHttpClient("uapis", httpClient =>
+            {
+                httpClient.BaseAddress = new Uri("https://uapis.cn/");
+            });
+
 
             ConfigureQuartz(builder.Services);
 
            
+
+
+
 
             var app = builder.Build();
 
