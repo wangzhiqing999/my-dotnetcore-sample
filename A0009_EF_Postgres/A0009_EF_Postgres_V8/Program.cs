@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using A0009_EF_Postgres_V8.Model;
 using A0009_EF_Postgres_V8.DataAccess;
 
+using Npgsql;
+
+
 
 
 namespace A0009_EF_Postgres_V8
@@ -15,11 +18,19 @@ namespace A0009_EF_Postgres_V8
         static void Main(string[] args)
         {
 
-
+            // 注意：这里追加的配置代码，是因为启用了动态 JSON 序列化.
+            // 也就是 C# 中，列的数据类型是 Dictionary<string, string>
+            // 数据库中，列的数据类型是 jsonb
+            // 需要启用动态 JSON 序列化.
+            var dataSourceBuilder = new NpgsqlDataSourceBuilder(@"Server=pve001;Port=5432;User ID=postgres;Password=1234567890;Database=postgres;");
+            // 启用动态 JSON 序列化
+            dataSourceBuilder.EnableDynamicJson();           
+            var dataSource = dataSourceBuilder.Build();
 
 
             var optionsBuilder = new DbContextOptionsBuilder<TestContext>();
-            optionsBuilder.UseNpgsql(@"Server=192.168.1.101;Port=5432;User ID=postgres;Password=1234567890;Database=postgres;");
+            optionsBuilder.UseNpgsql(dataSource);
+            
 
             using (TestContext context = new TestContext(optionsBuilder.Options))
             {
@@ -73,6 +84,9 @@ namespace A0009_EF_Postgres_V8
 
 
                 TestOneToOne(context);
+
+
+                TestJsonb(context);
             }
 
             Console.WriteLine("Finish!!!");
@@ -255,6 +269,178 @@ namespace A0009_EF_Postgres_V8
 
             }
         }
+
+
+
+
+
+
+
+        private static void TestJsonb(TestContext context)
+        {
+            Console.WriteLine("------ TestJsonb ------");
+
+            var query = 
+                from data in context.Products
+                where
+                    data.Name == "Ergonomic Chair"
+                select data;
+
+            var dbData = query.FirstOrDefault();
+            
+            if(dbData != null)
+            {
+                Console.WriteLine("数据已存在！");
+                Console.WriteLine(dbData);
+            } 
+            else
+            {
+                var newProduct = new Product
+                {
+                    Name = "Ergonomic Chair",
+                    Specifications = new Specifications
+                    {
+                        Material = "Leather",
+                        Color = "Black",
+                        Dimensions = "24 x 24 x 35 inches"
+
+                    },
+                    Reviews ={
+                        new Review
+                        {
+                            User = "Alice",
+                            Content = "Very comfortable",
+                            Rating = 5
+                        },
+                        new Review
+                        {
+                            User = "Jack",
+                            Content = "Not very comfortable",
+                            Rating = 4
+                        }
+                    },
+                    Translations ={
+                        { "en","Ergonomic Chair"},
+                        { "es","Silla Ergonómica"}
+                    }
+                };
+
+                context.Products.Add(newProduct);
+                context.SaveChanges();
+            }
+
+            
+            // 尝试执行使用Jsonb的查询
+            var query1 = 
+                from data in context.Products
+                where
+                    data.Specifications.Material == "Leather"
+                select data;
+
+            /*
+调试模式下，上面的 query1 的 SQL 语句如下：
+
+SELECT p."Id", p."CreatedAt", p."Name", p."Translations", p."UpdatedAt", p."Reviews", p."Specifications"
+FROM product AS p
+WHERE (p."Specifications" ->> 'Material') = 'Leather'
+
+             */
+
+            dbData = query1.FirstOrDefault();
+
+            Console.WriteLine("查询 Specifications.Material == Leather ");
+
+            if (dbData != null)
+            {
+                Console.WriteLine(dbData);
+            } 
+            else
+            {
+                Console.WriteLine("数据不存在！");
+            }
+
+
+
+            /*
+
+            var query2 =
+                from data in context.Products
+                where
+                    data.Reviews.Exists(p=>p.User == "Alice")
+                select data;
+
+            dbData = query2.FirstOrDefault();
+
+            上面这个语句，运行出错， 原因是 没法翻译为 sql.
+
+            手动写 SQL， 可以用下面这种写法来写:
+
+SELECT p."Id", p."CreatedAt", p."Name", p."Translations", p."UpdatedAt", p."Reviews", p."Specifications"
+FROM product AS p
+where (jsonb_path_query_array(p."Reviews",  '$[*] ? (@.User == "Alice")')) != '[]'::jsonb
+
+            */
+
+
+            var query2 =
+                from data in context.Products
+                where
+                    data.Reviews.First().User == "Alice"
+                select data;
+
+            /*
+调试模式下，上面的 query2 的 SQL 语句如下：
+SELECT p."Id", p."CreatedAt", p."Name", p."Translations", p."UpdatedAt", p."Reviews", p."Specifications"
+FROM product AS p
+WHERE (
+    SELECT r."User"
+    FROM ROWS FROM (jsonb_to_recordset(p."Reviews") AS (
+        "Content" text,
+        "Rating" integer,
+        "User" text
+    )) WITH ORDINALITY AS r
+    LIMIT 1) = 'Alice'
+	
+            */
+
+            dbData = query2.FirstOrDefault();
+
+            Console.WriteLine("查询 Reviews.First().User == \"Alice\" ");
+
+            if (dbData != null)
+            {
+                Console.WriteLine(dbData);
+            }
+            else
+            {
+                Console.WriteLine("数据不存在！");
+            }
+
+
+
+            /*
+
+            var query3 =
+                from data in context.Products
+                where
+                    data.Translations["en"] == "Ergonomic Chair"
+                select data;
+
+            dbData = query3.FirstOrDefault();
+
+            上面这个语句，运行出错， 原因是 没法翻译为 sql.
+
+            手动写 SQL， 可以用下面这种写法来写:
+
+SELECT p."Id", p."CreatedAt", p."Name", p."Translations", p."UpdatedAt", p."Reviews", p."Specifications"
+FROM product AS p
+WHERE (p."Translations" ->> 'en') = 'Ergonomic Chair'
+
+            */
+
+
+        }
+
 
 
     }

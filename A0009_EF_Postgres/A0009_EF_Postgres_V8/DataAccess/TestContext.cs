@@ -92,12 +92,29 @@ namespace A0009_EF_Postgres_V8.DataAccess
 
 
 
+        #region 用于测试 jsonb 的配置.
+
+
+        /// <summary>
+        /// 产品.
+        /// </summary>
+        public DbSet<Product> Products { get; set; }
+
+
+
+        #endregion
+
+
+
+
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             {
                 if (optionsBuilder.IsConfigured == false)
                 {
-                    optionsBuilder.UseNpgsql(@"Server=192.168.1.101;Port=5432;User ID=postgres;Password=1234567890;Database=postgres;");
+                    optionsBuilder.UseNpgsql(@"Server=pve001;Port=5432;User ID=postgres;Password=1234567890;Database=postgres;");
                 }
                 base.OnConfiguring(optionsBuilder);
             }
@@ -145,6 +162,20 @@ namespace A0009_EF_Postgres_V8.DataAccess
                         .WithMany(m => m.UserRoles)
                         // 外键.
                         .HasForeignKey(f => f.RoleCode);
+
+
+
+            // 用于测试 jsonb 的配置.
+            modelBuilder
+               .Entity<Product>()
+               .OwnsOne(product => product.Specifications, builder => { builder.ToJson(); })
+               .OwnsMany(product => product.Reviews, builder => { builder.ToJson(); });
+
+            modelBuilder.Entity<Product>()
+                .Property(p => p.Translations)
+                .HasColumnType("jsonb")
+                .IsRequired();
+
 
         }
 
