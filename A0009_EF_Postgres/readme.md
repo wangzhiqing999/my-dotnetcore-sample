@@ -182,3 +182,10 @@ var dataSource = dataSourceBuilder.Build();
 这样的代码
 
 
+
+
+### 2025-01-14 追加 AsNoTracking() 与 Attach() 的测试.
+
+也就是查询的时候，使用 AsNoTracking()，提升读取的速度。
+如果遇到，需要修改的数据，再使用 Attach() 来跟踪。
+修改数据属性之后，调用 SaveChanges() 来保存.

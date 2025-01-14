@@ -39,6 +39,19 @@ namespace A0009_EF_Postgres_V8
 
 
 
+                // 这里的 TestNoTracking 放在最前面。
+                // 原因是， 下面的 查询，是 默认跟踪 的。
+                // 如果把 TestNoTracking 放在下面 默认跟踪 代码的后面。
+                // 将会报错，提示 ：
+                // The instance of entity type 'TestData' cannot be tracked because another instance with the same key value for {'ID'} is already being tracked.
+                // When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+                // 也就是，下面的查询，已经把数据跟踪了。
+                // 把同一个数据，再手动跟踪一次，就会提示错误。
+                TestNoTracking(context);
+
+
+
+                // 这里的查询，是“默认跟踪”的。
                 if (context.TestDatas.Any())
                 {
                     Console.WriteLine("数据已存在...");
@@ -47,9 +60,17 @@ namespace A0009_EF_Postgres_V8
                         from data in context.TestDatas
                         select data;
 
-                    foreach (var data in query)
+                    foreach (var data in query.ToList())
                     {
                         Console.WriteLine("{0} : {1},  {2}", data.Name, data.Phone, data.Address);
+
+                        if (data.Name == "张三")
+                        {
+                            // 默认跟踪的情况下，不需要手动 跟踪数据。
+                            // 直接修改数据.
+                            data.Address = "测试地址3";
+                            context.SaveChanges();
+                        }
                     }
 
                 }
@@ -75,6 +96,7 @@ namespace A0009_EF_Postgres_V8
                 }
 
 
+                
 
 
                 TestOneToMany(context);
@@ -96,6 +118,46 @@ namespace A0009_EF_Postgres_V8
 
 
 
+
+
+        private static void TestNoTracking(TestContext context)
+        {
+            Console.WriteLine("------ TestNoTracking ------");
+
+            // 这里使用 AsNoTracking()
+            // 无跟踪，更快的读取。
+            // 但是，读取出来以后，无法通过修改属性的数值，然后调用 context.SaveChanges() 来保存数据。
+            // 实际业务中，遇到 只读的列表页面，可以使用 AsNoTracking() 。
+            var query =
+                        from data in context.TestDatas.AsNoTracking()
+                        select data;
+
+
+            // 这里使用 ToList() 的目的是，先执行完查询，把数据先放到内存中.
+            // 如果下面是直接 foreach (var data in dataList) 的。
+            // 在循环中，修改数据，会报错：提示你当前正在执行一个 select 查询。
+            var dataList = query.ToList();
+
+            foreach (var data in dataList)
+            {
+                Console.WriteLine("{0} : {1},  {2}", data.Name, data.Phone, data.Address);
+
+
+                if(data.Name == "张三")
+                {
+                    // 如果使用 AsNoTracking() 查询数据之后。
+                    // 又想修改数据，并保存数据。
+                    // 需要调用 Attach 来跟踪数据。
+                    context.Attach(data);
+
+                    // 修改数据.
+                    data.Address = "测试地址321";
+                    context.SaveChanges();
+                }
+
+
+            }
+        }
 
 
 
