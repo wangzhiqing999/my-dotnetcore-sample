@@ -140,6 +140,12 @@ ASP.Net Code，中间件的例子代码 (DotNet Core 3.0)
 
 
 
+### AI001_DeekSeek
+调用 api.deepseek.com 接口的例子代码. (.NET 9.0) 
+ApiKey 存储在用户机密里，没写在源代码里面。
+
+
+
 ### B0100_FluentValidation
 
 使用 FluentValidation，来校验数据的例子。（.NET 6.0）
