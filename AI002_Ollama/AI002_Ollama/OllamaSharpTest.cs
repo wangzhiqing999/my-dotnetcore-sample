@@ -62,5 +62,35 @@ namespace AI002_Ollama
             await foreach (var stream in ollama.GenerateAsync(request))
                 Console.Write(stream.Response);
         }
+
+
+
+
+        /// <summary>
+        /// 测试向 gemma3:12b 模型，使用图片和系统提示语。
+        /// </summary>
+        public static async void DoTest3()
+        {
+            Console.WriteLine("===== 测试使用 OllamaSharp ===== ");
+
+            // 初始化.
+            var uri = new Uri(Constant.OLLAMA_HOST);
+            var ollama = new OllamaApiClient(uri);
+
+            GenerateRequest request = new GenerateRequest()
+            {
+                System = "你是一个证券交易的专家",
+                Prompt = "分析一下这个图片中的行情数据，现在是应该买入，卖出，还是观望？",
+                Images = [Constant.GetImageBase64Str()],
+                Model = Constant.OLLAMA_MODEL,
+                Stream = true
+            };
+
+            await foreach (var stream in ollama.GenerateAsync(request))
+                Console.Write(stream.Response);
+        }
+
+
+
     }
 }

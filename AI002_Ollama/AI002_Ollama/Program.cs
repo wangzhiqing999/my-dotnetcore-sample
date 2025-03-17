@@ -11,7 +11,8 @@ namespace AI002_Ollama
         {
 
             // OllamaSharpTest.DoTest();
-            OllamaSharpTest.DoTest2();
+            // OllamaSharpTest.DoTest2();
+            OllamaSharpTest.DoTest3();
 
 
             // OllamaChatClientTest.DoTest();

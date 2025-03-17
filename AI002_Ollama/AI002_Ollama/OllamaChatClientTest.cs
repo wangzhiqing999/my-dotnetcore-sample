@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.Extensions.AI;
+using Microsoft.VisualBasic;
 
 
 namespace AI002_Ollama
@@ -52,6 +53,32 @@ namespace AI002_Ollama
             /*
             Console.WriteLine(await client.GetResponseAsync(chatMessages));
             */
+        }
+
+
+
+        public static async void DoTest3()
+        {
+
+            Console.WriteLine("===== 测试使用 Microsoft.Extensions.AI.Ollama ===== ");
+
+            IChatClient client = new OllamaChatClient(new Uri(Constant.OLLAMA_HOST), Constant.OLLAMA_MODEL);
+
+
+            List<AIContent> contents = new List<AIContent>()
+            {
+                // TODO: 预览版本，暂时没有 ImageContent 这个类。
+                // new ImageContent()
+                new TextContent("分析一下这个图片中的行情数据，现在是应该买入，卖出，还是观望？")
+            };
+
+
+            ChatMessage[] chatMessages = [
+                new ChatMessage(ChatRole.System, "你是一个证券交易的专家"),
+                new ChatMessage(ChatRole.User, contents),
+            ];
+
+
         }
 
     }
