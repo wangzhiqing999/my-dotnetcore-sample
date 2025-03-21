@@ -144,12 +144,17 @@ ASP.Net Code，中间件的例子代码 (DotNet Core 3.0)
 
 
 ### AI001_DeekSeek
-调用 api.deepseek.com 接口的例子代码. (.NET 9.0) 
+调用 api.deepseek.com 接口的例子代码. (.NET 9.0)
 ApiKey 存储在用户机密里，没写在源代码里面。
 
 
 ### AI002_Ollama
-C# 调用本地的 Ollama 上的大模型的例子.(.NET 8.0) 
+C# 调用本地的 Ollama 上的大模型的例子.(.NET 8.0)
+
+
+### AI003_Dify
+C# 调用本地的 Dify(0.15.3) 上的工作流的例子. (.NET 8.0)
+
 
 
 
