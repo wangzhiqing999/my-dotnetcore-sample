@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Reflection.Metadata;
 using System.Text.Json;
 using System.Net;
+using System.Text;
 
 
 namespace AI003_Dify
@@ -39,7 +40,10 @@ namespace AI003_Dify
             // await TestWorkflow(difyAIService);
 
 
-            await TestWorkflow2(difyAIService);
+            // await TestWorkflow2(difyAIService);
+
+
+            await TestAgent(difyAIService);
 
 
             Console.WriteLine("Finish!");
@@ -51,7 +55,7 @@ namespace AI003_Dify
 
 
 
-
+        #region 普通的工作流测试
 
 
         /// <summary>
@@ -120,8 +124,13 @@ namespace AI003_Dify
 
 
 
+        #endregion
 
 
+
+
+
+        #region 返回文件的工作流测试.
 
 
         public const string DIFY_API_KEY2 = "app-hPY8nrFExoWoqfYvGKZkjG4r";
@@ -309,6 +318,89 @@ namespace AI003_Dify
         }
 
 
+        #endregion
 
+
+
+
+
+
+        #region Agent 测试.
+
+
+        public const string DIFY_API_KEY3 = "app-9fyy30Cb9xvrX6fyTaTXLLqR";
+
+
+        static async Task TestAgent(IDifyAIService difyAIService)
+        {
+            Console.WriteLine("--- 测试调用 Dify 的消息审核的 Agent ---");
+
+
+            // 定义工作流的请求参数
+            ChatCompletionRequest request = new ChatCompletionRequest();
+
+            request.ApiKey = DIFY_API_KEY3;
+            request.User = "test-001";
+            request.Query = "老师好，请问 黄金ETF，现在能买入么？";
+
+            // 阻塞模式
+            // var rsp = await difyAIService.ChatMessages.ChatAsync(request);
+
+            Console.WriteLine($"发出请求：{request.Query}");
+
+            StringBuilder answerBuff = new StringBuilder();
+            // 流式模式
+            await foreach (var rsp in difyAIService.ChatMessages.ChatStreamAsync(request))
+            {
+                if(rsp != null && rsp.Event == "agent_message")
+                {
+                    ChunkCompletionAgentMessageResponse? agentResp = rsp as ChunkCompletionAgentMessageResponse;
+                    if(agentResp != null)
+                    {
+                        string answer = agentResp.Answer;                        
+                        answerBuff.Append(answer);
+                    }
+                }
+            }
+            string answerResult = answerBuff.ToString();
+            answerResult = answerResult.Trim(' ', '`');
+            Console.WriteLine(answerResult);
+
+
+
+
+            request.Query = "什么玩意，你推荐的股票，都是一些什么垃圾？";
+            Console.WriteLine($"发出请求：{request.Query}");
+            // 阻塞模式
+            // rsp = await difyAIService.ChatMessages.ChatAsync(request);
+            // 获取返回应答.
+            // resp = rsp.Answer;
+            // Console.WriteLine($"{request.Query} -- {resp[0]}");
+
+
+            answerBuff = new StringBuilder();
+            await foreach (var rsp in difyAIService.ChatMessages.ChatStreamAsync(request))
+            {
+                if (rsp != null && rsp.Event == "agent_message")
+                {
+                    ChunkCompletionAgentMessageResponse? agentResp = rsp as ChunkCompletionAgentMessageResponse;
+                    if (agentResp != null)
+                    {
+                        string answer = agentResp.Answer;
+                        answerBuff.Append(answer);
+                    }
+                }
+            }
+            answerResult = answerBuff.ToString();
+            answerResult = answerResult.Trim(' ', '`');
+            Console.WriteLine(answerResult);
+
+
+
+        }
+
+
+
+        #endregion
     }
 }
