@@ -156,6 +156,8 @@ C# 调用本地的 Ollama 上的大模型的例子.(.NET 8.0)
 C# 调用本地的 Dify(0.15.3) 上的工作流的例子. (.NET 8.0)
 
 
+### AI004_MCP_Server
+C# 写的 MCP Server，让 AI 客户端来调用的例子. (.NET 8.0)
 
 
 
