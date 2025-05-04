@@ -26,7 +26,7 @@
     "framework7": "^2.0.7",
     "framework7-vue": "^2.0.7",
     "framework7-icons": "^0.8.9",
-    "http-server": "^0.10.0",
+    "http-server": "^14.1.1",
     "material-design-icons": "^3.0.1"
   }
 }
