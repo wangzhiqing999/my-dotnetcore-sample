@@ -43,7 +43,9 @@ namespace AI003_Dify
             // await TestWorkflow2(difyAIService);
 
 
-            await TestAgent(difyAIService);
+            // await TestAgent(difyAIService);
+
+            await TestAgentWithUploadFile(difyAIService);
 
 
             Console.WriteLine("Finish!");
@@ -402,5 +404,193 @@ namespace AI003_Dify
 
 
         #endregion
+
+
+
+
+
+
+        #region 参数中包含文件的测试.
+
+
+        public const string DIFY_API_KEY4 = "app-cuxD7JUAJ3MGTLnOV4Zk5yq7";
+
+
+
+        /// <summary>
+        /// 测试照片识别的工作流.
+        /// <br/>
+        /// 特点在于，参数是文件，需要做一个文件上传.
+        /// </summary>
+        static async Task TestWorkflowWithUploadFile(IDifyAIService difyAIService)
+        {
+            Console.WriteLine("--- 测试调用 Dify 的身份证识别的工作流 ---");
+
+
+            var uploadReq = new FileUploadRequest();
+            uploadReq.ApiKey = DIFY_API_KEY4;
+            uploadReq.File = "test_id_card.jpg";
+            uploadReq.User = "test-004";
+
+
+            var uploadResult = difyAIService.Files.UploadAsync(uploadReq);
+            FileUploadResponse uploadRespose = uploadResult.Result;
+
+
+            Console.WriteLine(@$"上传文件 {uploadReq.File}
+结果：ID = {uploadRespose.Id}; Name = {uploadRespose.Name};Size = {uploadRespose.Size}");
+
+
+            // 定义工作流的请求参数
+            CompletionRequest request = new CompletionRequest();
+
+
+            CompletionFile completionFile = new CompletionFile()
+            {
+                Type = "image",
+                TransferMethod = "local_file",
+                UploadFileId = uploadRespose.Id
+            };
+            var requestFiles = new List<CompletionFile>();
+            requestFiles.Add(completionFile);
+            request.Files = requestFiles;
+
+
+
+            request.ApiKey = DIFY_API_KEY4;
+            request.Inputs = new Dictionary<string, string>();
+            request.Inputs.Add("id_card_image", uploadRespose.Id);
+            request.User = "test-004";
+
+
+
+
+
+            // 工作流中，参数是图片的情况下
+            // 上面的 Inputs 是 Dictionary<string, string>() 的。
+            // 无论是填写名称，还是文件ID，还是 json 序列化，都是要报错的。
+
+
+            // 阻塞模式
+            var rsp = await difyAIService.Workflows.WorkflowAsync(request);
+
+            // 获取工作流的返回结果.
+            JsonDocument document = rsp.Data.Outputs;
+
+
+
+            // 输出整个结果的 json 字符串.
+            using (var stream = new System.IO.MemoryStream())
+            using (var writer = new Utf8JsonWriter(stream))
+            {
+                // 将 JsonDocument 内容写入 Utf8JsonWriter
+                document.WriteTo(writer);
+                // 刷新写入器以确保所有数据都被写入流
+                writer.Flush();
+
+                // 将流中的数据转换为字符串
+                string jsonOutput = System.Text.Encoding.UTF8.GetString(stream.ToArray());
+
+                // 输出 JSON 字符串
+                Console.WriteLine(jsonOutput);
+            }
+
+
+
+
+            // 输出结果的 json 中的 "result" 属性.
+            // 获取根元素
+            JsonElement root = document.RootElement;
+            // 尝试获取 "result" 属性的值
+            if (root.TryGetProperty("result", out JsonElement outputElement))
+            {
+                // 检查属性值是否为字符串类型
+                if (outputElement.ValueKind == JsonValueKind.String)
+                {
+                    string? output = outputElement.GetString();
+                    Console.WriteLine($"result: {output}");
+                }
+            }
+
+
+        }
+
+
+
+
+
+
+        public const string DIFY_API_KEY5 = "app-wgcAhKEWwW4PpnOsAMrFD2bo";
+
+
+        static async Task TestAgentWithUploadFile(IDifyAIService difyAIService)
+        {
+            Console.WriteLine("--- 测试调用 Dify 的身份证识别的 Agent ---");
+
+
+            var uploadReq = new FileUploadRequest();
+            uploadReq.ApiKey = DIFY_API_KEY5;
+            uploadReq.File = "test_id_card.jpg";
+            uploadReq.User = "test-004";
+
+            var uploadResult = difyAIService.Files.UploadAsync(uploadReq);
+            FileUploadResponse uploadRespose = uploadResult.Result;
+
+
+            Console.WriteLine(@$"上传文件 {uploadReq.File}
+结果：ID = {uploadRespose.Id}; Name = {uploadRespose.Name};Size = {uploadRespose.Size}");
+
+
+
+
+            // 定义工作流的请求参数
+            ChatCompletionRequest request = new ChatCompletionRequest();
+
+            CompletionFile completionFile = new CompletionFile()
+            {
+                Type = "image",
+                TransferMethod = "local_file",
+                UploadFileId = uploadRespose.Id
+            };
+            var requestFiles = new List<CompletionFile>();
+            requestFiles.Add(completionFile);
+            request.Files = requestFiles;
+
+            request.ApiKey = DIFY_API_KEY5;
+            request.User = "test-005";
+            request.Query = "看一下这个图片";
+            
+
+            // 阻塞模式
+            // var rsp = await difyAIService.ChatMessages.ChatAsync(request);
+
+            Console.WriteLine($"发出请求.");
+
+            StringBuilder answerBuff = new StringBuilder();
+            // 流式模式
+            await foreach (var rsp in difyAIService.ChatMessages.ChatStreamAsync(request))
+            {
+                if (rsp != null && rsp.Event == "agent_message")
+                {
+                    ChunkCompletionAgentMessageResponse? agentResp = rsp as ChunkCompletionAgentMessageResponse;
+                    if (agentResp != null)
+                    {
+                        string answer = agentResp.Answer;
+                        answerBuff.Append(answer);
+                    }
+                }
+            }
+            string answerResult = answerBuff.ToString();
+            answerResult = answerResult.Trim(' ', '`');
+            Console.WriteLine(answerResult);
+
+
+        }
+
+
+        #endregion
+
+
+
     }
 }

@@ -1,0 +1,91 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: agent-chat
+  name: 身份证图片识别Agent
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/ollama:0.0.6@7d66a960a68cafdcdf5589fdf5d01a995533f956853c69c54eddcf797006fa37
+kind: app
+model_config:
+  agent_mode:
+    enabled: true
+    max_iteration: 5
+    prompt: null
+    strategy: react
+    tools: []
+  annotation_reply:
+    enabled: false
+  chat_prompt_config: {}
+  completion_prompt_config: {}
+  dataset_configs:
+    datasets:
+      datasets: []
+    reranking_enable: false
+    retrieval_model: multiple
+    top_k: 4
+  dataset_query_variable: ''
+  external_data_tools: []
+  file_upload:
+    allowed_file_extensions:
+    - .JPG
+    - .JPEG
+    - .PNG
+    - .GIF
+    - .WEBP
+    - .SVG
+    - .MP4
+    - .MOV
+    - .MPEG
+    - .WEBM
+    allowed_file_types:
+    - image
+    allowed_file_upload_methods:
+    - remote_url
+    - local_file
+    enabled: true
+    image:
+      detail: high
+      enabled: true
+      number_limits: 3
+      transfer_methods:
+      - remote_url
+      - local_file
+    number_limits: 3
+  model:
+    completion_params:
+      stop: []
+    mode: chat
+    name: qwen2.5vl:7b
+    provider: langgenius/ollama/ollama
+  more_like_this:
+    enabled: false
+  opening_statement: ''
+  pre_prompt: "你是一个身份证信息识别人员。\n你分析传入的图片。\n如果这张图片，是身份证正面照，那么以 json 的格式，返回 is_success\
+    \ 为 true，以及身份证正面照当中的 姓名、性别、名族、出身年月日、住址，以及身份证号。\n\n下面是示例：\n```\n{\n  \"is_success\"\
+    :true,\n  \"name\":\"张三\",\n  \"gender\":\"男\",\n  \"ethnicity\":\"汉\",\n  \"\
+    date_of_birth\":\"2020-01-01\",\n  \"address\":\"地址在这里\",\n  \"id_card_number\"\
+    :\"证件号码在这里\"\n}\n```\n\n如果这张图片，不是身份证正面照，那么以 json 的格式，返回is_success 为 false,。\n\
+    下面是示例：\n```\n{\n  \"is_success\":false\n}\n```\n\n注意，输出的结果，请只输出 json 信息，不要额外输出其它的文字信息。\n"
+  prompt_type: simple
+  retriever_resource:
+    enabled: true
+  sensitive_word_avoidance:
+    configs: []
+    enabled: false
+    type: ''
+  speech_to_text:
+    enabled: false
+  suggested_questions: []
+  suggested_questions_after_answer:
+    enabled: false
+  text_to_speech:
+    enabled: false
+    language: ''
+    voice: ''
+  user_input_form: []
+version: 0.3.0
