@@ -160,6 +160,11 @@ C# 调用本地的 Dify(0.15.3) 上的工作流的例子. (.NET 8.0)
 C# 写的 MCP Server，让 AI 客户端来调用的例子. (.NET 8.0)
 
 
+### AI005_RAGFlow
+C# 调用 RAGFlow(0.19) 的代码 (.NET 8.0)
+现状是 获取/创建 会话的时候，返回 404 错误。
+
+
 
 ### B0100_FluentValidation
 
