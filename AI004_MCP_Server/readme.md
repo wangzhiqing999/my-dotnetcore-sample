@@ -1,4 +1,4 @@
-## 用于测试的 MCP Server 项目。
+## AI004_MCP_Server 用于测试的 MCP Server 项目（使用 SSE）
 
 项目引用
 ModelContextProtocol (0.1.0-preview.8)
@@ -98,4 +98,37 @@ Tool execution result:
 5. 确保回答简洁准确。
 
 上海当前的时间是15:06。
+
+
+
+
+
+
+## AI004_Stdio_MCP_Server 用于测试的 MCP Server 项目 （使用 studio）
+
+
+项目引用
+ModelContextProtocol (0.2.0-preview.2)
+Microsoft.Extensions.Hosting (9.0.5)
+
+参考
+https://learn.microsoft.com/en-us/dotnet/ai/quickstarts/build-mcp-server
+创建代码。
+
+
+在 Cherry Studio 中，新建一个 MCP 服务器.
+类型：标准输入/输出(studio)
+命令：dotnet
+参数：
+run
+--project
+D:\My-Github\my-dotnetcore-sample\AI004_MCP_Server\AI004_Stdio_MCP_Server\AI004_Stdio_MCP_Server.csproj
+
+注意：参数的最后一行，是我的 C# 代码，在这个目录下。
+
+保存成功后，前往工具的 Tab，看看是否成功识别到了 C# 中的写的工具代码。
+
+
+
+
 
