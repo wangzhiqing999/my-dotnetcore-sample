@@ -15,7 +15,7 @@ NOTIFY test_event
 ```
 与
 ```
-NOTIFY test_event 'test 123'
+NOTIFY test_event, 'test 123'
 ```
 
 3. 观察 C# 程序控制台上的输出
