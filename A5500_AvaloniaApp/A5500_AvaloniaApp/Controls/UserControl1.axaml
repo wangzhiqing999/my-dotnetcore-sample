@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="using:A5500_AvaloniaApp.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="A5500_AvaloniaApp.Controls.UserControl1"
+			 x:DataType="vm:UserControl1ViewModel">
+
+	<StackPanel Margin="16" Spacing="8">
+		<TextBlock Text="Welcome to Avalonia UserControl!" />
+		<TextBox Text="{Binding TestValue}" />
+		<Button Content="Test1"  Command="{Binding Test1Command}" />
+		<Button Content="Test2"  Click="OnTest2Click" />
+	</StackPanel>
+	
+</UserControl>

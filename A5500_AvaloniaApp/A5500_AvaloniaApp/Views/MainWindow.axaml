@@ -1,0 +1,159 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:A5500_AvaloniaApp.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:controls="using:A5500_AvaloniaApp.Controls"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="A5500_AvaloniaApp.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="A5500_AvaloniaApp">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <!--
+	<TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	-->
+
+	
+	
+	<!-- 
+	https://docs.avaloniaui.net/docs/how-to/tabcontrol-how-to
+	-->
+	<TabControl SelectedIndex="{Binding TabSelectedIndex}">
+		
+		<!-- https://docs.avaloniaui.net/docs/how-to/combobox-how-to  -->
+		<TabItem>
+			<TabItem.Header>
+				<StackPanel Orientation="Horizontal" Spacing="6">
+					<Image Source="/Assets/spade.png" Width="14" Height="14" />
+					<TextBlock Text="ComboBox" />
+				</StackPanel>
+			</TabItem.Header>
+			
+			<StackPanel Margin="16" Spacing="8">
+				<TextBlock Text="{Binding SelectedChannel}" />
+
+				<ComboBox ItemsSource="{Binding Channels}"
+				  SelectedItem="{Binding SelectedChannel}"
+				  PlaceholderText="Select a Channel" />
+				
+			</StackPanel>
+		</TabItem>
+
+
+		<!-- https://docs.avaloniaui.net/docs/how-to/listbox-how-to  -->
+		<TabItem>
+			<TabItem.Header>
+				<StackPanel Orientation="Horizontal" Spacing="6">
+					<Image Source="/Assets/heart.png" Width="14" Height="14" />
+					<TextBlock Text="ListBox" />
+				</StackPanel>
+			</TabItem.Header>			
+			
+			<StackPanel Margin="16" Spacing="8">
+				<TextBlock Text="{Binding SelectedChannel}" />
+
+				<ListBox SelectionMode="Single"
+					 SelectedItem="{Binding SelectedChannel}"
+					 ItemsSource="{Binding Channels}" />
+
+				<ListBox SelectionMode="Multiple"
+					ItemsSource="{Binding Channels}" />
+
+				<ListBox SelectionMode="Toggle"
+						 SelectedItem="{Binding SelectedChannel}"
+						 ItemsSource="{Binding Channels}" />
+
+			</StackPanel>
+		</TabItem>
+
+
+		<TabItem>
+			<TabItem.Header>
+				<StackPanel Orientation="Horizontal" Spacing="6">
+					<Image Source="/Assets/heart.png" Width="14" Height="14" />
+					<TextBlock Text="ListBox 2" />
+				</StackPanel>
+			</TabItem.Header>
+
+			<StackPanel Orientation="Horizontal" Margin="16" Spacing="8">
+				
+
+				<ListBox SelectionMode="Single,AlwaysSelected"
+						SelectedItem="{Binding SelectedServer}"
+						ItemsSource="{Binding Servers}" />
+
+
+				<StackPanel>
+					<TextBlock Text="{Binding SelectedServer}" />
+					<TextBlock Text="{Binding SelectedServerHost}" />
+				</StackPanel>
+
+
+			</StackPanel>
+		</TabItem>
+		
+		
+		<!-- https://docs.avaloniaui.net/docs/how-to/textbox-how-to -->
+		<TabItem>
+			<TabItem.Header>
+				<StackPanel Orientation="Horizontal" Spacing="6">
+					<Image Source="/Assets/club.png" Width="14" Height="14" />
+					<TextBlock Text="TextBox" />
+				</StackPanel>
+			</TabItem.Header>
+			
+			
+			<StackPanel Margin="16" Spacing="8">
+				<TextBlock Text="{Binding Username}" />
+				<TextBox Text="{Binding Username}" />
+				
+				
+				<TextBox Text="{Binding UserPwd}" PasswordChar="●" />
+				<TextBlock Text="{Binding UserPwd}" />
+				
+				
+				<TextBox AcceptsReturn="True"
+					 TextWrapping="Wrap"
+					 Height="120" />
+				
+				<TextBox Text="{Binding Username}" IsReadOnly="True" />
+			</StackPanel>
+		</TabItem>
+
+
+		<!-- https://docs.avaloniaui.net/docs/how-to/dialogs-how-to  -->
+		<TabItem Header="Dialogs">
+			<StackPanel Margin="16" Spacing="8">
+				<Button HorizontalAlignment="Center" Click="ButtonOpenDialogs_OnClick">Open Dialogs</Button>
+			</StackPanel>
+		</TabItem>
+
+
+		<!-- 打开新窗口. https://docs.avaloniaui.net/docs/how-to/window-how-to -->
+		<TabItem Header="Window">
+			<StackPanel Margin="16" Spacing="8">
+				<Button HorizontalAlignment="Center" Click="ButtonOpenWindow_OnClick">Open Window</Button>
+			</StackPanel>
+		</TabItem>
+		
+
+		<!-- 用户自定义控件.  https://docs.avaloniaui.net/docs/custom-controls/ -->
+		<TabItem Header="UserControl">
+			<StackPanel Margin="16" Spacing="8">
+				<controls:UserControl1 DataContext="{Binding UserControl1Data}" />
+			</StackPanel>
+		</TabItem>
+		
+		
+	</TabControl>
+
+	
+	
+</Window>

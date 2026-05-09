@@ -138,6 +138,8 @@ ASP.Net Code，中间件的例子代码 (DotNet Core 3.0)
 学习使用 ML.NET 的代码.
 
 
+### A5500_AvaloniaApp
+学习使用 Avalonia 的代码。
 
 
 

@@ -1,0 +1,57 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:vm="using:A5500_AvaloniaApp.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="A5500_AvaloniaApp.Views.PostmanWindow"
+		x:DataType="vm:PostmanWindowViewModel"
+        Title="PostmanWindow">
+
+
+	<Grid ColumnDefinitions="200,*,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,*">
+
+
+		<ComboBox 
+			Grid.Row="0" Grid.Column="0"
+			ItemsSource="{Binding Methods}"
+			SelectedItem="{Binding SelectedMethod}"
+			PlaceholderText="Method" />
+
+		<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding UrlAddress}" />
+
+
+		<TextBox
+			Grid.Row="1" Grid.Column="0"
+			Grid.ColumnSpan="2"
+			AcceptsReturn="True"
+			TextWrapping="Wrap"
+			Height="256"
+			Text="{Binding Body}" />
+
+
+		<Button
+			Grid.Row="2" Grid.Column="0"
+			Grid.ColumnSpan="2"
+			HorizontalAlignment="Center" 
+			Command="{Binding SendCommand}">Send</Button>
+
+
+		<TextBlock Grid.Row="3" Grid.Column="0"
+			Grid.ColumnSpan="2" 
+			Text="{Binding ResultMessage}" />
+
+
+		<TextBox
+			Grid.Row="4" Grid.Column="0"
+			Grid.ColumnSpan="2"
+			IsReadOnly="True"
+			TextWrapping="Wrap"
+			Height="256"
+			Text="{Binding ResultText}" />
+
+		
+		
+	</Grid>
+	
+</Window>
